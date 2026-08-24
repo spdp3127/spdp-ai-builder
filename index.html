@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SPDP AI — Website Builder</title>
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -20,12 +22,18 @@ body{
   overflow:hidden;
 }
 
+/* BACKGROUND */
+
 body::before{
   content:"";
   position:fixed;
   width:600px;
   height:600px;
-  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 65%);
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,.07),
+    transparent 65%
+  );
   top:-250px;
   left:-200px;
   pointer-events:none;
@@ -36,7 +44,11 @@ body::after{
   position:fixed;
   width:500px;
   height:500px;
-  background:radial-gradient(circle,rgba(120,120,120,.06),transparent 65%);
+  background:radial-gradient(
+    circle,
+    rgba(120,120,120,.06),
+    transparent 65%
+  );
   bottom:-250px;
   right:-150px;
   pointer-events:none;
@@ -47,14 +59,17 @@ body::after{
 header{
   height:72px;
   border-bottom:1px solid #1d1d1d;
-  background:rgba(8,8,8,.85);
+  background:rgba(8,8,8,.88);
   backdrop-filter:blur(20px);
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   padding:0 28px;
+
   position:relative;
-  z-index:10;
+  z-index:20;
 }
 
 .brand{
@@ -67,14 +82,24 @@ header{
   width:38px;
   height:38px;
   border-radius:11px;
-  background:linear-gradient(145deg,#fff,#777);
+
+  background:linear-gradient(
+    145deg,
+    #fff,
+    #777
+  );
+
   color:#050505;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-weight:900;
   font-size:15px;
-  box-shadow:0 8px 30px rgba(255,255,255,.08);
+
+  box-shadow:
+    0 8px 30px rgba(255,255,255,.08);
 }
 
 .brand-name{
@@ -98,36 +123,52 @@ header{
   background:#101010;
   border:1px solid #292929;
   color:#ddd;
+
   padding:10px 15px;
+
   border-radius:9px;
+
   cursor:pointer;
+
+  transition:.2s;
 }
 
 .header-btn:hover{
   border-color:#555;
+  color:#fff;
 }
 
 .publish{
   background:#fff;
   color:#050505;
+
   border:0;
+
   font-weight:800;
+
   padding:11px 18px;
+
   border-radius:9px;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
 .publish:hover{
   transform:translateY(-1px);
-  box-shadow:0 8px 30px rgba(255,255,255,.15);
+
+  box-shadow:
+    0 8px 30px rgba(255,255,255,.15);
 }
 
 /* MAIN */
 
 .app{
   height:calc(100vh - 72px);
+
   display:grid;
+
   grid-template-columns:350px 1fr;
 }
 
@@ -135,55 +176,84 @@ header{
 
 .sidebar{
   background:#080808;
+
   border-right:1px solid #1c1c1c;
+
   padding:24px;
+
   overflow:auto;
 }
 
 .small-label{
   color:#777;
+
   font-size:11px;
+
   font-weight:700;
+
   letter-spacing:1.5px;
+
   text-transform:uppercase;
+
   margin-bottom:9px;
 }
 
 .sidebar h1{
   font-size:25px;
+
   letter-spacing:-1px;
+
   margin-bottom:8px;
 }
 
 .desc{
   color:#777;
+
   font-size:13px;
+
   line-height:1.6;
+
   margin-bottom:22px;
 }
 
+/* PROMPT */
+
 .prompt-box{
   background:#0d0d0d;
+
   border:1px solid #272727;
+
   border-radius:14px;
+
   padding:13px;
+
   transition:.2s;
 }
 
 .prompt-box:focus-within{
   border-color:#555;
-  box-shadow:0 0 0 3px rgba(255,255,255,.025);
+
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.025);
 }
 
 textarea{
   width:100%;
-  height:125px;
+
+  height:145px;
+
   resize:none;
+
   background:transparent;
+
   border:0;
+
   outline:0;
+
   color:#fff;
+
   font-size:14px;
+
   line-height:1.6;
 }
 
@@ -191,61 +261,101 @@ textarea::placeholder{
   color:#555;
 }
 
+/* GENERATE */
+
 .generate{
   width:100%;
+
   margin-top:10px;
+
   border:0;
+
   border-radius:11px;
+
   padding:14px;
-  background:linear-gradient(135deg,#fff,#aaa);
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #aaa
+    );
+
   color:#050505;
+
   font-size:14px;
+
   font-weight:900;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
 .generate:hover{
   transform:translateY(-2px);
-  box-shadow:0 12px 35px rgba(255,255,255,.12);
+
+  box-shadow:
+    0 12px 35px rgba(255,255,255,.12);
 }
 
 .generate:disabled{
   opacity:.5;
+
   cursor:wait;
+
   transform:none;
 }
 
+/* DIVIDER */
+
 .divider{
   height:1px;
+
   background:#1c1c1c;
+
   margin:25px 0;
 }
 
 .examples-title{
   color:#666;
+
   font-size:10px;
+
   font-weight:800;
+
   letter-spacing:1.4px;
+
   margin-bottom:11px;
 }
 
 .example{
   padding:12px 13px;
+
   border:1px solid #1d1d1d;
+
   background:#0c0c0c;
+
   border-radius:10px;
+
   margin-bottom:8px;
+
   color:#aaa;
+
   font-size:12px;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
 .example:hover{
   background:#111;
+
   color:#fff;
+
   border-color:#333;
+
   transform:translateX(3px);
 }
 
@@ -253,99 +363,168 @@ textarea::placeholder{
 
 .preview{
   display:flex;
+
   flex-direction:column;
+
   background:#0b0b0b;
+
   min-width:0;
 }
 
 .preview-top{
   height:55px;
+
   border-bottom:1px solid #1c1c1c;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   padding:0 20px;
 }
 
 .preview-left{
   display:flex;
+
   align-items:center;
+
   gap:10px;
+
   color:#999;
+
   font-size:12px;
 }
 
 .dot{
   width:7px;
+
   height:7px;
+
   border-radius:50%;
-  background:#777;
+
+  background:#40ff88;
+
+  box-shadow:
+    0 0 12px rgba(64,255,136,.5);
 }
 
 .preview-tools{
   display:flex;
+
   gap:7px;
 }
 
 .tool{
   width:32px;
+
   height:30px;
+
   border:1px solid #242424;
+
   background:#101010;
+
   color:#888;
+
   border-radius:7px;
+
   cursor:pointer;
+
+  transition:.2s;
 }
 
 .tool:hover{
   color:#fff;
+
+  border-color:#555;
 }
+
+/* CANVAS */
 
 .canvas{
   flex:1;
+
   padding:25px;
+
   display:flex;
+
   justify-content:center;
+
   align-items:center;
+
   overflow:auto;
 }
 
-/* REAL GENERATED WEBSITE PREVIEW */
+/* WEBSITE */
 
 .website{
   width:min(100%,1050px);
+
   height:min(100%,700px);
+
   min-height:520px;
+
   background:#fff;
+
   border-radius:14px;
+
   overflow:hidden;
+
   box-shadow:
     0 35px 100px rgba(0,0,0,.55),
     0 0 0 1px rgba(255,255,255,.04);
+
   position:relative;
+
+  transition:
+    width .3s ease,
+    height .3s ease;
 }
+
+/*
+  IMPORTANT:
+  Better sandbox permissions for games.
+*/
 
 #previewFrame{
   width:100%;
+
   height:100%;
+
   min-height:520px;
+
   border:0;
+
   display:block;
+
   background:#fff;
+
+  touch-action:auto;
 }
 
 /* LOADING */
 
 .loading{
   position:absolute;
+
   inset:0;
-  background:rgba(255,255,255,.96);
+
+  background:
+    rgba(255,255,255,.96);
+
   display:none;
+
   align-items:center;
+
   justify-content:center;
+
   flex-direction:column;
+
   gap:18px;
+
   color:#111;
+
   z-index:5;
 }
 
@@ -355,21 +534,30 @@ textarea::placeholder{
 
 .spinner{
   width:42px;
+
   height:42px;
+
   border:4px solid #ddd;
+
   border-top-color:#111;
+
   border-radius:50%;
-  animation:spin .8s linear infinite;
+
+  animation:
+    spin .8s linear infinite;
 }
 
 @keyframes spin{
+
   to{
     transform:rotate(360deg);
   }
+
 }
 
 .loading-text{
   font-size:14px;
+
   font-weight:800;
 }
 
@@ -377,22 +565,35 @@ textarea::placeholder{
 
 .toast{
   position:fixed;
+
   bottom:25px;
+
   right:25px;
+
   background:#fff;
+
   color:#111;
+
   padding:13px 18px;
+
   border-radius:10px;
+
   font-size:13px;
+
   font-weight:700;
+
   transform:translateY(100px);
+
   opacity:0;
+
   transition:.3s;
+
   z-index:100;
 }
 
 .toast.show{
   transform:translateY(0);
+
   opacity:1;
 }
 
@@ -414,11 +615,13 @@ textarea::placeholder{
 
   .app{
     height:auto;
+
     grid-template-columns:1fr;
   }
 
   .sidebar{
     border-right:0;
+
     border-bottom:1px solid #1c1c1c;
   }
 
@@ -433,11 +636,14 @@ textarea::placeholder{
   .canvas{
     padding:15px;
   }
+
 }
+
 </style>
 </head>
 
 <body>
+
 
 <header>
 
@@ -453,24 +659,33 @@ textarea::placeholder{
 
   </div>
 
+
   <div class="header-right">
 
     <button
       class="header-btn"
       onclick="newProject()">
+
       New Project
+
     </button>
+
 
     <button
       class="header-btn"
       onclick="downloadWebsite()">
+
       Download
+
     </button>
+
 
     <button
       class="publish"
       onclick="publishSite()">
+
       Publish
+
     </button>
 
   </div>
@@ -478,43 +693,56 @@ textarea::placeholder{
 </header>
 
 
+
 <div class="app">
+
 
   <!-- SIDEBAR -->
 
   <aside class="sidebar">
 
+
     <div class="small-label">
       SPDP AI BUILDER
     </div>
+
 
     <h1>
       Create with AI.
     </h1>
 
+
     <p class="desc">
-      Describe your website idea and turn it into
-      a beautiful digital experience.
+      Describe anything you want to build.
+      Websites, web apps and playable games.
     </p>
+
 
     <div class="prompt-box">
 
       <textarea
         id="prompt"
-        placeholder="Describe your website...
+        placeholder="Describe anything...
 
-Example:
-Create a premium website for a
-modern technology company."></textarea>
+Examples:
+
+Create a premium gaming website
+
+Create a playable 2D car game
+
+Create a 3D racing game
+
+Create an online store"></textarea>
 
     </div>
+
 
     <button
       class="generate"
       id="generateButton"
       onclick="generate()">
 
-      ✦ Generate Website
+      ✦ Generate
 
     </button>
 
@@ -523,62 +751,87 @@ modern technology company."></textarea>
 
 
     <div class="examples-title">
-      START WITH AN IDEA
+      TRY AN IDEA
     </div>
 
 
     <div
       class="example"
-      onclick="example('Create a premium gaming website with a dark futuristic design, hero section, features, pricing and contact section')">
+      onclick="example(
+      'Create a playable 2D car racing game with keyboard and mobile controls, enemies, score, collision detection, start screen and restart button'
+      )">
 
-      🎮 Premium Gaming Website
-
-    </div>
-
-
-    <div
-      class="example"
-      onclick="example('Create a modern restaurant website with menu, about section, reservation button and contact information')">
-
-      🍽 Modern Restaurant
+      🏎️ Playable 2D Car Game
 
     </div>
 
 
     <div
       class="example"
-      onclick="example('Create a premium portfolio website for a professional designer with projects and contact section')">
+      onclick="example(
+      'Create a playable 3D futuristic racing game using Three.js with player controls, enemy cars, score, collision detection and restart'
+      )">
 
-      ✦ Designer Portfolio
-
-    </div>
-
-
-    <div
-      class="example"
-      onclick="example('Create a premium technology startup website with a futuristic hero, features, pricing and testimonials')">
-
-      ◈ Technology Startup
+      🏁 Playable 3D Racing Game
 
     </div>
 
 
     <div
       class="example"
-      onclick="example('Create a modern online store with products, categories, pricing and shopping buttons')">
+      onclick="example(
+      'Create a premium black gaming website with hero, features, pricing, testimonials and contact'
+      )">
 
-      ◉ Online Store
+      🎮 Gaming Website
 
     </div>
+
+
+    <div
+      class="example"
+      onclick="example(
+      'Create a modern restaurant website with menu, reservation and contact sections'
+      )">
+
+      🍽️ Restaurant
+
+    </div>
+
+
+    <div
+      class="example"
+      onclick="example(
+      'Create a premium portfolio website for a professional designer'
+      )">
+
+      ✦ Portfolio
+
+    </div>
+
+
+    <div
+      class="example"
+      onclick="example(
+      'Create a modern online store for premium sneakers'
+      )">
+
+      🛒 Online Store
+
+    </div>
+
 
   </aside>
+
 
 
   <!-- PREVIEW -->
 
   <section class="preview">
 
+
     <div class="preview-top">
+
 
       <div class="preview-left">
 
@@ -591,9 +844,11 @@ modern technology company."></textarea>
 
       <div class="preview-tools">
 
+
         <button
           class="tool"
-          onclick="desktopPreview()">
+          onclick="desktopPreview()"
+          title="Desktop">
 
           ▣
 
@@ -602,25 +857,70 @@ modern technology company."></textarea>
 
         <button
           class="tool"
-          onclick="mobilePreview()">
+          onclick="mobilePreview()"
+          title="Mobile">
 
           ▯
 
         </button>
 
+
+        <button
+          class="tool"
+          onclick="fullscreenPreview()"
+          title="Fullscreen">
+
+          ⛶
+
+        </button>
+
+
       </div>
+
 
     </div>
 
 
     <div class="canvas">
 
-      <div class="website" id="website">
+
+      <div
+        class="website"
+        id="website">
+
+
+        <!--
+          IMPORTANT:
+          allow-scripts + forms + modals
+          allow-pointer-lock for FPS/3D games
+          allow-same-origin for many web apps
+          allow-popups for normal links
+        -->
 
         <iframe
           id="previewFrame"
-          title="Generated Website Preview"
-          sandbox="allow-scripts allow-forms allow-modals">
+          title="SPDP AI Generated Preview"
+
+          sandbox="
+            allow-scripts
+            allow-forms
+            allow-modals
+            allow-pointer-lock
+            allow-popups
+            allow-popups-to-escape-sandbox
+            allow-presentation
+            allow-same-origin
+          "
+
+          allow="
+            autoplay;
+            fullscreen;
+            gamepad;
+            microphone;
+            camera
+          "
+
+          allowfullscreen>
         </iframe>
 
 
@@ -628,13 +928,17 @@ modern technology company."></textarea>
           class="loading"
           id="loading">
 
+
           <div class="spinner"></div>
 
+
           <div class="loading-text">
-            SPDP AI is building your website...
+            SPDP AI is building...
           </div>
 
+
         </div>
+
 
       </div>
 
@@ -645,6 +949,7 @@ modern technology company."></textarea>
 </div>
 
 
+
 <div
   class="toast"
   id="toast">
@@ -652,6 +957,7 @@ modern technology company."></textarea>
   Done
 
 </div>
+
 
 
 <script>
@@ -668,36 +974,47 @@ let generatedHTML = "";
 
 
 /* =========================================
-   EXAMPLE PROMPTS
+   EXAMPLE
 ========================================= */
 
 function example(text){
 
-  document.getElementById("prompt").value = text;
+  document.getElementById(
+    "prompt"
+  ).value = text;
 
 }
 
 
 /* =========================================
-   REAL AI GENERATION
+   GENERATE
 ========================================= */
 
 async function generate(){
 
   const prompt =
-    document.getElementById("prompt").value.trim();
+    document
+      .getElementById("prompt")
+      .value
+      .trim();
+
 
   const button =
-    document.getElementById("generateButton");
+    document.getElementById(
+      "generateButton"
+    );
+
 
   const loading =
-    document.getElementById("loading");
+    document.getElementById(
+      "loading"
+    );
 
 
   if(!prompt){
 
     showToast(
-      "Describe your website first"
+      "Describe what you want to build"
     );
 
     return;
@@ -712,15 +1029,19 @@ async function generate(){
 
   try{
 
+
     showToast(
-      "AI is creating your website..."
+      "SPDP AI is thinking..."
     );
 
 
     const response =
       await fetch(
+
         WORKER_URL,
+
         {
+
           method:"POST",
 
           headers:{
@@ -728,37 +1049,162 @@ async function generate(){
               "application/json"
           },
 
-          body:JSON.stringify({
-            prompt:`
-Create a complete premium,
-production-quality website.
 
-User request:
+          body:JSON.stringify({
+
+            prompt:`
+
+You are the main AI engine for SPDP AI Builder.
+
+FIRST understand exactly what the user wants.
+
+USER REQUEST:
 
 ${prompt}
 
-Requirements:
+==================================================
 
-- Modern professional design
-- Fully responsive
-- Excellent typography
-- Beautiful spacing
-- Premium visual hierarchy
-- Smooth animations
-- Navigation bar
+IMPORTANT:
+
+This is a UNIVERSAL AI BUILDER.
+
+Do NOT assume every request is a normal website.
+
+Determine automatically whether the user wants:
+
+- Website
+- Landing page
+- Business website
+- Portfolio
+- Restaurant
+- Online store
+- Dashboard
+- SaaS interface
+- Web application
+- Tool
+- Interactive experience
+- 2D game
+- 3D game
+- Simulation
+- Calculator
+- Educational app
+- Other custom web experience
+
+Then build the correct experience.
+
+==================================================
+
+IF USER REQUESTS A GAME:
+
+The game MUST be genuinely playable.
+
+Do NOT create a static gaming landing page.
+
+For 2D games:
+
+Use HTML5 Canvas or DOM/JavaScript.
+
+Implement:
+
+- Real game loop
+- Player movement
+- Keyboard controls
+- Mouse controls when appropriate
+- Mobile touch controls
+- Collision detection
+- Score
+- Lives/health when appropriate
+- Enemies/obstacles
+- Start screen
+- Game over
+- Restart
+- Win condition where appropriate
+- Real animations
+- Responsive canvas
+- Pause/restart where appropriate
+
+For 3D games:
+
+Use Three.js from CDN when appropriate.
+
+Implement:
+
+- Real 3D scene
+- Camera
+- Lighting
+- 3D objects
+- Player movement
+- Keyboard controls
+- Mouse controls when appropriate
+- Touch controls when appropriate
+- Collision/gameplay logic
+- Score/game state
+- Start screen
+- Game over
+- Restart
+- Real animation loop
+
+A game must actually respond to user input.
+
+Never make fake buttons.
+
+Never create a static screenshot pretending to be a game.
+
+==================================================
+
+IF USER REQUESTS A NORMAL WEBSITE:
+
+Create a premium, modern, responsive website.
+
+Use:
+
+- Professional navigation
 - Hero section
-- Relevant sections based on the request
-- Call-to-action buttons
+- Relevant sections
+- CTA buttons
+- Modern typography
+- Good spacing
+- Responsive layout
+- Smooth animations
 - Footer
-- Mobile responsive layout
-- Use HTML, CSS and JavaScript
-- Keep everything in ONE HTML file
-- Do not use markdown
-- Return ONLY the complete HTML document
+- Interactive elements where appropriate
+
+==================================================
+
+IF USER REQUESTS A WEB APP:
+
+Create an actual interactive front-end application.
+
+Buttons, forms, tabs, menus and controls should work.
+
+==================================================
+
+GENERAL RULES:
+
+- Return ONLY HTML.
+- Start with <!DOCTYPE html>.
+- Include CSS inside <style>.
+- Include JavaScript inside <script>.
+- Everything must be in ONE HTML file.
+- No Markdown.
+- No code fences.
+- No explanations outside HTML.
+- Make desktop and mobile responsive.
+- Use CDN libraries only when necessary.
+- Do not require a backend.
+- Do not expose API keys.
+- Make the result polished and production-quality.
+
+Before returning the HTML, mentally verify that the important buttons and interactions have working JavaScript.
+
+Now generate the requested experience.
+
 `
+
           })
 
         }
+
       );
 
 
@@ -779,7 +1225,7 @@ Requirements:
     if(!data.html){
 
       throw new Error(
-        "AI did not return website code"
+        "AI returned no HTML"
       );
 
     }
@@ -795,6 +1241,11 @@ Requirements:
       );
 
 
+    /*
+      Remove loading only after
+      generated HTML is assigned.
+    */
+
     frame.srcdoc =
       generatedHTML;
 
@@ -805,7 +1256,7 @@ Requirements:
 
 
     showToast(
-      "✨ Website generated successfully!"
+      "✨ Generated successfully!"
     );
 
 
@@ -814,6 +1265,7 @@ Requirements:
   catch(error){
 
     console.error(error);
+
 
     loading.classList.remove(
       "show"
@@ -843,12 +1295,12 @@ Requirements:
 
 function newProject(){
 
+  generatedHTML = "";
+
+
   document.getElementById(
     "prompt"
   ).value = "";
-
-
-  generatedHTML = "";
 
 
   const frame =
@@ -868,7 +1320,7 @@ function newProject(){
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width,initial-scale=1">
 
 <style>
 
@@ -877,41 +1329,77 @@ box-sizing:border-box;
 }
 
 body{
+
 margin:0;
+
 height:100vh;
+
 display:flex;
+
 align-items:center;
+
 justify-content:center;
+
 font-family:Arial,sans-serif;
+
 background:
-linear-gradient(135deg,#ffffff,#eeeeee);
+linear-gradient(
+135deg,
+#ffffff,
+#eeeeee
+);
+
 color:#111;
+
 text-align:center;
+
 }
 
 .container{
+
 max-width:650px;
+
 padding:40px;
+
 }
 
 .badge{
+
 display:inline-block;
+
 padding:8px 14px;
+
 border:1px solid #ddd;
+
 border-radius:30px;
+
 font-size:12px;
+
 margin-bottom:20px;
+
 }
 
 h1{
-font-size:clamp(40px,6vw,70px);
+
+font-size:
+clamp(
+40px,
+6vw,
+70px
+);
+
 margin:0 0 20px;
+
 letter-spacing:-3px;
+
 }
 
 p{
+
 color:#666;
+
 line-height:1.7;
+
 }
 
 </style>
@@ -931,7 +1419,7 @@ Build Something Extraordinary.
 </h1>
 
 <p>
-Describe your idea and let SPDP AI create your website.
+Describe your idea and let SPDP AI create it.
 </p>
 
 </div>
@@ -946,7 +1434,7 @@ Describe your idea and let SPDP AI create your website.
 
 
 /* =========================================
-   DESKTOP PREVIEW
+   DESKTOP
 ========================================= */
 
 function desktopPreview(){
@@ -973,7 +1461,7 @@ function desktopPreview(){
 
 
 /* =========================================
-   MOBILE PREVIEW
+   MOBILE
 ========================================= */
 
 function mobilePreview(){
@@ -1000,7 +1488,28 @@ function mobilePreview(){
 
 
 /* =========================================
-   DOWNLOAD GENERATED WEBSITE
+   FULLSCREEN
+========================================= */
+
+function fullscreenPreview(){
+
+  const frame =
+    document.getElementById(
+      "previewFrame"
+    );
+
+
+  if(frame.requestFullscreen){
+
+    frame.requestFullscreen();
+
+  }
+
+}
+
+
+/* =========================================
+   DOWNLOAD
 ========================================= */
 
 function downloadWebsite(){
@@ -1008,7 +1517,7 @@ function downloadWebsite(){
   if(!generatedHTML){
 
     showToast(
-      "Generate a website first"
+      "Generate something first"
     );
 
     return;
@@ -1018,10 +1527,13 @@ function downloadWebsite(){
 
   const blob =
     new Blob(
+
       [generatedHTML],
+
       {
         type:"text/html"
       }
+
     );
 
 
@@ -1032,7 +1544,9 @@ function downloadWebsite(){
 
 
   const a =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
 
 
   a.href = url;
@@ -1067,7 +1581,7 @@ function publishSite(){
   if(!generatedHTML){
 
     showToast(
-      "Generate a website first"
+      "Generate something first"
     );
 
     return;
@@ -1076,7 +1590,7 @@ function publishSite(){
 
 
   showToast(
-    "Publish system coming next 🚀"
+    "Publishing system coming next 🚀"
   );
 
 }
@@ -1104,19 +1618,24 @@ function showToast(message){
 
 
   setTimeout(
+
     ()=>{
+
       toast.classList.remove(
         "show"
       );
+
     },
+
     2500
+
   );
 
 }
 
 
 /* =========================================
-   START SCREEN
+   START
 ========================================= */
 
 newProject();
