@@ -46,8 +46,6 @@ body:after{
   background:radial-gradient(circle,rgba(120,120,120,.06),transparent 65%)
 }
 
-/* HEADER */
-
 header{
   height:72px;
   border-bottom:1px solid #1d1d1d;
@@ -134,15 +132,11 @@ header{
   white-space:nowrap
 }
 
-/* APP */
-
 .app{
   height:calc(100vh - 72px);
   display:grid;
   grid-template-columns:330px 1fr 330px
 }
-
-/* SIDEBAR */
 
 .sidebar{
   background:#080808;
@@ -257,8 +251,6 @@ textarea::placeholder{
   transform:translateX(3px)
 }
 
-/* PREVIEW */
-
 .preview{
   display:flex;
   flex-direction:column;
@@ -341,8 +333,6 @@ textarea::placeholder{
   background:#fff;
   touch-action:auto
 }
-
-/* AI CHAT */
 
 .ai-chat{
   background:#080808;
@@ -472,8 +462,6 @@ textarea::placeholder{
   cursor:wait
 }
 
-/* LOADING */
-
 .loading{
   position:absolute;
   inset:0;
@@ -509,8 +497,6 @@ textarea::placeholder{
   font-weight:800
 }
 
-/* TOAST */
-
 .toast{
   position:fixed;
   bottom:25px;
@@ -524,7 +510,7 @@ textarea::placeholder{
   transform:translateY(100px);
   opacity:0;
   transition:.3s;
-  z-index:100;
+  z-index:1000;
   max-width:400px
 }
 
@@ -532,8 +518,6 @@ textarea::placeholder{
   transform:translateY(0);
   opacity:1
 }
-
-/* AUTH MODAL */
 
 .modal{
   position:fixed;
@@ -620,8 +604,6 @@ textarea::placeholder{
   cursor:pointer
 }
 
-/* PROJECTS */
-
 .projects-panel{
   position:fixed;
   top:72px;
@@ -671,7 +653,8 @@ textarea::placeholder{
 .project-name{
   font-weight:800;
   font-size:13px;
-  margin-bottom:4px
+  margin-bottom:4px;
+  padding-right:20px
 }
 
 .project-date{
@@ -684,10 +667,16 @@ textarea::placeholder{
   border:0;
   background:transparent;
   color:#777;
-  cursor:pointer
+  cursor:pointer;
+  font-size:18px
+}
+
+.project-delete:hover{
+  color:#fff
 }
 
 @media(max-width:1150px){
+
   .app{
     grid-template-columns:300px 1fr
   }
@@ -709,6 +698,7 @@ textarea::placeholder{
 }
 
 @media(max-width:850px){
+
   body{
     overflow:auto
   }
@@ -792,8 +782,6 @@ textarea::placeholder{
 
 <div class="app">
 
-<!-- LEFT -->
-
 <aside class="sidebar">
 
 <div class="small-label">SPDP AI BUILDER</div>
@@ -806,7 +794,10 @@ Websites, web apps and playable games.
 </p>
 
 <div class="prompt-box">
-<textarea id="prompt" placeholder="Describe anything...
+
+<textarea
+id="prompt"
+placeholder="Describe anything...
 
 Examples:
 
@@ -817,77 +808,114 @@ Create a playable 2D car game
 Create a 3D racing game
 
 Create an online store"></textarea>
+
 </div>
 
-<button class="generate" id="generateButton" onclick="generate()">
+<button
+class="generate"
+id="generateButton"
+onclick="generate()">
+
 ✦ Generate
+
 </button>
 
 <div class="divider"></div>
 
-<div class="examples-title">TRY AN IDEA</div>
+<div class="examples-title">
+TRY AN IDEA
+</div>
 
-<div class="example"
+<div
+class="example"
 onclick="example('Create a playable 2D car racing game with keyboard and mobile controls, enemies, score, collision detection, start screen and restart button')">
+
 🏎️ Playable 2D Car Game
+
 </div>
 
-<div class="example"
+<div
+class="example"
 onclick="example('Create a playable 3D futuristic racing game using Three.js with player controls, enemy cars, score, collision detection and restart')">
+
 🏁 Playable 3D Racing Game
+
 </div>
 
-<div class="example"
+<div
+class="example"
 onclick="example('Create a premium black gaming website with hero, features, pricing, testimonials and contact')">
+
 🎮 Gaming Website
+
 </div>
 
-<div class="example"
+<div
+class="example"
 onclick="example('Create a modern restaurant website with menu, reservation and contact sections')">
+
 🍽️ Restaurant
+
 </div>
 
-<div class="example"
+<div
+class="example"
 onclick="example('Create a premium portfolio website for a professional designer')">
+
 ✦ Portfolio
+
 </div>
 
-<div class="example"
+<div
+class="example"
 onclick="example('Create a modern online store for premium sneakers')">
+
 🛒 Online Store
+
 </div>
 
 </aside>
 
-<!-- PREVIEW -->
 
 <section class="preview">
 
 <div class="preview-top">
 
 <div class="preview-left">
+
 <div class="dot"></div>
+
 Live Preview
+
 </div>
 
 <div class="preview-tools">
 
-<button class="tool"
+<button
+class="tool"
 onclick="desktopPreview()"
 title="Desktop">
+
 ▣
+
 </button>
 
-<button class="tool"
+<button
+class="tool"
 onclick="mobilePreview()"
 title="Mobile">
+
 ▯
+
 </button>
 
-<button class="tool"
+<button
+class="tool"
 onclick="fullscreenPreview()"
 title="Fullscreen">
+
 ⛶
+
 </button>
 
 </div>
@@ -896,7 +924,9 @@ title="Fullscreen">
 
 <div class="canvas">
 
-<div class="website" id="website">
+<div
+class="website"
+id="website">
 
 <iframe
 id="previewFrame"
@@ -906,7 +936,9 @@ allow="autoplay; fullscreen; gamepad; microphone; camera"
 allowfullscreen>
 </iframe>
 
-<div class="loading" id="loading">
+<div
+class="loading"
+id="loading">
 
 <div class="spinner"></div>
 
@@ -922,33 +954,54 @@ SPDP AI is building...
 
 </section>
 
-<!-- AI CHAT -->
 
-<aside class="ai-chat" id="aiChat">
+<aside
+class="ai-chat"
+id="aiChat">
 
 <div class="chat-header">
 
 <div class="chat-title">
+
 <div class="ai-dot"></div>
+
 AI Website Editor
+
 </div>
 
-<button class="chat-clear" onclick="clearChat()">
+<button
+class="chat-clear"
+onclick="clearChat()">
+
 Clear
+
 </button>
 
 </div>
 
-<div class="chat-messages" id="chatMessages">
+<div
+class="chat-messages"
+id="chatMessages">
 
 <div class="chat-empty">
-Your generated website can be edited here.<br><br>
-Try:<br>
-• Make the background black<br>
-• Change the hero title<br>
-• Add a pricing section<br>
-• Make the button blue<br>
+
+Your generated website can be edited here.
+
+<br><br>
+
+Try:
+
+<br>
+• Make the background black
+<br>
+• Change the hero title
+<br>
+• Add a pricing section
+<br>
+• Make the button blue
+<br>
 • Add a working contact form
+
 </div>
 
 </div>
@@ -964,7 +1017,9 @@ placeholder="Tell AI what to change..."></textarea>
 id="chatSend"
 class="chat-send"
 onclick="editWebsite()">
+
 ✦ Update Website
+
 </button>
 
 </div>
@@ -973,9 +1028,10 @@ onclick="editWebsite()">
 
 </div>
 
-<!-- PROJECTS -->
 
-<div class="projects-panel" id="projectsPanel">
+<div
+class="projects-panel"
+id="projectsPanel">
 
 <div class="projects-head">
 
@@ -984,35 +1040,48 @@ onclick="editWebsite()">
 <button
 class="chat-clear"
 onclick="toggleProjects()">
+
 Close
+
 </button>
 
 </div>
 
-<div class="projects-list" id="projectsList">
+<div
+class="projects-list"
+id="projectsList">
+
 Loading...
-</div>
 
 </div>
 
-<!-- AUTH MODAL -->
+</div>
 
-<div class="modal" id="authModal">
+
+<div
+class="modal"
+id="authModal">
 
 <div class="auth-box">
 
 <button
 class="close-modal"
 onclick="closeAuth()">
+
 ×
+
 </button>
 
 <h2 id="authTitle">
 Sign in
 </h2>
 
-<p class="auth-desc" id="authDesc">
+<p
+class="auth-desc"
+id="authDesc">
+
 Sign in to save and manage your SPDP AI projects.
+
 </p>
 
 <input
@@ -1031,24 +1100,34 @@ placeholder="Password">
 class="auth-action"
 id="authAction"
 onclick="submitAuth()">
+
 Sign In
+
 </button>
 
 <div
 class="auth-switch"
 id="authSwitch"
 onclick="toggleAuthMode()">
+
 Don't have an account?
 <span>Sign Up</span>
-</div>
 
 </div>
 
 </div>
 
-<div class="toast" id="toast">
+</div>
+
+
+<div
+class="toast"
+id="toast">
+
 Done
+
 </div>
+
 
 <script>
 
@@ -1070,11 +1149,16 @@ window.supabase.createClient(
 
 
 /* =========================================
-   CONFIG
+   SPDP AI WORKER
 ========================================= */
 
 const WORKER_URL =
 "https://spdp-ai.spdp3127.workers.dev/";
+
+
+/* =========================================
+   STATE
+========================================= */
 
 let generatedHTML = "";
 
@@ -1091,7 +1175,7 @@ let authMode = "signin";
 
 function example(text){
 
-document.getElementById("prompt").value = text;
+  document.getElementById("prompt").value = text;
 
 }
 
@@ -1102,151 +1186,221 @@ document.getElementById("prompt").value = text;
 
 function openAuth(){
 
-document
-.getElementById("authModal")
-.classList.add("show");
+  document
+    .getElementById("authModal")
+    .classList.add("show");
 
 }
 
 function closeAuth(){
 
-document
-.getElementById("authModal")
-.classList.remove("show");
+  document
+    .getElementById("authModal")
+    .classList.remove("show");
 
 }
+
 
 function toggleAuthMode(){
 
-authMode =
-authMode === "signin"
-? "signup"
-: "signin";
+  authMode =
+    authMode === "signin"
+      ? "signup"
+      : "signin";
 
-const title =
-document.getElementById("authTitle");
+  const title =
+    document.getElementById("authTitle");
 
-const desc =
-document.getElementById("authDesc");
+  const desc =
+    document.getElementById("authDesc");
 
-const action =
-document.getElementById("authAction");
+  const action =
+    document.getElementById("authAction");
 
-const switchText =
-document.getElementById("authSwitch");
+  const switchText =
+    document.getElementById("authSwitch");
 
-if(authMode === "signup"){
 
-title.innerText = "Create account";
+  if(authMode === "signup"){
 
-desc.innerText =
-"Create your SPDP AI account and save your projects.";
+    title.innerText =
+      "Create account";
 
-action.innerText =
-"Sign Up";
+    desc.innerText =
+      "Create your SPDP AI account and save your projects.";
 
-switchText.innerHTML =
-'Already have an account? <span>Sign In</span>';
+    action.innerText =
+      "Sign Up";
 
-}else{
+    switchText.innerHTML =
+      'Already have an account? <span>Sign In</span>';
 
-title.innerText =
-"Sign in";
+  }else{
 
-desc.innerText =
-"Sign in to save and manage your SPDP AI projects.";
+    title.innerText =
+      "Sign in";
 
-action.innerText =
-"Sign In";
+    desc.innerText =
+      "Sign in to save and manage your SPDP AI projects.";
 
-switchText.innerHTML =
-'Don\'t have an account? <span>Sign Up</span>';
+    action.innerText =
+      "Sign In";
+
+    switchText.innerHTML =
+      'Don\'t have an account? <span>Sign Up</span>';
+
+  }
 
 }
 
-}
+
+/* =========================================
+   AUTH SUBMIT
+========================================= */
 
 async function submitAuth(){
 
-const email =
-document.getElementById("authEmail")
-.value
-.trim();
+  const email =
+    document
+      .getElementById("authEmail")
+      .value
+      .trim();
 
-const password =
-document.getElementById("authPassword")
-.value;
+  const password =
+    document
+      .getElementById("authPassword")
+      .value;
 
-if(!email || !password){
 
-showToast("Enter email and password");
+  if(!email || !password){
 
-return;
+    showToast(
+      "Enter email and password"
+    );
 
-}
+    return;
 
-const action =
-document.getElementById("authAction");
+  }
 
-action.disabled = true;
 
-try{
+  if(password.length < 6){
 
-if(authMode === "signup"){
+    showToast(
+      "Password must be at least 6 characters"
+    );
 
-const {data,error} =
-await supabaseClient.auth.signUp({
-email,
-password
-});
+    return;
 
-if(error)
-throw error;
+  }
 
-if(data.session){
 
-showToast("Account created!");
+  const action =
+    document.getElementById("authAction");
 
-closeAuth();
+  action.disabled = true;
 
-}else{
 
-showToast(
-"Account created. Check your email to confirm."
-);
+  try{
 
-}
+    if(authMode === "signup"){
 
-}else{
+      const {data,error} =
+        await supabaseClient.auth.signUp({
 
-const {error} =
-await supabaseClient.auth.signInWithPassword({
-email,
-password
-});
+          email,
+          password
 
-if(error)
-throw error;
+        });
 
-showToast("Signed in successfully!");
 
-closeAuth();
+      if(error)
+        throw error;
 
-}
 
-}catch(error){
+      if(data.session){
 
-console.error(error);
+        currentUser =
+          data.session.user;
 
-showToast(
-"❌ " + error.message
-);
+        updateAuthUI();
 
-}finally{
+        closeAuth();
 
-action.disabled = false;
+        showToast(
+          "✓ Account created"
+        );
 
-}
+
+        if(generatedHTML){
+
+          await saveProject();
+
+        }
+
+      }else{
+
+        showToast(
+          "✓ Account created. Check your email to confirm."
+        );
+
+      }
+
+
+    }else{
+
+      const {data,error} =
+        await supabaseClient.auth.signInWithPassword({
+
+          email,
+          password
+
+        });
+
+
+      if(error)
+        throw error;
+
+
+      currentUser =
+        data.user;
+
+
+      updateAuthUI();
+
+      closeAuth();
+
+      showToast(
+        "✓ Signed in successfully"
+      );
+
+
+      if(generatedHTML){
+
+        await saveProject();
+
+      }
+
+
+      await loadProjects();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "AUTH ERROR:",
+      error
+    );
+
+    showToast(
+      "❌ " + error.message
+    );
+
+  }finally{
+
+    action.disabled = false;
+
+  }
 
 }
 
@@ -1257,56 +1411,56 @@ action.disabled = false;
 
 async function loadUser(){
 
-const {data} =
-await supabaseClient.auth.getSession();
+  try{
 
-currentUser =
-data.session?.user || null;
+    const {data,error} =
+      await supabaseClient.auth.getSession();
 
-updateAuthUI();
+
+    if(error)
+      throw error;
+
+
+    currentUser =
+      data.session?.user || null;
+
+
+    updateAuthUI();
+
+
+    if(currentUser){
+
+      await loadProjects();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "SESSION ERROR:",
+      error
+    );
+
+  }
 
 }
 
-function updateAuthUI(){
-
-const button =
-document.getElementById("authButton");
-
-if(currentUser){
-
-button.innerText =
-currentUser.email;
-
-button.title =
-"Sign out";
-
-}else{
-
-button.innerText =
-"Sign In";
-
-button.title =
-"Sign in";
-
-}
-
-}
 
 supabaseClient.auth.onAuthStateChange(
-async(event,session)=>{
+  async(event,session)=>{
 
-currentUser =
-session?.user || null;
+    currentUser =
+      session?.user || null;
 
-updateAuthUI();
+    updateAuthUI();
 
-if(currentUser){
+    if(currentUser){
 
-await loadProjects();
+      await loadProjects();
 
-}
+    }
 
-}
+  }
 );
 
 
@@ -1316,164 +1470,244 @@ await loadProjects();
 
 async function handleAuthButton(){
 
-if(!currentUser){
+  if(!currentUser){
 
-openAuth();
+    openAuth();
 
-return;
+    return;
+
+  }
+
+
+  const {error} =
+    await supabaseClient.auth.signOut();
+
+
+  if(error){
+
+    showToast(
+      "❌ " + error.message
+    );
+
+    return;
+
+  }
+
+
+  currentUser = null;
+
+  currentProjectId = null;
+
+  updateAuthUI();
+
+  document
+    .getElementById("projectsPanel")
+    .classList.remove("show");
+
+  showToast(
+    "Signed out"
+  );
 
 }
 
-const {error} =
-await supabaseClient.auth.signOut();
 
-if(error){
+function updateAuthUI(){
 
-showToast(
-"❌ " + error.message
-);
+  const button =
+    document.getElementById(
+      "authButton"
+    );
 
-return;
 
-}
+  if(currentUser){
 
-currentUser = null;
+    button.innerText =
+      currentUser.email;
 
-currentProjectId = null;
+    button.title =
+      "Sign out";
 
-updateAuthUI();
+  }else{
 
-showToast("Signed out");
+    button.innerText =
+      "Sign In";
+
+    button.title =
+      "Sign in";
+
+  }
 
 }
 
 
 /* =========================================
-   GENERATE
+   GENERATE WEBSITE
 ========================================= */
 
 async function generate(){
 
-const prompt =
-document
-.getElementById("prompt")
-.value
-.trim();
+  const prompt =
+    document
+      .getElementById("prompt")
+      .value
+      .trim();
 
-const button =
-document.getElementById(
-"generateButton"
-);
 
-const loading =
-document.getElementById(
-"loading"
-);
+  const button =
+    document.getElementById(
+      "generateButton"
+    );
 
-if(!prompt){
 
-showToast(
-"Describe what you want to build"
-);
+  const loading =
+    document.getElementById(
+      "loading"
+    );
 
-return;
 
-}
+  if(!prompt){
 
-button.disabled = true;
+    showToast(
+      "Describe what you want to build"
+    );
 
-loading.classList.add("show");
+    return;
 
-try{
+  }
 
-showToast(
-"SPDP AI is thinking..."
-);
 
-const response =
-await fetch(
-WORKER_URL,
-{
-method:"POST",
+  button.disabled = true;
 
-headers:{
-"Content-Type":
-"application/json"
-},
+  loading.classList.add("show");
 
-body:JSON.stringify({
-prompt
-})
 
-}
-);
+  try{
 
-let data;
+    showToast(
+      "SPDP AI is thinking..."
+    );
 
-try{
 
-data =
-await response.json();
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
 
-}catch{
+          method:"POST",
 
-throw new Error(
-"Worker returned an invalid response."
-);
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
 
-}
+          body:
+            JSON.stringify({
+              prompt
+            })
 
-if(!response.ok){
+        }
+      );
 
-throw new Error(
-data.error ||
-`Worker error: ${response.status}`
-);
 
-}
+    let data;
 
-if(!data.html){
 
-throw new Error(
-"AI returned no HTML."
-);
+    try{
 
-}
+      data =
+        await response.json();
 
-generatedHTML =
-data.html;
+    }catch{
 
-currentProjectId = null;
+      throw new Error(
+        "Worker returned an invalid response."
+      );
 
-document
-.getElementById(
-"previewFrame"
-)
-.srcdoc =
-generatedHTML;
+    }
 
-showToast(
-"✨ Website generated successfully!"
-);
 
-}catch(error){
+    if(!response.ok){
 
-console.error(
-"SPDP AI ERROR:",
-error
-);
+      throw new Error(
+        data.error ||
+        `Worker error: ${response.status}`
+      );
 
-showToast(
-"❌ " + error.message
-);
+    }
 
-}finally{
 
-loading.classList.remove("show");
+    if(!data.html){
 
-button.disabled = false;
+      throw new Error(
+        "AI returned no HTML."
+      );
 
-}
+    }
+
+
+    generatedHTML =
+      data.html;
+
+
+    /*
+      VERY IMPORTANT:
+      A new generation creates
+      a new project.
+    */
+
+    currentProjectId = null;
+
+
+    document
+      .getElementById(
+        "previewFrame"
+      )
+      .srcdoc =
+        generatedHTML;
+
+
+    showToast(
+      "✨ Website generated successfully!"
+    );
+
+
+    /*
+      AUTO SAVE
+    */
+
+    if(currentUser){
+
+      await saveProject();
+
+    }else{
+
+      showToast(
+        "Website created. Sign in to save it."
+      );
+
+    }
+
+
+  }catch(error){
+
+    console.error(
+      "SPDP AI ERROR:",
+      error
+    );
+
+
+    showToast(
+      "❌ " + error.message
+    );
+
+
+  }finally{
+
+    loading.classList.remove("show");
+
+    button.disabled = false;
+
+  }
 
 }
 
@@ -1484,105 +1718,179 @@ button.disabled = false;
 
 async function saveProject(){
 
-if(!currentUser){
+  if(!currentUser){
 
-openAuth();
+    openAuth();
 
-showToast(
-"Sign in first to save your project"
-);
+    showToast(
+      "Sign in first to save your project"
+    );
 
-return;
+    return false;
 
-}
+  }
 
-if(!generatedHTML){
 
-showToast(
-"Generate a website first"
-);
+  if(!generatedHTML){
 
-return;
+    showToast(
+      "Generate a website first"
+    );
 
-}
+    return false;
 
-const prompt =
-document
-.getElementById("prompt")
-.value
-.trim();
+  }
 
-let name =
-prompt
-.split("\n")[0]
-.trim()
-.substring(0,80);
 
-if(!name)
-name = "Untitled Project";
+  const prompt =
+    document
+      .getElementById("prompt")
+      .value
+      .trim();
 
-try{
 
-let result;
+  let name =
+    prompt
+      .split("\n")[0]
+      .trim()
+      .substring(0,80);
 
-if(currentProjectId){
 
-result =
-await supabaseClient
-.from("projects")
-.update({
+  if(!name){
 
-name,
-prompt,
-html:generatedHTML,
-updated_at:new Date().toISOString()
+    name =
+      "Untitled Project";
 
-})
-.eq("id",currentProjectId)
-.eq("user_id",currentUser.id);
+  }
 
-}else{
 
-result =
-await supabaseClient
-.from("projects")
-.insert({
+  try{
 
-user_id:currentUser.id,
-name,
-prompt,
-html:generatedHTML
+    let result;
 
-})
-.select()
-.single();
 
-if(!result.error){
+    /*
+      UPDATE EXISTING PROJECT
+    */
 
-currentProjectId =
-result.data.id;
+    if(currentProjectId){
 
-}
+      result =
+        await supabaseClient
+          .from("projects")
+          .update({
 
-}
+            name:
 
-if(result.error)
-throw result.error;
+              name,
 
-showToast(
-"✓ Project saved"
-);
+            prompt:
 
-await loadProjects();
+              prompt,
 
-}catch(error){
+            html:
 
-console.error(error);
+              generatedHTML,
 
-showToast(
-"❌ Save failed: " +
-error.message
-);
+            updated_at:
+
+              new Date()
+                .toISOString()
+
+          })
+          .eq(
+            "id",
+            currentProjectId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          );
+
+
+    }
+
+
+    /*
+      CREATE NEW PROJECT
+    */
+
+    else{
+
+      result =
+        await supabaseClient
+          .from("projects")
+          .insert({
+
+            user_id:
+
+              currentUser.id,
+
+            name:
+
+              name,
+
+            prompt:
+
+              prompt,
+
+            html:
+
+              generatedHTML
+
+          })
+          .select()
+          .single();
+
+
+      if(
+        !result.error &&
+        result.data
+      ){
+
+        currentProjectId =
+          result.data.id;
+
+      }
+
+    }
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    await loadProjects();
+
+
+    showToast(
+      "✓ Project saved"
+    );
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "SAVE PROJECT ERROR:",
+      error
+    );
+
+
+    showToast(
+      "❌ Save failed: " +
+      error.message
+    );
+
+
+    return false;
+
+  }
 
 }
 
@@ -1591,106 +1899,163 @@ error.message
    LOAD PROJECTS
 ========================================= */
 
-}
-
 async function loadProjects(){
 
-if(!currentUser)
-return;
+  if(!currentUser)
+    return;
 
-const list =
-document.getElementById(
-"projectsList"
-);
 
-list.innerHTML =
-"Loading...";
+  const list =
+    document.getElementById(
+      "projectsList"
+    );
 
-const {data,error} =
-await supabaseClient
-.from("projects")
-.select("*")
-.eq("user_id",currentUser.id)
-.order("updated_at",{
-ascending:false
-});
 
-if(error){
+  list.innerHTML =
+    "Loading...";
 
-console.error(error);
 
-list.innerHTML =
-"Unable to load projects.";
+  try{
 
-return;
+    const {data,error} =
+      await supabaseClient
+        .from("projects")
+        .select("*")
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .order(
+          "updated_at",
+          {
+            ascending:false
+          }
+        );
 
-}
 
-if(!data || data.length === 0){
+    if(error)
+      throw error;
 
-list.innerHTML =
-`<div style="color:#666;padding:15px;font-size:12px">
-No saved projects yet.
-</div>`;
 
-return;
+    if(
+      !data ||
+      data.length === 0
+    ){
 
-}
+      list.innerHTML = `
+        <div style="
+          color:#666;
+          padding:15px;
+          font-size:12px
+        ">
+          No saved projects yet.
+        </div>
+      `;
 
-list.innerHTML = "";
+      return;
 
-data.forEach(project=>{
+    }
 
-const item =
-document.createElement("div");
 
-item.className =
-"project-item";
+    list.innerHTML = "";
 
-const date =
-project.updated_at ||
-project.created_at;
 
-item.innerHTML = `
+    data.forEach(
+      project=>{
 
-<button
-class="project-delete"
-title="Delete"
->
-×
-</button>
+        const item =
+          document.createElement(
+            "div"
+          );
 
-<div class="project-name">
-${escapeHTML(project.name || "Untitled")}
-</div>
 
-<div class="project-date">
-${date ? new Date(date).toLocaleString() : ""}
-</div>
+        item.className =
+          "project-item";
 
-`;
 
-item.onclick =
-()=>{
-loadProject(project);
-};
+        const date =
+          project.updated_at ||
+          project.created_at;
 
-item
-.querySelector(".project-delete")
-.onclick =
-async(e)=>{
 
-e.stopPropagation();
+        item.innerHTML = `
 
-await deleteProject(
-project.id
-);
+          <button
+            class="project-delete"
+            title="Delete">
+            ×
+          </button>
 
-};
+          <div class="project-name">
+            ${escapeHTML(
+              project.name ||
+              "Untitled"
+            )}
+          </div>
 
-list.appendChild(item);
+          <div class="project-date">
+            ${
+              date
+                ? new Date(date)
+                    .toLocaleString()
+                : ""
+            }
+          </div>
 
-});
+        `;
+
+
+        item.onclick =
+          ()=>{
+            loadProject(
+              project
+            );
+          };
+
+
+        item
+          .querySelector(
+            ".project-delete"
+          )
+          .onclick =
+          async(e)=>{
+
+            e.stopPropagation();
+
+            await deleteProject(
+              project.id
+            );
+
+          };
+
+
+        list.appendChild(
+          item
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "LOAD PROJECTS ERROR:",
+      error
+    );
+
+
+    list.innerHTML = `
+      <div style="
+        color:#ff7777;
+        padding:15px;
+        font-size:12px
+      ">
+        Unable to load projects.
+      </div>
+    `;
+
+  }
 
 }
 
@@ -1701,27 +2066,38 @@ list.appendChild(item);
 
 function loadProject(project){
 
-currentProjectId =
-project.id;
+  currentProjectId =
+    project.id;
 
-generatedHTML =
-project.html || "";
 
-document
-.getElementById("prompt")
-.value =
-project.prompt || "";
+  generatedHTML =
+    project.html || "";
 
-document
-.getElementById("previewFrame")
-.srcdoc =
-generatedHTML;
 
-toggleProjects();
+  document
+    .getElementById("prompt")
+    .value =
+      project.prompt || "";
 
-showToast(
-"✓ Project loaded"
-);
+
+  document
+    .getElementById(
+      "previewFrame"
+    )
+    .srcdoc =
+      generatedHTML;
+
+
+  document
+    .getElementById(
+      "projectsPanel"
+    )
+    .classList.remove("show");
+
+
+  showToast(
+    "✓ Project loaded"
+  );
 
 }
 
@@ -1732,40 +2108,76 @@ showToast(
 
 async function deleteProject(id){
 
-if(!currentUser)
-return;
+  if(!currentUser)
+    return;
 
-if(!confirm(
-"Delete this project?"
-))
-return;
 
-const {error} =
-await supabaseClient
-.from("projects")
-.delete()
-.eq("id",id)
-.eq("user_id",currentUser.id);
+  if(
+    !confirm(
+      "Delete this project?"
+    )
+  ){
 
-if(error){
+    return;
 
-showToast(
-"❌ Delete failed: " +
-error.message
-);
+  }
 
-return;
 
-}
+  try{
 
-if(currentProjectId === id)
-currentProjectId = null;
+    const {error} =
+      await supabaseClient
+        .from("projects")
+        .delete()
+        .eq(
+          "id",
+          id
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        );
 
-showToast(
-"Project deleted"
-);
 
-await loadProjects();
+    if(error)
+      throw error;
+
+
+    if(
+      currentProjectId === id
+    ){
+
+      currentProjectId =
+        null;
+
+      generatedHTML =
+        "";
+
+    }
+
+
+    showToast(
+      "Project deleted"
+    );
+
+
+    await loadProjects();
+
+
+  }catch(error){
+
+    console.error(
+      "DELETE ERROR:",
+      error
+    );
+
+
+    showToast(
+      "❌ Delete failed: " +
+      error.message
+    );
+
+  }
 
 }
 
@@ -1776,26 +2188,39 @@ await loadProjects();
 
 function toggleProjects(){
 
-const panel =
-document.getElementById(
-"projectsPanel"
-);
+  if(!currentUser){
 
-if(!currentUser){
+    openAuth();
 
-openAuth();
+    showToast(
+      "Sign in to view your projects"
+    );
 
-return;
+    return;
 
-}
+  }
 
-panel.classList.toggle("show");
 
-if(panel.classList.contains("show")){
+  const panel =
+    document.getElementById(
+      "projectsPanel"
+    );
 
-loadProjects();
 
-}
+  panel.classList.toggle(
+    "show"
+  );
+
+
+  if(
+    panel.classList.contains(
+      "show"
+    )
+  ){
+
+    loadProjects();
+
+  }
 
 }
 
@@ -1806,76 +2231,110 @@ loadProjects();
 
 function toggleChat(){
 
-const chat =
-document.getElementById(
-"aiChat"
-);
+  const chat =
+    document.getElementById(
+      "aiChat"
+    );
 
-chat.classList.toggle("open");
+
+  chat.classList.toggle(
+    "open"
+  );
 
 }
+
 
 function clearChat(){
 
-document
-.getElementById("chatMessages")
-.innerHTML = `
-<div class="chat-empty">
-Your generated website can be edited here.<br><br>
-Try:<br>
-• Make the background black<br>
-• Change the hero title<br>
-• Add a pricing section<br>
-• Make the button blue<br>
-• Add a working contact form
-</div>
-`;
+  document
+    .getElementById(
+      "chatMessages"
+    )
+    .innerHTML = `
+
+      <div class="chat-empty">
+
+        Your generated website can be edited here.
+
+        <br><br>
+
+        Try:
+
+        <br>
+        • Make the background black
+        <br>
+        • Change the hero title
+        <br>
+        • Add a pricing section
+        <br>
+        • Make the button blue
+        <br>
+        • Add a working contact form
+
+      </div>
+
+    `;
 
 }
 
+
 function addChatMessage(
-type,
-text
+  type,
+  text
 ){
 
-const container =
-document.getElementById(
-"chatMessages"
-);
+  const container =
+    document.getElementById(
+      "chatMessages"
+    );
 
-const empty =
-container.querySelector(
-".chat-empty"
-);
 
-if(empty)
-empty.remove();
+  const empty =
+    container.querySelector(
+      ".chat-empty"
+    );
 
-const message =
-document.createElement("div");
 
-message.className =
-"message " + type;
+  if(empty)
+    empty.remove();
 
-const bubble =
-document.createElement("div");
 
-bubble.className =
-"message-bubble";
+  const message =
+    document.createElement(
+      "div"
+    );
 
-bubble.innerText =
-text;
 
-message.appendChild(
-bubble
-);
+  message.className =
+    "message " + type;
 
-container.appendChild(
-message
-);
 
-container.scrollTop =
-container.scrollHeight;
+  const bubble =
+    document.createElement(
+      "div"
+    );
+
+
+  bubble.className =
+    "message-bubble";
+
+
+  bubble.innerText =
+    text;
+
+
+  message.appendChild(
+    bubble
+  );
+
+
+  container.appendChild(
+    message
+  );
+
+
+  container.scrollTop =
+    container.scrollHeight;
 
 }
 
@@ -1886,55 +2345,63 @@ container.scrollHeight;
 
 async function editWebsite(){
 
-if(!generatedHTML){
+  if(!generatedHTML){
 
-showToast(
-"Generate a website first"
-);
+    showToast(
+      "Generate a website first"
+    );
 
-return;
+    return;
 
-}
+  }
 
-const input =
-document.getElementById(
-"chatInput"
-);
 
-const send =
-document.getElementById(
-"chatSend"
-);
+  const input =
+    document.getElementById(
+      "chatInput"
+    );
 
-const instruction =
-input.value.trim();
 
-if(!instruction){
+  const send =
+    document.getElementById(
+      "chatSend"
+    );
 
-showToast(
-"Tell AI what to change"
-);
 
-return;
+  const instruction =
+    input.value.trim();
 
-}
 
-addChatMessage(
-"user",
-instruction
-);
+  if(!instruction){
 
-input.value = "";
+    showToast(
+      "Tell AI what to change"
+    );
 
-send.disabled = true;
+    return;
 
-showToast(
-"AI is editing your website..."
-);
+  }
 
-try{
 
-const editPrompt = `
+  addChatMessage(
+    "user",
+    instruction
+  );
+
+
+  input.value = "";
+
+  send.disabled = true;
+
+
+  showToast(
+    "AI is editing your website..."
+  );
+
+
+  try{
+
+    const editPrompt = `
 
 You are SPDP AI Website Editor.
 
@@ -1982,108 +2449,168 @@ First characters must be:
 No Markdown.
 No code fences.
 No explanation.
+
 `;
 
-const response =
-await fetch(
-WORKER_URL,
-{
-method:"POST",
 
-headers:{
-"Content-Type":
-"application/json"
-},
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
 
-body:JSON.stringify({
-prompt:editPrompt
-})
+          method:"POST",
 
-}
-);
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
 
-const data =
-await response.json();
+          body:
+            JSON.stringify({
+              prompt:
+                editPrompt
+            })
 
-if(!response.ok){
+        }
+      );
 
-throw new Error(
-data.error ||
-"AI editing failed"
-);
 
-}
+    let data;
 
-if(!data.html){
 
-throw new Error(
-"AI returned no HTML"
-);
+    try{
 
-}
+      data =
+        await response.json();
 
-generatedHTML =
-data.html;
+    }catch{
 
-document
-.getElementById(
-"previewFrame"
-)
-.srcdoc =
-generatedHTML;
+      throw new Error(
+        "Worker returned invalid JSON."
+      );
 
-addChatMessage(
-"ai",
-"✓ Website updated successfully."
-);
+    }
 
-showToast(
-"✨ Website updated"
-);
 
-}catch(error){
+    if(!response.ok){
 
-console.error(error);
+      throw new Error(
+        data.error ||
+        "AI editing failed"
+      );
 
-addChatMessage(
-"ai",
-"❌ " + error.message
-);
+    }
 
-showToast(
-"❌ " + error.message
-);
 
-}finally{
+    if(!data.html){
 
-send.disabled = false;
+      throw new Error(
+        "AI returned no HTML"
+      );
 
-}
+    }
+
+
+    generatedHTML =
+      data.html;
+
+
+    document
+      .getElementById(
+        "previewFrame"
+      )
+      .srcdoc =
+        generatedHTML;
+
+
+    addChatMessage(
+      "ai",
+      "✓ Website updated successfully."
+    );
+
+
+    showToast(
+      "✨ Website updated"
+    );
+
+
+    /*
+      AUTO UPDATE SAME PROJECT
+    */
+
+    if(currentUser){
+
+      if(currentProjectId){
+
+        await saveProject();
+
+      }else{
+
+        await saveProject();
+
+      }
+
+    }else{
+
+      showToast(
+        "Website updated. Sign in to save it."
+      );
+
+    }
+
+
+  }catch(error){
+
+    console.error(
+      "AI EDIT ERROR:",
+      error
+    );
+
+
+    addChatMessage(
+      "ai",
+      "❌ " + error.message
+    );
+
+
+    showToast(
+      "❌ " + error.message
+    );
+
+
+  }finally{
+
+    send.disabled = false;
+
+  }
 
 }
 
 
 /* =========================================
-   CHAT ENTER
+   CHAT SHORTCUT
 ========================================= */
 
 document
-.getElementById("chatInput")
-.addEventListener(
-"keydown",
-e=>{
+  .getElementById(
+    "chatInput"
+  )
+  .addEventListener(
+    "keydown",
+    e=>{
 
-if(
-(e.ctrlKey || e.metaKey) &&
-e.key === "Enter"
-){
+      if(
+        (e.ctrlKey ||
+         e.metaKey) &&
+        e.key === "Enter"
+      ){
 
-editWebsite();
+        editWebsite();
 
-}
+      }
 
-}
-);
+    }
+  );
 
 
 /* =========================================
@@ -2092,54 +2619,71 @@ editWebsite();
 
 function downloadWebsite(){
 
-if(!generatedHTML){
+  if(!generatedHTML){
 
-showToast(
-"Generate something first"
-);
+    showToast(
+      "Generate something first"
+    );
 
-return;
+    return;
 
-}
+  }
 
-const blob =
-new Blob(
-[generatedHTML],
-{
-type:
-"text/html;charset=utf-8"
-}
-);
 
-const url =
-URL.createObjectURL(blob);
+  const blob =
+    new Blob(
+      [generatedHTML],
+      {
+        type:
+          "text/html;charset=utf-8"
+      }
+    );
 
-const a =
-document.createElement("a");
 
-a.href = url;
+  const url =
+    URL.createObjectURL(
+      blob
+    );
 
-a.download =
-"spdp-generated-website.html";
 
-document
-.body
-.appendChild(a);
+  const a =
+    document.createElement(
+      "a"
+    );
 
-a.click();
 
-a.remove();
+  a.href =
+    url;
 
-setTimeout(
-()=>{
-URL.revokeObjectURL(url);
-},
-1000
-);
 
-showToast(
-"Website downloaded!"
-);
+  a.download =
+    "spdp-generated-website.html";
+
+
+  document
+    .body
+    .appendChild(a);
+
+
+  a.click();
+
+
+  a.remove();
+
+
+  setTimeout(
+    ()=>{
+      URL.revokeObjectURL(
+        url
+      );
+    },
+    1000
+  );
+
+
+  showToast(
+    "Website downloaded!"
+  );
 
 }
 
@@ -2150,17 +2694,24 @@ showToast(
 
 function newProject(){
 
-generatedHTML = "";
+  generatedHTML = "";
 
-currentProjectId = null;
+  currentProjectId =
+    null;
 
-document
-.getElementById("prompt")
-.value = "";
 
-document
-.getElementById("previewFrame")
-.srcdoc = `
+  document
+    .getElementById(
+      "prompt"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "previewFrame"
+    )
+    .srcdoc = `
 
 <!DOCTYPE html>
 
@@ -2267,9 +2818,10 @@ Describe your idea and let SPDP AI create it.
 
 `;
 
-showToast(
-"New project"
-);
+
+  showToast(
+    "New project"
+  );
 
 }
 
@@ -2280,62 +2832,71 @@ showToast(
 
 function desktopPreview(){
 
-const website =
-document.getElementById(
-"website"
-);
+  const website =
+    document.getElementById(
+      "website"
+    );
 
-website.style.width =
-"min(100%,1050px)";
 
-website.style.height =
-"min(100%,700px)";
+  website.style.width =
+    "min(100%,1050px)";
 
-showToast(
-"Desktop preview"
-);
+
+  website.style.height =
+    "min(100%,700px)";
+
+
+  showToast(
+    "Desktop preview"
+  );
 
 }
+
 
 function mobilePreview(){
 
-const website =
-document.getElementById(
-"website"
-);
+  const website =
+    document.getElementById(
+      "website"
+    );
 
-website.style.width =
-"390px";
 
-website.style.height =
-"700px";
+  website.style.width =
+    "390px";
 
-showToast(
-"Mobile preview"
-);
+
+  website.style.height =
+    "700px";
+
+
+  showToast(
+    "Mobile preview"
+  );
 
 }
+
 
 async function fullscreenPreview(){
 
-const website =
-document.getElementById(
-"website"
-);
+  const website =
+    document.getElementById(
+      "website"
+    );
 
-if(
-website.requestFullscreen
-){
 
-await website.requestFullscreen();
+  if(
+    website.requestFullscreen
+  ){
 
-}else{
+    await website.requestFullscreen();
 
-showToast(
-"Fullscreen is not supported"
-);
+  }else{
 
-}
+    showToast(
+      "Fullscreen is not supported"
+    );
+
+  }
 
 }
 
@@ -2346,90 +2907,130 @@ showToast(
 
 function publishSite(){
 
-if(!generatedHTML){
+  if(!generatedHTML){
 
-showToast(
-"Generate something first"
-);
+    showToast(
+      "Generate something first"
+    );
 
-return;
+    return;
 
-}
+  }
 
-showToast(
-"Publish endpoint coming next."
-);
+
+  showToast(
+    "Publish system needs a deployment endpoint."
+  );
 
 }
 
 
 /* =========================================
-   UTIL
+   ESCAPE HTML
 ========================================= */
 
 function escapeHTML(value){
 
-return String(value)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
+
+
+/* =========================================
+   TOAST
+========================================= */
 
 function showToast(message){
 
-const toast =
-document.getElementById(
-"toast"
-);
+  const toast =
+    document.getElementById(
+      "toast"
+    );
 
-toast.innerText =
-message;
 
-toast.classList.add(
-"show"
-);
+  toast.innerText =
+    message;
 
-clearTimeout(
-window.toastTimer
-);
 
-window.toastTimer =
-setTimeout(
-()=>{
-toast.classList.remove(
-"show"
-);
-},
-3500
-);
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(
+      ()=>{
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3500
+    );
 
 }
+
+
+/* =========================================
+   PROMPT SHORTCUT
+========================================= */
+
+document
+  .getElementById(
+    "prompt"
+  )
+  .addEventListener(
+    "keydown",
+    e=>{
+
+      if(
+        (e.ctrlKey ||
+         e.metaKey) &&
+        e.key === "Enter"
+      ){
+
+        generate();
+
+      }
+
+    }
+  );
 
 
 /* =========================================
    START
 ========================================= */
-
-document
-.getElementById("prompt")
-.addEventListener(
-"keydown",
-e=>{
-
-if(
-(e.ctrlKey || e.metaKey) &&
-e.key === "Enter"
-){
-
-generate();
-
-}
-
-}
-);
 
 newProject();
 
