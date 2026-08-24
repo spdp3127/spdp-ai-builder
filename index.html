@@ -20,7 +20,6 @@ body{
   overflow:hidden;
 }
 
-/* Background */
 body::before{
   content:"";
   position:fixed;
@@ -43,7 +42,8 @@ body::after{
   pointer-events:none;
 }
 
-/* Header */
+/* HEADER */
+
 header{
   height:72px;
   border-bottom:1px solid #1d1d1d;
@@ -123,14 +123,16 @@ header{
   box-shadow:0 8px 30px rgba(255,255,255,.15);
 }
 
-/* Main */
+/* MAIN */
+
 .app{
   height:calc(100vh - 72px);
   display:grid;
   grid-template-columns:350px 1fr;
 }
 
-/* Sidebar */
+/* SIDEBAR */
+
 .sidebar{
   background:#080808;
   border-right:1px solid #1c1c1c;
@@ -208,8 +210,10 @@ textarea::placeholder{
   box-shadow:0 12px 35px rgba(255,255,255,.12);
 }
 
-.generate:active{
-  transform:scale(.98);
+.generate:disabled{
+  opacity:.5;
+  cursor:wait;
+  transform:none;
 }
 
 .divider{
@@ -245,7 +249,8 @@ textarea::placeholder{
   transform:translateX(3px);
 }
 
-/* Preview */
+/* PREVIEW */
+
 .preview{
   display:flex;
   flex-direction:column;
@@ -305,89 +310,71 @@ textarea::placeholder{
   overflow:auto;
 }
 
-/* Website preview */
+/* REAL GENERATED WEBSITE PREVIEW */
+
 .website{
   width:min(100%,1050px);
   height:min(100%,700px);
   min-height:520px;
   background:#fff;
-  color:#111;
   border-radius:14px;
   overflow:hidden;
   box-shadow:
     0 35px 100px rgba(0,0,0,.55),
     0 0 0 1px rgba(255,255,255,.04);
+  position:relative;
 }
 
-.site-nav{
-  height:65px;
-  border-bottom:1px solid #eee;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 28px;
-}
-
-.site-brand{
-  font-size:16px;
-  font-weight:900;
-}
-
-.site-nav-links{
-  display:flex;
-  gap:24px;
-  font-size:12px;
-  color:#666;
-}
-
-.site-hero{
-  height:calc(100% - 65px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:40px;
-  background:
-    radial-gradient(circle at 50% 30%,#eee,transparent 45%),
-    linear-gradient(135deg,#fff,#f2f2f2);
-}
-
-.badge{
-  border:1px solid #ddd;
-  padding:7px 12px;
-  border-radius:30px;
-  font-size:10px;
-  color:#555;
-  margin-bottom:20px;
-}
-
-.site-hero h2{
-  font-size:clamp(34px,5vw,68px);
-  line-height:1;
-  letter-spacing:-3px;
-  max-width:750px;
-  margin-bottom:20px;
-}
-
-.site-hero p{
-  color:#666;
-  max-width:570px;
-  line-height:1.7;
-  font-size:14px;
-  margin-bottom:28px;
-}
-
-.site-cta{
+#previewFrame{
+  width:100%;
+  height:100%;
+  min-height:520px;
   border:0;
-  background:#111;
-  color:#fff;
-  padding:13px 22px;
-  border-radius:8px;
+  display:block;
+  background:#fff;
+}
+
+/* LOADING */
+
+.loading{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.96);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:18px;
+  color:#111;
+  z-index:5;
+}
+
+.loading.show{
+  display:flex;
+}
+
+.spinner{
+  width:42px;
+  height:42px;
+  border:4px solid #ddd;
+  border-top-color:#111;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.loading-text{
+  font-size:14px;
   font-weight:800;
 }
 
-/* Toast */
+/* TOAST */
+
 .toast{
   position:fixed;
   bottom:25px;
@@ -409,7 +396,8 @@ textarea::placeholder{
   opacity:1;
 }
 
-/* Mobile */
+/* MOBILE */
+
 @media(max-width:850px){
 
   body{
@@ -442,10 +430,6 @@ textarea::placeholder{
     min-height:500px;
   }
 
-  .site-nav-links{
-    display:none;
-  }
-
   .canvas{
     padding:15px;
   }
@@ -458,21 +442,37 @@ textarea::placeholder{
 <header>
 
   <div class="brand">
-    <div class="logo">SP</div>
+
+    <div class="logo">
+      SP
+    </div>
 
     <div class="brand-name">
       SPDP <span>AI</span>
     </div>
+
   </div>
 
   <div class="header-right">
-    <button class="header-btn" onclick="newProject()">
+
+    <button
+      class="header-btn"
+      onclick="newProject()">
       New Project
     </button>
 
-    <button class="publish" onclick="publishSite()">
+    <button
+      class="header-btn"
+      onclick="downloadWebsite()">
+      Download
+    </button>
+
+    <button
+      class="publish"
+      onclick="publishSite()">
       Publish
     </button>
+
   </div>
 
 </header>
@@ -488,7 +488,9 @@ textarea::placeholder{
       SPDP AI BUILDER
     </div>
 
-    <h1>Create with AI.</h1>
+    <h1>
+      Create with AI.
+    </h1>
 
     <p class="desc">
       Describe your website idea and turn it into
@@ -497,7 +499,8 @@ textarea::placeholder{
 
     <div class="prompt-box">
 
-      <textarea id="prompt"
+      <textarea
+        id="prompt"
         placeholder="Describe your website...
 
 Example:
@@ -506,8 +509,13 @@ modern technology company."></textarea>
 
     </div>
 
-    <button class="generate" onclick="generate()">
+    <button
+      class="generate"
+      id="generateButton"
+      onclick="generate()">
+
       ✦ Generate Website
+
     </button>
 
 
@@ -518,29 +526,49 @@ modern technology company."></textarea>
       START WITH AN IDEA
     </div>
 
-    <div class="example"
-      onclick="example('Create a premium gaming website')">
+
+    <div
+      class="example"
+      onclick="example('Create a premium gaming website with a dark futuristic design, hero section, features, pricing and contact section')">
+
       🎮 Premium Gaming Website
+
     </div>
 
-    <div class="example"
-      onclick="example('Create a modern restaurant website')">
+
+    <div
+      class="example"
+      onclick="example('Create a modern restaurant website with menu, about section, reservation button and contact information')">
+
       🍽 Modern Restaurant
+
     </div>
 
-    <div class="example"
-      onclick="example('Create a portfolio website for a designer')">
+
+    <div
+      class="example"
+      onclick="example('Create a premium portfolio website for a professional designer with projects and contact section')">
+
       ✦ Designer Portfolio
+
     </div>
 
-    <div class="example"
-      onclick="example('Create a premium technology startup website')">
+
+    <div
+      class="example"
+      onclick="example('Create a premium technology startup website with a futuristic hero, features, pricing and testimonials')">
+
       ◈ Technology Startup
+
     </div>
 
-    <div class="example"
-      onclick="example('Create a modern online store')">
+
+    <div
+      class="example"
+      onclick="example('Create a modern online store with products, categories, pricing and shopping buttons')">
+
       ◉ Online Store
+
     </div>
 
   </aside>
@@ -553,18 +581,31 @@ modern technology company."></textarea>
     <div class="preview-top">
 
       <div class="preview-left">
+
         <div class="dot"></div>
+
         Live Preview
+
       </div>
+
 
       <div class="preview-tools">
 
-        <button class="tool" onclick="showToast('Desktop preview')">
+        <button
+          class="tool"
+          onclick="desktopPreview()">
+
           ▣
+
         </button>
 
-        <button class="tool" onclick="showToast('Mobile preview')">
+
+        <button
+          class="tool"
+          onclick="mobilePreview()">
+
           ▯
+
         </button>
 
       </div>
@@ -576,43 +617,24 @@ modern technology company."></textarea>
 
       <div class="website" id="website">
 
-        <nav class="site-nav">
+        <iframe
+          id="previewFrame"
+          title="Generated Website Preview"
+          sandbox="allow-scripts allow-forms allow-modals">
+        </iframe>
 
-          <div class="site-brand" id="siteBrand">
-            YOUR BRAND
+
+        <div
+          class="loading"
+          id="loading">
+
+          <div class="spinner"></div>
+
+          <div class="loading-text">
+            SPDP AI is building your website...
           </div>
 
-          <div class="site-nav-links">
-            <span>Home</span>
-            <span>About</span>
-            <span>Services</span>
-            <span>Contact</span>
-          </div>
-
-        </nav>
-
-
-        <section class="site-hero">
-
-          <div class="badge">
-            POWERED BY SPDP AI
-          </div>
-
-          <h2 id="siteTitle">
-            Build Something<br>
-            Extraordinary.
-          </h2>
-
-          <p id="siteDescription">
-            Turn your ideas into beautiful websites.
-            Describe what you want and start creating.
-          </p>
-
-          <button class="site-cta">
-            Get Started
-          </button>
-
-        </section>
+        </div>
 
       </div>
 
@@ -623,12 +645,31 @@ modern technology company."></textarea>
 </div>
 
 
-<div class="toast" id="toast">
+<div
+  class="toast"
+  id="toast">
+
   Done
+
 </div>
 
 
 <script>
+
+/* =========================================
+   SPDP AI CONFIG
+========================================= */
+
+const WORKER_URL =
+  "https://spdp-ai.spdp3127.workers.dev/";
+
+
+let generatedHTML = "";
+
+
+/* =========================================
+   EXAMPLE PROMPTS
+========================================= */
 
 function example(text){
 
@@ -637,168 +678,448 @@ function example(text){
 }
 
 
-function generate(){
+/* =========================================
+   REAL AI GENERATION
+========================================= */
+
+async function generate(){
 
   const prompt =
-    document.getElementById("prompt").value.toLowerCase();
+    document.getElementById("prompt").value.trim();
 
-  const brand =
-    document.getElementById("siteBrand");
+  const button =
+    document.getElementById("generateButton");
 
-  const title =
-    document.getElementById("siteTitle");
-
-  const description =
-    document.getElementById("siteDescription");
+  const loading =
+    document.getElementById("loading");
 
 
-  if(!prompt.trim()){
+  if(!prompt){
 
-    showToast("Describe your website first");
+    showToast(
+      "Describe your website first"
+    );
 
     return;
 
   }
 
 
-  if(
-    prompt.includes("gaming") ||
-    prompt.includes("game")
-  ){
+  button.disabled = true;
 
-    brand.innerText = "NEXA";
+  loading.classList.add("show");
 
-    title.innerHTML =
-      "Enter The<br>Gaming Universe.";
 
-    description.innerText =
-      "A powerful gaming experience built for players, creators and competitive communities.";
+  try{
+
+    showToast(
+      "AI is creating your website..."
+    );
+
+
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            prompt:`
+Create a complete premium,
+production-quality website.
+
+User request:
+
+${prompt}
+
+Requirements:
+
+- Modern professional design
+- Fully responsive
+- Excellent typography
+- Beautiful spacing
+- Premium visual hierarchy
+- Smooth animations
+- Navigation bar
+- Hero section
+- Relevant sections based on the request
+- Call-to-action buttons
+- Footer
+- Mobile responsive layout
+- Use HTML, CSS and JavaScript
+- Keep everything in ONE HTML file
+- Do not use markdown
+- Return ONLY the complete HTML document
+`
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "AI request failed"
+      );
+
+    }
+
+
+    if(!data.html){
+
+      throw new Error(
+        "AI did not return website code"
+      );
+
+    }
+
+
+    generatedHTML =
+      data.html;
+
+
+    const frame =
+      document.getElementById(
+        "previewFrame"
+      );
+
+
+    frame.srcdoc =
+      generatedHTML;
+
+
+    loading.classList.remove(
+      "show"
+    );
+
+
+    showToast(
+      "✨ Website generated successfully!"
+    );
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    loading.classList.remove(
+      "show"
+    );
+
+
+    showToast(
+      "AI Error: " +
+      error.message
+    );
 
   }
 
 
-  else if(
-    prompt.includes("restaurant") ||
-    prompt.includes("food")
-  ){
+  finally{
 
-    brand.innerText = "LUMI";
-
-    title.innerHTML =
-      "Taste Something<br>Extraordinary.";
-
-    description.innerText =
-      "A premium dining experience crafted with fresh ingredients, creativity and passion.";
+    button.disabled = false;
 
   }
-
-
-  else if(
-    prompt.includes("portfolio") ||
-    prompt.includes("designer")
-  ){
-
-    brand.innerText = "STUDIO";
-
-    title.innerHTML =
-      "Ideas Into<br>Visual Experiences.";
-
-    description.innerText =
-      "A modern creative portfolio designed to showcase exceptional work and digital experiences.";
-
-  }
-
-
-  else if(
-    prompt.includes("technology") ||
-    prompt.includes("startup") ||
-    prompt.includes("tech")
-  ){
-
-    brand.innerText = "NOVA";
-
-    title.innerHTML =
-      "Technology That<br>Moves Forward.";
-
-    description.innerText =
-      "Building intelligent products and digital experiences for the next generation.";
-
-  }
-
-
-  else if(
-    prompt.includes("store") ||
-    prompt.includes("shop")
-  ){
-
-    brand.innerText = "MODE";
-
-    title.innerHTML =
-      "Discover Your<br>Next Favorite.";
-
-    description.innerText =
-      "A modern shopping experience built around beautiful products and effortless discovery.";
-
-  }
-
-
-  else{
-
-    brand.innerText = "SPDP";
-
-    title.innerHTML =
-      "Your Idea.<br>Built Beautifully.";
-
-    description.innerText =
-      "A premium website concept generated from your idea. Your vision starts here.";
-
-  }
-
-
-  showToast("Website generated");
 
 }
 
+
+/* =========================================
+   NEW PROJECT
+========================================= */
 
 function newProject(){
 
-  document.getElementById("prompt").value = "";
+  document.getElementById(
+    "prompt"
+  ).value = "";
 
-  document.getElementById("siteBrand").innerText =
-    "YOUR BRAND";
 
-  document.getElementById("siteTitle").innerHTML =
-    "Build Something<br>Extraordinary.";
+  generatedHTML = "";
 
-  document.getElementById("siteDescription").innerText =
-    "Turn your ideas into beautiful websites. Describe what you want and start creating.";
 
-  showToast("New project created");
+  const frame =
+    document.getElementById(
+      "previewFrame"
+    );
+
+
+  frame.srcdoc = `
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial,sans-serif;
+background:
+linear-gradient(135deg,#ffffff,#eeeeee);
+color:#111;
+text-align:center;
+}
+
+.container{
+max-width:650px;
+padding:40px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 14px;
+border:1px solid #ddd;
+border-radius:30px;
+font-size:12px;
+margin-bottom:20px;
+}
+
+h1{
+font-size:clamp(40px,6vw,70px);
+margin:0 0 20px;
+letter-spacing:-3px;
+}
+
+p{
+color:#666;
+line-height:1.7;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="badge">
+POWERED BY SPDP AI
+</div>
+
+<h1>
+Build Something Extraordinary.
+</h1>
+
+<p>
+Describe your idea and let SPDP AI create your website.
+</p>
+
+</div>
+
+</body>
+
+</html>
+
+`;
 
 }
 
+
+/* =========================================
+   DESKTOP PREVIEW
+========================================= */
+
+function desktopPreview(){
+
+  const website =
+    document.getElementById(
+      "website"
+    );
+
+
+  website.style.width =
+    "min(100%,1050px)";
+
+
+  website.style.height =
+    "min(100%,700px)";
+
+
+  showToast(
+    "Desktop preview"
+  );
+
+}
+
+
+/* =========================================
+   MOBILE PREVIEW
+========================================= */
+
+function mobilePreview(){
+
+  const website =
+    document.getElementById(
+      "website"
+    );
+
+
+  website.style.width =
+    "390px";
+
+
+  website.style.height =
+    "700px";
+
+
+  showToast(
+    "Mobile preview"
+  );
+
+}
+
+
+/* =========================================
+   DOWNLOAD GENERATED WEBSITE
+========================================= */
+
+function downloadWebsite(){
+
+  if(!generatedHTML){
+
+    showToast(
+      "Generate a website first"
+    );
+
+    return;
+
+  }
+
+
+  const blob =
+    new Blob(
+      [generatedHTML],
+      {
+        type:"text/html"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement("a");
+
+
+  a.href = url;
+
+  a.download =
+    "spdp-generated-website.html";
+
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(url);
+
+
+  showToast(
+    "Website downloaded!"
+  );
+
+}
+
+
+/* =========================================
+   PUBLISH
+========================================= */
 
 function publishSite(){
 
-  showToast("Publishing will be connected soon");
+  if(!generatedHTML){
+
+    showToast(
+      "Generate a website first"
+    );
+
+    return;
+
+  }
+
+
+  showToast(
+    "Publish system coming next 🚀"
+  );
 
 }
 
+
+/* =========================================
+   TOAST
+========================================= */
 
 function showToast(message){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
-  toast.innerText = message;
 
-  toast.classList.add("show");
+  toast.innerText =
+    message;
 
-  setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    ()=>{
+      toast.classList.remove(
+        "show"
+      );
+    },
+    2500
+  );
 
 }
+
+
+/* =========================================
+   START SCREEN
+========================================= */
+
+newProject();
 
 </script>
 
