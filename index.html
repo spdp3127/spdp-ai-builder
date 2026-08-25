@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -690,7 +689,6 @@ textarea::placeholder{
 }
 
 @media(max-width:1150px){
-
   .app{
     grid-template-columns:300px 1fr;
   }
@@ -712,7 +710,6 @@ textarea::placeholder{
 }
 
 @media(max-width:850px){
-
   body{
     overflow:auto;
   }
@@ -761,1873 +758,754 @@ textarea::placeholder{
 <body>
 
 <header>
+  <div class="brand">
+    <div class="logo">SP</div>
+    <div class="brand-name">SPDP <span>AI</span></div>
+  </div>
 
-<div class="brand">
-  <div class="logo">SP</div>
-  <div class="brand-name">SPDP <span>AI</span></div>
-</div>
-
-<div class="header-right">
-
-<button class="header-btn" onclick="toggleProjects()">Projects</button>
-<button class="header-btn" onclick="newProject()">New Project</button>
-<button class="header-btn" onclick="downloadWebsite()">Download</button>
-<button class="header-btn" onclick="toggleChat()">AI Edit</button>
-<button class="publish" onclick="publishSite()">Publish</button>
-
-<button
-  class="header-btn user-btn"
-  id="authButton"
-  onclick="handleAuthButton()">
-  Sign In
-</button>
-
-</div>
+  <div class="header-right">
+    <button class="header-btn" onclick="toggleProjects()">Projects</button>
+    <button class="header-btn" onclick="newProject()">New Project</button>
+    <button class="header-btn" onclick="viewCode()">View Code</button>
+    <button class="header-btn" onclick="downloadWebsite()">Download</button>
+    <button class="header-btn" onclick="toggleChat()">AI Edit</button>
+    <button class="publish" onclick="publishSite()">Publish</button>
+    <button class="header-btn user-btn" id="authButton" onclick="handleAuthButton()">Sign In</button>
+  </div>
 </header>
 
-
 <div class="app">
+  <aside class="sidebar">
+    <div class="small-label">SPDP AI BUILDER</div>
+    <h1>Create with AI.</h1>
+    <p class="desc">Describe anything you want to build. Websites, web apps and playable games.</p>
 
-<aside class="sidebar">
-
-<div class="small-label">SPDP AI BUILDER</div>
-
-<h1>Create with AI.</h1>
-
-<p class="desc">
-Describe anything you want to build.
-Websites, web apps and playable games.
-</p>
-
-<div class="prompt-box">
-
-<textarea
-id="prompt"
-placeholder="Describe anything...
+    <div class="prompt-box">
+      <textarea id="prompt" placeholder="Describe anything...
 
 Examples:
-
 Create a premium gaming website
-
 Create a long scrolling website
-
 Create a 3D website
-
 Create a playable 2D car game
-
 Create a 3D racing game"></textarea>
+    </div>
 
+    <button class="generate" id="generateButton" onclick="generate()">✦ Generate</button>
+    <div class="divider"></div>
+
+    <div class="examples-title">TRY AN IDEA</div>
+    <div class="example" onclick="example('Create a premium long scrolling website with a large hero section, animated sections, features, pricing, testimonials, FAQ and footer. Make the entire page vertically scrollable.')">🌐 Long Scrolling Website</div>
+    <div class="example" onclick="example('Create a premium interactive 3D website using Three.js. Make it responsive, immersive and vertically scrollable with multiple sections.')">✨ 3D Scrolling Website</div>
+    <div class="example" onclick="example('Create a playable 2D car racing game with keyboard and mobile controls, enemies, score, collision detection, start screen and restart button')">🏎️ Playable 2D Car Game</div>
+    <div class="example" onclick="example('Create a playable 3D futuristic racing game using Three.js with player controls, enemy cars, score, collision detection and restart')">🏁 Playable 3D Racing Game</div>
+    <div class="example" onclick="example('Create a premium black gaming website with hero, features, pricing, testimonials and contact. Make it a long scrolling page.')">🎮 Gaming Website</div>
+    <div class="example" onclick="example('Create a modern restaurant website with menu, reservation, gallery, testimonials, contact and a long scrolling layout')">🍽️ Restaurant</div>
+    <div class="example" onclick="example('Create a premium portfolio website for a professional designer with a beautiful long scrolling layout')">✦ Portfolio</div>
+    <div class="example" onclick="example('Create a modern online store for premium sneakers with product sections, categories, testimonials and a long scrolling page')">🛒 Online Store</div>
+  </aside>
+
+  <section class="preview">
+    <div class="preview-top">
+      <div class="preview-left">
+        <div class="dot"></div> Live Preview
+      </div>
+      <div class="preview-tools">
+        <button class="tool" onclick="desktopPreview()" title="Desktop">▣</button>
+        <button class="tool" onclick="mobilePreview()" title="Mobile">▯</button>
+        <button class="tool" onclick="fullscreenPreview()" title="Fullscreen">⛶</button>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="website" id="website">
+        <iframe
+          id="previewFrame"
+          title="SPDP AI Generated Preview"
+          sandbox="allow-scripts allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-downloads"
+          allow="autoplay; fullscreen; gamepad; microphone; camera"
+          allowfullscreen>
+        </iframe>
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <div class="loading-text">SPDP AI is building...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="ai-chat" id="aiChat">
+    <div class="chat-header">
+      <div class="chat-title">
+        <div class="ai-dot"></div> AI Website Editor
+      </div>
+      <button class="chat-clear" onclick="clearChat()">Clear</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-empty">
+        Your generated website can be edited here.
+        <br><br>Try:<br>
+        • Make the background black<br>
+        • Add more scrolling sections<br>
+        • Add a 3D hero<br>
+        • Make the website responsive<br>
+        • Add animations
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea id="chatInput" class="chat-input" placeholder="Tell AI what to change..."></textarea>
+      <button id="chatSend" class="chat-send" onclick="editWebsite()">✦ Update Website</button>
+    </div>
+  </aside>
 </div>
 
-<button
-class="generate"
-id="generateButton"
-onclick="generate()">
-✦ Generate
-</button>
-
-<div class="divider"></div>
-
-<div class="examples-title">
-TRY AN IDEA
-</div>
-
-<div
-class="example"
-onclick="example('Create a premium long scrolling website with a large hero section, animated sections, features, pricing, testimonials, FAQ and footer. Make the entire page vertically scrollable.')">
-🌐 Long Scrolling Website
-</div>
-
-<div
-class="example"
-onclick="example('Create a premium interactive 3D website using Three.js. Make it responsive, immersive and vertically scrollable with multiple sections.')">
-✨ 3D Scrolling Website
-</div>
-
-<div
-class="example"
-onclick="example('Create a playable 2D car racing game with keyboard and mobile controls, enemies, score, collision detection, start screen and restart button')">
-🏎️ Playable 2D Car Game
-</div>
-
-<div
-class="example"
-onclick="example('Create a playable 3D futuristic racing game using Three.js with player controls, enemy cars, score, collision detection and restart')">
-🏁 Playable 3D Racing Game
-</div>
-
-<div
-class="example"
-onclick="example('Create a premium black gaming website with hero, features, pricing, testimonials and contact. Make it a long scrolling page.')">
-🎮 Gaming Website
-</div>
-
-<div
-class="example"
-onclick="example('Create a modern restaurant website with menu, reservation, gallery, testimonials, contact and a long scrolling layout')">
-🍽️ Restaurant
-</div>
-
-<div
-class="example"
-onclick="example('Create a premium portfolio website for a professional designer with a beautiful long scrolling layout')">
-✦ Portfolio
-</div>
-
-<div
-class="example"
-onclick="example('Create a modern online store for premium sneakers with product sections, categories, testimonials and a long scrolling page')">
-🛒 Online Store
-</div>
-
-</aside>
-
-
-<section class="preview">
-
-<div class="preview-top">
-
-<div class="preview-left">
-<div class="dot"></div>
-Live Preview
-</div>
-
-<div class="preview-tools">
-
-<button class="tool" onclick="desktopPreview()" title="Desktop">
-▣
-</button>
-
-<button class="tool" onclick="mobilePreview()" title="Mobile">
-▯
-</button>
-
-<button class="tool" onclick="fullscreenPreview()" title="Fullscreen">
-⛶
-</button>
-
-</div>
-</div>
-
-
-<div class="canvas">
-
-<div class="website" id="website">
-
-<iframe
-id="previewFrame"
-title="SPDP AI Generated Preview"
-sandbox="allow-scripts allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin"
-allow="autoplay; fullscreen; gamepad; microphone; camera"
-allowfullscreen>
-</iframe>
-
-<div class="loading" id="loading">
-
-<div class="spinner"></div>
-
-<div class="loading-text">
-SPDP AI is building...
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<aside class="ai-chat" id="aiChat">
-
-<div class="chat-header">
-
-<div class="chat-title">
-
-<div class="ai-dot"></div>
-
-AI Website Editor
-
-</div>
-
-<button class="chat-clear" onclick="clearChat">
-Clear
-</button>
-
-</div>
-
-<div class="chat-messages" id="chatMessages">
-
-<div class="chat-empty">
-
-Your generated website can be edited here.
-
-<br><br>
-
-Try:
-
-<br>
-• Make the background black
-<br>
-• Add more scrolling sections
-<br>
-• Add a 3D hero
-<br>
-• Make the website fully responsive
-<br>
-• Add animations
-<br>
-• Make the page scroll vertically
-
-</div>
-
-</div>
-
-<div class="chat-input-area">
-
-<textarea
-id="chatInput"
-class="chat-input"
-placeholder="Tell AI what to change..."></textarea>
-
-<button
-id="chatSend"
-class="chat-send"
-onclick="editWebsite()">
-✦ Update Website
-</button>
-
-</div>
-
-</aside>
-
-</div>
-
-
+<!-- PROJECTS PANEL -->
 <div class="projects-panel" id="projectsPanel">
-
-<div class="projects-head">
-
-<strong>My Projects</strong>
-
-<button class="chat-clear" onclick="toggleProjects()">
-Close
-</button>
-
+  <div class="projects-head">
+    <strong>My Projects</strong>
+    <button class="chat-clear" onclick="toggleProjects()">Close</button>
+  </div>
+  <div class="projects-list" id="projectsList">Loading...</div>
 </div>
 
-<div class="projects-list" id="projectsList">
-Loading...
-</div>
-
-</div>
-
-
+<!-- AUTH MODAL -->
 <div class="modal" id="authModal">
-
-<div class="auth-box">
-
-<button class="close-modal" onclick="closeAuth()">
-×
-</button>
-
-<h2 id="authTitle">
-Sign in
-</h2>
-
-<p class="auth-desc" id="authDesc">
-Sign in to save and manage your SPDP AI projects.
-</p>
-
-<input
-class="auth-input"
-id="authEmail"
-type="email"
-placeholder="Email">
-
-<input
-class="auth-input"
-id="authPassword"
-type="password"
-placeholder="Password">
-
-<button
-class="auth-action"
-id="authAction"
-onclick="submitAuth()">
-Sign In
-</button>
-
-<div
-class="auth-switch"
-id="authSwitch"
-onclick="toggleAuthMode()">
-Don't have an account?
-<span>Sign Up</span>
+  <div class="auth-box">
+    <button class="close-modal" onclick="closeAuth()">×</button>
+    <h2 id="authTitle">Sign in</h2>
+    <p class="auth-desc" id="authDesc">Sign in to save and manage your SPDP AI projects.</p>
+    <input class="auth-input" id="authEmail" type="email" placeholder="Email">
+    <input class="auth-input" id="authPassword" type="password" placeholder="Password">
+    <button class="auth-action" id="authAction" onclick="submitAuth()">Sign In</button>
+    <div class="auth-switch" id="authSwitch" onclick="toggleAuthMode()">
+      Don't have an account? <span>Sign Up</span>
+    </div>
+  </div>
 </div>
 
+<!-- CODE MODAL (NEW) -->
+<div class="modal" id="codeModal">
+  <div class="auth-box" style="width: min(92%, 850px);">
+    <button class="close-modal" onclick="closeCodeModal()">×</button>
+    <h2>Website Source Code</h2>
+    <p class="auth-desc">Your complete generated HTML / CSS / JS code:</p>
+    <textarea 
+      id="codeTextarea" 
+      readonly 
+      style="width:100%; height:380px; background:#050505; color:#00ff88; font-family:monospace; font-size:12px; padding:15px; border:1px solid #292929; border-radius:9px; resize:none; margin-bottom:12px; outline:none; line-height:1.5;"></textarea>
+    <button class="auth-action" onclick="copyGeneratedCode()">📋 Copy Code</button>
+  </div>
 </div>
 
-</div>
-
-
-<div class="toast" id="toast">
-Done
-</div>
-
+<!-- TOAST -->
+<div class="toast" id="toast">Done</div>
 
 <script>
+/* =========================================
+   SUPABASE CONFIG
+========================================= */
+const SUPABASE_URL = "https://zwabvtywvxoapjnspqwz.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZKOYBYdIgUA_R7WjspKhoA_-iCPTZoT";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 /* =========================================
-   SUPABASE
+   WORKER CONFIG
 ========================================= */
-
-const SUPABASE_URL =
-"https://zwabvtywvxoapjnspqwz.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_ZKOYBYdIgUA_R7WjspKhoA_-iCPTZoT";
-
-const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
-
-
-/* =========================================
-   SPDP AI WORKER
-========================================= */
-
-const WORKER_URL =
-"https://spdp-ai.spdp3127.workers.dev/";
-
+const WORKER_URL = "https://spdp-ai.spdp3127.workers.dev/";
 
 /* =========================================
    STATE
 ========================================= */
-
 let generatedHTML = "";
 let currentProjectId = null;
 let currentUser = null;
 let authMode = "signin";
 
-
 /* =========================================
    EXAMPLE
 ========================================= */
-
 function example(text){
-
   document.getElementById("prompt").value = text;
-
 }
-
 
 /* =========================================
-   AUTH
+   AUTH FUNCTIONS
 ========================================= */
-
-function openAuth(){
-
-  document
-    .getElementById("authModal")
-    .classList.add("show");
-
-}
-
-function closeAuth(){
-
-  document
-    .getElementById("authModal")
-    .classList.remove("show");
-
-}
-
+function openAuth(){ document.getElementById("authModal").classList.add("show"); }
+function closeAuth(){ document.getElementById("authModal").classList.remove("show"); }
 
 function toggleAuthMode(){
-
-  authMode =
-    authMode === "signin"
-      ? "signup"
-      : "signin";
-
-  const title =
-    document.getElementById("authTitle");
-
-  const desc =
-    document.getElementById("authDesc");
-
-  const action =
-    document.getElementById("authAction");
-
-  const switchText =
-    document.getElementById("authSwitch");
+  authMode = authMode === "signin" ? "signup" : "signin";
+  const title = document.getElementById("authTitle");
+  const desc = document.getElementById("authDesc");
+  const action = document.getElementById("authAction");
+  const switchText = document.getElementById("authSwitch");
 
   if(authMode === "signup"){
-
     title.innerText = "Create account";
-
-    desc.innerText =
-      "Create your SPDP AI account and save your projects.";
-
+    desc.innerText = "Create your SPDP AI account and save your projects.";
     action.innerText = "Sign Up";
-
-    switchText.innerHTML =
-      'Already have an account? <span>Sign In</span>';
-
+    switchText.innerHTML = 'Already have an account? <span>Sign In</span>';
   }else{
-
     title.innerText = "Sign in";
-
-    desc.innerText =
-      "Sign in to save and manage your SPDP AI projects.";
-
+    desc.innerText = "Sign in to save and manage your SPDP AI projects.";
     action.innerText = "Sign In";
-
-    switchText.innerHTML =
-      'Don\'t have an account? <span>Sign Up</span>';
-
+    switchText.innerHTML = 'Don\'t have an account? <span>Sign Up</span>';
   }
-
 }
 
-
 async function submitAuth(){
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
 
-  const email =
-    document.getElementById("authEmail").value.trim();
+  if(!email || !password){ showToast("Enter email and password"); return; }
+  if(password.length < 6){ showToast("Password must be at least 6 characters"); return; }
 
-  const password =
-    document.getElementById("authPassword").value;
-
-  if(!email || !password){
-
-    showToast("Enter email and password");
-    return;
-
-  }
-
-  if(password.length < 6){
-
-    showToast("Password must be at least 6 characters");
-    return;
-
-  }
-
-  const action =
-    document.getElementById("authAction");
-
+  const action = document.getElementById("authAction");
   action.disabled = true;
 
   try{
-
     if(authMode === "signup"){
-
-      const {data,error} =
-        await supabaseClient.auth.signUp({
-          email,
-          password
-        });
-
+      const {data,error} = await supabaseClient.auth.signUp({ email, password });
       if(error) throw error;
-
       if(data.session){
-
-        currentUser =
-          data.session.user;
-
-        updateAuthUI();
-
-        closeAuth();
-
+        currentUser = data.session.user;
+        updateAuthUI(); closeAuth();
         showToast("✓ Account created");
-
-        if(generatedHTML){
-          await saveProject();
-        }
-
+        if(generatedHTML) await saveProject();
       }else{
-
-        showToast(
-          "✓ Account created. Check your email to confirm."
-        );
-
+        showToast("✓ Account created. Check your email to confirm.");
       }
-
     }else{
-
-      const {data,error} =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
+      const {data,error} = await supabaseClient.auth.signInWithPassword({ email, password });
       if(error) throw error;
-
       currentUser = data.user;
-
-      updateAuthUI();
-
-      closeAuth();
-
+      updateAuthUI(); closeAuth();
       showToast("✓ Signed in successfully");
-
-      if(generatedHTML){
-        await saveProject();
-      }
-
+      if(generatedHTML) await saveProject();
       await loadProjects();
-
     }
-
   }catch(error){
-
     console.error("AUTH ERROR:",error);
-
     showToast("❌ " + error.message);
-
   }finally{
-
     action.disabled = false;
-
   }
-
 }
-
 
 async function loadUser(){
-
   try{
-
-    const {data,error} =
-      await supabaseClient.auth.getSession();
-
+    const {data,error} = await supabaseClient.auth.getSession();
     if(error) throw error;
-
-    currentUser =
-      data.session?.user || null;
-
+    currentUser = data.session?.user || null;
     updateAuthUI();
-
-    if(currentUser){
-      await loadProjects();
-    }
-
+    if(currentUser) await loadProjects();
   }catch(error){
-
     console.error("SESSION ERROR:",error);
-
   }
-
 }
 
-
-supabaseClient.auth.onAuthStateChange(
-  async(event,session)=>{
-
-    currentUser =
-      session?.user || null;
-
-    updateAuthUI();
-
-    if(currentUser){
-      await loadProjects();
-    }
-
-  }
-);
-
+supabaseClient.auth.onAuthStateChange(async(event,session)=>{
+  currentUser = session?.user || null;
+  updateAuthUI();
+  if(currentUser) await loadProjects();
+});
 
 async function handleAuthButton(){
-
-  if(!currentUser){
-
-    openAuth();
-    return;
-
-  }
-
-  const {error} =
-    await supabaseClient.auth.signOut();
-
-  if(error){
-
-    showToast("❌ " + error.message);
-    return;
-
-  }
-
+  if(!currentUser){ openAuth(); return; }
+  const {error} = await supabaseClient.auth.signOut();
+  if(error){ showToast("❌ " + error.message); return; }
   currentUser = null;
   currentProjectId = null;
-
   updateAuthUI();
-
-  document
-    .getElementById("projectsPanel")
-    .classList.remove("show");
-
+  document.getElementById("projectsPanel").classList.remove("show");
   showToast("Signed out");
-
 }
-
 
 function updateAuthUI(){
-
-  const button =
-    document.getElementById("authButton");
-
+  const button = document.getElementById("authButton");
   if(currentUser){
-
-    button.innerText =
-      currentUser.email;
-
-    button.title =
-      "Sign out";
-
+    button.innerText = currentUser.email;
+    button.title = "Sign out";
   }else{
-
-    button.innerText =
-      "Sign In";
-
-    button.title =
-      "Sign in";
-
+    button.innerText = "Sign In";
+    button.title = "Sign in";
   }
-
 }
-
 
 /* =========================================
    SCROLLING NORMALIZER
 ========================================= */
-
 function normalizeGeneratedHTML(html){
-
   let result = String(html || "").trim();
-
   if(!result) return result;
 
   const scrollCSS = `
-
 <style id="spdp-scroll-fix">
-
 html{
   min-height:100%;
   overflow-x:hidden !important;
   overflow-y:auto !important;
   scroll-behavior:smooth;
 }
-
 body{
   min-height:100vh;
   overflow-x:hidden !important;
   overflow-y:auto !important;
 }
-
 body > *{
   max-width:100%;
 }
-
 </style>
-
 `;
 
   if(/<\/head>/i.test(result)){
-
-    result =
-      result.replace(
-        /<\/head>/i,
-        scrollCSS + "</head>"
-      );
-
+    result = result.replace(/<\/head>/i, scrollCSS + "</head>");
   }else{
-
-    result =
-      scrollCSS + result;
-
+    result = scrollCSS + result;
   }
-
   return result;
-
 }
-
 
 /* =========================================
    GENERATE WEBSITE
 ========================================= */
-
 async function generate(){
-
-  const prompt =
-    document.getElementById("prompt")
-      .value
-      .trim();
-
-  const button =
-    document.getElementById("generateButton");
-
-  const loading =
-    document.getElementById("loading");
+  const prompt = document.getElementById("prompt").value.trim();
+  const button = document.getElementById("generateButton");
+  const loading = document.getElementById("loading");
 
   if(!prompt){
-
-    showToast(
-      "Describe what you want to build"
-    );
-
+    showToast("Describe what you want to build");
     return;
-
   }
 
   button.disabled = true;
   loading.classList.add("show");
 
   try{
-
     showToast("SPDP AI is thinking...");
-
-    const response =
-      await fetch(
-        WORKER_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            prompt
-          })
-        }
-      );
+    const response = await fetch(WORKER_URL, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify({ prompt })
+    });
 
     let data;
-
-    try{
-
-      data =
-        await response.json();
-
-    }catch{
-
-      throw new Error(
-        "Worker returned an invalid response."
-      );
-
-    }
+    try{ data = await response.json(); }
+    catch{ throw new Error("Worker returned an invalid response."); }
 
     if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        `Worker error: ${response.status}`
-      );
-
+      throw new Error(data.error || `Worker error: ${response.status}`);
     }
 
-    if(!data.html){
+    if(!data.html){ throw new Error("AI returned no HTML."); }
 
-      throw new Error(
-        "AI returned no HTML."
-      );
-
-    }
-
-    generatedHTML =
-      normalizeGeneratedHTML(data.html);
-
+    generatedHTML = normalizeGeneratedHTML(data.html);
     currentProjectId = null;
+    document.getElementById("previewFrame").srcdoc = generatedHTML;
 
-    document
-      .getElementById("previewFrame")
-      .srcdoc =
-        generatedHTML;
-
-    showToast(
-      "✨ Website generated successfully!"
-    );
+    showToast("✨ Website generated successfully!");
 
     if(currentUser){
-
       await saveProject();
-
     }else{
-
-      showToast(
-        "Website created. Sign in to save it."
-      );
-
+      showToast("Website created. Sign in to save it.");
     }
-
   }catch(error){
-
-    console.error(
-      "SPDP AI ERROR:",
-      error
-    );
-
-    showToast(
-      "❌ " + error.message
-    );
-
+    console.error("SPDP AI ERROR:", error);
+    showToast("❌ " + error.message);
   }finally{
-
     loading.classList.remove("show");
     button.disabled = false;
-
   }
-
 }
-
 
 /* =========================================
    SAVE PROJECT
 ========================================= */
-
 async function saveProject(){
-
   if(!currentUser){
-
     openAuth();
-
-    showToast(
-      "Sign in first to save your project"
-    );
-
+    showToast("Sign in first to save your project");
     return false;
-
   }
 
   if(!generatedHTML){
-
-    showToast(
-      "Generate a website first"
-    );
-
+    showToast("Generate a website first");
     return false;
-
   }
 
-  const prompt =
-    document.getElementById("prompt")
-      .value
-      .trim();
-
-  let name =
-    prompt
-      .split("\n")[0]
-      .trim()
-      .substring(0,80);
-
-  if(!name){
-    name = "Untitled Project";
-  }
+  const prompt = document.getElementById("prompt").value.trim();
+  let name = prompt.split("\n")[0].trim().substring(0,80) || "Untitled Project";
 
   try{
-
     let result;
-
     if(currentProjectId){
-
-      result =
-        await supabaseClient
-          .from("projects")
-          .update({
-            name:name,
-            prompt:prompt,
-            html:generatedHTML,
-            updated_at:new Date().toISOString()
-          })
-          .eq("id",currentProjectId)
-          .eq("user_id",currentUser.id);
-
+      result = await supabaseClient
+        .from("projects")
+        .update({
+          name:name,
+          prompt:prompt,
+          html:generatedHTML,
+          updated_at:new Date().toISOString()
+        })
+        .eq("id",currentProjectId)
+        .eq("user_id",currentUser.id);
     }else{
+      result = await supabaseClient
+        .from("projects")
+        .insert({
+          user_id:currentUser.id,
+          name:name,
+          prompt:prompt,
+          html:generatedHTML
+        })
+        .select()
+        .single();
 
-      result =
-        await supabaseClient
-          .from("projects")
-          .insert({
-            user_id:currentUser.id,
-            name:name,
-            prompt:prompt,
-            html:generatedHTML
-          })
-          .select()
-          .single();
-
-      if(
-        !result.error &&
-        result.data
-      ){
-
-        currentProjectId =
-          result.data.id;
-
+      if(!result.error && result.data){
+        currentProjectId = result.data.id;
       }
-
     }
 
-    if(result.error){
-      throw result.error;
-    }
-
+    if(result.error) throw result.error;
     await loadProjects();
-
     showToast("✓ Project saved");
-
     return true;
-
   }catch(error){
-
-    console.error(
-      "SAVE PROJECT ERROR:",
-      error
-    );
-
-    showToast(
-      "❌ Save failed: " +
-      error.message
-    );
-
+    console.error("SAVE ERROR:", error);
+    showToast("❌ Save failed: " + error.message);
     return false;
-
   }
-
 }
-
 
 /* =========================================
    LOAD PROJECTS
 ========================================= */
-
 async function loadProjects(){
-
   if(!currentUser) return;
-
-  const list =
-    document.getElementById("projectsList");
-
+  const list = document.getElementById("projectsList");
   list.innerHTML = "Loading...";
 
   try{
-
-    const {data,error} =
-      await supabaseClient
-        .from("projects")
-        .select("*")
-        .eq("user_id",currentUser.id)
-        .order(
-          "updated_at",
-          {ascending:false}
-        );
+    const {data,error} = await supabaseClient
+      .from("projects")
+      .select("*")
+      .eq("user_id",currentUser.id)
+      .order("updated_at", {ascending:false});
 
     if(error) throw error;
 
     if(!data || data.length === 0){
-
-      list.innerHTML = `
-        <div style="
-          color:#666;
-          padding:15px;
-          font-size:12px
-        ">
-          No saved projects yet.
-        </div>
-      `;
-
+      list.innerHTML = `<div style="color:#666; padding:15px; font-size:12px">No saved projects yet.</div>`;
       return;
-
     }
 
     list.innerHTML = "";
-
-    data.forEach(project=>{
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "project-item";
-
-      const date =
-        project.updated_at ||
-        project.created_at;
+    data.forEach(project => {
+      const item = document.createElement("div");
+      item.className = "project-item";
+      const date = project.updated_at || project.created_at;
 
       item.innerHTML = `
-
-        <button
-          class="project-delete"
-          title="Delete">
-          ×
-        </button>
-
-        <div class="project-name">
-          ${escapeHTML(
-            project.name ||
-            "Untitled"
-          )}
-        </div>
-
-        <div class="project-date">
-          ${
-            date
-              ? new Date(date).toLocaleString()
-              : ""
-          }
-        </div>
-
+        <button class="project-delete" title="Delete">×</button>
+        <div class="project-name">${escapeHTML(project.name || "Untitled")}</div>
+        <div class="project-date">${date ? new Date(date).toLocaleString() : ""}</div>
       `;
 
-      item.onclick =
-        ()=>{
-          loadProject(project);
-        };
-
-      item
-        .querySelector(".project-delete")
-        .onclick =
-        async(e)=>{
-
-          e.stopPropagation();
-
-          await deleteProject(project.id);
-
-        };
+      item.onclick = () => loadProject(project);
+      item.querySelector(".project-delete").onclick = async(e) => {
+        e.stopPropagation();
+        await deleteProject(project.id);
+      };
 
       list.appendChild(item);
-
     });
-
   }catch(error){
-
-    console.error(
-      "LOAD PROJECTS ERROR:",
-      error
-    );
-
-    list.innerHTML = `
-      <div style="
-        color:#ff7777;
-        padding:15px;
-        font-size:12px
-      ">
-        Unable to load projects.
-      </div>
-    `;
-
+    console.error("LOAD ERROR:", error);
+    list.innerHTML = `<div style="color:#ff7777; padding:15px; font-size:12px">Unable to load projects.</div>`;
   }
-
 }
-
-
-/* =========================================
-   LOAD PROJECT
-========================================= */
 
 function loadProject(project){
-
-  currentProjectId =
-    project.id;
-
-  generatedHTML =
-    normalizeGeneratedHTML(
-      project.html || ""
-    );
-
-  document
-    .getElementById("prompt")
-    .value =
-      project.prompt || "";
-
-  document
-    .getElementById("previewFrame")
-    .srcdoc =
-      generatedHTML;
-
-  document
-    .getElementById("projectsPanel")
-    .classList.remove("show");
-
+  currentProjectId = project.id;
+  generatedHTML = normalizeGeneratedHTML(project.html || "");
+  document.getElementById("prompt").value = project.prompt || "";
+  document.getElementById("previewFrame").srcdoc = generatedHTML;
+  document.getElementById("projectsPanel").classList.remove("show");
   showToast("✓ Project loaded");
-
 }
-
-
-/* =========================================
-   DELETE PROJECT
-========================================= */
 
 async function deleteProject(id){
-
   if(!currentUser) return;
-
-  if(!confirm("Delete this project?")){
-    return;
-  }
+  if(!confirm("Delete this project?")) return;
 
   try{
-
-    const {error} =
-      await supabaseClient
-        .from("projects")
-        .delete()
-        .eq("id",id)
-        .eq("user_id",currentUser.id);
+    const {error} = await supabaseClient
+      .from("projects")
+      .delete()
+      .eq("id",id)
+      .eq("user_id",currentUser.id);
 
     if(error) throw error;
-
     if(currentProjectId === id){
-
       currentProjectId = null;
       generatedHTML = "";
-
     }
-
     showToast("Project deleted");
-
     await loadProjects();
-
   }catch(error){
-
-    console.error(
-      "DELETE ERROR:",
-      error
-    );
-
-    showToast(
-      "❌ Delete failed: " +
-      error.message
-    );
-
+    console.error("DELETE ERROR:", error);
+    showToast("❌ Delete failed: " + error.message);
   }
-
 }
-
-
-/* =========================================
-   PROJECT PANEL
-========================================= */
 
 function toggleProjects(){
-
   if(!currentUser){
-
     openAuth();
-
-    showToast(
-      "Sign in to view your projects"
-    );
-
+    showToast("Sign in to view your projects");
     return;
-
   }
-
-  const panel =
-    document.getElementById(
-      "projectsPanel"
-    );
-
+  const panel = document.getElementById("projectsPanel");
   panel.classList.toggle("show");
-
-  if(panel.classList.contains("show")){
-    loadProjects();
-  }
-
+  if(panel.classList.contains("show")) loadProjects();
 }
-
 
 /* =========================================
-   AI CHAT
+   AI CHAT & EDITING
 ========================================= */
-
-function toggleChat(){
-
-  const chat =
-    document.getElementById("aiChat");
-
-  chat.classList.toggle("open");
-
-}
-
+function toggleChat(){ document.getElementById("aiChat").classList.toggle("open"); }
 
 function clearChat(){
-
-  document
-    .getElementById("chatMessages")
-    .innerHTML = `
-
-      <div class="chat-empty">
-
-        Your generated website can be edited here.
-
-        <br><br>
-
-        Try:
-
-        <br>
-        • Make the background black
-        <br>
-        • Add more scrolling sections
-        <br>
-        • Add a 3D hero
-        <br>
-        • Make the website responsive
-        <br>
-        • Add animations
-        <br>
-        • Make the page vertically scrollable
-
-      </div>
-
-    `;
-
+  document.getElementById("chatMessages").innerHTML = `
+    <div class="chat-empty">
+      Your generated website can be edited here.
+      <br><br>Try:<br>
+      • Make the background black<br>
+      • Add more scrolling sections<br>
+      • Add a 3D hero<br>
+      • Make the website responsive<br>
+      • Add animations
+    </div>`;
 }
 
-
-function addChatMessage(type,text){
-
-  const container =
-    document.getElementById(
-      "chatMessages"
-    );
-
-  const empty =
-    container.querySelector(
-      ".chat-empty"
-    );
-
+function addChatMessage(type, text){
+  const container = document.getElementById("chatMessages");
+  const empty = container.querySelector(".chat-empty");
   if(empty) empty.remove();
 
-  const message =
-    document.createElement("div");
-
-  message.className =
-    "message " + type;
-
-  const bubble =
-    document.createElement("div");
-
-  bubble.className =
-    "message-bubble";
-
-  bubble.innerText =
-    text;
-
+  const message = document.createElement("div");
+  message.className = "message " + type;
+  const bubble = document.createElement("div");
+  bubble.className = "message-bubble";
+  bubble.innerText = text;
   message.appendChild(bubble);
-
   container.appendChild(message);
-
-  container.scrollTop =
-    container.scrollHeight;
-
+  container.scrollTop = container.scrollHeight;
 }
 
-
-/* =========================================
-   AI EDIT WEBSITE
-========================================= */
-
 async function editWebsite(){
+  if(!generatedHTML){ showToast("Generate a website first"); return; }
 
-  if(!generatedHTML){
+  const input = document.getElementById("chatInput");
+  const send = document.getElementById("chatSend");
+  const instruction = input.value.trim();
 
-    showToast(
-      "Generate a website first"
-    );
+  if(!instruction){ showToast("Tell AI what to change"); return; }
 
-    return;
-
-  }
-
-  const input =
-    document.getElementById("chatInput");
-
-  const send =
-    document.getElementById("chatSend");
-
-  const instruction =
-    input.value.trim();
-
-  if(!instruction){
-
-    showToast(
-      "Tell AI what to change"
-    );
-
-    return;
-
-  }
-
-  addChatMessage(
-    "user",
-    instruction
-  );
-
+  addChatMessage("user", instruction);
   input.value = "";
   send.disabled = true;
-
-  showToast(
-    "AI is editing your website..."
-  );
+  showToast("AI is editing your website...");
 
   try{
-
     const editPrompt = `
-
 You are SPDP AI Website Editor.
-
 The user already has a complete working website.
 
 CURRENT WEBSITE HTML:
-
 ${generatedHTML}
 
-==================================================
-
 USER REQUEST:
-
 ${instruction}
 
-==================================================
-
 TASK:
-
 Modify the CURRENT WEBSITE according to the user's request.
-
-IMPORTANT:
-
-- Preserve existing functionality.
-- Do not remove working game mechanics.
-- Do not turn a game into a static page.
-- Keep existing buttons working.
-- Keep existing JavaScript functionality.
-- Add the requested change.
-- Fix obvious bugs if necessary.
-- Keep the design premium.
-- Keep it responsive.
-- If it is a game, it must remain genuinely playable.
-
-SCROLLING REQUIREMENT:
-
-- For normal websites, landing pages, portfolios, stores, dashboards and web apps, the page MUST be vertically scrollable when content is taller than the viewport.
-- Use natural document flow.
-- Do NOT use body { overflow:hidden; } for normal websites.
-- Do NOT force the whole website into 100vh.
-- Use min-height:100vh instead of fixed height where appropriate.
-- Allow html and body to scroll naturally.
-- If the user asks for a long scrolling website, create multiple vertically stacked sections.
-- Sections may contain animations and 3D elements.
-- A 3D website should still allow normal page scrolling.
-- Only use overflow:hidden when it is specifically required for a visual element, animation or game canvas.
-- Do not prevent mouse wheel, touch scrolling or keyboard scrolling.
-
-3D WEBSITE REQUIREMENT:
-
-If the user asks for a 3D website:
-
-- Use Three.js CDN when appropriate.
-- Create a real WebGL 3D scene.
-- Add camera and lighting.
-- Add interactive 3D objects.
-- Keep the page itself vertically scrollable.
-- Do not make the entire document permanently overflow:hidden.
-- Make the 3D section responsive.
-
-Return the COMPLETE updated HTML.
-
-OUTPUT:
-
-Return ONLY the complete HTML document.
-
-First characters must be:
-
-<!DOCTYPE html>
-
-No Markdown.
-No code fences.
-No explanation.
-
+Keep functionality, responsive design, interactive scripts, and game mechanics working.
+Return ONLY the complete HTML document starting with <!DOCTYPE html>.
+No markdown formatting, no code blocks, no intro/outro text.
 `;
 
-
-    const response =
-      await fetch(
-        WORKER_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-          body:
-            JSON.stringify({
-              prompt:editPrompt
-            })
-        }
-      );
+    const response = await fetch(WORKER_URL, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify({ prompt: editPrompt })
+    });
 
     let data;
+    try{ data = await response.json(); }
+    catch{ throw new Error("Worker returned invalid response."); }
 
-    try{
+    if(!response.ok) throw new Error(data.error || "AI editing failed");
+    if(!data.html) throw new Error("AI returned no HTML");
 
-      data =
-        await response.json();
+    generatedHTML = normalizeGeneratedHTML(data.html);
+    document.getElementById("previewFrame").srcdoc = generatedHTML;
 
-    }catch{
+    addChatMessage("ai", "✓ Website updated successfully.");
+    showToast("✨ Website updated");
 
-      throw new Error(
-        "Worker returned invalid JSON."
-      );
-
-    }
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "AI editing failed"
-      );
-
-    }
-
-    if(!data.html){
-
-      throw new Error(
-        "AI returned no HTML"
-      );
-
-    }
-
-    generatedHTML =
-      normalizeGeneratedHTML(
-        data.html
-      );
-
-    document
-      .getElementById("previewFrame")
-      .srcdoc =
-        generatedHTML;
-
-    addChatMessage(
-      "ai",
-      "✓ Website updated successfully."
-    );
-
-    showToast(
-      "✨ Website updated"
-    );
-
-    if(currentUser){
-      await saveProject();
-    }else{
-
-      showToast(
-        "Website updated. Sign in to save it."
-      );
-
-    }
-
+    if(currentUser) await saveProject();
   }catch(error){
-
-    console.error(
-      "AI EDIT ERROR:",
-      error
-    );
-
-    addChatMessage(
-      "ai",
-      "❌ " + error.message
-    );
-
-    showToast(
-      "❌ " + error.message
-    );
-
+    console.error("EDIT ERROR:", error);
+    addChatMessage("ai", "❌ " + error.message);
+    showToast("❌ " + error.message);
   }finally{
-
     send.disabled = false;
-
   }
-
 }
 
-
 /* =========================================
-   CHAT SHORTCUT
+   VIEW & COPY CODE
 ========================================= */
-
-document
-  .getElementById("chatInput")
-  .addEventListener(
-    "keydown",
-    e=>{
-
-      if(
-        (e.ctrlKey || e.metaKey) &&
-        e.key === "Enter"
-      ){
-
-        editWebsite();
-
-      }
-
-    }
-  );
-
-
-/* =========================================
-   DOWNLOAD
-========================================= */
-
-function downloadWebsite(){
-
+function viewCode(){
   if(!generatedHTML){
-
-    showToast(
-      "Generate something first"
-    );
-
+    showToast("Generate something first");
     return;
-
   }
-
-  const blob =
-    new Blob(
-      [generatedHTML],
-      {
-        type:"text/html;charset=utf-8"
-      }
-    );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href = url;
-
-  a.download =
-    "spdp-generated-website.html";
-
-  document
-    .body
-    .appendChild(a);
-
-  a.click();
-
-  a.remove();
-
-  setTimeout(
-    ()=>{
-      URL.revokeObjectURL(url);
-    },
-    1000
-  );
-
-  showToast(
-    "Website downloaded!"
-  );
-
+  document.getElementById("codeTextarea").value = generatedHTML;
+  document.getElementById("codeModal").classList.add("show");
 }
 
+function closeCodeModal(){
+  document.getElementById("codeModal").classList.remove("show");
+}
+
+function copyGeneratedCode(){
+  const codeBox = document.getElementById("codeTextarea");
+  codeBox.select();
+  navigator.clipboard.writeText(codeBox.value);
+  showToast("✓ Code copied to clipboard!");
+}
 
 /* =========================================
-   NEW PROJECT
+   DOWNLOAD & NEW PROJECT
 ========================================= */
+function downloadWebsite(){
+  if(!generatedHTML){ showToast("Generate something first"); return; }
+  const blob = new Blob([generatedHTML], { type:"text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "spdp-generated-website.html";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast("Website downloaded!");
+}
 
 function newProject(){
-
   generatedHTML = "";
   currentProjectId = null;
-
-  document
-    .getElementById("prompt")
-    .value = "";
-
-  document
-    .getElementById("previewFrame")
-    .srcdoc = `
-
+  document.getElementById("prompt").value = "";
+  document.getElementById("previewFrame").srcdoc = `
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-
-*{
-box-sizing:border-box;
-}
-
-html{
-min-height:100%;
-overflow-y:auto;
-}
-
+*{ box-sizing:border-box; }
+html{ min-height:100%; overflow-y:auto; }
 body{
-
-margin:0;
-min-height:100vh;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-family:Arial,sans-serif;
-
-background:
-linear-gradient(
-135deg,
-#fff,
-#eee
-);
-
-color:#111;
-text-align:center;
-
+  margin:0; min-height:100vh; display:flex; align-items:center;
+  justify-content:center; font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#fff,#eee); color:#111; text-align:center;
 }
-
-.container{
-max-width:650px;
-padding:40px;
-}
-
-.badge{
-
-display:inline-block;
-
-padding:8px 14px;
-
-border:1px solid #ddd;
-
-border-radius:30px;
-
-font-size:12px;
-
-margin-bottom:20px;
-
-}
-
-h1{
-
-font-size:
-clamp(40px,6vw,70px);
-
-margin:0 0 20px;
-
-letter-spacing:-3px;
-
-}
-
-p{
-color:#666;
-line-height:1.7;
-}
-
+.container{ max-width:650px; padding:40px; }
+.badge{ display:inline-block; padding:8px 14px; border:1px solid #ddd; border-radius:30px; font-size:12px; margin-bottom:20px; }
+h1{ font-size:clamp(40px,6vw,70px); margin:0 0 20px; letter-spacing:-3px; }
+p{ color:#666; line-height:1.7; }
 </style>
-
 </head>
-
 <body>
-
 <div class="container">
-
-<div class="badge">
-POWERED BY SPDP AI
+  <div class="badge">POWERED BY SPDP AI</div>
+  <h1>Build Something Extraordinary.</h1>
+  <p>Describe your idea and let SPDP AI create it.</p>
 </div>
-
-<h1>
-Build Something Extraordinary.
-</h1>
-
-<p>
-Describe your idea and let SPDP AI create it.
-</p>
-
-</div>
-
 </body>
-
 </html>
-
 `;
-
-  showToast(
-    "New project"
-  );
-
+  showToast("New project");
 }
-
 
 /* =========================================
-   PREVIEW
+   PREVIEW CONTROLS
 ========================================= */
-
 function desktopPreview(){
-
-  const website =
-    document.getElementById("website");
-
-  website.style.width =
-    "min(100%,1050px)";
-
-  website.style.height =
-    "700px";
-
-  showToast(
-    "Desktop preview"
-  );
-
+  const website = document.getElementById("website");
+  website.style.width = "min(100%,1050px)";
+  website.style.height = "700px";
+  showToast("Desktop preview");
 }
-
 
 function mobilePreview(){
-
-  const website =
-    document.getElementById("website");
-
-  website.style.width =
-    "390px";
-
-  website.style.height =
-    "700px";
-
-  showToast(
-    "Mobile preview"
-  );
-
+  const website = document.getElementById("website");
+  website.style.width = "390px";
+  website.style.height = "700px";
+  showToast("Mobile preview");
 }
-
 
 async function fullscreenPreview(){
-
-  const website =
-    document.getElementById("website");
-
+  const website = document.getElementById("website");
   if(website.requestFullscreen){
-
     await website.requestFullscreen();
-
   }else{
-
-    showToast(
-      "Fullscreen is not supported"
-    );
-
+    showToast("Fullscreen is not supported");
   }
-
 }
-
-
-/* =========================================
-   PUBLISH
-========================================= */
 
 function publishSite(){
-
-  if(!generatedHTML){
-
-    showToast(
-      "Generate something first"
-    );
-
-    return;
-
-  }
-
-  showToast(
-    "Publish system needs a deployment endpoint."
-  );
-
+  if(!generatedHTML){ showToast("Generate something first"); return; }
+  showToast("Publish system needs a deployment endpoint.");
 }
 
-
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
 function escapeHTML(value){
-
   return String(value)
-
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
-
 }
-
-
-/* =========================================
-   TOAST
-========================================= */
 
 function showToast(message){
-
-  const toast =
-    document.getElementById("toast");
-
-  toast.innerText =
-    message;
-
+  const toast = document.getElementById("toast");
+  toast.innerText = message;
   toast.classList.add("show");
-
-  clearTimeout(
-    window.toastTimer
-  );
-
-  window.toastTimer =
-    setTimeout(
-      ()=>{
-        toast.classList.remove("show");
-      },
-      3500
-    );
-
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 3500);
 }
 
-
 /* =========================================
-   PROMPT SHORTCUT
+   KEYBOARD SHORTCUTS & INIT
 ========================================= */
+document.getElementById("prompt").addEventListener("keydown", e => {
+  if((e.ctrlKey || e.metaKey) && e.key === "Enter"){ generate(); }
+});
 
-document
-  .getElementById("prompt")
-  .addEventListener(
-    "keydown",
-    e=>{
-
-      if(
-        (e.ctrlKey || e.metaKey) &&
-        e.key === "Enter"
-      ){
-
-        generate();
-
-      }
-
-    }
-  );
-
-
-/* =========================================
-   START
-========================================= */
+document.getElementById("chatInput").addEventListener("keydown", e => {
+  if((e.ctrlKey || e.metaKey) && e.key === "Enter"){ editWebsite(); }
+});
 
 newProject();
 loadUser();
-
 </script>
 
 </body>
 </html>
-```
