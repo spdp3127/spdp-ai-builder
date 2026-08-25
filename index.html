@@ -1,5 +1,6 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -12,14 +13,20 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Inter,Arial,sans-serif
+  font-family:Inter,Arial,sans-serif;
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
   min-height:100vh;
   background:#050505;
   color:#fff;
-  overflow:hidden
+  overflow:hidden;
 }
 
 body:before,
@@ -27,7 +34,7 @@ body:after{
   content:"";
   position:fixed;
   border-radius:50%;
-  pointer-events:none
+  pointer-events:none;
 }
 
 body:before{
@@ -35,7 +42,7 @@ body:before{
   height:600px;
   top:-250px;
   left:-200px;
-  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 65%)
+  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 65%);
 }
 
 body:after{
@@ -43,7 +50,7 @@ body:after{
   height:500px;
   bottom:-250px;
   right:-150px;
-  background:radial-gradient(circle,rgba(120,120,120,.06),transparent 65%)
+  background:radial-gradient(circle,rgba(120,120,120,.06),transparent 65%);
 }
 
 header{
@@ -56,13 +63,13 @@ header{
   justify-content:space-between;
   padding:0 28px;
   position:relative;
-  z-index:20
+  z-index:20;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:12px
+  gap:12px;
 }
 
 .logo{
@@ -75,23 +82,23 @@ header{
   align-items:center;
   justify-content:center;
   font-weight:900;
-  font-size:15px
+  font-size:15px;
 }
 
 .brand-name{
   font-size:18px;
-  font-weight:800
+  font-weight:800;
 }
 
 .brand-name span{
   color:#777;
-  font-weight:500
+  font-weight:500;
 }
 
 .header-right{
   display:flex;
   align-items:center;
-  gap:8px
+  gap:8px;
 }
 
 .header-btn,
@@ -99,18 +106,18 @@ header{
   border-radius:9px;
   padding:10px 15px;
   cursor:pointer;
-  transition:.2s
+  transition:.2s;
 }
 
 .header-btn{
   background:#101010;
   border:1px solid #292929;
-  color:#ddd
+  color:#ddd;
 }
 
 .header-btn:hover{
   border-color:#555;
-  color:#fff
+  color:#fff;
 }
 
 .publish{
@@ -118,31 +125,31 @@ header{
   color:#050505;
   border:0;
   font-weight:800;
-  padding:11px 18px
+  padding:11px 18px;
 }
 
 .publish:hover{
-  transform:translateY(-1px)
+  transform:translateY(-1px);
 }
 
 .user-btn{
   max-width:170px;
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .app{
   height:calc(100vh - 72px);
   display:grid;
-  grid-template-columns:330px 1fr 330px
+  grid-template-columns:330px 1fr 330px;
 }
 
 .sidebar{
   background:#080808;
   border-right:1px solid #1c1c1c;
   padding:24px;
-  overflow:auto
+  overflow:auto;
 }
 
 .small-label{
@@ -151,31 +158,31 @@ header{
   font-weight:700;
   letter-spacing:1.5px;
   text-transform:uppercase;
-  margin-bottom:9px
+  margin-bottom:9px;
 }
 
 .sidebar h1{
   font-size:25px;
   letter-spacing:-1px;
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 .desc{
   color:#777;
   font-size:13px;
   line-height:1.6;
-  margin-bottom:22px
+  margin-bottom:22px;
 }
 
 .prompt-box{
   background:#0d0d0d;
   border:1px solid #272727;
   border-radius:14px;
-  padding:13px
+  padding:13px;
 }
 
 .prompt-box:focus-within{
-  border-color:#555
+  border-color:#555;
 }
 
 textarea{
@@ -187,11 +194,11 @@ textarea{
   outline:0;
   color:#fff;
   font-size:14px;
-  line-height:1.6
+  line-height:1.6;
 }
 
 textarea::placeholder{
-  color:#555
+  color:#555;
 }
 
 .generate{
@@ -205,23 +212,23 @@ textarea::placeholder{
   font-size:14px;
   font-weight:900;
   cursor:pointer;
-  transition:.2s
+  transition:.2s;
 }
 
 .generate:hover{
-  transform:translateY(-2px)
+  transform:translateY(-2px);
 }
 
 .generate:disabled{
   opacity:.5;
   cursor:wait;
-  transform:none
+  transform:none;
 }
 
 .divider{
   height:1px;
   background:#1c1c1c;
-  margin:25px 0
+  margin:25px 0;
 }
 
 .examples-title{
@@ -229,7 +236,7 @@ textarea::placeholder{
   font-size:10px;
   font-weight:800;
   letter-spacing:1.4px;
-  margin-bottom:11px
+  margin-bottom:11px;
 }
 
 .example{
@@ -241,30 +248,32 @@ textarea::placeholder{
   color:#aaa;
   font-size:12px;
   cursor:pointer;
-  transition:.2s
+  transition:.2s;
 }
 
 .example:hover{
   background:#111;
   color:#fff;
   border-color:#333;
-  transform:translateX(3px)
+  transform:translateX(3px);
 }
 
 .preview{
   display:flex;
   flex-direction:column;
   background:#0b0b0b;
-  min-width:0
+  min-width:0;
+  min-height:0;
 }
 
 .preview-top{
   height:55px;
+  min-height:55px;
   border-bottom:1px solid #1c1c1c;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 20px
+  padding:0 20px;
 }
 
 .preview-left{
@@ -272,7 +281,7 @@ textarea::placeholder{
   align-items:center;
   gap:10px;
   color:#999;
-  font-size:12px
+  font-size:12px;
 }
 
 .dot{
@@ -280,12 +289,12 @@ textarea::placeholder{
   height:7px;
   border-radius:50%;
   background:#40ff88;
-  box-shadow:0 0 12px rgba(64,255,136,.5)
+  box-shadow:0 0 12px rgba(64,255,136,.5);
 }
 
 .preview-tools{
   display:flex;
-  gap:7px
+  gap:7px;
 }
 
 .tool{
@@ -295,43 +304,46 @@ textarea::placeholder{
   background:#101010;
   color:#888;
   border-radius:7px;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .tool:hover{
   color:#fff;
-  border-color:#555
+  border-color:#555;
 }
 
 .canvas{
   flex:1;
+  min-height:0;
   padding:25px;
   display:flex;
   justify-content:center;
-  align-items:center;
-  overflow:auto
+  align-items:flex-start;
+  overflow:auto;
 }
 
 .website{
   width:min(100%,1050px);
-  height:min(100%,700px);
-  min-height:520px;
+  height:700px;
+  min-height:500px;
+  flex-shrink:0;
   background:#fff;
   border-radius:14px;
   overflow:hidden;
   box-shadow:0 35px 100px rgba(0,0,0,.55);
   position:relative;
-  transition:.3s
+  transition:.3s;
 }
 
 #previewFrame{
   width:100%;
   height:100%;
-  min-height:520px;
+  min-height:500px;
   border:0;
   display:block;
   background:#fff;
-  touch-action:auto
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
 }
 
 .ai-chat{
@@ -339,7 +351,7 @@ textarea::placeholder{
   border-left:1px solid #1c1c1c;
   display:flex;
   flex-direction:column;
-  min-width:0
+  min-width:0;
 }
 
 .chat-header{
@@ -348,7 +360,7 @@ textarea::placeholder{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 17px
+  padding:0 17px;
 }
 
 .chat-title{
@@ -356,7 +368,7 @@ textarea::placeholder{
   align-items:center;
   gap:9px;
   font-size:13px;
-  font-weight:800
+  font-weight:800;
 }
 
 .ai-dot{
@@ -364,7 +376,7 @@ textarea::placeholder{
   height:8px;
   border-radius:50%;
   background:#fff;
-  box-shadow:0 0 15px rgba(255,255,255,.6)
+  box-shadow:0 0 15px rgba(255,255,255,.6);
 }
 
 .chat-clear{
@@ -374,13 +386,13 @@ textarea::placeholder{
   border-radius:7px;
   padding:6px 9px;
   cursor:pointer;
-  font-size:11px
+  font-size:11px;
 }
 
 .chat-messages{
   flex:1;
   overflow:auto;
-  padding:16px
+  padding:16px;
 }
 
 .chat-empty{
@@ -390,16 +402,16 @@ textarea::placeholder{
   padding:12px;
   border:1px solid #1d1d1d;
   border-radius:10px;
-  background:#0d0d0d
+  background:#0d0d0d;
 }
 
 .message{
   margin-bottom:12px;
-  max-width:92%
+  max-width:92%;
 }
 
 .message.user{
-  margin-left:auto
+  margin-left:auto;
 }
 
 .message-bubble{
@@ -407,23 +419,23 @@ textarea::placeholder{
   border-radius:11px;
   font-size:12px;
   line-height:1.5;
-  white-space:pre-wrap
+  white-space:pre-wrap;
 }
 
 .message.ai .message-bubble{
   background:#101010;
   border:1px solid #222;
-  color:#bbb
+  color:#bbb;
 }
 
 .message.user .message-bubble{
   background:#fff;
-  color:#111
+  color:#111;
 }
 
 .chat-input-area{
   padding:12px;
-  border-top:1px solid #1c1c1c
+  border-top:1px solid #1c1c1c;
 }
 
 .chat-input{
@@ -438,11 +450,11 @@ textarea::placeholder{
   color:#fff;
   outline:none;
   font-size:12px;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .chat-input:focus{
-  border-color:#555
+  border-color:#555;
 }
 
 .chat-send{
@@ -454,12 +466,12 @@ textarea::placeholder{
   background:#fff;
   color:#111;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .chat-send:disabled{
   opacity:.5;
-  cursor:wait
+  cursor:wait;
 }
 
 .loading{
@@ -472,11 +484,11 @@ textarea::placeholder{
   flex-direction:column;
   gap:18px;
   color:#111;
-  z-index:5
+  z-index:5;
 }
 
 .loading.show{
-  display:flex
+  display:flex;
 }
 
 .spinner{
@@ -485,16 +497,18 @@ textarea::placeholder{
   border:4px solid #ddd;
   border-top-color:#111;
   border-radius:50%;
-  animation:spin .8s linear infinite
+  animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-  to{transform:rotate(360deg)}
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 .loading-text{
   font-size:14px;
-  font-weight:800
+  font-weight:800;
 }
 
 .toast{
@@ -511,12 +525,12 @@ textarea::placeholder{
   opacity:0;
   transition:.3s;
   z-index:1000;
-  max-width:400px
+  max-width:400px;
 }
 
 .toast.show{
   transform:translateY(0);
-  opacity:1
+  opacity:1;
 }
 
 .modal{
@@ -527,11 +541,11 @@ textarea::placeholder{
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:500
+  z-index:500;
 }
 
 .modal.show{
-  display:flex
+  display:flex;
 }
 
 .auth-box{
@@ -540,19 +554,19 @@ textarea::placeholder{
   border:1px solid #292929;
   border-radius:18px;
   padding:25px;
-  box-shadow:0 30px 100px rgba(0,0,0,.7)
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
 }
 
 .auth-box h2{
   font-size:25px;
-  margin-bottom:7px
+  margin-bottom:7px;
 }
 
 .auth-desc{
   color:#777;
   font-size:13px;
   margin-bottom:22px;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .auth-input{
@@ -563,11 +577,11 @@ textarea::placeholder{
   border:1px solid #292929;
   border-radius:9px;
   color:#fff;
-  outline:none
+  outline:none;
 }
 
 .auth-input:focus{
-  border-color:#555
+  border-color:#555;
 }
 
 .auth-action{
@@ -579,7 +593,7 @@ textarea::placeholder{
   color:#111;
   font-weight:900;
   cursor:pointer;
-  margin-top:4px
+  margin-top:4px;
 }
 
 .auth-switch{
@@ -587,12 +601,12 @@ textarea::placeholder{
   color:#666;
   font-size:12px;
   margin-top:15px;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .auth-switch span{
   color:#fff;
-  font-weight:700
+  font-weight:700;
 }
 
 .close-modal{
@@ -601,7 +615,7 @@ textarea::placeholder{
   background:transparent;
   color:#777;
   font-size:20px;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .projects-panel{
@@ -616,11 +630,11 @@ textarea::placeholder{
   z-index:200;
   display:none;
   overflow:hidden;
-  box-shadow:0 25px 80px rgba(0,0,0,.65)
+  box-shadow:0 25px 80px rgba(0,0,0,.65);
 }
 
 .projects-panel.show{
-  display:block
+  display:block;
 }
 
 .projects-head{
@@ -628,13 +642,13 @@ textarea::placeholder{
   border-bottom:1px solid #222;
   display:flex;
   justify-content:space-between;
-  align-items:center
+  align-items:center;
 }
 
 .projects-list{
   padding:10px;
   max-height:500px;
-  overflow:auto
+  overflow:auto;
 }
 
 .project-item{
@@ -643,23 +657,23 @@ textarea::placeholder{
   border:1px solid #202020;
   border-radius:10px;
   margin-bottom:8px;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .project-item:hover{
-  border-color:#444
+  border-color:#444;
 }
 
 .project-name{
   font-weight:800;
   font-size:13px;
   margin-bottom:4px;
-  padding-right:20px
+  padding-right:20px;
 }
 
 .project-date{
   color:#666;
-  font-size:10px
+  font-size:10px;
 }
 
 .project-delete{
@@ -668,17 +682,17 @@ textarea::placeholder{
   background:transparent;
   color:#777;
   cursor:pointer;
-  font-size:18px
+  font-size:18px;
 }
 
 .project-delete:hover{
-  color:#fff
+  color:#fff;
 }
 
 @media(max-width:1150px){
 
   .app{
-    grid-template-columns:300px 1fr
+    grid-template-columns:300px 1fr;
   }
 
   .ai-chat{
@@ -689,48 +703,51 @@ textarea::placeholder{
     width:330px;
     transform:translateX(100%);
     transition:.3s;
-    z-index:100
+    z-index:100;
   }
 
   .ai-chat.open{
-    transform:translateX(0)
+    transform:translateX(0);
   }
 }
 
 @media(max-width:850px){
 
   body{
-    overflow:auto
+    overflow:auto;
   }
 
   header{
-    padding:0 15px
+    padding:0 15px;
   }
 
   .header-btn{
-    display:none
+    display:none;
   }
 
   .app{
     height:auto;
-    grid-template-columns:1fr
+    min-height:calc(100vh - 72px);
+    grid-template-columns:1fr;
   }
 
   .sidebar{
     border-right:0;
-    border-bottom:1px solid #1c1c1c
+    border-bottom:1px solid #1c1c1c;
   }
 
   .preview{
-    min-height:700px
+    min-height:750px;
   }
 
   .website{
-    min-height:500px
+    min-height:600px;
+    height:700px;
   }
 
   .canvas{
-    padding:15px
+    padding:15px;
+    overflow:auto;
   }
 
   .ai-chat{
@@ -752,33 +769,22 @@ textarea::placeholder{
 
 <div class="header-right">
 
-  <button class="header-btn" onclick="toggleProjects()">
-    Projects
-  </button>
+<button class="header-btn" onclick="toggleProjects()">Projects</button>
+<button class="header-btn" onclick="newProject()">New Project</button>
+<button class="header-btn" onclick="downloadWebsite()">Download</button>
+<button class="header-btn" onclick="toggleChat()">AI Edit</button>
+<button class="publish" onclick="publishSite()">Publish</button>
 
-  <button class="header-btn" onclick="newProject()">
-    New Project
-  </button>
-
-  <button class="header-btn" onclick="downloadWebsite()">
-    Download
-  </button>
-
-  <button class="header-btn" onclick="toggleChat()">
-    AI Edit
-  </button>
-
-  <button class="publish" onclick="publishSite()">
-    Publish
-  </button>
-
-  <button class="header-btn user-btn" id="authButton" onclick="handleAuthButton()">
-    Sign In
-  </button>
+<button
+  class="header-btn user-btn"
+  id="authButton"
+  onclick="handleAuthButton()">
+  Sign In
+</button>
 
 </div>
-
 </header>
+
 
 <div class="app">
 
@@ -803,11 +809,13 @@ Examples:
 
 Create a premium gaming website
 
+Create a long scrolling website
+
+Create a 3D website
+
 Create a playable 2D car game
 
-Create a 3D racing game
-
-Create an online store"></textarea>
+Create a 3D racing game"></textarea>
 
 </div>
 
@@ -815,9 +823,7 @@ Create an online store"></textarea>
 class="generate"
 id="generateButton"
 onclick="generate()">
-
 ✦ Generate
-
 </button>
 
 <div class="divider"></div>
@@ -828,50 +834,50 @@ TRY AN IDEA
 
 <div
 class="example"
+onclick="example('Create a premium long scrolling website with a large hero section, animated sections, features, pricing, testimonials, FAQ and footer. Make the entire page vertically scrollable.')">
+🌐 Long Scrolling Website
+</div>
+
+<div
+class="example"
+onclick="example('Create a premium interactive 3D website using Three.js. Make it responsive, immersive and vertically scrollable with multiple sections.')">
+✨ 3D Scrolling Website
+</div>
+
+<div
+class="example"
 onclick="example('Create a playable 2D car racing game with keyboard and mobile controls, enemies, score, collision detection, start screen and restart button')">
-
 🏎️ Playable 2D Car Game
-
 </div>
 
 <div
 class="example"
 onclick="example('Create a playable 3D futuristic racing game using Three.js with player controls, enemy cars, score, collision detection and restart')">
-
 🏁 Playable 3D Racing Game
-
 </div>
 
 <div
 class="example"
-onclick="example('Create a premium black gaming website with hero, features, pricing, testimonials and contact')">
-
+onclick="example('Create a premium black gaming website with hero, features, pricing, testimonials and contact. Make it a long scrolling page.')">
 🎮 Gaming Website
-
 </div>
 
 <div
 class="example"
-onclick="example('Create a modern restaurant website with menu, reservation and contact sections')">
-
+onclick="example('Create a modern restaurant website with menu, reservation, gallery, testimonials, contact and a long scrolling layout')">
 🍽️ Restaurant
-
 </div>
 
 <div
 class="example"
-onclick="example('Create a premium portfolio website for a professional designer')">
-
+onclick="example('Create a premium portfolio website for a professional designer with a beautiful long scrolling layout')">
 ✦ Portfolio
-
 </div>
 
 <div
 class="example"
-onclick="example('Create a modern online store for premium sneakers')">
-
+onclick="example('Create a modern online store for premium sneakers with product sections, categories, testimonials and a long scrolling page')">
 🛒 Online Store
-
 </div>
 
 </aside>
@@ -882,51 +888,31 @@ onclick="example('Create a modern online store for premium sneakers')">
 <div class="preview-top">
 
 <div class="preview-left">
-
 <div class="dot"></div>
-
 Live Preview
-
 </div>
 
 <div class="preview-tools">
 
-<button
-class="tool"
-onclick="desktopPreview()"
-title="Desktop">
-
+<button class="tool" onclick="desktopPreview()" title="Desktop">
 ▣
-
 </button>
 
-<button
-class="tool"
-onclick="mobilePreview()"
-title="Mobile">
-
+<button class="tool" onclick="mobilePreview()" title="Mobile">
 ▯
-
 </button>
 
-<button
-class="tool"
-onclick="fullscreenPreview()"
-title="Fullscreen">
-
+<button class="tool" onclick="fullscreenPreview()" title="Fullscreen">
 ⛶
-
 </button>
 
 </div>
-
 </div>
+
 
 <div class="canvas">
 
-<div
-class="website"
-id="website">
+<div class="website" id="website">
 
 <iframe
 id="previewFrame"
@@ -936,9 +922,7 @@ allow="autoplay; fullscreen; gamepad; microphone; camera"
 allowfullscreen>
 </iframe>
 
-<div
-class="loading"
-id="loading">
+<div class="loading" id="loading">
 
 <div class="spinner"></div>
 
@@ -955,9 +939,7 @@ SPDP AI is building...
 </section>
 
 
-<aside
-class="ai-chat"
-id="aiChat">
+<aside class="ai-chat" id="aiChat">
 
 <div class="chat-header">
 
@@ -969,19 +951,13 @@ AI Website Editor
 
 </div>
 
-<button
-class="chat-clear"
-onclick="clearChat()">
-
+<button class="chat-clear" onclick="clearChat">
 Clear
-
 </button>
 
 </div>
 
-<div
-class="chat-messages"
-id="chatMessages">
+<div class="chat-messages" id="chatMessages">
 
 <div class="chat-empty">
 
@@ -994,13 +970,15 @@ Try:
 <br>
 • Make the background black
 <br>
-• Change the hero title
+• Add more scrolling sections
 <br>
-• Add a pricing section
+• Add a 3D hero
 <br>
-• Make the button blue
+• Make the website fully responsive
 <br>
-• Add a working contact form
+• Add animations
+<br>
+• Make the page scroll vertically
 
 </div>
 
@@ -1017,9 +995,7 @@ placeholder="Tell AI what to change..."></textarea>
 id="chatSend"
 class="chat-send"
 onclick="editWebsite()">
-
 ✦ Update Website
-
 </button>
 
 </div>
@@ -1029,59 +1005,39 @@ onclick="editWebsite()">
 </div>
 
 
-<div
-class="projects-panel"
-id="projectsPanel">
+<div class="projects-panel" id="projectsPanel">
 
 <div class="projects-head">
 
 <strong>My Projects</strong>
 
-<button
-class="chat-clear"
-onclick="toggleProjects()">
-
+<button class="chat-clear" onclick="toggleProjects()">
 Close
-
 </button>
 
 </div>
 
-<div
-class="projects-list"
-id="projectsList">
-
+<div class="projects-list" id="projectsList">
 Loading...
-
 </div>
 
 </div>
 
 
-<div
-class="modal"
-id="authModal">
+<div class="modal" id="authModal">
 
 <div class="auth-box">
 
-<button
-class="close-modal"
-onclick="closeAuth()">
-
+<button class="close-modal" onclick="closeAuth()">
 ×
-
 </button>
 
 <h2 id="authTitle">
 Sign in
 </h2>
 
-<p
-class="auth-desc"
-id="authDesc">
-
+<p class="auth-desc" id="authDesc">
 Sign in to save and manage your SPDP AI projects.
-
 </p>
 
 <input
@@ -1100,19 +1056,15 @@ placeholder="Password">
 class="auth-action"
 id="authAction"
 onclick="submitAuth()">
-
 Sign In
-
 </button>
 
 <div
 class="auth-switch"
 id="authSwitch"
 onclick="toggleAuthMode()">
-
 Don't have an account?
 <span>Sign Up</span>
-
 </div>
 
 </div>
@@ -1120,12 +1072,8 @@ Don't have an account?
 </div>
 
 
-<div
-class="toast"
-id="toast">
-
+<div class="toast" id="toast">
 Done
-
 </div>
 
 
@@ -1161,11 +1109,8 @@ const WORKER_URL =
 ========================================= */
 
 let generatedHTML = "";
-
 let currentProjectId = null;
-
 let currentUser = null;
-
 let authMode = "signin";
 
 
@@ -1181,7 +1126,7 @@ function example(text){
 
 
 /* =========================================
-   AUTH MODAL
+   AUTH
 ========================================= */
 
 function openAuth(){
@@ -1220,31 +1165,26 @@ function toggleAuthMode(){
   const switchText =
     document.getElementById("authSwitch");
 
-
   if(authMode === "signup"){
 
-    title.innerText =
-      "Create account";
+    title.innerText = "Create account";
 
     desc.innerText =
       "Create your SPDP AI account and save your projects.";
 
-    action.innerText =
-      "Sign Up";
+    action.innerText = "Sign Up";
 
     switchText.innerHTML =
       'Already have an account? <span>Sign In</span>';
 
   }else{
 
-    title.innerText =
-      "Sign in";
+    title.innerText = "Sign in";
 
     desc.innerText =
       "Sign in to save and manage your SPDP AI projects.";
 
-    action.innerText =
-      "Sign In";
+    action.innerText = "Sign In";
 
     switchText.innerHTML =
       'Don\'t have an account? <span>Sign Up</span>';
@@ -1254,51 +1194,32 @@ function toggleAuthMode(){
 }
 
 
-/* =========================================
-   AUTH SUBMIT
-========================================= */
-
 async function submitAuth(){
 
   const email =
-    document
-      .getElementById("authEmail")
-      .value
-      .trim();
+    document.getElementById("authEmail").value.trim();
 
   const password =
-    document
-      .getElementById("authPassword")
-      .value;
-
+    document.getElementById("authPassword").value;
 
   if(!email || !password){
 
-    showToast(
-      "Enter email and password"
-    );
-
+    showToast("Enter email and password");
     return;
 
   }
-
 
   if(password.length < 6){
 
-    showToast(
-      "Password must be at least 6 characters"
-    );
-
+    showToast("Password must be at least 6 characters");
     return;
 
   }
-
 
   const action =
     document.getElementById("authAction");
 
   action.disabled = true;
-
 
   try{
 
@@ -1306,16 +1227,11 @@ async function submitAuth(){
 
       const {data,error} =
         await supabaseClient.auth.signUp({
-
           email,
           password
-
         });
 
-
-      if(error)
-        throw error;
-
+      if(error) throw error;
 
       if(data.session){
 
@@ -1326,15 +1242,10 @@ async function submitAuth(){
 
         closeAuth();
 
-        showToast(
-          "✓ Account created"
-        );
-
+        showToast("✓ Account created");
 
         if(generatedHTML){
-
           await saveProject();
-
         }
 
       }else{
@@ -1345,41 +1256,27 @@ async function submitAuth(){
 
       }
 
-
     }else{
 
       const {data,error} =
         await supabaseClient.auth.signInWithPassword({
-
           email,
           password
-
         });
 
+      if(error) throw error;
 
-      if(error)
-        throw error;
-
-
-      currentUser =
-        data.user;
-
+      currentUser = data.user;
 
       updateAuthUI();
 
       closeAuth();
 
-      showToast(
-        "✓ Signed in successfully"
-      );
-
+      showToast("✓ Signed in successfully");
 
       if(generatedHTML){
-
         await saveProject();
-
       }
-
 
       await loadProjects();
 
@@ -1387,14 +1284,9 @@ async function submitAuth(){
 
   }catch(error){
 
-    console.error(
-      "AUTH ERROR:",
-      error
-    );
+    console.error("AUTH ERROR:",error);
 
-    showToast(
-      "❌ " + error.message
-    );
+    showToast("❌ " + error.message);
 
   }finally{
 
@@ -1405,10 +1297,6 @@ async function submitAuth(){
 }
 
 
-/* =========================================
-   AUTH STATE
-========================================= */
-
 async function loadUser(){
 
   try{
@@ -1416,30 +1304,20 @@ async function loadUser(){
     const {data,error} =
       await supabaseClient.auth.getSession();
 
-
-    if(error)
-      throw error;
-
+    if(error) throw error;
 
     currentUser =
       data.session?.user || null;
 
-
     updateAuthUI();
 
-
     if(currentUser){
-
       await loadProjects();
-
     }
 
   }catch(error){
 
-    console.error(
-      "SESSION ERROR:",
-      error
-    );
+    console.error("SESSION ERROR:",error);
 
   }
 
@@ -1455,47 +1333,33 @@ supabaseClient.auth.onAuthStateChange(
     updateAuthUI();
 
     if(currentUser){
-
       await loadProjects();
-
     }
 
   }
 );
 
 
-/* =========================================
-   AUTH BUTTON
-========================================= */
-
 async function handleAuthButton(){
 
   if(!currentUser){
 
     openAuth();
-
     return;
 
   }
-
 
   const {error} =
     await supabaseClient.auth.signOut();
 
-
   if(error){
 
-    showToast(
-      "❌ " + error.message
-    );
-
+    showToast("❌ " + error.message);
     return;
 
   }
 
-
   currentUser = null;
-
   currentProjectId = null;
 
   updateAuthUI();
@@ -1504,9 +1368,7 @@ async function handleAuthButton(){
     .getElementById("projectsPanel")
     .classList.remove("show");
 
-  showToast(
-    "Signed out"
-  );
+  showToast("Signed out");
 
 }
 
@@ -1514,10 +1376,7 @@ async function handleAuthButton(){
 function updateAuthUI(){
 
   const button =
-    document.getElementById(
-      "authButton"
-    );
-
+    document.getElementById("authButton");
 
   if(currentUser){
 
@@ -1541,29 +1400,76 @@ function updateAuthUI(){
 
 
 /* =========================================
+   SCROLLING NORMALIZER
+========================================= */
+
+function normalizeGeneratedHTML(html){
+
+  let result = String(html || "").trim();
+
+  if(!result) return result;
+
+  const scrollCSS = `
+
+<style id="spdp-scroll-fix">
+
+html{
+  min-height:100%;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+}
+
+body > *{
+  max-width:100%;
+}
+
+</style>
+
+`;
+
+  if(/<\/head>/i.test(result)){
+
+    result =
+      result.replace(
+        /<\/head>/i,
+        scrollCSS + "</head>"
+      );
+
+  }else{
+
+    result =
+      scrollCSS + result;
+
+  }
+
+  return result;
+
+}
+
+
+/* =========================================
    GENERATE WEBSITE
 ========================================= */
 
 async function generate(){
 
   const prompt =
-    document
-      .getElementById("prompt")
+    document.getElementById("prompt")
       .value
       .trim();
 
-
   const button =
-    document.getElementById(
-      "generateButton"
-    );
-
+    document.getElementById("generateButton");
 
   const loading =
-    document.getElementById(
-      "loading"
-    );
-
+    document.getElementById("loading");
 
   if(!prompt){
 
@@ -1575,42 +1481,28 @@ async function generate(){
 
   }
 
-
   button.disabled = true;
-
   loading.classList.add("show");
-
 
   try{
 
-    showToast(
-      "SPDP AI is thinking..."
-    );
-
+    showToast("SPDP AI is thinking...");
 
     const response =
       await fetch(
         WORKER_URL,
         {
-
           method:"POST",
-
           headers:{
-            "Content-Type":
-              "application/json"
+            "Content-Type":"application/json"
           },
-
-          body:
-            JSON.stringify({
-              prompt
-            })
-
+          body:JSON.stringify({
+            prompt
+          })
         }
       );
 
-
     let data;
-
 
     try{
 
@@ -1625,7 +1517,6 @@ async function generate(){
 
     }
 
-
     if(!response.ok){
 
       throw new Error(
@@ -1635,7 +1526,6 @@ async function generate(){
 
     }
 
-
     if(!data.html){
 
       throw new Error(
@@ -1644,36 +1534,19 @@ async function generate(){
 
     }
 
-
     generatedHTML =
-      data.html;
-
-
-    /*
-      VERY IMPORTANT:
-      A new generation creates
-      a new project.
-    */
+      normalizeGeneratedHTML(data.html);
 
     currentProjectId = null;
 
-
     document
-      .getElementById(
-        "previewFrame"
-      )
+      .getElementById("previewFrame")
       .srcdoc =
         generatedHTML;
-
 
     showToast(
       "✨ Website generated successfully!"
     );
-
-
-    /*
-      AUTO SAVE
-    */
 
     if(currentUser){
 
@@ -1687,7 +1560,6 @@ async function generate(){
 
     }
 
-
   }catch(error){
 
     console.error(
@@ -1695,16 +1567,13 @@ async function generate(){
       error
     );
 
-
     showToast(
       "❌ " + error.message
     );
 
-
   }finally{
 
     loading.classList.remove("show");
-
     button.disabled = false;
 
   }
@@ -1730,7 +1599,6 @@ async function saveProject(){
 
   }
 
-
   if(!generatedHTML){
 
     showToast(
@@ -1741,13 +1609,10 @@ async function saveProject(){
 
   }
 
-
   const prompt =
-    document
-      .getElementById("prompt")
+    document.getElementById("prompt")
       .value
       .trim();
-
 
   let name =
     prompt
@@ -1755,23 +1620,13 @@ async function saveProject(){
       .trim()
       .substring(0,80);
 
-
   if(!name){
-
-    name =
-      "Untitled Project";
-
+    name = "Untitled Project";
   }
-
 
   try{
 
     let result;
-
-
-    /*
-      UPDATE EXISTING PROJECT
-    */
 
     if(currentProjectId){
 
@@ -1779,69 +1634,27 @@ async function saveProject(){
         await supabaseClient
           .from("projects")
           .update({
-
-            name:
-
-              name,
-
-            prompt:
-
-              prompt,
-
-            html:
-
-              generatedHTML,
-
-            updated_at:
-
-              new Date()
-                .toISOString()
-
+            name:name,
+            prompt:prompt,
+            html:generatedHTML,
+            updated_at:new Date().toISOString()
           })
-          .eq(
-            "id",
-            currentProjectId
-          )
-          .eq(
-            "user_id",
-            currentUser.id
-          );
+          .eq("id",currentProjectId)
+          .eq("user_id",currentUser.id);
 
-
-    }
-
-
-    /*
-      CREATE NEW PROJECT
-    */
-
-    else{
+    }else{
 
       result =
         await supabaseClient
           .from("projects")
           .insert({
-
-            user_id:
-
-              currentUser.id,
-
-            name:
-
-              name,
-
-            prompt:
-
-              prompt,
-
-            html:
-
-              generatedHTML
-
+            user_id:currentUser.id,
+            name:name,
+            prompt:prompt,
+            html:generatedHTML
           })
           .select()
           .single();
-
 
       if(
         !result.error &&
@@ -1855,24 +1668,15 @@ async function saveProject(){
 
     }
 
-
     if(result.error){
-
       throw result.error;
-
     }
-
 
     await loadProjects();
 
-
-    showToast(
-      "✓ Project saved"
-    );
-
+    showToast("✓ Project saved");
 
     return true;
-
 
   }catch(error){
 
@@ -1881,12 +1685,10 @@ async function saveProject(){
       error
     );
 
-
     showToast(
       "❌ Save failed: " +
       error.message
     );
-
 
     return false;
 
@@ -1901,19 +1703,12 @@ async function saveProject(){
 
 async function loadProjects(){
 
-  if(!currentUser)
-    return;
-
+  if(!currentUser) return;
 
   const list =
-    document.getElementById(
-      "projectsList"
-    );
+    document.getElementById("projectsList");
 
-
-  list.innerHTML =
-    "Loading...";
-
+  list.innerHTML = "Loading...";
 
   try{
 
@@ -1921,26 +1716,15 @@ async function loadProjects(){
       await supabaseClient
         .from("projects")
         .select("*")
-        .eq(
-          "user_id",
-          currentUser.id
-        )
+        .eq("user_id",currentUser.id)
         .order(
           "updated_at",
-          {
-            ascending:false
-          }
+          {ascending:false}
         );
 
+    if(error) throw error;
 
-    if(error)
-      throw error;
-
-
-    if(
-      !data ||
-      data.length === 0
-    ){
+    if(!data || data.length === 0){
 
       list.innerHTML = `
         <div style="
@@ -1956,86 +1740,64 @@ async function loadProjects(){
 
     }
 
-
     list.innerHTML = "";
 
+    data.forEach(project=>{
 
-    data.forEach(
-      project=>{
+      const item =
+        document.createElement("div");
 
-        const item =
-          document.createElement(
-            "div"
-          );
+      item.className =
+        "project-item";
 
+      const date =
+        project.updated_at ||
+        project.created_at;
 
-        item.className =
-          "project-item";
+      item.innerHTML = `
 
+        <button
+          class="project-delete"
+          title="Delete">
+          ×
+        </button>
 
-        const date =
-          project.updated_at ||
-          project.created_at;
+        <div class="project-name">
+          ${escapeHTML(
+            project.name ||
+            "Untitled"
+          )}
+        </div>
 
+        <div class="project-date">
+          ${
+            date
+              ? new Date(date).toLocaleString()
+              : ""
+          }
+        </div>
 
-        item.innerHTML = `
+      `;
 
-          <button
-            class="project-delete"
-            title="Delete">
-            ×
-          </button>
+      item.onclick =
+        ()=>{
+          loadProject(project);
+        };
 
-          <div class="project-name">
-            ${escapeHTML(
-              project.name ||
-              "Untitled"
-            )}
-          </div>
+      item
+        .querySelector(".project-delete")
+        .onclick =
+        async(e)=>{
 
-          <div class="project-date">
-            ${
-              date
-                ? new Date(date)
-                    .toLocaleString()
-                : ""
-            }
-          </div>
+          e.stopPropagation();
 
-        `;
+          await deleteProject(project.id);
 
+        };
 
-        item.onclick =
-          ()=>{
-            loadProject(
-              project
-            );
-          };
+      list.appendChild(item);
 
-
-        item
-          .querySelector(
-            ".project-delete"
-          )
-          .onclick =
-          async(e)=>{
-
-            e.stopPropagation();
-
-            await deleteProject(
-              project.id
-            );
-
-          };
-
-
-        list.appendChild(
-          item
-        );
-
-      }
-    );
-
+    });
 
   }catch(error){
 
@@ -2043,7 +1805,6 @@ async function loadProjects(){
       "LOAD PROJECTS ERROR:",
       error
     );
-
 
     list.innerHTML = `
       <div style="
@@ -2061,7 +1822,7 @@ async function loadProjects(){
 
 
 /* =========================================
-   LOAD SINGLE PROJECT
+   LOAD PROJECT
 ========================================= */
 
 function loadProject(project){
@@ -2069,35 +1830,26 @@ function loadProject(project){
   currentProjectId =
     project.id;
 
-
   generatedHTML =
-    project.html || "";
-
+    normalizeGeneratedHTML(
+      project.html || ""
+    );
 
   document
     .getElementById("prompt")
     .value =
       project.prompt || "";
 
-
   document
-    .getElementById(
-      "previewFrame"
-    )
+    .getElementById("previewFrame")
     .srcdoc =
       generatedHTML;
 
-
   document
-    .getElementById(
-      "projectsPanel"
-    )
+    .getElementById("projectsPanel")
     .classList.remove("show");
 
-
-  showToast(
-    "✓ Project loaded"
-  );
+  showToast("✓ Project loaded");
 
 }
 
@@ -2108,20 +1860,11 @@ function loadProject(project){
 
 async function deleteProject(id){
 
-  if(!currentUser)
+  if(!currentUser) return;
+
+  if(!confirm("Delete this project?")){
     return;
-
-
-  if(
-    !confirm(
-      "Delete this project?"
-    )
-  ){
-
-    return;
-
   }
-
 
   try{
 
@@ -2129,40 +1872,21 @@ async function deleteProject(id){
       await supabaseClient
         .from("projects")
         .delete()
-        .eq(
-          "id",
-          id
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        );
+        .eq("id",id)
+        .eq("user_id",currentUser.id);
 
+    if(error) throw error;
 
-    if(error)
-      throw error;
+    if(currentProjectId === id){
 
-
-    if(
-      currentProjectId === id
-    ){
-
-      currentProjectId =
-        null;
-
-      generatedHTML =
-        "";
+      currentProjectId = null;
+      generatedHTML = "";
 
     }
 
-
-    showToast(
-      "Project deleted"
-    );
-
+    showToast("Project deleted");
 
     await loadProjects();
-
 
   }catch(error){
 
@@ -2170,7 +1894,6 @@ async function deleteProject(id){
       "DELETE ERROR:",
       error
     );
-
 
     showToast(
       "❌ Delete failed: " +
@@ -2200,26 +1923,15 @@ function toggleProjects(){
 
   }
 
-
   const panel =
     document.getElementById(
       "projectsPanel"
     );
 
+  panel.classList.toggle("show");
 
-  panel.classList.toggle(
-    "show"
-  );
-
-
-  if(
-    panel.classList.contains(
-      "show"
-    )
-  ){
-
+  if(panel.classList.contains("show")){
     loadProjects();
-
   }
 
 }
@@ -2232,14 +1944,9 @@ function toggleProjects(){
 function toggleChat(){
 
   const chat =
-    document.getElementById(
-      "aiChat"
-    );
+    document.getElementById("aiChat");
 
-
-  chat.classList.toggle(
-    "open"
-  );
+  chat.classList.toggle("open");
 
 }
 
@@ -2247,9 +1954,7 @@ function toggleChat(){
 function clearChat(){
 
   document
-    .getElementById(
-      "chatMessages"
-    )
+    .getElementById("chatMessages")
     .innerHTML = `
 
       <div class="chat-empty">
@@ -2263,13 +1968,15 @@ function clearChat(){
         <br>
         • Make the background black
         <br>
-        • Change the hero title
+        • Add more scrolling sections
         <br>
-        • Add a pricing section
+        • Add a 3D hero
         <br>
-        • Make the button blue
+        • Make the website responsive
         <br>
-        • Add a working contact form
+        • Add animations
+        <br>
+        • Make the page vertically scrollable
 
       </div>
 
@@ -2278,60 +1985,38 @@ function clearChat(){
 }
 
 
-function addChatMessage(
-  type,
-  text
-){
+function addChatMessage(type,text){
 
   const container =
     document.getElementById(
       "chatMessages"
     );
 
-
   const empty =
     container.querySelector(
       ".chat-empty"
     );
 
-
-  if(empty)
-    empty.remove();
-
+  if(empty) empty.remove();
 
   const message =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   message.className =
     "message " + type;
 
-
   const bubble =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   bubble.className =
     "message-bubble";
 
-
   bubble.innerText =
     text;
 
+  message.appendChild(bubble);
 
-  message.appendChild(
-    bubble
-  );
-
-
-  container.appendChild(
-    message
-  );
-
+  container.appendChild(message);
 
   container.scrollTop =
     container.scrollHeight;
@@ -2355,22 +2040,14 @@ async function editWebsite(){
 
   }
 
-
   const input =
-    document.getElementById(
-      "chatInput"
-    );
-
+    document.getElementById("chatInput");
 
   const send =
-    document.getElementById(
-      "chatSend"
-    );
-
+    document.getElementById("chatSend");
 
   const instruction =
     input.value.trim();
-
 
   if(!instruction){
 
@@ -2382,22 +2059,17 @@ async function editWebsite(){
 
   }
 
-
   addChatMessage(
     "user",
     instruction
   );
 
-
   input.value = "";
-
   send.disabled = true;
-
 
   showToast(
     "AI is editing your website..."
   );
-
 
   try{
 
@@ -2435,8 +2107,34 @@ IMPORTANT:
 - Keep the design premium.
 - Keep it responsive.
 - If it is a game, it must remain genuinely playable.
-- Return the COMPLETE updated HTML.
-- Do not return only a changed section.
+
+SCROLLING REQUIREMENT:
+
+- For normal websites, landing pages, portfolios, stores, dashboards and web apps, the page MUST be vertically scrollable when content is taller than the viewport.
+- Use natural document flow.
+- Do NOT use body { overflow:hidden; } for normal websites.
+- Do NOT force the whole website into 100vh.
+- Use min-height:100vh instead of fixed height where appropriate.
+- Allow html and body to scroll naturally.
+- If the user asks for a long scrolling website, create multiple vertically stacked sections.
+- Sections may contain animations and 3D elements.
+- A 3D website should still allow normal page scrolling.
+- Only use overflow:hidden when it is specifically required for a visual element, animation or game canvas.
+- Do not prevent mouse wheel, touch scrolling or keyboard scrolling.
+
+3D WEBSITE REQUIREMENT:
+
+If the user asks for a 3D website:
+
+- Use Three.js CDN when appropriate.
+- Create a real WebGL 3D scene.
+- Add camera and lighting.
+- Add interactive 3D objects.
+- Keep the page itself vertically scrollable.
+- Do not make the entire document permanently overflow:hidden.
+- Make the 3D section responsive.
+
+Return the COMPLETE updated HTML.
 
 OUTPUT:
 
@@ -2457,26 +2155,19 @@ No explanation.
       await fetch(
         WORKER_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "application/json"
           },
-
           body:
             JSON.stringify({
-              prompt:
-                editPrompt
+              prompt:editPrompt
             })
-
         }
       );
 
-
     let data;
-
 
     try{
 
@@ -2491,7 +2182,6 @@ No explanation.
 
     }
 
-
     if(!response.ok){
 
       throw new Error(
@@ -2501,7 +2191,6 @@ No explanation.
 
     }
 
-
     if(!data.html){
 
       throw new Error(
@@ -2510,46 +2199,27 @@ No explanation.
 
     }
 
-
     generatedHTML =
-      data.html;
-
+      normalizeGeneratedHTML(
+        data.html
+      );
 
     document
-      .getElementById(
-        "previewFrame"
-      )
+      .getElementById("previewFrame")
       .srcdoc =
         generatedHTML;
-
 
     addChatMessage(
       "ai",
       "✓ Website updated successfully."
     );
 
-
     showToast(
       "✨ Website updated"
     );
 
-
-    /*
-      AUTO UPDATE SAME PROJECT
-    */
-
     if(currentUser){
-
-      if(currentProjectId){
-
-        await saveProject();
-
-      }else{
-
-        await saveProject();
-
-      }
-
+      await saveProject();
     }else{
 
       showToast(
@@ -2558,7 +2228,6 @@ No explanation.
 
     }
 
-
   }catch(error){
 
     console.error(
@@ -2566,17 +2235,14 @@ No explanation.
       error
     );
 
-
     addChatMessage(
       "ai",
       "❌ " + error.message
     );
 
-
     showToast(
       "❌ " + error.message
     );
-
 
   }finally{
 
@@ -2592,16 +2258,13 @@ No explanation.
 ========================================= */
 
 document
-  .getElementById(
-    "chatInput"
-  )
+  .getElementById("chatInput")
   .addEventListener(
     "keydown",
     e=>{
 
       if(
-        (e.ctrlKey ||
-         e.metaKey) &&
+        (e.ctrlKey || e.metaKey) &&
         e.key === "Enter"
       ){
 
@@ -2629,57 +2292,39 @@ function downloadWebsite(){
 
   }
 
-
   const blob =
     new Blob(
       [generatedHTML],
       {
-        type:
-          "text/html;charset=utf-8"
+        type:"text/html;charset=utf-8"
       }
     );
 
-
   const url =
-    URL.createObjectURL(
-      blob
-    );
-
+    URL.createObjectURL(blob);
 
   const a =
-    document.createElement(
-      "a"
-    );
+    document.createElement("a");
 
-
-  a.href =
-    url;
-
+  a.href = url;
 
   a.download =
     "spdp-generated-website.html";
-
 
   document
     .body
     .appendChild(a);
 
-
   a.click();
-
 
   a.remove();
 
-
   setTimeout(
     ()=>{
-      URL.revokeObjectURL(
-        url
-      );
+      URL.revokeObjectURL(url);
     },
     1000
   );
-
 
   showToast(
     "Website downloaded!"
@@ -2695,22 +2340,14 @@ function downloadWebsite(){
 function newProject(){
 
   generatedHTML = "";
-
-  currentProjectId =
-    null;
-
+  currentProjectId = null;
 
   document
-    .getElementById(
-      "prompt"
-    )
+    .getElementById("prompt")
     .value = "";
 
-
   document
-    .getElementById(
-      "previewFrame"
-    )
+    .getElementById("previewFrame")
     .srcdoc = `
 
 <!DOCTYPE html>
@@ -2727,13 +2364,18 @@ content="width=device-width,initial-scale=1">
 <style>
 
 *{
-box-sizing:border-box
+box-sizing:border-box;
+}
+
+html{
+min-height:100%;
+overflow-y:auto;
 }
 
 body{
 
 margin:0;
-height:100vh;
+min-height:100vh;
 
 display:flex;
 align-items:center;
@@ -2755,7 +2397,7 @@ text-align:center;
 
 .container{
 max-width:650px;
-padding:40px
+padding:40px;
 }
 
 .badge{
@@ -2770,7 +2412,7 @@ border-radius:30px;
 
 font-size:12px;
 
-margin-bottom:20px
+margin-bottom:20px;
 
 }
 
@@ -2781,13 +2423,13 @@ clamp(40px,6vw,70px);
 
 margin:0 0 20px;
 
-letter-spacing:-3px
+letter-spacing:-3px;
 
 }
 
 p{
 color:#666;
-line-height:1.7
+line-height:1.7;
 }
 
 </style>
@@ -2818,7 +2460,6 @@ Describe your idea and let SPDP AI create it.
 
 `;
 
-
   showToast(
     "New project"
   );
@@ -2833,18 +2474,13 @@ Describe your idea and let SPDP AI create it.
 function desktopPreview(){
 
   const website =
-    document.getElementById(
-      "website"
-    );
-
+    document.getElementById("website");
 
   website.style.width =
     "min(100%,1050px)";
 
-
   website.style.height =
-    "min(100%,700px)";
-
+    "700px";
 
   showToast(
     "Desktop preview"
@@ -2856,18 +2492,13 @@ function desktopPreview(){
 function mobilePreview(){
 
   const website =
-    document.getElementById(
-      "website"
-    );
-
+    document.getElementById("website");
 
   website.style.width =
     "390px";
 
-
   website.style.height =
     "700px";
-
 
   showToast(
     "Mobile preview"
@@ -2879,14 +2510,9 @@ function mobilePreview(){
 async function fullscreenPreview(){
 
   const website =
-    document.getElementById(
-      "website"
-    );
+    document.getElementById("website");
 
-
-  if(
-    website.requestFullscreen
-  ){
+  if(website.requestFullscreen){
 
     await website.requestFullscreen();
 
@@ -2917,7 +2543,6 @@ function publishSite(){
 
   }
 
-
   showToast(
     "Publish system needs a deployment endpoint."
   );
@@ -2933,30 +2558,11 @@ function escapeHTML(value){
 
   return String(value)
 
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
@@ -2968,33 +2574,21 @@ function escapeHTML(value){
 function showToast(message){
 
   const toast =
-    document.getElementById(
-      "toast"
-    );
-
+    document.getElementById("toast");
 
   toast.innerText =
     message;
 
-
-  toast.classList.add(
-    "show"
-  );
-
+  toast.classList.add("show");
 
   clearTimeout(
     window.toastTimer
   );
 
-
   window.toastTimer =
     setTimeout(
       ()=>{
-
-        toast.classList.remove(
-          "show"
-        );
-
+        toast.classList.remove("show");
       },
       3500
     );
@@ -3007,16 +2601,13 @@ function showToast(message){
 ========================================= */
 
 document
-  .getElementById(
-    "prompt"
-  )
+  .getElementById("prompt")
   .addEventListener(
     "keydown",
     e=>{
 
       if(
-        (e.ctrlKey ||
-         e.metaKey) &&
+        (e.ctrlKey || e.metaKey) &&
         e.key === "Enter"
       ){
 
@@ -3033,10 +2624,10 @@ document
 ========================================= */
 
 newProject();
-
 loadUser();
 
 </script>
 
 </body>
 </html>
+```
