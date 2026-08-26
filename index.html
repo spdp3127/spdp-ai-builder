@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#050505">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SPDP AI — AI Website Builder</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 html{
   scroll-behavior:smooth;
@@ -21,16 +23,29 @@ body{
   overflow-x:hidden;
   overflow-y:auto;
   background:
-    radial-gradient(circle at 10% 0%,rgba(90,110,255,.15),transparent 30%),
-    radial-gradient(circle at 90% 10%,rgba(255,255,255,.06),transparent 25%),
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(100,120,255,.13),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(255,255,255,.06),
+      transparent 25%
+    ),
     #050505;
   color:#fff;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 button,
-textarea,
-input{
+textarea{
   font:inherit;
 }
 
@@ -45,7 +60,7 @@ button:disabled{
 
 .app{
   min-height:100vh;
-  padding:18px;
+  padding:20px;
 }
 
 .container{
@@ -61,15 +76,14 @@ header{
   align-items:center;
   justify-content:space-between;
   border-bottom:1px solid rgba(255,255,255,.07);
-  margin-bottom:20px;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:11px;
-  font-size:19px;
   font-weight:850;
+  font-size:20px;
 }
 
 .logo{
@@ -78,10 +92,16 @@ header{
   border-radius:11px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#fff,#777);
   color:#000;
   font-weight:950;
-  box-shadow:0 8px 35px rgba(255,255,255,.08);
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #777
+    );
+  box-shadow:
+    0 10px 35px rgba(255,255,255,.1);
 }
 
 .status{
@@ -97,143 +117,139 @@ header{
   height:7px;
   border-radius:50%;
   background:#4ade80;
-  box-shadow:0 0 12px #4ade80;
+  box-shadow:0 0 14px #4ade80;
 }
 
 /* HERO */
 
 .hero{
   text-align:center;
-  padding:35px 0 25px;
+  padding:55px 0 30px;
 }
 
 .badge{
   display:inline-flex;
-  align-items:center;
-  gap:7px;
   padding:8px 14px;
-  border:1px solid #222;
-  background:#0d0d0d;
   border-radius:999px;
+  border:1px solid #222;
+  background:#0c0c0c;
   color:#999;
   font-size:12px;
 }
 
 h1{
-  margin:21px 0 14px;
-  font-size:clamp(46px,8vw,90px);
-  line-height:.91;
+  margin:22px 0 15px;
+  font-size:
+    clamp(
+      48px,
+      8vw,
+      92px
+    );
+  line-height:.9;
   letter-spacing:-.075em;
-  background:linear-gradient(180deg,#fff 15%,#666);
+  background:
+    linear-gradient(
+      180deg,
+      #fff,
+      #666
+    );
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
 
-.hero>p{
-  max-width:700px;
+.hero-description{
+  max-width:720px;
   margin:auto;
   color:#858585;
   line-height:1.7;
-  font-size:15px;
 }
 
-/* BUILDER */
+/* PROMPT */
 
 .panel{
-  margin-top:26px;
-  border:1px solid #202020;
+  margin-top:30px;
+  padding:16px;
   border-radius:24px;
+  border:1px solid #202020;
   background:
-    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
-  padding:15px;
-  box-shadow:0 30px 100px rgba(0,0,0,.45);
-  backdrop-filter:blur(18px);
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.018)
+    );
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.45);
+  text-align:left;
 }
 
 .prompt-wrap{
   position:relative;
 }
 
-#prompt{
+textarea{
+  outline:none;
+}
+
+.prompt{
   width:100%;
   min-height:145px;
   resize:vertical;
   border:1px solid #191919;
-  border-radius:18px;
-  outline:none;
+  border-radius:17px;
   background:#080808;
   color:#fff;
-  padding:19px 64px 19px 18px;
-  line-height:1.65;
+  padding:18px 60px 18px 18px;
   font-size:15px;
-  transition:border .2s,box-shadow .2s;
+  line-height:1.6;
 }
 
-#prompt:focus{
-  border-color:#3c3c3c;
-  box-shadow:0 0 0 3px rgba(255,255,255,.025);
+.prompt:focus{
+  border-color:#3b3b3b;
 }
 
-#prompt::placeholder{
-  color:#4f4f4f;
+.prompt::placeholder{
+  color:#4d4d4d;
 }
 
-/* MIC */
-
-.mic-button{
+.mic{
   position:absolute;
   right:12px;
-  bottom:12px;
-  width:43px;
-  height:43px;
-  border-radius:13px;
-  border:1px solid #292929;
-  background:#111;
-  color:#fff;
+  top:12px;
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  padding:0;
   display:grid;
   place-items:center;
+  background:#111;
+  border:1px solid #292929;
+  color:#fff;
   font-size:18px;
-  transition:.2s;
 }
 
-.mic-button:hover{
-  background:#1b1b1b;
-  transform:translateY(-2px);
+.mic:hover{
+  background:#191919;
 }
 
-.mic-button.recording{
-  background:#fff;
-  color:#000;
-  border-color:#fff;
+.mic.recording{
+  background:#4b1111;
+  border-color:#7b2222;
   animation:pulseMic 1s infinite;
 }
 
 @keyframes pulseMic{
-  0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.15)}
-  50%{box-shadow:0 0 0 9px rgba(255,255,255,0)}
-}
-
-.voice-status{
-  display:none;
-  padding:9px 12px;
-  margin-top:8px;
-  border-radius:10px;
-  background:#101010;
-  color:#888;
-  font-size:12px;
-}
-
-.voice-status.show{
-  display:block;
+  50%{
+    box-shadow:
+      0 0 0 8px rgba(255,60,60,.08);
+  }
 }
 
 .actions{
   display:flex;
-  align-items:center;
   justify-content:flex-end;
   gap:9px;
-  margin-top:12px;
+  margin-top:11px;
   flex-wrap:wrap;
 }
 
@@ -242,7 +258,9 @@ button{
   border-radius:11px;
   padding:11px 16px;
   font-weight:750;
-  transition:transform .2s,background .2s,opacity .2s;
+  transition:
+    transform .2s ease,
+    background .2s ease;
 }
 
 button:hover{
@@ -260,46 +278,13 @@ button:hover{
   border:1px solid #292929;
 }
 
-.danger{
-  background:#251010;
-  color:#ff9a9a;
-  border:1px solid #402020;
-}
-
-/* LOADING */
-
-.loading{
-  display:none;
-  align-items:center;
-  gap:8px;
-}
-
-.loading.show{
-  display:inline-flex;
-}
-
-.spinner{
-  width:14px;
-  height:14px;
-  border:2px solid #555;
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-/* MESSAGE */
-
 .message{
   display:none;
   margin-top:12px;
   padding:13px 15px;
   border-radius:12px;
+  border:1px solid #292929;
   background:#101010;
-  border:1px solid #222;
   color:#aaa;
   line-height:1.5;
   white-space:pre-wrap;
@@ -309,48 +294,17 @@ button:hover{
   display:block;
 }
 
-/* CONVERSATION */
-
-.conversation{
-  display:none;
-  margin-top:12px;
-  border:1px solid #202020;
-  border-radius:15px;
-  background:#080808;
-  padding:12px;
-}
-
-.conversation.show{
-  display:block;
-}
-
-.conversation-title{
-  color:#666;
-  font-size:11px;
-  margin-bottom:8px;
-}
-
-.conversation-actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-}
-
-.conversation-actions button{
-  font-size:12px;
-  padding:8px 11px;
-}
-
 /* WORKSPACE */
 
 .workspace{
   display:none;
-  margin-top:24px;
+  margin-top:25px;
   border:1px solid #202020;
   border-radius:22px;
-  background:#080808;
+  background:#070707;
   overflow:hidden;
-  box-shadow:0 25px 90px rgba(0,0,0,.35);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.45);
 }
 
 .workspace.show{
@@ -362,10 +316,10 @@ button:hover{
 .toolbar{
   min-height:60px;
   padding:10px 12px;
-  border-bottom:1px solid #1c1c1c;
+  border-bottom:1px solid #1d1d1d;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:10px;
   flex-wrap:wrap;
   background:#090909;
@@ -374,113 +328,50 @@ button:hover{
 .toolbar-left,
 .toolbar-right{
   display:flex;
+  gap:7px;
   align-items:center;
-  gap:6px;
   flex-wrap:wrap;
 }
 
 .tool-title{
-  color:#888;
+  color:#777;
   font-size:12px;
   margin-right:7px;
 }
 
-.toolbar button{
-  font-size:12px;
-  padding:9px 12px;
-}
-
-.device.active,
-.mode.active{
+.device.active{
   background:#fff;
   color:#000;
-  border-color:#fff;
 }
 
-/* PREVIEW AREA */
+/* PREVIEW */
 
 .preview-wrap{
-  padding:14px;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(255,255,255,.04),transparent 30%),
-    #030303;
   min-height:720px;
-  position:relative;
-}
-
-.preview-stage{
-  width:100%;
-  min-height:680px;
+  padding:12px;
+  background:
+    radial-gradient(
+      circle at center,
+      #111,
+      #030303 65%
+    );
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  transition:.35s ease;
 }
 
 .preview-frame{
   width:100%;
   height:700px;
-  border:1px solid #292929;
+  display:block;
+  border:1px solid #252525;
   border-radius:15px;
   background:#fff;
-  display:block;
-  box-shadow:0 20px 80px rgba(0,0,0,.5);
   transition:
-    width .4s cubic-bezier(.22,1,.36,1),
-    height .3s ease,
-    box-shadow .3s ease;
-}
-
-/* SMOOTH MODE */
-
-.preview-frame.smooth{
-  scroll-behavior:smooth;
-}
-
-/* 3D BADGE */
-
-.three-badge{
-  display:none;
-  position:absolute;
-  top:24px;
-  left:25px;
-  z-index:5;
-  padding:7px 11px;
-  border:1px solid rgba(255,255,255,.15);
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(10px);
-  border-radius:999px;
-  color:#aaa;
-  font-size:11px;
-}
-
-.three-badge.show{
-  display:block;
-}
-
-/* FULLSCREEN */
-
-.workspace.fullscreen{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  margin:0;
-  border-radius:0;
-  background:#030303;
-}
-
-.workspace.fullscreen .preview-wrap{
-  height:calc(100vh - 60px);
-  min-height:0;
-}
-
-.workspace.fullscreen .preview-stage{
-  height:100%;
-  min-height:0;
-}
-
-.workspace.fullscreen .preview-frame{
-  height:100%;
+    width .35s ease,
+    box-shadow .35s ease;
+  box-shadow:
+    0 20px 80px rgba(0,0,0,.5);
 }
 
 /* CODE */
@@ -496,72 +387,27 @@ button:hover{
 }
 
 .code-head{
-  padding:11px 14px;
+  padding:12px 15px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  border-bottom:1px solid #1c1c1c;
+  justify-content:space-between;
+  border-bottom:1px solid #1b1b1b;
 }
 
 .code{
   width:100%;
-  height:470px;
+  height:500px;
   resize:vertical;
   border:0;
   outline:0;
   background:#020202;
-  color:#c5cad1;
+  color:#c4c9d0;
   padding:18px;
-  font:12px/1.6 Consolas,monospace;
-}
-
-/* VISUAL EDITOR */
-
-.editor-panel{
-  display:none;
-  border-top:1px solid #202020;
-  background:#090909;
-  padding:14px;
-}
-
-.editor-panel.show{
-  display:block;
-}
-
-.editor-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:9px;
-}
-
-.editor-field label{
-  display:block;
-  color:#666;
-  font-size:10px;
-  margin-bottom:5px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-.editor-field input,
-.editor-field select{
-  width:100%;
-  border:1px solid #252525;
-  background:#101010;
-  color:#fff;
-  border-radius:8px;
-  padding:8px;
-  outline:none;
-}
-
-.selected-info{
-  color:#888;
-  font-size:12px;
-  margin-bottom:12px;
-}
-
-.selected-info strong{
-  color:#fff;
+  font:
+    12px/1.6
+    Consolas,
+    Monaco,
+    monospace;
 }
 
 /* CHAT */
@@ -581,23 +427,23 @@ button:hover{
 }
 
 .chat-head span{
-  font-size:12px;
   color:#666;
+  font-size:12px;
   margin-left:8px;
 }
 
 .messages{
-  height:230px;
+  height:240px;
   overflow-y:auto;
   padding:15px;
   display:flex;
   flex-direction:column;
-  gap:9px;
+  gap:10px;
 }
 
 .msg{
   max-width:85%;
-  padding:10px 13px;
+  padding:11px 13px;
   border-radius:13px;
   font-size:13px;
   line-height:1.5;
@@ -606,14 +452,14 @@ button:hover{
 
 .msg.user{
   align-self:flex-end;
-  background:#fff;
   color:#000;
+  background:#fff;
 }
 
 .msg.ai{
   align-self:flex-start;
-  background:#111;
   color:#aaa;
+  background:#111;
   border:1px solid #222;
 }
 
@@ -624,34 +470,51 @@ button:hover{
   border-top:1px solid #1a1a1a;
 }
 
-.chat-input textarea{
+.edit-wrap{
   flex:1;
+  position:relative;
+}
+
+.edit-prompt{
+  width:100%;
   min-height:48px;
   height:48px;
   resize:none;
-  padding:12px;
   border:1px solid #191919;
-  border-radius:11px;
-  background:#090909;
+  border-radius:12px;
+  background:#080808;
   color:#fff;
-  outline:none;
+  padding:12px 48px 12px 12px;
 }
 
-.chat-input button{
-  height:48px;
+.edit-mic{
+  position:absolute;
+  right:5px;
+  top:5px;
+  width:38px;
+  height:38px;
+  padding:0;
+  border-radius:9px;
+  background:#111;
+  color:#fff;
+  border:1px solid #252525;
 }
 
 /* FEATURES */
 
 .features{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
   gap:12px;
-  margin:28px 0;
+  margin:35px 0;
 }
 
 .feature{
-  padding:21px;
+  padding:22px;
   border:1px solid #1b1b1b;
   border-radius:17px;
   background:#090909;
@@ -659,7 +522,7 @@ button:hover{
 
 .feature h3{
   margin:0 0 8px;
-  font-size:14px;
+  font-size:15px;
 }
 
 .feature p{
@@ -669,42 +532,41 @@ button:hover{
   line-height:1.6;
 }
 
-/* TOAST */
+/* LOADING */
 
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  padding:11px 15px;
-  border:1px solid #2a2a2a;
-  background:#101010;
-  color:#ddd;
-  border-radius:12px;
+.loading{
+  display:none;
+  align-items:center;
+  gap:8px;
+}
+
+.loading.show{
+  display:inline-flex;
+}
+
+.spinner{
+  width:14px;
+  height:14px;
+  border:2px solid #555;
+  border-top-color:#000;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+footer{
+  text-align:center;
+  padding:35px;
+  color:#444;
   font-size:12px;
-  z-index:10000;
-  transition:.25s;
 }
 
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-  .editor-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .toolbar{
-    align-items:flex-start;
-  }
-}
+/* MOBILE */
 
 @media(max-width:760px){
 
@@ -721,7 +583,16 @@ button:hover{
   }
 
   .hero{
-    padding-top:30px;
+    padding-top:40px;
+  }
+
+  h1{
+    font-size:
+      clamp(
+        48px,
+        15vw,
+        70px
+      );
   }
 
   .features{
@@ -729,30 +600,15 @@ button:hover{
   }
 
   .preview-wrap{
-    padding:8px;
     min-height:610px;
   }
 
   .preview-frame{
-    height:600px;
+    height:590px;
   }
 
-  .preview-stage{
-    min-height:580px;
-  }
-
-  .toolbar-left,
-  .toolbar-right{
-    width:100%;
-  }
-
-  .toolbar-left button,
-  .toolbar-right button{
-    flex:1;
-  }
-
-  .editor-grid{
-    grid-template-columns:1fr;
+  .toolbar{
+    align-items:flex-start;
   }
 
   .chat-input{
@@ -763,39 +619,35 @@ button:hover{
     width:100%;
   }
 }
-
-@media(max-width:480px){
-
-  h1{
-    font-size:54px;
-  }
-
-  .actions button{
-    flex:1;
-  }
-
-  .preview-frame{
-    height:560px;
-  }
-}
 </style>
 </head>
 
 <body>
 
 <main class="app">
+
 <div class="container">
 
 <header>
 
   <div class="brand">
-    <div class="logo">S</div>
-    <span>SPDP AI</span>
+
+    <div class="logo">
+      S
+    </div>
+
+    <span>
+      SPDP AI
+    </span>
+
   </div>
 
   <div class="status">
+
     <span class="dot"></span>
-    AI Builder Online
+
+    Builder Online
+
   </div>
 
 </header>
@@ -806,11 +658,14 @@ button:hover{
     ✦ AI Website · App · Game Builder
   </div>
 
-  <h1>Build anything.</h1>
+  <h1>
+    Build anything.
+  </h1>
 
-  <p>
-    Describe what you want, speak naturally or type a prompt.
-    Generate it, preview it live and keep editing with AI.
+  <p class="hero-description">
+    Describe what you want. Type it or speak naturally.
+    SPDP AI creates the website, app or game and lets you
+    continue editing the same project with AI.
   </p>
 
   <div class="panel">
@@ -819,20 +674,19 @@ button:hover{
 
       <textarea
         id="prompt"
-        placeholder="Try: I need a premium black gaming website with a 3D hero, animated particles, games section, pricing and footer..."
+        class="prompt"
+        placeholder="Try: Create a premium black 3D gaming website with Three.js, animated particles, games section, pricing and footer..."
       ></textarea>
 
       <button
         id="micBtn"
-        class="mic-button"
+        class="mic"
         type="button"
-        title="Voice prompt"
-      >🎤</button>
+        title="Speak your prompt"
+      >
+        🎙️
+      </button>
 
-    </div>
-
-    <div id="voiceStatus" class="voice-status">
-      Listening... speak naturally.
     </div>
 
     <div class="actions">
@@ -859,8 +713,11 @@ button:hover{
           id="loading"
           class="loading"
         >
+
           <span class="spinner"></span>
+
           Generating...
+
         </span>
 
       </button>
@@ -871,42 +728,6 @@ button:hover{
       id="message"
       class="message"
     ></div>
-
-    <div
-      id="conversation"
-      class="conversation"
-    >
-
-      <div class="conversation-title">
-        AI understood this as a conversation. What would you like to build?
-      </div>
-
-      <div class="conversation-actions">
-
-        <button
-          class="secondary quick"
-          data-prompt="Create a website for me"
-        >
-          Create a website
-        </button>
-
-        <button
-          class="secondary quick"
-          data-prompt="Create a web application for me"
-        >
-          Create a web app
-        </button>
-
-        <button
-          class="secondary quick"
-          data-prompt="Create a playable game for me"
-        >
-          Create a game
-        </button>
-
-      </div>
-
-    </div>
 
   </div>
 
@@ -928,6 +749,7 @@ button:hover{
       <button
         class="secondary device active"
         data-width="100%"
+        type="button"
       >
         Desktop
       </button>
@@ -935,6 +757,7 @@ button:hover{
       <button
         class="secondary device"
         data-width="768px"
+        type="button"
       >
         Tablet
       </button>
@@ -942,34 +765,15 @@ button:hover{
       <button
         class="secondary device"
         data-width="390px"
+        type="button"
       >
         Mobile
       </button>
 
       <button
-        id="smoothBtn"
-        class="secondary mode active"
-      >
-        ✨ Smooth
-      </button>
-
-      <button
-        id="threeBtn"
-        class="secondary mode"
-      >
-        ◈ 3D
-      </button>
-
-      <button
-        id="visualBtn"
-        class="secondary"
-      >
-        ✦ Visual Edit
-      </button>
-
-      <button
         id="codeBtn"
         class="secondary"
+        type="button"
       >
         Code
       </button>
@@ -981,20 +785,23 @@ button:hover{
       <button
         id="undoBtn"
         class="secondary"
+        type="button"
       >
-        ↶ Undo
+        Undo
       </button>
 
       <button
         id="redoBtn"
         class="secondary"
+        type="button"
       >
-        ↷ Redo
+        Redo
       </button>
 
       <button
         id="copyBtn"
         class="secondary"
+        type="button"
       >
         Copy
       </button>
@@ -1002,15 +809,17 @@ button:hover{
       <button
         id="downloadBtn"
         class="secondary"
+        type="button"
       >
         Download
       </button>
 
       <button
-        id="fullscreenBtn"
+        id="openBtn"
         class="secondary"
+        type="button"
       >
-        ⛶ Fullscreen
+        Open
       </button>
 
     </div>
@@ -1019,113 +828,12 @@ button:hover{
 
   <div class="preview-wrap">
 
-    <div
-      id="threeBadge"
-      class="three-badge"
-    >
-      ◈ Three.js / 3D Experience
-    </div>
-
-    <div class="preview-stage">
-
-      <iframe
-        id="previewFrame"
-        class="preview-frame smooth"
-        title="SPDP AI Live Preview"
-        sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-      ></iframe>
-
-    </div>
-
-  </div>
-
-  <div
-    id="editorPanel"
-    class="editor-panel"
-  >
-
-    <div
-      id="selectedInfo"
-      class="selected-info"
-    >
-      Click an element inside the preview to select it.
-    </div>
-
-    <div class="editor-grid">
-
-      <div class="editor-field">
-
-        <label>Text</label>
-
-        <input
-          id="editText"
-          type="text"
-          placeholder="Element text"
-        >
-
-      </div>
-
-      <div class="editor-field">
-
-        <label>Font Size</label>
-
-        <input
-          id="editFontSize"
-          type="text"
-          placeholder="e.g. 32px"
-        >
-
-      </div>
-
-      <div class="editor-field">
-
-        <label>Color</label>
-
-        <input
-          id="editColor"
-          type="text"
-          placeholder="#ffffff"
-        >
-
-      </div>
-
-      <div class="editor-field">
-
-        <label>Background</label>
-
-        <input
-          id="editBackground"
-          type="text"
-          placeholder="#111111"
-        >
-
-      </div>
-
-      <div class="editor-field">
-
-        <label>Border Radius</label>
-
-        <input
-          id="editRadius"
-          type="text"
-          placeholder="16px"
-        >
-
-      </div>
-
-      <div class="editor-field">
-
-        <label>Padding</label>
-
-        <input
-          id="editPadding"
-          type="text"
-          placeholder="20px"
-        >
-
-      </div>
-
-    </div>
+    <iframe
+      id="previewFrame"
+      class="preview-frame"
+      title="SPDP AI Live Preview"
+      sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+    ></iframe>
 
   </div>
 
@@ -1143,6 +851,7 @@ button:hover{
       <button
         id="codeCopyBtn"
         class="secondary"
+        type="button"
       >
         Copy Code
       </button>
@@ -1177,30 +886,39 @@ button:hover{
     >
 
       <div class="msg ai">
+
         Your generated website will stay here.
+
         Ask me to change anything.
 
         Example:
-        “Make the hero more premium and add animated particles.”
+
+        "Make the hero more premium and add animated particles."
+
       </div>
 
     </div>
 
     <div class="chat-input">
 
-      <textarea
-        id="editPrompt"
-        placeholder="Tell AI what to change in the current website..."
-      ></textarea>
+      <div class="edit-wrap">
 
-      <button
-        id="editMicBtn"
-        class="secondary"
-        type="button"
-        title="Voice edit"
-      >
-        🎤
-      </button>
+        <textarea
+          id="editPrompt"
+          class="edit-prompt"
+          placeholder="Tell AI what to change..."
+        ></textarea>
+
+        <button
+          id="editMic"
+          class="edit-mic"
+          type="button"
+          title="Speak edit"
+        >
+          🎙️
+        </button>
+
+      </div>
 
       <button
         id="editBtn"
@@ -1220,33 +938,41 @@ button:hover{
 
   <article class="feature">
 
-    <h3>🎤 Speak Naturally</h3>
+    <h3>
+      Complete Websites
+    </h3>
 
     <p>
-      Use your microphone and describe your idea
-      naturally instead of typing everything.
+      Generate responsive landing pages,
+      portfolios, business sites and long-form
+      experiences.
     </p>
 
   </article>
 
   <article class="feature">
 
-    <h3>◈ Real 3D</h3>
+    <h3>
+      Real 3D
+    </h3>
 
     <p>
-      Three.js websites and games can be previewed
-      inside the live builder.
+      Generate real Three.js scenes with
+      lighting, cameras, materials,
+      animation and interaction.
     </p>
 
   </article>
 
   <article class="feature">
 
-    <h3>✦ Visual + AI Edit</h3>
+    <h3>
+      AI Editing
+    </h3>
 
     <p>
-      Select elements visually or tell the AI what
-      you want changed through Sub-chat.
+      Generate once and keep editing the
+      same website through the AI sub-chat.
     </p>
 
   </article>
@@ -1260,27 +986,22 @@ button:hover{
 </div>
 </main>
 
-<div
-  id="toast"
-  class="toast"
-></div>
-
 <script>
 
-/* =========================================================
-   CONFIG
-========================================================= */
+/* =====================================================
+   WORKER
+===================================================== */
 
 const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
 
-/* =========================================================
-   DOM
-========================================================= */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-const $ = id =>
-  document.getElementById(id);
+const $ =
+  id => document.getElementById(id);
 
 const promptInput =
   $("prompt");
@@ -1300,11 +1021,8 @@ const clearBtn =
 const micBtn =
   $("micBtn");
 
-const editMicBtn =
-  $("editMicBtn");
-
-const voiceStatus =
-  $("voiceStatus");
+const editMic =
+  $("editMic");
 
 const message =
   $("message");
@@ -1327,22 +1045,13 @@ const code =
 const codePanel =
   $("codePanel");
 
-const editorPanel =
-  $("editorPanel");
-
 const messages =
   $("messages");
 
-const threeBadge =
-  $("threeBadge");
 
-const toast =
-  $("toast");
-
-
-/* =========================================================
+/* =====================================================
    STATE
-========================================================= */
+===================================================== */
 
 let currentHTML = "";
 
@@ -1350,60 +1059,47 @@ let undoStack = [];
 
 let redoStack = [];
 
-let selectedElement = null;
-
 let recognition = null;
 
-let activeVoiceTarget = "prompt";
-
-let smoothMode = true;
+let activeVoiceTarget = null;
 
 
-/* =========================================================
-   BASIC UI
-========================================================= */
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 function showMessage(text){
 
-  message.textContent = text;
+  message.textContent =
+    text;
 
-  message.classList.add("show");
+  message.classList.add(
+    "show"
+  );
 }
-
 
 function hideMessage(){
 
-  message.textContent = "";
+  message.textContent =
+    "";
 
-  message.classList.remove("show");
-}
-
-
-function showToast(text){
-
-  toast.textContent = text;
-
-  toast.classList.add("show");
-
-  clearTimeout(
-    showToast.timer
+  message.classList.remove(
+    "show"
   );
-
-  showToast.timer =
-    setTimeout(
-      function(){
-        toast.classList.remove("show");
-      },
-      1800
-    );
 }
 
+
+/* =====================================================
+   LOADING
+===================================================== */
 
 function setGenerating(value){
 
-  generateBtn.disabled = value;
+  generateBtn.disabled =
+    value;
 
-  editBtn.disabled = value;
+  editBtn.disabled =
+    value;
 
   if(value){
 
@@ -1426,34 +1122,38 @@ function setGenerating(value){
 }
 
 
-/* =========================================================
+/* =====================================================
    HTML VALIDATION
-========================================================= */
+===================================================== */
 
 function validHTML(html){
 
-  if(typeof html !== "string"){
+  if(
+    typeof html !==
+    "string"
+  ){
     return false;
   }
 
-  const value =
+  const x =
     html.trim().toLowerCase();
 
   return (
-    value.startsWith(
+    x.startsWith(
       "<!doctype html"
     ) &&
-    value.includes("<html") &&
-    value.includes("<head") &&
-    value.includes("<body") &&
-    value.includes("</html>")
+    x.includes("<html") &&
+    x.includes("<head") &&
+    x.includes("<body") &&
+    x.includes("<script") &&
+    x.includes("</html>")
   );
 }
 
 
-/* =========================================================
-   HISTORY
-========================================================= */
+/* =====================================================
+   SAVE
+===================================================== */
 
 function saveState(){
 
@@ -1466,7 +1166,7 @@ function saveState(){
   );
 
   if(
-    undoStack.length > 40
+    undoStack.length > 30
   ){
     undoStack.shift();
   }
@@ -1475,264 +1175,17 @@ function saveState(){
 }
 
 
-/* =========================================================
-   3D DETECTION
-========================================================= */
-
-function detectThree(html){
-
-  const lower =
-    html.toLowerCase();
-
-  return (
-    lower.includes("three.min.js") ||
-    lower.includes("three.module.js") ||
-    lower.includes("new three.") ||
-    lower.includes("three.scene") ||
-    lower.includes("webglrenderer")
-  );
-}
-
-
-function update3DBadge(){
-
-  if(
-    detectThree(currentHTML)
-  ){
-
-    threeBadge.classList.add(
-      "show"
-    );
-
-    threeBtn.classList.add(
-      "active"
-    );
-
-  }else{
-
-    threeBadge.classList.remove(
-      "show"
-    );
-
-    threeBtn.classList.remove(
-      "active"
-    );
-  }
-}
-
-
-/* =========================================================
-   INJECT VISUAL EDITOR
-========================================================= */
-
-function injectEditor(html){
-
-  const marker =
-    "</head>";
-
-  const lower =
-    html.toLowerCase();
-
-  const position =
-    lower.lastIndexOf(
-      marker
-    );
-
-  if(position === -1){
-    return html;
-  }
-
-  const script = `
-<script>
-(function(){
-
-  var selected = null;
-
-  function send(type,data){
-
-    try{
-
-      parent.postMessage({
-        source:"SPDP_AI_EDITOR",
-        type:type,
-        data:data || {}
-      },"*");
-
-    }catch(e){}
-
-  }
-
-  document.addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target.closest &&
-        event.target.closest(
-          "[data-spdp-ignore]"
-        )
-      ){
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if(selected){
-        selected.removeAttribute(
-          "data-spdp-selected"
-        );
-
-        selected.style.outline =
-          selected.dataset.spdpOldOutline || "";
-      }
-
-      selected =
-        event.target;
-
-      selected.dataset.spdpOldOutline =
-        selected.style.outline || "";
-
-      selected.setAttribute(
-        "data-spdp-selected",
-        "true"
-      );
-
-      selected.style.outline =
-        "2px solid #4f7cff";
-
-      var computed =
-        window.getComputedStyle(
-          selected
-        );
-
-      send(
-        "select",
-        {
-          tag:selected.tagName,
-          text:selected.innerText || "",
-          fontSize:computed.fontSize,
-          color:computed.color,
-          background:computed.backgroundColor,
-          radius:computed.borderRadius,
-          padding:computed.padding
-        }
-      );
-
-    },
-    true
-  );
-
-  window.addEventListener(
-    "message",
-    function(event){
-
-      var data =
-        event.data;
-
-      if(
-        !data ||
-        data.source !==
-          "SPDP_AI_EDITOR"
-      ){
-        return;
-      }
-
-      if(
-        data.type ===
-        "apply-style"
-      ){
-
-        if(!selected){
-          return;
-        }
-
-        var changes =
-          data.changes || {};
-
-        if(
-          changes.text !== undefined &&
-          changes.text !== ""
-        ){
-          selected.innerText =
-            changes.text;
-        }
-
-        if(changes.fontSize){
-          selected.style.fontSize =
-            changes.fontSize;
-        }
-
-        if(changes.color){
-          selected.style.color =
-            changes.color;
-        }
-
-        if(changes.background){
-          selected.style.background =
-            changes.background;
-        }
-
-        if(changes.radius){
-          selected.style.borderRadius =
-            changes.radius;
-        }
-
-        if(changes.padding){
-          selected.style.padding =
-            changes.padding;
-        }
-
-        send(
-          "changed",
-          {}
-        );
-      }
-
-    }
-  );
-
-})();
-<\/script>
-`;
-
-  return (
-    html.slice(
-      0,
-      position
-    ) +
-    script +
-    html.slice(position)
-  );
-}
-
-
-/* =========================================================
+/* =====================================================
    RENDER
-========================================================= */
+===================================================== */
 
-function renderHTML(
-  html,
-  addHistory
-){
-
-  if(
-    addHistory &&
-    currentHTML
-  ){
-    saveState();
-  }
+function renderHTML(html){
 
   currentHTML =
     html.trim();
 
-  const editorHTML =
-    injectEditor(
-      currentHTML
-    );
-
   previewFrame.srcdoc =
-    editorHTML;
+    currentHTML;
 
   code.value =
     currentHTML;
@@ -1745,18 +1198,14 @@ function renderHTML(
     "spdp_current_html",
     currentHTML
   );
-
-  update3DBadge();
 }
 
 
-/* =========================================================
-   WORKER
-========================================================= */
+/* =====================================================
+   WORKER CALL
+===================================================== */
 
-async function callWorker(
-  payload
-){
+async function callWorker(payload){
 
   const response =
     await fetch(
@@ -1786,20 +1235,19 @@ async function callWorker(
     data =
       JSON.parse(raw);
 
-  }catch(error){
+  }catch{
 
     throw new Error(
-      "Worker returned invalid JSON."
+      "Worker returned invalid JSON. Response: " +
+      raw.substring(0,500)
     );
   }
 
   if(!response.ok){
 
     throw new Error(
-      data &&
-      data.error
-        ? data.error
-        : "Worker request failed."
+      data?.error ||
+      "Worker request failed."
     );
   }
 
@@ -1810,15 +1258,15 @@ async function callWorker(
   ){
 
     throw new Error(
-      data &&
-      data.error
-        ? data.error
-        : "AI did not return valid HTML."
+      data?.error ||
+      "AI did not return valid HTML."
     );
   }
 
   if(
-    !validHTML(data.html)
+    !validHTML(
+      data.html
+    )
   ){
 
     throw new Error(
@@ -1830,116 +1278,9 @@ async function callWorker(
 }
 
 
-/* =========================================================
-   INTENT DETECTION
-========================================================= */
-
-function looksLikeWebsiteRequest(
-  text
-){
-
-  const x =
-    text.toLowerCase();
-
-  const words = [
-
-    "website",
-    "web site",
-    "web app",
-    "webapp",
-    "landing page",
-    "portfolio",
-    "dashboard",
-    "application",
-    "app",
-    "game",
-    "gaming",
-    "3d",
-    "three.js",
-    "threejs",
-    "page",
-    "site",
-    "shop",
-    "store",
-    "blog",
-    "saas",
-    "builder",
-    "homepage",
-    "home page",
-
-    "വെബ്സൈറ്റ്",
-    "വെബ്‌സൈറ്റ്",
-    "സൈറ്റ്",
-    "വെബ്",
-    "ആപ്പ്",
-    "ഗെയിം"
-
-  ];
-
-  return words.some(
-    function(word){
-      return x.includes(word);
-    }
-  );
-}
-
-
-/* =========================================================
-   CASUAL RESPONSE
-========================================================= */
-
-function handleCasualInput(
-  text
-){
-
-  const x =
-    text.toLowerCase().trim();
-
-  if(
-    x === "hi" ||
-    x === "hai" ||
-    x === "hello" ||
-    x === "hey"
-  ){
-
-    addMessage(
-      "user",
-      text
-    );
-
-    addMessage(
-      "ai",
-      "Hey! Tell me what you want to build. You can type it or use the 🎤 microphone."
-    );
-
-    return true;
-  }
-
-  if(
-    x.includes("help") ||
-    x.includes("what can you do")
-  ){
-
-    addMessage(
-      "user",
-      text
-    );
-
-    addMessage(
-      "ai",
-      "I can build websites, web apps and browser games. You can describe your idea normally, then I can generate it and keep editing the same project."
-    );
-
-    return true;
-  }
-
-  return false;
-}
-
-
-/* =========================================================
+/* =====================================================
    GENERATE
-========================================================= */
+===================================================== */
 
 async function generateWebsite(){
 
@@ -1949,7 +1290,7 @@ async function generateWebsite(){
   if(!prompt){
 
     showMessage(
-      "Tell me what you want to build first."
+      "Please type or speak what you want to build."
     );
 
     promptInput.focus();
@@ -1957,25 +1298,25 @@ async function generateWebsite(){
     return;
   }
 
-  if(
-    !looksLikeWebsiteRequest(
-      prompt
-    )
-  ){
+  hideMessage();
 
-    if(
-      handleCasualInput(
+  setGenerating(true);
+
+  try{
+
+    const html =
+      await callWorker({
+        action:"create",
         prompt
-      )
-    ){
+      });
 
-      return;
-    }
+    undoStack = [];
 
-    $("conversation")
-      .classList.add(
-        "show"
-      );
+    redoStack = [];
+
+    renderHTML(
+      html
+    );
 
     addMessage(
       "user",
@@ -1984,46 +1325,7 @@ async function generateWebsite(){
 
     addMessage(
       "ai",
-      "Got it. What are you trying to build — a website, web app, or game?"
-    );
-
-    return;
-  }
-
-  hideMessage();
-
-  $("conversation")
-    .classList.remove(
-      "show"
-    );
-
-  setGenerating(true);
-
-  addMessage(
-    "user",
-    prompt
-  );
-
-  try{
-
-    const html =
-      await callWorker({
-        action:"create",
-        prompt:prompt
-      });
-
-    undoStack = [];
-
-    redoStack = [];
-
-    renderHTML(
-      html,
-      false
-    );
-
-    addMessage(
-      "ai",
-      "Done. Your website is live in the preview. You can visually edit it or use AI Sub-chat."
+      "Website generated successfully. Ask me to modify it using AI Sub-chat."
     );
 
     workspace.scrollIntoView({
@@ -2034,23 +1336,16 @@ async function generateWebsite(){
   }catch(error){
 
     console.error(
-      "SPDP AI Generate:",
+      "SPDP AI:",
       error
     );
 
     showMessage(
       "❌ " +
       (
-        error &&
-        error.message
-          ? error.message
-          : "Website generation failed."
+        error?.message ||
+        "Website generation failed."
       )
-    );
-
-    addMessage(
-      "ai",
-      "I couldn't generate the website. Check the Worker connection and try again."
     );
 
   }finally{
@@ -2060,9 +1355,9 @@ async function generateWebsite(){
 }
 
 
-/* =========================================================
-   AI EDIT
-========================================================= */
+/* =====================================================
+   EDIT
+===================================================== */
 
 async function editWebsite(){
 
@@ -2094,35 +1389,30 @@ async function editWebsite(){
     instruction
   );
 
-  editPrompt.value = "";
+  editPrompt.value =
+    "";
+
+  saveState();
 
   try{
-
-    saveState();
 
     const html =
       await callWorker({
         action:"edit",
         prompt:instruction,
-        currentHTML:currentHTML
+        currentHTML
       });
 
     renderHTML(
-      html,
-      false
+      html
     );
 
     addMessage(
       "ai",
-      "Done. I updated the current website."
+      "Done. I updated your current website."
     );
 
   }catch(error){
-
-    console.error(
-      "SPDP AI Edit:",
-      error
-    );
 
     if(
       undoStack.length
@@ -2130,19 +1420,22 @@ async function editWebsite(){
       undoStack.pop();
     }
 
+    console.error(
+      "EDIT ERROR:",
+      error
+    );
+
     showMessage(
       "❌ " +
       (
-        error &&
-        error.message
-          ? error.message
-          : "Edit failed."
+        error?.message ||
+        "Edit failed."
       )
     );
 
     addMessage(
       "ai",
-      "I couldn't apply that edit. Try describing the change more specifically."
+      "I couldn't apply that edit."
     );
 
   }finally{
@@ -2152,9 +1445,9 @@ async function editWebsite(){
 }
 
 
-/* =========================================================
-   CHAT
-========================================================= */
+/* =====================================================
+   CHAT MESSAGE
+===================================================== */
 
 function addMessage(
   type,
@@ -2181,13 +1474,11 @@ function addMessage(
 }
 
 
-/* =========================================================
+/* =====================================================
    COPY
-========================================================= */
+===================================================== */
 
-async function copyText(
-  text
-){
+async function copyText(text){
 
   if(!text){
     return;
@@ -2195,14 +1486,20 @@ async function copyText(
 
   try{
 
-    await navigator.clipboard
-      .writeText(text);
-
-    showToast(
-      "✓ Copied"
+    await navigator.clipboard.writeText(
+      text
     );
 
-  }catch(error){
+    showMessage(
+      "✓ Copied to clipboard."
+    );
+
+    setTimeout(
+      hideMessage,
+      1800
+    );
+
+  }catch{
 
     showMessage(
       "Copy failed. Please copy manually."
@@ -2211,9 +1508,9 @@ async function copyText(
 }
 
 
-/* =========================================================
+/* =====================================================
    DOWNLOAD
-========================================================= */
+===================================================== */
 
 function downloadHTML(){
 
@@ -2225,7 +1522,8 @@ function downloadHTML(){
     new Blob(
       [currentHTML],
       {
-        type:"text/html"
+        type:
+          "text/html"
       }
     );
 
@@ -2254,23 +1552,18 @@ function downloadHTML(){
   a.remove();
 
   setTimeout(
-    function(){
+    () =>
       URL.revokeObjectURL(
         url
-      );
-    },
+      ),
     1000
-  );
-
-  showToast(
-    "✓ HTML downloaded"
   );
 }
 
 
-/* =========================================================
+/* =====================================================
    OPEN
-========================================================= */
+===================================================== */
 
 function openHTML(){
 
@@ -2282,7 +1575,8 @@ function openHTML(){
     new Blob(
       [currentHTML],
       {
-        type:"text/html"
+        type:
+          "text/html"
       }
     );
 
@@ -2297,532 +1591,261 @@ function openHTML(){
   );
 
   setTimeout(
-    function(){
+    () =>
       URL.revokeObjectURL(
         url
-      );
-    },
+      ),
     60000
   );
 }
 
 
-/* =========================================================
+/* =====================================================
+   GENERATE BUTTON
+===================================================== */
+
+generateBtn.addEventListener(
+  "click",
+  generateWebsite
+);
+
+
+/* =====================================================
+   EDIT BUTTON
+===================================================== */
+
+editBtn.addEventListener(
+  "click",
+  editWebsite
+);
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+clearBtn.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !confirm(
+        "Clear the current project?"
+      )
+    ){
+      return;
+    }
+
+    currentHTML =
+      "";
+
+    undoStack =
+      [];
+
+    redoStack =
+      [];
+
+    promptInput.value =
+      "";
+
+    editPrompt.value =
+      "";
+
+    code.value =
+      "";
+
+    previewFrame.srcdoc =
+      "";
+
+    workspace.classList.remove(
+      "show"
+    );
+
+    localStorage.removeItem(
+      "spdp_current_html"
+    );
+
+    messages.innerHTML = `
+      <div class="msg ai">
+        Your generated website will stay here.
+        Ask me to modify it.
+      </div>
+    `;
+
+    hideMessage();
+
+    promptInput.focus();
+  }
+);
+
+
+/* =====================================================
+   CODE
+===================================================== */
+
+$("codeBtn").addEventListener(
+  "click",
+  () => {
+
+    codePanel.classList.toggle(
+      "show"
+    );
+  }
+);
+
+
+/* =====================================================
+   COPY BUTTONS
+===================================================== */
+
+$("copyBtn").addEventListener(
+  "click",
+  () => {
+    copyText(
+      currentHTML
+    );
+  }
+);
+
+$("codeCopyBtn").addEventListener(
+  "click",
+  () => {
+    copyText(
+      code.value
+    );
+  }
+);
+
+
+/* =====================================================
+   DOWNLOAD
+===================================================== */
+
+$("downloadBtn").addEventListener(
+  "click",
+  downloadHTML
+);
+
+
+/* =====================================================
+   OPEN
+===================================================== */
+
+$("openBtn").addEventListener(
+  "click",
+  openHTML
+);
+
+
+/* =====================================================
+   UNDO
+===================================================== */
+
+$("undoBtn").addEventListener(
+  "click",
+  () => {
+
+    if(
+      !undoStack.length
+    ){
+      return;
+    }
+
+    redoStack.push(
+      currentHTML
+    );
+
+    const previous =
+      undoStack.pop();
+
+    renderHTML(
+      previous
+    );
+  }
+);
+
+
+/* =====================================================
+   REDO
+===================================================== */
+
+$("redoBtn").addEventListener(
+  "click",
+  () => {
+
+    if(
+      !redoStack.length
+    ){
+      return;
+    }
+
+    undoStack.push(
+      currentHTML
+    );
+
+    const next =
+      redoStack.pop();
+
+    renderHTML(
+      next
+    );
+  }
+);
+
+
+/* =====================================================
    DEVICE PREVIEW
-========================================================= */
+===================================================== */
 
 document
   .querySelectorAll(
     ".device"
   )
   .forEach(
-    function(button){
+    button => {
 
       button.addEventListener(
         "click",
-        function(){
+        () => {
 
           document
             .querySelectorAll(
               ".device"
             )
             .forEach(
-              function(item){
-                item.classList.remove(
+              x =>
+                x.classList.remove(
                   "active"
-                );
-              }
+                )
             );
 
           button.classList.add(
             "active"
           );
 
-          previewFrame.style.width =
+          const width =
             button.dataset.width;
 
-          if(
-            button.dataset.width ===
-            "100%"
-          ){
+          previewFrame.style.width =
+            width;
 
-            previewFrame.style.margin =
-              "0";
-
-          }else{
-
-            previewFrame.style.margin =
-              "0 auto";
-          }
+          previewFrame.style.margin =
+            width === "100%"
+              ? "0"
+              : "0 auto";
         }
       );
     }
   );
 
 
-/* =========================================================
-   SMOOTH PREVIEW
-========================================================= */
-
-$("smoothBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      smoothMode =
-        !smoothMode;
-
-      previewFrame.classList.toggle(
-        "smooth",
-        smoothMode
-      );
-
-      this.classList.toggle(
-        "active",
-        smoothMode
-      );
-
-      showToast(
-        smoothMode
-          ? "✨ Smooth preview enabled"
-          : "Smooth preview disabled"
-      );
-    }
-  );
-
-
-/* =========================================================
-   3D MODE
-========================================================= */
-
-$("threeBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      if(
-        detectThree(
-          currentHTML
-        )
-      ){
-
-        showToast(
-          "◈ 3D experience detected"
-        );
-
-        previewFrame.classList.add(
-          "smooth"
-        );
-
-      }else{
-
-        showToast(
-          "No Three.js scene detected"
-        );
-      }
-    }
-  );
-
-
-/* =========================================================
-   CODE PANEL
-========================================================= */
-
-$("codeBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      codePanel.classList.toggle(
-        "show"
-      );
-    }
-  );
-
-
-$("copyBtn")
-  .addEventListener(
-    "click",
-    function(){
-      copyText(
-        currentHTML
-      );
-    }
-  );
-
-
-$("codeCopyBtn")
-  .addEventListener(
-    "click",
-    function(){
-      copyText(
-        code.value
-      );
-    }
-  );
-
-
-$("downloadBtn")
-  .addEventListener(
-    "click",
-    downloadHTML
-  );
-
-
-/* =========================================================
-   FULLSCREEN
-========================================================= */
-
-$("fullscreenBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      workspace.classList.toggle(
-        "fullscreen"
-      );
-
-      this.textContent =
-        workspace.classList.contains(
-          "fullscreen"
-        )
-          ? "✕ Exit Fullscreen"
-          : "⛶ Fullscreen";
-    }
-  );
-
-
-/* =========================================================
-   VISUAL EDITOR
-========================================================= */
-
-$("visualBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      editorPanel.classList.toggle(
-        "show"
-      );
-
-      this.classList.toggle(
-        "active"
-      );
-
-      if(
-        editorPanel.classList.contains(
-          "show"
-        )
-      ){
-
-        showToast(
-          "Click an element in the preview"
-        );
-      }
-    }
-  );
-
-
-/* =========================================================
-   RECEIVE PREVIEW EVENTS
-========================================================= */
-
-window.addEventListener(
-  "message",
-  function(event){
-
-    const data =
-      event.data;
-
-    if(
-      !data ||
-      data.source !==
-        "SPDP_AI_EDITOR"
-    ){
-      return;
-    }
-
-    if(
-      data.type ===
-      "select"
-    ){
-
-      selectedElement =
-        true;
-
-      const info =
-        data.data || {};
-
-      $("selectedInfo").innerHTML =
-        "Selected: <strong>" +
-        (
-          info.tag ||
-          "ELEMENT"
-        ) +
-        "</strong>";
-
-      $("editText").value =
-        info.text || "";
-
-      $("editFontSize").value =
-        info.fontSize || "";
-
-      $("editColor").value =
-        info.color || "";
-
-      $("editBackground").value =
-        info.background || "";
-
-      $("editRadius").value =
-        info.radius || "";
-
-      $("editPadding").value =
-        info.padding || "";
-    }
-
-    if(
-      data.type ===
-      "changed"
-    ){
-
-      syncPreviewToCode();
-
-      showToast(
-        "✓ Visual change applied"
-      );
-    }
-  }
-);
-
-
-/* =========================================================
-   APPLY VISUAL EDIT
-========================================================= */
-
-function applyVisualChanges(){
-
-  if(!selectedElement){
-
-    showToast(
-      "Select an element first"
-    );
-
-    return;
-  }
-
-  const changes = {
-
-    text:
-      $("editText").value,
-
-    fontSize:
-      $("editFontSize").value,
-
-    color:
-      $("editColor").value,
-
-    background:
-      $("editBackground").value,
-
-    radius:
-      $("editRadius").value,
-
-    padding:
-      $("editPadding").value
-  };
-
-  previewFrame.contentWindow.postMessage(
-    {
-      source:
-        "SPDP_AI_EDITOR",
-
-      type:
-        "apply-style",
-
-      changes:
-        changes
-    },
-    "*"
-  );
-}
-
-
-/* =========================================================
-   VISUAL INPUT EVENTS
-========================================================= */
-
-[
-  "editText",
-  "editFontSize",
-  "editColor",
-  "editBackground",
-  "editRadius",
-  "editPadding"
-]
-.forEach(
-  function(id){
-
-    $(id).addEventListener(
-      "change",
-      applyVisualChanges
-    );
-  }
-);
-
-
-/* =========================================================
-   SYNC PREVIEW → CODE
-========================================================= */
-
-function syncPreviewToCode(){
-
-  try{
-
-    const doc =
-      previewFrame.contentDocument;
-
-    if(!doc){
-      return;
-    }
-
-    const clone =
-      doc.documentElement.cloneNode(
-        true
-      );
-
-    clone
-      .querySelectorAll(
-        "[data-spdp-selected]"
-      )
-      .forEach(
-        function(el){
-
-          el.removeAttribute(
-            "data-spdp-selected"
-          );
-
-          el.style.outline =
-            el.dataset.spdpOldOutline || "";
-
-          delete el.dataset.spdpOldOutline;
-        }
-      );
-
-    const result =
-      "<!DOCTYPE html>\n" +
-      clone.outerHTML;
-
-    if(
-      validHTML(result)
-    ){
-
-      currentHTML =
-        result;
-
-      code.value =
-        currentHTML;
-
-      localStorage.setItem(
-        "spdp_current_html",
-        currentHTML
-      );
-    }
-
-  }catch(error){
-
-    console.warn(
-      "Could not sync visual edit:",
-      error
-    );
-  }
-}
-
-
-/* =========================================================
-   UNDO
-========================================================= */
-
-$("undoBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      if(
-        !undoStack.length
-      ){
-
-        showToast(
-          "Nothing to undo"
-        );
-
-        return;
-      }
-
-      redoStack.push(
-        currentHTML
-      );
-
-      const previous =
-        undoStack.pop();
-
-      renderHTML(
-        previous,
-        false
-      );
-
-      showToast(
-        "↶ Undo"
-      );
-    }
-  );
-
-
-/* =========================================================
-   REDO
-========================================================= */
-
-$("redoBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      if(
-        !redoStack.length
-      ){
-
-        showToast(
-          "Nothing to redo"
-        );
-
-        return;
-      }
-
-      undoStack.push(
-        currentHTML
-      );
-
-      const next =
-        redoStack.pop();
-
-      renderHTML(
-        next,
-        false
-      );
-
-      showToast(
-        "↷ Redo"
-      );
-    }
-  );
-
-
-/* =========================================================
-   CODE MANUAL EDIT
-========================================================= */
+/* =====================================================
+   CODE EDITOR
+===================================================== */
 
 code.addEventListener(
   "input",
-  function(){
+  () => {
 
     const value =
       code.value.trim();
@@ -2835,85 +1858,24 @@ code.addEventListener(
         value;
 
       previewFrame.srcdoc =
-        injectEditor(
-          currentHTML
-        );
+        currentHTML;
 
       localStorage.setItem(
         "spdp_current_html",
         currentHTML
       );
-
-      update3DBadge();
     }
   }
 );
 
 
-/* =========================================================
-   CLEAR
-========================================================= */
-
-clearBtn.addEventListener(
-  "click",
-  function(){
-
-    if(
-      !confirm(
-        "Clear the current project?"
-      )
-    ){
-      return;
-    }
-
-    currentHTML = "";
-
-    undoStack = [];
-
-    redoStack = [];
-
-    selectedElement = null;
-
-    promptInput.value = "";
-
-    editPrompt.value = "";
-
-    code.value = "";
-
-    previewFrame.srcdoc = "";
-
-    workspace.classList.remove(
-      "show"
-    );
-
-    editorPanel.classList.remove(
-      "show"
-    );
-
-    codePanel.classList.remove(
-      "show"
-    );
-
-    localStorage.removeItem(
-      "spdp_current_html"
-    );
-
-    hideMessage();
-
-    showToast(
-      "Project cleared"
-    );
-  }
-);
-
-
-/* =========================================================
-   KEYBOARD SHORTCUTS
-========================================================= */
+/* =====================================================
+   KEYBOARD
+===================================================== */
 
 promptInput.addEventListener(
   "keydown",
-  function(event){
+  event => {
 
     if(
       (event.ctrlKey ||
@@ -2928,10 +1890,9 @@ promptInput.addEventListener(
   }
 );
 
-
 editPrompt.addEventListener(
   "keydown",
-  function(event){
+  event => {
 
     if(
       (event.ctrlKey ||
@@ -2947,74 +1908,23 @@ editPrompt.addEventListener(
 );
 
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+/* =====================================================
+   VOICE RECOGNITION
+===================================================== */
 
-generateBtn.addEventListener(
-  "click",
-  generateWebsite
-);
-
-
-editBtn.addEventListener(
-  "click",
-  editWebsite
-);
-
-
-/* =========================================================
-   QUICK CONVERSATION
-========================================================= */
-
-document
-  .querySelectorAll(
-    ".quick"
-  )
-  .forEach(
-    function(button){
-
-      button.addEventListener(
-        "click",
-        function(){
-
-          promptInput.value =
-            button.dataset.prompt;
-
-          $("conversation")
-            .classList.remove(
-              "show"
-            );
-
-          promptInput.focus();
-        }
-      );
-    }
-  );
-
-
-/* =========================================================
-   SPEECH RECOGNITION
-========================================================= */
-
-function setupSpeech(){
+function setupVoice(){
 
   const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
-  if(
-    !SpeechRecognition
-  ){
-
-    micBtn.disabled =
-      true;
-
-    editMicBtn.disabled =
-      true;
+  if(!SpeechRecognition){
 
     micBtn.title =
-      "Speech recognition is not supported in this browser.";
+      "Voice input is not supported by this browser";
+
+    editMic.title =
+      "Voice input is not supported by this browser";
 
     return;
   }
@@ -3029,17 +1939,10 @@ function setupSpeech(){
     true;
 
   recognition.lang =
-    "en-IN";
+    "en-US";
 
   recognition.onstart =
-    function(){
-
-      voiceStatus.classList.add(
-        "show"
-      );
-
-      voiceStatus.textContent =
-        "🎤 Listening... speak naturally.";
+    () => {
 
       if(
         activeVoiceTarget ===
@@ -3052,17 +1955,17 @@ function setupSpeech(){
 
       }else{
 
-        editMicBtn.classList.add(
+        editMic.classList.add(
           "recording"
         );
       }
     };
 
-
   recognition.onresult =
-    function(event){
+    event => {
 
-      let transcript = "";
+      let finalText =
+        "";
 
       for(
         let i =
@@ -3072,95 +1975,84 @@ function setupSpeech(){
         i++
       ){
 
-        transcript +=
+        const transcript =
           event.results[i][0]
             .transcript;
+
+        if(
+          event.results[i].isFinal
+        ){
+          finalText += transcript;
+        }
       }
 
-      transcript =
-        transcript.trim();
+      if(!finalText){
+        return;
+      }
 
       if(
         activeVoiceTarget ===
         "prompt"
       ){
 
+        const old =
+          promptInput.value.trim();
+
         promptInput.value =
-          transcript;
+          old
+            ? old + " " + finalText
+            : finalText;
 
       }else{
 
+        const old =
+          editPrompt.value.trim();
+
         editPrompt.value =
-          transcript;
+          old
+            ? old + " " + finalText
+            : finalText;
       }
     };
 
-
   recognition.onerror =
-    function(event){
+    event => {
 
-      console.warn(
-        "Speech error:",
+      console.error(
+        "VOICE ERROR:",
         event.error
       );
 
-      voiceStatus.textContent =
-        "Microphone error: " +
-        event.error;
+      if(
+        event.error ===
+        "not-allowed"
+      ){
 
-      setTimeout(
-        function(){
-          voiceStatus.classList.remove(
-            "show"
-          );
-        },
-        2200
-      );
+        showMessage(
+          "🎙️ Microphone permission was denied. Allow microphone access in your browser."
+        );
+      }
     };
 
-
   recognition.onend =
-    function(){
+    () => {
 
       micBtn.classList.remove(
         "recording"
       );
 
-      editMicBtn.classList.remove(
+      editMic.classList.remove(
         "recording"
       );
-
-      voiceStatus.classList.remove(
-        "show"
-      );
-
-      if(
-        activeVoiceTarget ===
-        "prompt"
-      ){
-
-        promptInput.focus();
-
-      }else{
-
-        editPrompt.focus();
-      }
     };
 }
 
-
-/* =========================================================
-   START VOICE
-========================================================= */
-
-function startVoice(
-  target
-){
+function startVoice(target){
 
   if(!recognition){
 
     showMessage(
-      "Voice input is not supported in this browser. Use Chrome or Edge."
+      "🎙️ Voice input is not supported in this browser. Try Chrome or Edge."
     );
 
     return;
@@ -3175,29 +2067,20 @@ function startVoice(
 
   }catch(error){
 
-    try{
-
-      recognition.stop();
-
-    }catch(e){}
-
-    setTimeout(
-      function(){
-
-        try{
-          recognition.start();
-        }catch(e){}
-
-      },
-      200
+    console.log(
+      "Voice already active."
     );
   }
 }
 
 
+/* =====================================================
+   MIC BUTTONS
+===================================================== */
+
 micBtn.addEventListener(
   "click",
-  function(){
+  () => {
 
     startVoice(
       "prompt"
@@ -3205,10 +2088,9 @@ micBtn.addEventListener(
   }
 );
 
-
-editMicBtn.addEventListener(
+editMic.addEventListener(
   "click",
-  function(){
+  () => {
 
     startVoice(
       "edit"
@@ -3217,15 +2099,15 @@ editMicBtn.addEventListener(
 );
 
 
-/* =========================================================
+/* =====================================================
    LOAD SAVED PROJECT
-========================================================= */
+===================================================== */
 
 window.addEventListener(
   "load",
-  function(){
+  () => {
 
-    setupSpeech();
+    setupVoice();
 
     const saved =
       localStorage.getItem(
@@ -3238,8 +2120,7 @@ window.addEventListener(
     ){
 
       renderHTML(
-        saved,
-        false
+        saved
       );
     }
   }
