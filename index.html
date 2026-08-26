@@ -1,10 +1,3060 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8"><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>SPDP AI — AI Website Builder</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(100,120,255,.13),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(255,255,255,.06),
+      transparent 25%
+    ),
+    #050505;
+
+  color:#fff;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+button,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.app{
+  min-height:100vh;
+  padding:20px;
+}
+
+.container{
+  width:min(1400px,100%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  min-height:62px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.07);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  font-weight:850;
+  font-size:20px;
+}
+
+.logo{
+  width:38px;
+  height:38px;
+
+  border-radius:11px;
+
+  display:grid;
+  place-items:center;
+
+  color:#000;
+
+  font-weight:950;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #777
+    );
+
+  box-shadow:
+    0 10px 35px
+    rgba(255,255,255,.1);
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  color:#777;
+
+  font-size:12px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#4ade80;
+
+  box-shadow:
+    0 0 14px #4ade80;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:55px 0 30px;
+}
+
+.badge{
+  display:inline-flex;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  border:1px solid #222;
+
+  background:#0c0c0c;
+
+  color:#999;
+
+  font-size:12px;
+}
+
+h1{
+  margin:22px 0 15px;
+
+  font-size:
+    clamp(
+      48px,
+      8vw,
+      92px
+    );
+
+  line-height:.9;
+
+  letter-spacing:-.075em;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff,
+      #666
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+}
+
+.hero-description{
+  max-width:720px;
+
+  margin:auto;
+
+  color:#858585;
+
+  line-height:1.7;
+}
+
+/* PROMPT PANEL */
+
+.panel{
+  margin-top:30px;
+
+  padding:16px;
+
+  border-radius:24px;
+
+  border:1px solid #202020;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.018)
+    );
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.45);
+
+  text-align:left;
+}
+
+.prompt-wrap{
+  position:relative;
+}
+
+textarea{
+  outline:none;
+}
+
+.prompt{
+  width:100%;
+
+  min-height:145px;
+
+  resize:vertical;
+
+  border:
+    1px solid #191919;
+
+  border-radius:17px;
+
+  background:#080808;
+
+  color:#fff;
+
+  padding:
+    18px
+    60px
+    18px
+    18px;
+
+  font-size:15px;
+
+  line-height:1.6;
+}
+
+.prompt:focus{
+  border-color:#3b3b3b;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(255,255,255,.025);
+}
+
+.prompt::placeholder{
+  color:#4d4d4d;
+}
+
+.mic{
+  position:absolute;
+
+  right:12px;
+  top:12px;
+
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  padding:0;
+
+  display:grid;
+  place-items:center;
+
+  background:#111;
+
+  border:
+    1px solid #292929;
+
+  color:#fff;
+
+  font-size:18px;
+}
+
+.mic:hover{
+  background:#191919;
+}
+
+.mic.recording{
+  background:#4b1111;
+
+  border-color:#7b2222;
+
+  animation:
+    pulseMic 1s infinite;
+}
+
+@keyframes pulseMic{
+
+  50%{
+    box-shadow:
+      0 0 0 8px
+      rgba(255,60,60,.08);
+  }
+
+}
+
+/* ACTIONS */
+
+.actions{
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:9px;
+
+  margin-top:11px;
+
+  flex-wrap:wrap;
+}
+
+button{
+  border:0;
+
+  border-radius:11px;
+
+  padding:11px 16px;
+
+  font-weight:750;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+button:hover{
+  transform:
+    translateY(-1px);
+}
+
+.primary{
+  background:#fff;
+  color:#000;
+}
+
+.primary:hover{
+  background:#e9e9e9;
+}
+
+.secondary{
+  background:#111;
+  color:#fff;
+
+  border:
+    1px solid #292929;
+}
+
+.secondary:hover{
+  background:#191919;
+}
+
+.message{
+  display:none;
+
+  margin-top:12px;
+
+  padding:13px 15px;
+
+  border-radius:12px;
+
+  border:
+    1px solid #292929;
+
+  background:#101010;
+
+  color:#aaa;
+
+  line-height:1.5;
+
+  white-space:pre-wrap;
+}
+
+.message.show{
+  display:block;
+}
+
+/* WORKSPACE */
+
+.workspace{
+  display:none;
+
+  margin-top:25px;
+
+  border:
+    1px solid #202020;
+
+  border-radius:22px;
+
+  background:#070707;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.45);
+}
+
+.workspace.show{
+  display:block;
+
+  animation:
+    workspaceIn .4s ease;
+}
+
+@keyframes workspaceIn{
+
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* TOOLBAR */
+
+.toolbar{
+  min-height:60px;
+
+  padding:10px 12px;
+
+  border-bottom:
+    1px solid #1d1d1d;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  background:#090909;
+}
+
+.toolbar-left,
+.toolbar-right{
+  display:flex;
+
+  gap:7px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+}
+
+.tool-title{
+  color:#777;
+
+  font-size:12px;
+
+  margin-right:7px;
+}
+
+.device.active{
+  background:#fff;
+  color:#000;
+}
+
+/* PREVIEW */
+
+.preview-wrap{
+  min-height:720px;
+
+  padding:12px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #111,
+      #030303 65%
+    );
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:flex-start;
+}
+
+.preview-frame{
+  width:100%;
+
+  height:700px;
+
+  display:block;
+
+  border:
+    1px solid #252525;
+
+  border-radius:15px;
+
+  background:#fff;
+
+  transition:
+    width .35s ease,
+    box-shadow .35s ease;
+
+  box-shadow:
+    0 20px 80px
+    rgba(0,0,0,.5);
+}
+
+/* CODE */
+
+.code-panel{
+  display:none;
+
+  border-top:
+    1px solid #202020;
+
+  background:#050505;
+}
+
+.code-panel.show{
+  display:block;
+}
+
+.code-head{
+  padding:12px 15px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid #1b1b1b;
+}
+
+.code{
+  width:100%;
+
+  height:500px;
+
+  resize:vertical;
+
+  border:0;
+
+  outline:0;
+
+  background:#020202;
+
+  color:#c4c9d0;
+
+  padding:18px;
+
+  font:
+    12px/1.6
+    Consolas,
+    Monaco,
+    monospace;
+}
+
+/* CHAT */
+
+.chat{
+  border-top:
+    1px solid #202020;
+
+  background:#080808;
+}
+
+.chat-head{
+  padding:15px;
+
+  border-bottom:
+    1px solid #1b1b1b;
+}
+
+.chat-head strong{
+  font-size:14px;
+}
+
+.chat-head span{
+  color:#666;
+
+  font-size:12px;
+
+  margin-left:8px;
+}
+
+.messages{
+  height:240px;
+
+  overflow-y:auto;
+
+  padding:15px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+}
+
+.msg{
+  max-width:85%;
+
+  padding:11px 13px;
+
+  border-radius:13px;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+  white-space:pre-wrap;
+}
+
+.msg.user{
+  align-self:flex-end;
+
+  color:#000;
+
+  background:#fff;
+}
+
+.msg.ai{
+  align-self:flex-start;
+
+  color:#aaa;
+
+  background:#111;
+
+  border:
+    1px solid #222;
+}
+
+.chat-input{
+  display:flex;
+
+  gap:8px;
+
+  padding:12px;
+
+  border-top:
+    1px solid #1a1a1a;
+}
+
+.edit-wrap{
+  flex:1;
+
+  position:relative;
+}
+
+.edit-prompt{
+  width:100%;
+
+  min-height:48px;
+
+  height:48px;
+
+  resize:none;
+
+  border:
+    1px solid #191919;
+
+  border-radius:12px;
+
+  background:#080808;
+
+  color:#fff;
+
+  padding:
+    12px
+    48px
+    12px
+    12px;
+}
+
+.edit-prompt:focus{
+  border-color:#3b3b3b;
+}
+
+.edit-mic{
+  position:absolute;
+
+  right:5px;
+  top:5px;
+
+  width:38px;
+  height:38px;
+
+  padding:0;
+
+  border-radius:9px;
+
+  background:#111;
+
+  color:#fff;
+
+  border:
+    1px solid #252525;
+}
+
+/* FEATURES */
+
+.features{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
+
+  gap:12px;
+
+  margin:35px 0;
+}
+
+.feature{
+  padding:22px;
+
+  border:
+    1px solid #1b1b1b;
+
+  border-radius:17px;
+
+  background:#090909;
+}
+
+.feature h3{
+  margin:0 0 8px;
+
+  font-size:15px;
+}
+
+.feature p{
+  margin:0;
+
+  color:#666;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
+
+/* LOADING */
+
+.loading{
+  display:none;
+
+  align-items:center;
+
+  gap:8px;
+}
+
+.loading.show{
+  display:inline-flex;
+}
+
+.spinner{
+  width:14px;
+  height:14px;
+
+  border:
+    2px solid #555;
+
+  border-top-color:#000;
+
+  border-radius:50%;
+
+  animation:
+    spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+footer{
+  text-align:center;
+
+  padding:35px;
+
+  color:#444;
+
+  font-size:12px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+
+  left:50%;
+
+  bottom:25px;
+
+  transform:
+    translate(-50%,20px);
+
+  padding:
+    11px
+    16px;
+
+  border:
+    1px solid #292929;
+
+  border-radius:12px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:13px;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+
+  z-index:99999;
+}
+
+.toast.show{
+  opacity:1;
+
+  transform:
+    translate(-50%,0);
+}
+
+/* MOBILE */
+
+@media(max-width:760px){
+
+  .app{
+    padding:12px;
+  }
+
+  header{
+    min-height:55px;
+  }
+
+  .status{
+    display:none;
+  }
+
+  .hero{
+    padding-top:40px;
+  }
+
+  h1{
+    font-size:
+      clamp(
+        48px,
+        15vw,
+        70px
+      );
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .preview-wrap{
+    min-height:610px;
+  }
+
+  .preview-frame{
+    height:590px;
+  }
+
+  .toolbar{
+    align-items:flex-start;
+  }
+
+  .chat-input{
+    flex-direction:column;
+  }
+
+  .chat-input button{
+    width:100%;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="app">
+
+<div class="container">
+
+<header>
+
+  <div class="brand">
+
+    <div class="logo">
+      S
+    </div>
+
+    <span>
+      SPDP AI
+    </span>
+
+  </div>
+
+  <div class="status">
+
+    <span class="dot"></span>
+
+    Builder Online
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="badge">
+    ✦ AI Website · App · Game Builder
+  </div>
+
+  <h1>
+    Build anything.
+  </h1>
+
+  <p class="hero-description">
+
+    Describe what you want.
+
+    Type it, speak naturally, or simply tell SPDP AI
+    what you are imagining.
+
+    Generate a complete website, app or game and
+    continue editing the same project with AI.
+
+  </p>
+
+
+  <div class="panel">
+
+    <div class="prompt-wrap">
+
+      <textarea
+        id="prompt"
+        class="prompt"
+        placeholder="Try: Make me a premium black 3D gaming website with Three.js, animated particles, pricing, games and a footer..."
+      ></textarea>
+
+
+      <button
+        id="micBtn"
+        class="mic"
+        type="button"
+        title="Speak your prompt"
+      >
+        🎙️
+      </button>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        id="clearBtn"
+        class="secondary"
+        type="button"
+      >
+        Clear
+      </button>
+
+
+      <button
+        id="generateBtn"
+        class="primary"
+        type="button"
+      >
+
+        <span id="generateText">
+          Generate
+        </span>
+
+        <span
+          id="loading"
+          class="loading"
+        >
+
+          <span class="spinner"></span>
+
+          Generating...
+
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<section
+  id="workspace"
+  class="workspace"
+>
+
+  <div class="toolbar">
+
+    <div class="toolbar-left">
+
+      <span class="tool-title">
+        Live Preview
+      </span>
+
+
+      <button
+        class="secondary device active"
+        data-width="100%"
+        type="button"
+      >
+        Desktop
+      </button>
+
+
+      <button
+        class="secondary device"
+        data-width="768px"
+        type="button"
+      >
+        Tablet
+      </button>
+
+
+      <button
+        class="secondary device"
+        data-width="390px"
+        type="button"
+      >
+        Mobile
+      </button>
+
+
+      <button
+        id="codeBtn"
+        class="secondary"
+        type="button"
+      >
+        Code
+      </button>
+
+    </div>
+
+
+    <div class="toolbar-right">
+
+      <button
+        id="undoBtn"
+        class="secondary"
+        type="button"
+      >
+        ↶ Undo
+      </button>
+
+
+      <button
+        id="redoBtn"
+        class="secondary"
+        type="button"
+      >
+        ↷ Redo
+      </button>
+
+
+      <button
+        id="copyBtn"
+        class="secondary"
+        type="button"
+      >
+        Copy
+      </button>
+
+
+      <button
+        id="downloadBtn"
+        class="secondary"
+        type="button"
+      >
+        Download
+      </button>
+
+
+      <button
+        id="openBtn"
+        class="secondary"
+        type="button"
+      >
+        Open
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="preview-wrap">
+
+    <iframe
+      id="previewFrame"
+      class="preview-frame"
+      title="SPDP AI Live Preview"
+
+      sandbox="
+        allow-scripts
+        allow-forms
+        allow-modals
+        allow-popups
+        allow-same-origin
+      "
+    ></iframe>
+
+  </div>
+
+
+  <div
+    id="codePanel"
+    class="code-panel"
+  >
+
+    <div class="code-head">
+
+      <span class="tool-title">
+        Generated HTML
+      </span>
+
+
+      <button
+        id="codeCopyBtn"
+        class="secondary"
+        type="button"
+      >
+        Copy Code
+      </button>
+
+    </div>
+
+
+    <textarea
+      id="code"
+      class="code"
+      spellcheck="false"
+    ></textarea>
+
+  </div>
+
+
+  <div class="chat">
+
+    <div class="chat-head">
+
+      <strong>
+        AI Sub-chat
+      </strong>
+
+      <span>
+        Edit your current website
+      </span>
+
+    </div>
+
+
+    <div
+      id="messages"
+      class="messages"
+    >
+
+      <div class="msg ai">
+
+        Your generated website will stay here.
+
+        Tell me what you want to change.
+
+        Example:
+
+        "Make the hero more premium and add animated particles."
+
+      </div>
+
+    </div>
+
+
+    <div class="chat-input">
+
+      <div class="edit-wrap">
+
+        <textarea
+          id="editPrompt"
+          class="edit-prompt"
+          placeholder="Tell AI what to change..."
+        ></textarea>
+
+
+        <button
+          id="editMic"
+          class="edit-mic"
+          type="button"
+          title="Speak edit"
+        >
+          🎙️
+        </button>
+
+      </div>
+
+
+      <button
+        id="editBtn"
+        class="primary"
+        type="button"
+      >
+        Apply Edit
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="features">
+
+  <article class="feature">
+
+    <h3>
+      Complete Websites
+    </h3>
+
+    <p>
+      Generate responsive landing pages,
+      portfolios, business sites, dashboards
+      and interactive experiences.
+    </p>
+
+  </article>
+
+
+  <article class="feature">
+
+    <h3>
+      Real 3D
+    </h3>
+
+    <p>
+      Generate real Three.js scenes with
+      cameras, lighting, materials,
+      animation and interaction.
+    </p>
+
+  </article>
+
+
+  <article class="feature">
+
+    <h3>
+      AI Editing
+    </h3>
+
+    <p>
+      Generate once and keep editing the
+      same project using the AI sub-chat.
+    </p>
+
+  </article>
+
+</section>
+
+
+<footer>
+  SPDP AI · Digital Platform · 2026
+</footer>
+
+</div>
+
+</main>
+
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<script>
+
+/* =====================================================
+   WORKER URL
+===================================================== */
+
+const WORKER_URL =
+  "https://spdp-ai.spdp3127.workers.dev";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const $ =
+  id => document.getElementById(id);
+
+const promptInput =
+  $("prompt");
+
+const editPrompt =
+  $("editPrompt");
+
+const generateBtn =
+  $("generateBtn");
+
+const editBtn =
+  $("editBtn");
+
+const clearBtn =
+  $("clearBtn");
+
+const micBtn =
+  $("micBtn");
+
+const editMic =
+  $("editMic");
+
+const message =
+  $("message");
+
+const loading =
+  $("loading");
+
+const generateText =
+  $("generateText");
+
+const workspace =
+  $("workspace");
+
+const previewFrame =
+  $("previewFrame");
+
+const code =
+  $("code");
+
+const codePanel =
+  $("codePanel");
+
+const messages =
+  $("messages");
+
+const toast =
+  $("toast");
+
+const undoBtn =
+  $("undoBtn");
+
+const redoBtn =
+  $("redoBtn");
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let currentHTML = "";
+
+let undoStack = [];
+
+let redoStack = [];
+
+let recognition = null;
+
+let activeVoiceTarget = null;
+
+let isGenerating = false;
+
+
+/* =====================================================
+   CONSTANTS
+===================================================== */
+
+const MAX_HISTORY =
+  40;
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+function showToast(text){
+
+  toast.textContent =
+    text;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      1800
+    );
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(text){
+
+  message.textContent =
+    text;
+
+  message.classList.add(
+    "show"
+  );
+}
+
+function hideMessage(){
+
+  message.textContent =
+    "";
+
+  message.classList.remove(
+    "show"
+  );
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+function setGenerating(value){
+
+  isGenerating =
+    value;
+
+  generateBtn.disabled =
+    value;
+
+  editBtn.disabled =
+    value;
+
+  if(value){
+
+    generateText.style.display =
+      "none";
+
+    loading.classList.add(
+      "show"
+    );
+
+  }else{
+
+    generateText.style.display =
+      "inline";
+
+    loading.classList.remove(
+      "show"
+    );
+  }
+
+  updateHistoryButtons();
+}
+
+
+/* =====================================================
+   HTML VALIDATION
+===================================================== */
+
+function validHTML(html){
+
+  if(
+    typeof html !==
+    "string"
+  ){
+
+    return false;
+  }
+
+  const x =
+    html.trim().toLowerCase();
+
+  return (
+    x.startsWith(
+      "<!doctype html"
+    ) &&
+    x.includes("<html") &&
+    x.includes("<head") &&
+    x.includes("<body") &&
+    x.includes("<script") &&
+    x.includes("</html>")
+  );
+}
+
+
+/* =====================================================
+   SAVE PROJECT
+===================================================== */
+
+function saveProject(){
+
+  if(!currentHTML){
+    return;
+  }
+
+  try{
+
+    localStorage.setItem(
+      "spdp_current_html",
+      currentHTML
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Could not save project:",
+      error
+    );
+  }
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+/*
+ * This is the important Undo/Redo fix.
+ *
+ * Every actual project change pushes the OLD
+ * version into undoStack.
+ */
+
+function pushHistory(previousHTML){
+
+  if(
+    !previousHTML ||
+    !validHTML(previousHTML)
+  ){
+
+    return;
+  }
+
+  /*
+   * Avoid duplicate history entries.
+   */
+  if(
+    undoStack.length &&
+    undoStack[undoStack.length - 1] ===
+      previousHTML
+  ){
+
+    return;
+  }
+
+  undoStack.push(
+    previousHTML
+  );
+
+  if(
+    undoStack.length >
+    MAX_HISTORY
+  ){
+
+    undoStack.shift();
+  }
+
+  /*
+   * Any new edit invalidates redo history.
+   */
+  redoStack = [];
+
+  updateHistoryButtons();
+}
+
+
+function updateHistoryButtons(){
+
+  undoBtn.disabled =
+    isGenerating ||
+    undoStack.length === 0;
+
+  redoBtn.disabled =
+    isGenerating ||
+    redoStack.length === 0;
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderHTML(
+  html,
+  options = {}
+){
+
+  const value =
+    String(html || "").trim();
+
+  if(
+    !validHTML(value)
+  ){
+
+    throw new Error(
+      "Invalid HTML cannot be rendered."
+    );
+  }
+
+  currentHTML =
+    value;
+
+  /*
+   * srcdoc gives us a real live preview.
+   */
+  previewFrame.srcdoc =
+    currentHTML;
+
+  /*
+   * Keep code editor synchronized.
+   */
+  code.value =
+    currentHTML;
+
+  workspace.classList.add(
+    "show"
+  );
+
+  saveProject();
+
+  updateHistoryButtons();
+
+  if(
+    options.scroll !== false
+  ){
+
+    workspace.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
+}
+
+
+/* =====================================================
+   WORKER CALL
+===================================================== */
+
+async function callWorker(payload){
+
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(payload)
+      }
+    );
+
+  const raw =
+    await response.text();
+
+  let data;
+
+  try{
+
+    data =
+      JSON.parse(raw);
+
+  }catch(error){
+
+    throw new Error(
+      "Worker returned invalid JSON. " +
+      "Response: " +
+      raw.substring(0,600)
+    );
+  }
+
+  if(
+    !response.ok
+  ){
+
+    throw new Error(
+      data?.error ||
+      `Worker request failed (${response.status}).`
+    );
+  }
+
+  if(
+    !data ||
+    data.success !== true
+  ){
+
+    throw new Error(
+      data?.error ||
+      "AI request failed."
+    );
+  }
+
+  if(
+    typeof data.html !==
+    "string"
+  ){
+
+    throw new Error(
+      "Worker did not return HTML."
+    );
+  }
+
+  if(
+    !validHTML(data.html)
+  ){
+
+    throw new Error(
+      "AI returned incomplete or invalid HTML."
+    );
+  }
+
+  return data.html.trim();
+}
+
+
+/* =====================================================
+   GENERATE WEBSITE
+===================================================== */
+
+async function generateWebsite(){
+
+  if(isGenerating){
+    return;
+  }
+
+  const prompt =
+    promptInput.value.trim();
+
+  if(!prompt){
+
+    showMessage(
+      "Please type or speak what you want to build."
+    );
+
+    promptInput.focus();
+
+    return;
+  }
+
+  hideMessage();
+
+  setGenerating(true);
+
+  try{
+
+    const html =
+      await callWorker({
+        action:"create",
+        prompt
+      });
+
+    /*
+     * A brand-new project starts a new history.
+     */
+    undoStack = [];
+
+    redoStack = [];
+
+    renderHTML(
+      html,
+      {
+        scroll:true
+      }
+    );
+
+    addMessage(
+      "user",
+      prompt
+    );
+
+    addMessage(
+      "ai",
+      "Website generated successfully. You can now edit this same website using AI Sub-chat."
+    );
+
+    showToast(
+      "✓ Website generated"
+    );
+
+  }catch(error){
+
+    console.error(
+      "SPDP Generate Error:",
+      error
+    );
+
+    showMessage(
+      "❌ " +
+      (
+        error?.message ||
+        "Website generation failed."
+      )
+    );
+
+  }finally{
+
+    setGenerating(false);
+  }
+}
+
+
+/* =====================================================
+   EDIT WEBSITE
+===================================================== */
+
+async function editWebsite(){
+
+  if(isGenerating){
+    return;
+  }
+
+  if(!currentHTML){
+
+    showMessage(
+      "Generate a website first."
+    );
+
+    return;
+  }
+
+  const instruction =
+    editPrompt.value.trim();
+
+  if(!instruction){
+
+    editPrompt.focus();
+
+    return;
+  }
+
+  hideMessage();
+
+  /*
+   * Save the CURRENT version before changing it.
+   * This is what makes Undo reliable.
+   */
+  const previousHTML =
+    currentHTML;
+
+  setGenerating(true);
+
+  addMessage(
+    "user",
+    instruction
+  );
+
+  editPrompt.value =
+    "";
+
+  try{
+
+    const html =
+      await callWorker({
+        action:"edit",
+        prompt:instruction,
+        currentHTML:
+          previousHTML
+      });
+
+    /*
+     * Only add history AFTER the AI successfully
+     * returns valid HTML.
+     */
+    pushHistory(
+      previousHTML
+    );
+
+    renderHTML(
+      html,
+      {
+        scroll:false
+      }
+    );
+
+    addMessage(
+      "ai",
+      "Done. I updated your current website."
+    );
+
+    showToast(
+      "✓ Website updated"
+    );
+
+  }catch(error){
+
+    console.error(
+      "SPDP Edit Error:",
+      error
+    );
+
+    /*
+     * Do NOT modify history when edit fails.
+     */
+
+    showMessage(
+      "❌ " +
+      (
+        error?.message ||
+        "Edit failed."
+      )
+    );
+
+    addMessage(
+      "ai",
+      "I couldn't apply that edit."
+    );
+
+  }finally{
+
+    setGenerating(false);
+  }
+}
+
+
+/* =====================================================
+   CHAT MESSAGE
+===================================================== */
+
+function addMessage(
+  type,
+  text
+){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.className =
+    "msg " + type;
+
+  div.textContent =
+    text;
+
+  messages.appendChild(
+    div
+  );
+
+  messages.scrollTop =
+    messages.scrollHeight;
+}
+
+
+/* =====================================================
+   COPY — ROBUST VERSION
+===================================================== */
+
+async function copyText(text){
+
+  if(!text){
+
+    showToast(
+      "Nothing to copy"
+    );
+
+    return;
+  }
+
+  /*
+   * Modern clipboard API.
+   */
+  try{
+
+    if(
+      navigator.clipboard &&
+      window.isSecureContext
+    ){
+
+      await navigator.clipboard.writeText(
+        text
+      );
+
+      showToast(
+        "✓ Copied"
+      );
+
+      return;
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Clipboard API failed:",
+      error
+    );
+  }
+
+  /*
+   * Fallback for browsers / deployments where
+   * navigator.clipboard isn't available.
+   */
+  try{
+
+    const temp =
+      document.createElement(
+        "textarea"
+      );
+
+    temp.value =
+      text;
+
+    temp.style.position =
+      "fixed";
+
+    temp.style.left =
+      "-999999px";
+
+    temp.style.top =
+      "0";
+
+    temp.style.opacity =
+      "0";
+
+    document.body.appendChild(
+      temp
+    );
+
+    temp.focus();
+
+    temp.select();
+
+    temp.setSelectionRange(
+      0,
+      temp.value.length
+    );
+
+    const successful =
+      document.execCommand(
+        "copy"
+      );
+
+    temp.remove();
+
+    if(successful){
+
+      showToast(
+        "✓ Copied"
+      );
+
+      return;
+    }
+
+  }catch(error){
+
+    console.error(
+      "Copy fallback failed:",
+      error
+    );
+  }
+
+  showMessage(
+    "Copy failed. Select the code manually and press Ctrl+C."
+  );
+}
+
+
+/* =====================================================
+   DOWNLOAD
+===================================================== */
+
+function downloadHTML(){
+
+  if(!currentHTML){
+
+    showToast(
+      "Nothing to download"
+    );
+
+    return;
+  }
+
+  const blob =
+    new Blob(
+      [currentHTML],
+      {
+        type:
+          "text/html;charset=utf-8"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+  a.href =
+    url;
+
+  a.download =
+    "spdp-ai-website.html";
+
+  document.body.appendChild(
+    a
+  );
+
+  a.click();
+
+  a.remove();
+
+  setTimeout(
+    () => {
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    },
+    1000
+  );
+
+  showToast(
+    "✓ HTML downloaded"
+  );
+}
+
+
+/* =====================================================
+   OPEN
+===================================================== */
+
+function openHTML(){
+
+  if(!currentHTML){
+
+    showToast(
+      "Nothing to open"
+    );
+
+    return;
+  }
+
+  const blob =
+    new Blob(
+      [currentHTML],
+      {
+        type:
+          "text/html;charset=utf-8"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+  const newWindow =
+    window.open(
+      url,
+      "_blank"
+    );
+
+  if(!newWindow){
+
+    showMessage(
+      "Popup blocked. Allow popups for SPDP AI."
+    );
+
+    URL.revokeObjectURL(
+      url
+    );
+
+    return;
+  }
+
+  setTimeout(
+    () => {
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    },
+    60000
+  );
+}
+
+
+/* =====================================================
+   UNDO
+===================================================== */
+
+function undo(){
+
+  if(
+    isGenerating ||
+    undoStack.length === 0
+  ){
+
+    return;
+  }
+
+  /*
+   * Current state goes to REDO.
+   */
+  redoStack.push(
+    currentHTML
+  );
+
+  /*
+   * Previous state becomes current.
+   */
+  const previous =
+    undoStack.pop();
+
+  renderHTML(
+    previous,
+    {
+      scroll:false
+    }
+  );
+
+  showToast(
+    "↶ Undo"
+  );
+
+  updateHistoryButtons();
+}
+
+
+/* =====================================================
+   REDO
+===================================================== */
+
+function redo(){
+
+  if(
+    isGenerating ||
+    redoStack.length === 0
+  ){
+
+    return;
+  }
+
+  /*
+   * Current state goes back to UNDO.
+   */
+  undoStack.push(
+    currentHTML
+  );
+
+  /*
+   * Next state becomes current.
+   */
+  const next =
+    redoStack.pop();
+
+  renderHTML(
+    next,
+    {
+      scroll:false
+    }
+  );
+
+  showToast(
+    "↷ Redo"
+  );
+
+  updateHistoryButtons();
+}
+
+
+/* =====================================================
+   BUTTON EVENTS
+===================================================== */
+
+generateBtn.addEventListener(
+  "click",
+  generateWebsite
+);
+
+editBtn.addEventListener(
+  "click",
+  editWebsite
+);
+
+undoBtn.addEventListener(
+  "click",
+  undo
+);
+
+redoBtn.addEventListener(
+  "click",
+  redo
+);
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+clearBtn.addEventListener(
+  "click",
+  () => {
+
+    if(
+      currentHTML &&
+      !confirm(
+        "Clear the current project?"
+      )
+    ){
+
+      return;
+    }
+
+    currentHTML =
+      "";
+
+    undoStack =
+      [];
+
+    redoStack =
+      [];
+
+    promptInput.value =
+      "";
+
+    editPrompt.value =
+      "";
+
+    code.value =
+      "";
+
+    previewFrame.srcdoc =
+      "";
+
+    workspace.classList.remove(
+      "show"
+    );
+
+    localStorage.removeItem(
+      "spdp_current_html"
+    );
+
+    messages.innerHTML = `
+      <div class="msg ai">
+        Your generated website will stay here.
+        Ask me to modify it.
+      </div>
+    `;
+
+    hideMessage();
+
+    updateHistoryButtons();
+
+    promptInput.focus();
+
+    showToast(
+      "Project cleared"
+    );
+  }
+);
+
+
+/* =====================================================
+   CODE PANEL
+===================================================== */
+
+$("codeBtn").addEventListener(
+  "click",
+  () => {
+
+    codePanel.classList.toggle(
+      "show"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   COPY BUTTONS
+===================================================== */
+
+$("copyBtn").addEventListener(
+  "click",
+  () => {
+
+    copyText(
+      currentHTML
+    );
+
+  }
+);
+
+
+$("codeCopyBtn").addEventListener(
+  "click",
+  () => {
+
+    copyText(
+      code.value
+    );
+
+  }
+);
+
+
+/* =====================================================
+   DOWNLOAD
+===================================================== */
+
+$("downloadBtn").addEventListener(
+  "click",
+  downloadHTML
+);
+
+
+/* =====================================================
+   OPEN
+===================================================== */
+
+$("openBtn").addEventListener(
+  "click",
+  openHTML
+);
+
+
+/* =====================================================
+   DEVICE PREVIEW
+===================================================== */
+
+document
+  .querySelectorAll(
+    ".device"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".device"
+            )
+            .forEach(
+              x =>
+                x.classList.remove(
+                  "active"
+                )
+            );
+
+          button.classList.add(
+            "active"
+          );
+
+          const width =
+            button.dataset.width;
+
+          previewFrame.style.width =
+            width;
+
+          previewFrame.style.margin =
+            width === "100%"
+              ? "0"
+              : "0 auto";
+
+        }
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   CODE EDITOR — LIVE PREVIEW
+===================================================== */
+
+let codeEditTimer = null;
+
+code.addEventListener(
+  "input",
+  () => {
+
+    clearTimeout(
+      codeEditTimer
+    );
+
+    codeEditTimer =
+      setTimeout(
+        () => {
+
+          const value =
+            code.value.trim();
+
+          if(
+            validHTML(value)
+          ){
+
+            /*
+             * Save old code into history only when
+             * the code editor actually changes it.
+             */
+            if(
+              currentHTML &&
+              currentHTML !== value
+            ){
+
+              pushHistory(
+                currentHTML
+              );
+            }
+
+            currentHTML =
+              value;
+
+            previewFrame.srcdoc =
+              currentHTML;
+
+            saveProject();
+
+            updateHistoryButtons();
+
+          }
+
+        },
+        350
+      );
+  }
+);
+
+
+/* =====================================================
+   KEYBOARD — GENERATE
+===================================================== */
+
+promptInput.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key === "Enter"
+    ){
+
+      event.preventDefault();
+
+      generateWebsite();
+    }
+
+  }
+);
+
+
+/* =====================================================
+   KEYBOARD — EDIT
+===================================================== */
+
+editPrompt.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key === "Enter"
+    ){
+
+      event.preventDefault();
+
+      editWebsite();
+    }
+
+  }
+);
+
+
+/* =====================================================
+   KEYBOARD — UNDO / REDO
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    /*
+     * Do not intercept browser shortcuts while typing
+     * except Ctrl/Cmd + Z/Y.
+     */
+
+    if(
+      !(event.ctrlKey || event.metaKey)
+    ){
+
+      return;
+    }
+
+    if(
+      event.key.toLowerCase() === "z"
+    ){
+
+      /*
+       * If user is editing code manually,
+       * let normal textarea undo work.
+       */
+      if(
+        document.activeElement === code
+      ){
+
+        return;
+      }
+
+      event.preventDefault();
+
+      if(
+        event.shiftKey
+      ){
+
+        redo();
+
+      }else{
+
+        undo();
+      }
+
+    }
+
+    if(
+      event.key.toLowerCase() === "y"
+    ){
+
+      if(
+        document.activeElement === code
+      ){
+
+        return;
+      }
+
+      event.preventDefault();
+
+      redo();
+    }
+
+  }
+);
+
+
+/* =====================================================
+   VOICE RECOGNITION
+===================================================== */
+
+function setupVoice(){
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if(!SpeechRecognition){
+
+    recognition =
+      null;
+
+    micBtn.title =
+      "Voice input is not supported by this browser";
+
+    editMic.title =
+      "Voice input is not supported by this browser";
+
+    return;
+  }
+
+  recognition =
+    new SpeechRecognition();
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    false;
+
+  /*
+   * Browser will listen in English.
+   *
+   * The user can still speak naturally.
+   */
+  recognition.lang =
+    "en-US";
+
+
+  recognition.onstart =
+    () => {
+
+      if(
+        activeVoiceTarget ===
+        "prompt"
+      ){
+
+        micBtn.classList.add(
+          "recording"
+        );
+
+        showToast(
+          "🎙️ Listening..."
+        );
+
+      }else{
+
+        editMic.classList.add(
+          "recording"
+        );
+
+        showToast(
+          "🎙️ Listening..."
+        );
+      }
+
+    };
+
+
+  recognition.onresult =
+    event => {
+
+      let finalText =
+        "";
+
+      for(
+        let i =
+          event.resultIndex;
+        i <
+          event.results.length;
+        i++
+      ){
+
+        const result =
+          event.results[i];
+
+        if(
+          result &&
+          result.isFinal
+        ){
+
+          finalText +=
+            result[0].transcript;
+        }
+
+      }
+
+      finalText =
+        finalText.trim();
+
+      if(!finalText){
+        return;
+      }
+
+      if(
+        activeVoiceTarget ===
+        "prompt"
+      ){
+
+        const old =
+          promptInput.value.trim();
+
+        promptInput.value =
+          old
+            ? old + " " + finalText
+            : finalText;
+
+        promptInput.focus();
+
+      }else{
+
+        const old =
+          editPrompt.value.trim();
+
+        editPrompt.value =
+          old
+            ? old + " " + finalText
+            : finalText;
+
+        editPrompt.focus();
+      }
+
+    };
+
+
+  recognition.onerror =
+    event => {
+
+      console.error(
+        "VOICE ERROR:",
+        event.error
+      );
+
+      if(
+        event.error ===
+        "not-allowed"
+      ){
+
+        showMessage(
+          "🎙️ Microphone permission was denied. Allow microphone access in your browser."
+        );
+
+      }else if(
+        event.error ===
+        "no-speech"
+      ){
+
+        showToast(
+          "No speech detected."
+        );
+
+      }else{
+
+        showMessage(
+          "Voice input error: " +
+          event.error
+        );
+      }
+
+    };
+
+
+  recognition.onend =
+    () => {
+
+      micBtn.classList.remove(
+        "recording"
+      );
+
+      editMic.classList.remove(
+        "recording"
+      );
+
+    };
+
+}
+
+
+/* =====================================================
+   START VOICE
+===================================================== */
+
+function startVoice(target){
+
+  if(!recognition){
+
+    showMessage(
+      "🎙️ Voice input is not supported in this browser. Use Chrome or Edge."
+    );
+
+    return;
+  }
+
+  activeVoiceTarget =
+    target;
+
+  try{
+
+    recognition.start();
+
+  }catch(error){
+
+    /*
+     * SpeechRecognition throws if already running.
+     * We simply ignore that case.
+     */
+    console.log(
+      "Voice recognition is already running."
+    );
+  }
+}
+
+
+/* =====================================================
+   MIC BUTTONS
+===================================================== */
+
+micBtn.addEventListener(
+  "click",
+  () => {
+
+    startVoice(
+      "prompt"
+    );
+
+  }
+);
+
+
+editMic.addEventListener(
+  "click",
+  () => {
+
+    startVoice(
+      "edit"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   LOAD SAVED PROJECT
+===================================================== */
+
+function loadSavedProject(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        "spdp_current_html"
+      );
+
+    if(
+      saved &&
+      validHTML(saved)
+    ){
+
+      currentHTML =
+        saved;
+
+      /*
+       * Don't create undo history while restoring.
+       */
+      renderHTML(
+        saved,
+        {
+          scroll:false
+        }
+      );
+
+      showToast(
+        "✓ Previous project restored"
+      );
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Could not restore project:",
+      error
+    );
+  }
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    setupVoice();
+
+    updateHistoryButtons();
+
+    loadSavedProject();
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
 
 <style>
 *{
