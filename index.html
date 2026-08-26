@@ -17,20 +17,21 @@
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
+html,
+body{
+  margin:0;
+  min-height:100%;
+  background:#050505;
+  color:#fff;
+  font-family:Inter,system-ui,sans-serif;
 }
 
 body{
-  margin:0;
-  background:#050505;
-  color:#fff;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
 }
 
 button,
-textarea,
-input{
+textarea{
   font:inherit;
 }
 
@@ -44,51 +45,46 @@ button:disabled{
 }
 
 .app{
-  min-height:100vh;
   padding:20px;
 }
 
 .container{
-  width:min(1500px,100%);
+  width:min(1450px,100%);
   margin:auto;
 }
-
-
-/* HEADER */
 
 header{
   height:64px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid #1c1c1c;
+  border-bottom:1px solid #191919;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:10px;
   font-weight:900;
 }
 
 .logo{
   width:40px;
   height:40px;
+  border-radius:12px;
   display:grid;
   place-items:center;
-  border-radius:12px;
-  background:#fff;
+  background:linear-gradient(135deg,#fff,#777);
   color:#000;
   font-weight:950;
-  box-shadow:0 0 30px rgba(255,255,255,.08);
 }
 
 .status{
+  color:#777;
+  font-size:12px;
   display:flex;
   align-items:center;
   gap:8px;
-  color:#777;
-  font-size:12px;
 }
 
 .dot{
@@ -99,18 +95,15 @@ header{
   box-shadow:0 0 15px #4ade80;
 }
 
-
-/* HERO */
-
 .hero{
   text-align:center;
-  padding:70px 0 35px;
+  padding:60px 0 35px;
 }
 
 .badge{
-  display:inline-flex;
+  display:inline-block;
   padding:8px 14px;
-  border:1px solid #252525;
+  border:1px solid #242424;
   border-radius:999px;
   background:#0b0b0b;
   color:#888;
@@ -119,7 +112,7 @@ header{
 
 h1{
   margin:22px 0 15px;
-  font-size:clamp(52px,8vw,110px);
+  font-size:clamp(50px,8vw,94px);
   line-height:.9;
   letter-spacing:-.07em;
   background:linear-gradient(180deg,#fff,#555);
@@ -129,18 +122,15 @@ h1{
 }
 
 .hero p{
-  max-width:750px;
+  max-width:720px;
   margin:auto;
   color:#777;
   line-height:1.7;
 }
 
-
-/* PROMPT */
-
 .panel{
-  margin-top:35px;
-  padding:15px;
+  margin-top:30px;
+  padding:16px;
   border:1px solid #202020;
   border-radius:24px;
   background:rgba(255,255,255,.025);
@@ -150,14 +140,14 @@ h1{
 
 .prompt{
   width:100%;
-  min-height:160px;
+  min-height:145px;
   resize:vertical;
-  padding:18px;
   border:1px solid #1b1b1b;
   border-radius:17px;
-  outline:none;
   background:#080808;
   color:#fff;
+  padding:18px;
+  outline:none;
   line-height:1.6;
 }
 
@@ -177,9 +167,9 @@ h1{
 }
 
 button{
+  border-radius:11px;
   padding:10px 15px;
   border:1px solid #292929;
-  border-radius:11px;
   background:#111;
   color:#fff;
   font-weight:750;
@@ -191,39 +181,32 @@ button:hover{
 }
 
 .primary{
-  border-color:#fff;
   background:#fff;
   color:#000;
+  border-color:#fff;
 }
-
-
-/* MESSAGE */
 
 .message{
   display:none;
   margin-top:12px;
   padding:13px;
-  border:1px solid #292929;
   border-radius:12px;
   background:#101010;
+  border:1px solid #292929;
   color:#aaa;
   white-space:pre-wrap;
-  line-height:1.5;
 }
 
 .message.show{
   display:block;
 }
 
-
-/* WORKSPACE */
-
 .workspace{
   display:none;
   margin-top:25px;
-  overflow:hidden;
   border:1px solid #202020;
   border-radius:22px;
+  overflow:hidden;
   background:#070707;
   box-shadow:0 35px 100px rgba(0,0,0,.5);
 }
@@ -232,25 +215,21 @@ button:hover{
   display:block;
 }
 
-
-/* TOOLBAR */
-
 .toolbar{
   min-height:62px;
   padding:10px;
+  border-bottom:1px solid #202020;
   display:flex;
-  align-items:center;
   justify-content:space-between;
   gap:8px;
   flex-wrap:wrap;
-  border-bottom:1px solid #202020;
 }
 
 .toolbar-left,
 .toolbar-right{
   display:flex;
-  align-items:center;
   gap:7px;
+  align-items:center;
   flex-wrap:wrap;
 }
 
@@ -264,9 +243,6 @@ button:hover{
   color:#000;
 }
 
-
-/* PREVIEW */
-
 .preview-wrap{
   min-height:720px;
   padding:12px;
@@ -276,7 +252,7 @@ button:hover{
   background:
     radial-gradient(
       circle at center,
-      #141414,
+      #121212,
       #030303 70%
     );
 }
@@ -291,9 +267,6 @@ button:hover{
   transition:.3s;
 }
 
-
-/* CODE */
-
 .code-panel{
   display:none;
   border-top:1px solid #202020;
@@ -307,20 +280,19 @@ button:hover{
   padding:12px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   border-bottom:1px solid #202020;
 }
 
 .code{
   width:100%;
-  height:520px;
+  height:500px;
   resize:vertical;
-  padding:18px;
-  border:0;
-  outline:none;
   background:#020202;
   color:#c9ced6;
-  font:12px/1.6 Consolas,Monaco,monospace;
+  border:0;
+  padding:18px;
+  font:12px/1.6 Consolas,monospace;
+  outline:none;
 }
 
 .code-actions{
@@ -330,9 +302,6 @@ button:hover{
   gap:8px;
   border-top:1px solid #181818;
 }
-
-
-/* CHAT */
 
 .chat{
   border-top:1px solid #202020;
@@ -348,13 +317,13 @@ button:hover{
 }
 
 .chat-head span{
-  margin-left:8px;
   color:#666;
   font-size:12px;
+  margin-left:8px;
 }
 
 .messages{
-  height:250px;
+  height:240px;
   overflow-y:auto;
   padding:15px;
   display:flex;
@@ -363,12 +332,12 @@ button:hover{
 }
 
 .msg{
-  max-width:88%;
+  max-width:85%;
   padding:11px 13px;
   border-radius:13px;
   font-size:13px;
-  line-height:1.5;
   white-space:pre-wrap;
+  line-height:1.5;
 }
 
 .msg.user{
@@ -395,30 +364,13 @@ button:hover{
   flex:1;
   height:48px;
   resize:none;
-  padding:12px;
-  border:1px solid #1c1c1c;
   border-radius:12px;
-  outline:none;
+  border:1px solid #1c1c1c;
   background:#080808;
   color:#fff;
+  padding:12px;
+  outline:none;
 }
-
-
-/* MODEL STATUS */
-
-.model-status{
-  padding:9px 12px;
-  border-bottom:1px solid #191919;
-  color:#666;
-  font-size:11px;
-}
-
-.model-status strong{
-  color:#aaa;
-}
-
-
-/* FEATURES */
 
 .features{
   display:grid;
@@ -445,18 +397,12 @@ button:hover{
   font-size:13px;
 }
 
-
-/* FOOTER */
-
 footer{
-  padding:35px;
   text-align:center;
+  padding:35px;
   color:#444;
   font-size:12px;
 }
-
-
-/* MOBILE */
 
 @media(max-width:760px){
 
@@ -466,10 +412,6 @@ footer{
 
   .status{
     display:none;
-  }
-
-  .hero{
-    padding-top:50px;
   }
 
   .features{
@@ -522,7 +464,7 @@ footer{
 
     <span class="dot"></span>
 
-    Automatic AI Fallback
+    AI Builder Online
 
   </div>
 
@@ -540,8 +482,8 @@ footer{
   </h1>
 
   <p>
-    Generate complete websites with automatic AI model
-    switching, live preview, full source code and AI editing.
+    Describe what you want and SPDP AI will build a complete
+    responsive website with live preview and editable code.
   </p>
 
 
@@ -550,8 +492,9 @@ footer{
     <textarea
       id="prompt"
       class="prompt"
-      placeholder="Example: Create a premium black gaming company website with a cinematic hero, games section, pricing, testimonials, contact form and responsive mobile design..."
+      placeholder="Example: Create a premium black gaming company website with a hero section, games, pricing and contact section..."
     ></textarea>
+
 
     <div class="actions">
 
@@ -563,10 +506,11 @@ footer{
         id="generateBtn"
         class="primary"
       >
-        Generate Website
+        Generate
       </button>
 
     </div>
+
 
     <div
       id="message"
@@ -592,12 +536,14 @@ footer{
       Live Preview
     </span>
 
+
     <button
       class="device active"
       data-width="100%"
     >
       Desktop
     </button>
+
 
     <button
       class="device"
@@ -606,12 +552,14 @@ footer{
       Tablet
     </button>
 
+
     <button
       class="device"
       data-width="390px"
     >
       Mobile
     </button>
+
 
     <button id="codeBtn">
       Code
@@ -647,20 +595,12 @@ footer{
 </div>
 
 
-<div
-  id="modelStatus"
-  class="model-status"
->
-  Ready.
-</div>
-
-
 <div class="preview-wrap">
 
   <iframe
     id="previewFrame"
     class="preview-frame"
-    title="Live Website Preview"
+    title="Live Preview"
     sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
   ></iframe>
 
@@ -675,7 +615,7 @@ footer{
   <div class="code-head">
 
     <span class="tool-title">
-      Full HTML Source
+      Manual HTML Editor
     </span>
 
     <button id="codeCopyBtn">
@@ -731,7 +671,8 @@ footer{
   >
 
     <div class="msg ai">
-      Generate a website first. Then tell me what you want changed.
+      Your website is ready.
+      Ask AI to change anything.
     </div>
 
   </div>
@@ -742,14 +683,15 @@ footer{
     <textarea
       id="editPrompt"
       class="edit-prompt"
-      placeholder="Example: Make the hero more premium, add glowing gradient lights and add a mobile menu..."
+      placeholder="Example: Make the hero more premium and add animated gradient lights..."
     ></textarea>
+
 
     <button
       id="editBtn"
       class="primary"
     >
-      Apply AI Edit
+      Apply Edit
     </button>
 
   </div>
@@ -764,12 +706,12 @@ footer{
   <article class="feature">
 
     <h3>
-      ⚡ Automatic Fallback
+      ⚡ Multi-AI
     </h3>
 
     <p>
-      If one configured AI provider or model fails,
-      the Worker automatically tries the next one.
+      Multiple free AI models are automatically tried
+      when one is unavailable.
     </p>
 
   </article>
@@ -778,12 +720,11 @@ footer{
   <article class="feature">
 
     <h3>
-      🖥 Live Preview
+      🛠 Code Editor
     </h3>
 
     <p>
-      See the complete generated website immediately
-      and switch between desktop, tablet and mobile.
+      View, edit and apply the complete generated HTML.
     </p>
 
   </article>
@@ -792,12 +733,12 @@ footer{
   <article class="feature">
 
     <h3>
-      ✨ AI Sub-chat
+      ✨ AI Editing
     </h3>
 
     <p>
-      Keep the current website and ask AI to modify
-      specific sections without starting again.
+      Continue improving the current website through
+      the built-in AI sub-chat.
     </p>
 
   </article>
@@ -808,6 +749,7 @@ footer{
 <footer>
   SPDP AI · Digital Platform · 2026
 </footer>
+
 
 </div>
 
@@ -820,8 +762,9 @@ const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
 
-const $ = id =>
-  document.getElementById(id);
+const $ =
+  id =>
+    document.getElementById(id);
 
 
 const promptInput =
@@ -854,9 +797,6 @@ const messages =
 const message =
   $("message");
 
-const modelStatus =
-  $("modelStatus");
-
 
 let currentHTML = "";
 
@@ -866,7 +806,7 @@ let redoStack = [];
 
 
 /* =========================================================
-   UI
+   MESSAGE
 ========================================================= */
 
 function showMessage(text){
@@ -891,28 +831,29 @@ function hideMessage(){
 }
 
 
-function setModelStatus(
-  provider,
-  model,
-  fallback
-){
+/* =========================================================
+   HISTORY
+========================================================= */
 
-  if(!provider){
+function pushHistory(){
 
-    modelStatus.innerHTML =
-      "Ready.";
-
+  if(!currentHTML){
     return;
   }
 
-  modelStatus.innerHTML =
-    "<strong>" +
-    provider +
-    "</strong> · " +
-    model +
-    (fallback
-      ? " · automatic fallback"
-      : "");
+  undoStack.push(
+    currentHTML
+  );
+
+  if(
+    undoStack.length > 40
+  ){
+
+    undoStack.shift();
+
+  }
+
+  redoStack = [];
 }
 
 
@@ -923,17 +864,20 @@ function setModelStatus(
 function validHTML(html){
 
   if(
-    typeof html !== "string" ||
-    !html.trim()
+    typeof html !== "string"
   ){
     return false;
   }
 
   const x =
-    html.trim().toLowerCase();
+    html
+      .trim()
+      .toLowerCase();
 
   return (
-    x.startsWith("<!doctype html") &&
+    x.startsWith(
+      "<!doctype html"
+    ) &&
     x.includes("<html") &&
     x.includes("<head") &&
     x.includes("<body") &&
@@ -949,7 +893,7 @@ function validHTML(html){
 function renderHTML(html){
 
   currentHTML =
-    String(html || "").trim();
+    html.trim();
 
   previewFrame.srcdoc =
     currentHTML;
@@ -969,90 +913,440 @@ function renderHTML(html){
 
 
 /* =========================================================
-   HISTORY
+   LOCAL FALLBACK
 ========================================================= */
 
-function pushHistory(){
+function generateLocalWebsite(prompt){
 
-  if(!currentHTML){
-    return;
-  }
+  const p =
+    prompt.toLowerCase();
 
-  undoStack.push(
-    currentHTML
-  );
+  let title =
+    "SPDP STUDIO";
+
+  let subtitle =
+    "Build something extraordinary.";
 
   if(
-    undoStack.length > 40
+    p.includes("gaming") ||
+    p.includes("game")
   ){
-    undoStack.shift();
+
+    title =
+      "NEXUS GAMING";
+
+    subtitle =
+      "Enter the next generation of gaming.";
   }
 
-  redoStack = [];
+  else if(
+    p.includes("portfolio")
+  ){
+
+    title =
+      "CREATIVE PORTFOLIO";
+
+    subtitle =
+      "Design. Build. Create.";
+  }
+
+  else if(
+    p.includes("business") ||
+    p.includes("company")
+  ){
+
+    title =
+      "NEXTGEN COMPANY";
+
+    subtitle =
+      "Technology built for tomorrow.";
+  }
+
+  else if(
+    p.includes("shop") ||
+    p.includes("store")
+  ){
+
+    title =
+      "LUXE STORE";
+
+    subtitle =
+      "Premium products. Simple experience.";
+  }
+
+  return `<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<title>
+${escapeHTML(title)}
+</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  background:#050505;
+  color:#fff;
+}
+
+nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  border-bottom:1px solid #222;
+  position:sticky;
+  top:0;
+  background:rgba(5,5,5,.8);
+  backdrop-filter:blur(20px);
+  z-index:10;
+}
+
+.logo{
+  font-weight:900;
+}
+
+nav a{
+  color:#888;
+  text-decoration:none;
+  margin-left:25px;
+}
+
+.hero{
+  min-height:80vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 20px;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      #252525,
+      transparent 45%
+    );
+}
+
+.badge{
+  padding:8px 14px;
+  border:1px solid #333;
+  border-radius:999px;
+  color:#aaa;
+  font-size:13px;
+}
+
+h1{
+  font-size:
+    clamp(50px,10vw,120px);
+
+  line-height:.9;
+
+  margin:25px 0;
+
+  letter-spacing:-.07em;
+
+  background:
+    linear-gradient(
+      #fff,
+      #555
+    );
+
+  -webkit-background-clip:text;
+
+  background-clip:text;
+
+  color:transparent;
+}
+
+.hero p{
+  max-width:650px;
+  color:#777;
+  line-height:1.7;
+}
+
+.btn{
+  margin-top:30px;
+  display:inline-block;
+  padding:14px 24px;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  text-decoration:none;
+  font-weight:800;
+}
+
+section{
+  padding:100px 7%;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:20px;
+}
+
+.card{
+  padding:30px;
+  border:1px solid #222;
+  border-radius:20px;
+  background:#0b0b0b;
+}
+
+.card h3{
+  margin-top:0;
+}
+
+.card p{
+  color:#777;
+  line-height:1.6;
+}
+
+.contact{
+  text-align:center;
+  background:#0b0b0b;
+}
+
+footer{
+  text-align:center;
+  padding:40px;
+  color:#555;
+}
+
+@media(max-width:700px){
+
+  nav a{
+    display:none;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:70px 20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+SPDP
+</div>
+
+<div>
+
+<a href="#features">
+Features
+</a>
+
+<a href="#about">
+About
+</a>
+
+<a href="#contact">
+Contact
+</a>
+
+</div>
+
+</nav>
+
+
+<section class="hero">
+
+<div class="badge">
+✦ BUILT WITH SPDP AI
+</div>
+
+<h1>
+${escapeHTML(title)}
+</h1>
+
+<p>
+${escapeHTML(subtitle)}
+</p>
+
+<a
+class="btn"
+href="#features"
+>
+Explore
+</a>
+
+</section>
+
+
+<section id="features">
+
+<h2>
+Why choose us?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+01 — Powerful
+</h3>
+
+<p>
+Everything you need to launch
+a modern digital experience.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+02 — Fast
+</h3>
+
+<p>
+Designed with performance
+and responsive layouts in mind.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+03 — Premium
+</h3>
+
+<p>
+Clean visuals, smooth interactions
+and professional design.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="about">
+
+<h2>
+About
+</h2>
+
+<p
+style="
+color:#777;
+max-width:700px;
+line-height:1.8
+"
+>
+This website was generated using
+SPDP AI.
+</p>
+
+</section>
+
+
+<section
+id="contact"
+class="contact"
+>
+
+<h2>
+Ready to build?
+</h2>
+
+<p style="color:#777">
+Start creating your next
+digital experience.
+</p>
+
+<a
+class="btn"
+href="#features"
+>
+Get Started
+</a>
+
+</section>
+
+
+<footer>
+SPDP AI · 2026
+</footer>
+
+
+</body>
+
+</html>`;
 }
 
 
 /* =========================================================
-   API
+   ESCAPE
 ========================================================= */
 
-async function workerRequest(
-  payload
-){
+function escapeHTML(value){
 
-  const response =
-    await fetch(
-      WORKER_URL,
-      {
-        method:"POST",
+  return String(value)
 
-        headers:{
-          "Content-Type":
-            "application/json"
-        },
+    .replace(
+      /&/g,
+      "&amp;"
+    )
 
-        body:
-          JSON.stringify(payload)
-      }
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
     );
-
-
-  const text =
-    await response.text();
-
-
-  let data;
-
-
-  try{
-
-    data =
-      JSON.parse(text);
-
-  }catch{
-
-    throw new Error(
-      "Worker returned invalid JSON."
-    );
-  }
-
-
-  if(
-    !response.ok ||
-    !data.success
-  ){
-
-    const error =
-      data.error ||
-      "AI request failed.";
-
-    throw new Error(
-      error
-    );
-  }
-
-
-  return data;
 }
 
 
@@ -1062,11 +1356,10 @@ async function workerRequest(
 
 async function generateWebsite(){
 
-  const prompt =
+  const text =
     promptInput.value.trim();
 
-
-  if(!prompt){
+  if(!text){
 
     showMessage(
       "Type what you want to build."
@@ -1075,71 +1368,94 @@ async function generateWebsite(){
     return;
   }
 
-
   hideMessage();
-
 
   generateBtn.disabled =
     true;
 
   generateBtn.textContent =
-    "AI Generating...";
-
-
-  modelStatus.innerHTML =
-    "Trying available AI models...";
+    "AI Building...";
 
 
   try{
 
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            action:"create",
+            prompt:text
+          })
+        }
+      );
+
+
     const data =
-      await workerRequest({
-        action:"create",
-        prompt
-      });
+      await response.json();
 
 
     if(
-      !validHTML(data.html)
+      data.success &&
+      validHTML(data.html)
     ){
 
-      throw new Error(
-        "AI returned invalid HTML."
+      undoStack = [];
+
+      redoStack = [];
+
+      renderHTML(
+        data.html
       );
+
+      addMessage(
+        "user",
+        text
+      );
+
+      addMessage(
+        "ai",
+        "Website generated successfully."
+      );
+
     }
 
+    else{
 
-    undoStack = [];
+      /*
+       * ONLY NOW use local fallback.
+       */
 
-    redoStack = [];
+      const localHTML =
+        generateLocalWebsite(
+          text
+        );
 
+      undoStack = [];
 
-    renderHTML(
-      data.html
-    );
+      redoStack = [];
 
+      renderHTML(
+        localHTML
+      );
 
-    setModelStatus(
-      data.provider,
-      data.model,
-      data.fallback
-    );
+      addMessage(
+        "user",
+        text
+      );
 
-
-    addMessage(
-      "user",
-      prompt
-    );
-
-
-    addMessage(
-      "ai",
-      "Website generated using " +
-      data.model +
-      (data.fallback
-        ? " after automatic fallback."
-        : ".")
-    );
+      addMessage(
+        "ai",
+        "AI services were temporarily unavailable. Local fallback generated your website."
+      );
+    }
 
 
     workspace.scrollIntoView({
@@ -1149,18 +1465,29 @@ async function generateWebsite(){
 
   }catch(error){
 
-    showMessage(
-      "❌ " +
-      error.message
+    /*
+     * Worker/network failure:
+     * local fallback.
+     */
+
+    const localHTML =
+      generateLocalWebsite(
+        text
+      );
+
+    renderHTML(
+      localHTML
     );
 
+    addMessage(
+      "user",
+      text
+    );
 
     addMessage(
       "ai",
-      "❌ " +
-      error.message
+      "AI connection failed. Local fallback generated your website."
     );
-
 
   }finally{
 
@@ -1168,7 +1495,7 @@ async function generateWebsite(){
       false;
 
     generateBtn.textContent =
-      "Generate Website";
+      "Generate";
   }
 }
 
@@ -1218,26 +1545,47 @@ async function editWebsite(){
     "AI Working...";
 
 
-  modelStatus.innerHTML =
-    "Trying available AI models...";
-
-
   try{
 
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            action:"edit",
+
+            prompt:
+              instruction,
+
+            currentHTML:
+              currentHTML
+
+          })
+        }
+      );
+
+
     const data =
-      await workerRequest({
-        action:"edit",
-        prompt:instruction,
-        currentHTML:currentHTML
-      });
+      await response.json();
 
 
     if(
+      !response.ok ||
+      !data.success ||
       !validHTML(data.html)
     ){
 
       throw new Error(
-        "AI returned invalid HTML."
+        data.error ||
+        "AI edit failed."
       );
     }
 
@@ -1247,20 +1595,9 @@ async function editWebsite(){
     );
 
 
-    setModelStatus(
-      data.provider,
-      data.model,
-      data.fallback
-    );
-
-
     addMessage(
       "ai",
-      "Done. Updated using " +
-      data.model +
-      (data.fallback
-        ? " after automatic fallback."
-        : ".")
+      "Done. Your website has been updated."
     );
 
 
@@ -1269,7 +1606,9 @@ async function editWebsite(){
     if(
       undoStack.length
     ){
+
       undoStack.pop();
+
     }
 
 
@@ -1292,7 +1631,7 @@ async function editWebsite(){
       false;
 
     editBtn.textContent =
-      "Apply AI Edit";
+      "Apply Edit";
   }
 }
 
@@ -1312,8 +1651,7 @@ function addMessage(
     );
 
   div.className =
-    "msg " +
-    type;
+    "msg " + type;
 
   div.textContent =
     text;
@@ -1397,6 +1735,7 @@ $("codeBtn").onclick =
     codePanel.classList.toggle(
       "show"
     );
+
   };
 
 
@@ -1425,7 +1764,6 @@ $("applyCodeBtn").onclick =
 
     pushHistory();
 
-
     renderHTML(
       newHTML
     );
@@ -1433,7 +1771,7 @@ $("applyCodeBtn").onclick =
 
     addMessage(
       "ai",
-      "Manual HTML changes applied."
+      "Manual code changes applied."
     );
 
 
@@ -1459,9 +1797,7 @@ $("resetCodeBtn").onclick =
    COPY
 ========================================================= */
 
-async function copyText(
-  text
-){
+async function copyText(text){
 
   if(!text){
     return;
@@ -1470,8 +1806,9 @@ async function copyText(
 
   try{
 
-    await navigator.clipboard
-      .writeText(text);
+    await navigator.clipboard.writeText(
+      text
+    );
 
 
     showMessage(
@@ -1483,7 +1820,6 @@ async function copyText(
       hideMessage,
       1500
     );
-
 
   }catch{
 
@@ -1545,6 +1881,7 @@ $("downloadBtn").onclick =
     a.href =
       url;
 
+
     a.download =
       "spdp-ai-website.html";
 
@@ -1553,7 +1890,9 @@ $("downloadBtn").onclick =
       a
     );
 
+
     a.click();
+
 
     a.remove();
 
@@ -1600,7 +1939,7 @@ $("openBtn").onclick =
 
 
 /* =========================================================
-   DEVICE SWITCHER
+   DEVICES
 ========================================================= */
 
 document
@@ -1608,9 +1947,9 @@ document
     ".device"
   )
   .forEach(
-    button => {
+    btn => {
 
-      button.onclick =
+      btn.onclick =
         () => {
 
           document
@@ -1625,13 +1964,13 @@ document
             );
 
 
-          button.classList.add(
+          btn.classList.add(
             "active"
           );
 
 
           const width =
-            button.dataset.width;
+            btn.dataset.width;
 
 
           previewFrame.style.width =
@@ -1643,6 +1982,7 @@ document
               ? "0"
               : "0 auto";
         };
+
     }
   );
 
@@ -1682,6 +2022,7 @@ $("clearBtn").onclick =
     code.value =
       "";
 
+
     previewFrame.srcdoc =
       "";
 
@@ -1696,56 +2037,53 @@ $("clearBtn").onclick =
     );
 
 
-    messages.innerHTML =
-      `
+    messages.innerHTML = `
       <div class="msg ai">
-        Generate a website to begin.
+        Your generated website will stay here.
       </div>
-      `;
+    `;
 
-
-    setModelStatus();
 
     hideMessage();
   };
 
 
 /* =========================================================
-   KEYBOARD SHORTCUTS
+   KEYBOARD
 ========================================================= */
 
 promptInput.addEventListener(
   "keydown",
-  event => {
+  e => {
 
     if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key === "Enter"
+      (e.ctrlKey || e.metaKey) &&
+      e.key === "Enter"
     ){
 
-      event.preventDefault();
+      e.preventDefault();
 
       generateWebsite();
     }
+
   }
 );
 
 
 editPrompt.addEventListener(
   "keydown",
-  event => {
+  e => {
 
     if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key === "Enter"
+      (e.ctrlKey || e.metaKey) &&
+      e.key === "Enter"
     ){
 
-      event.preventDefault();
+      e.preventDefault();
 
       editWebsite();
     }
+
   }
 );
 
@@ -1762,7 +2100,7 @@ editBtn.onclick =
 
 
 /* =========================================================
-   LOAD SAVED WEBSITE
+   LOAD SAVED PROJECT
 ========================================================= */
 
 window.addEventListener(
@@ -1784,12 +2122,8 @@ window.addEventListener(
         saved
       );
 
-
-      addMessage(
-        "ai",
-        "Previous project restored."
-      );
     }
+
   }
 );
 
