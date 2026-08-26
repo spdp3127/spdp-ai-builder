@@ -1,656 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SPDP AI — Hybrid Website Builder</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#050505;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
-button,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.45;cursor:not-allowed}
-.app{padding:20px}
-.container{width:min(1450px,100%);margin:auto}
-header{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #191919}
-.brand{display:flex;align-items:center;gap:10px;font-weight:850}
-.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#777);color:#000;font-weight:950}
-.status{font-size:12px;color:#777;display:flex;gap:8px;align-items:center}
-.dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 15px #4ade80}
-.hero{text-align:center;padding:55px 0 30px}
-.badge{display:inline-block;padding:8px 14px;border:1px solid #242424;border-radius:999px;background:#0b0b0b;color:#888;font-size:12px}
-h1{margin:22px 0 15px;font-size:clamp(50px,8vw,94px);line-height:.9;letter-spacing:-.07em;background:linear-gradient(180deg,#fff,#555);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{max-width:720px;margin:auto;color:#777;line-height:1.7}
-.panel{margin-top:30px;padding:16px;border:1px solid #202020;border-radius:24px;background:rgba(255,255,255,.025);box-shadow:0 30px 100px rgba(0,0,0,.45);text-align:left}
-.prompt{width:100%;min-height:145px;resize:vertical;border:1px solid #1b1b1b;border-radius:17px;background:#080808;color:#fff;padding:18px;outline:none;line-height:1.6}
-.prompt:focus{border-color:#444}
-.prompt::placeholder{color:#444}
-.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
-button{border-radius:11px;padding:10px 15px;border:1px solid #292929;background:#111;color:#fff;font-weight:750;transition:.15s}
-button:hover{transform:translateY(-1px)}
-.primary{background:#fff;color:#000;border-color:#fff}
-.message{display:none;margin-top:12px;padding:13px;border-radius:12px;background:#101010;border:1px solid #292929;color:#aaa;white-space:pre-wrap}
-.message.show{display:block}
-.workspace{display:none;margin-top:25px;border:1px solid #202020;border-radius:22px;overflow:hidden;background:#070707;box-shadow:0 35px 100px rgba(0,0,0,.5)}
-.workspace.show{display:block}
-.toolbar{min-height:62px;padding:10px;border-bottom:1px solid #202020;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.toolbar-left,.toolbar-right{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.tool-title{color:#777;font-size:12px}
-.device.active{background:#fff;color:#000}
-.preview-wrap{min-height:720px;padding:12px;display:flex;justify-content:center;align-items:flex-start;background:radial-gradient(circle at center,#121212,#030303 70%)}
-.preview-frame{width:100%;height:700px;border:1px solid #292929;border-radius:15px;background:#fff;box-shadow:0 20px 80px rgba(0,0,0,.5);transition:.3s}
-.preview-edit-bar{display:none;padding:10px 12px;background:#0b0b0b;border-top:1px solid #202020;border-bottom:1px solid #202020;align-items:center;justify-content:space-between;gap:10px}
-.code-panel{display:none;border-top:1px solid #202020}
-.code-panel.show{display:block}
-.code-head{padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #202020}
-.code{width:100%;height:500px;resize:vertical;background:#020202;color:#c9ced6;border:0;padding:18px;font:12px/1.6 Consolas,monospace;outline:none}
-.code-actions{padding:10px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid #181818}
-.chat{border-top:1px solid #202020}
-.chat-head{padding:15px;border-bottom:1px solid #1b1b1b}
-.chat-head strong{font-size:14px}
-.chat-head span{color:#666;font-size:12px;margin-left:8px}
-.messages{height:240px;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:9px}
-.msg{max-width:85%;padding:11px 13px;border-radius:13px;font-size:13px;white-space:pre-wrap;line-height:1.5}
-.msg.user{align-self:flex-end;background:#fff;color:#000}
-.msg.ai{align-self:flex-start;background:#111;color:#aaa;border:1px solid #222}
-.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #191919}
-.edit-prompt{flex:1;height:48px;resize:none;border-radius:12px;border:1px solid #1c1c1c;background:#080808;color:#fff;padding:12px;outline:none}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:35px 0}
-.feature{padding:22px;border:1px solid #1c1c1c;border-radius:17px;background:#090909}
-.feature h3{margin:0 0 8px}
-.feature p{margin:0;color:#666;line-height:1.6;font-size:13px}
-footer{text-align:center;padding:35px;color:#444;font-size:12px}
-@media(max-width:760px){
-.app{padding:12px}
-.status{display:none}
-.features{grid-template-columns:1fr}
-.preview-wrap{min-height:610px}
-.preview-frame{height:590px}
-.chat-input{flex-direction:column}
-.chat-input button{width:100%}
-.preview-edit-bar{align-items:flex-start;flex-direction:column}
-}
-</style>
-</head>
-
-<body>
-<main class="app">
-<div class="container">
-
-<header>
-<div class="brand">
-<div class="logo">S</div>
-<span>SPDP AI</span>
-</div>
-<div class="status">
-<span class="dot"></span>
-Hybrid Builder Online
-</div>
-</header>
-
-<section class="hero">
-<div class="badge">✦ AI Website · App · Game Builder</div>
-<h1>Build anything.</h1>
-<p>
-Generate websites locally for free, edit the code directly,
-edit the live preview, or use AI for advanced changes.
-</p>
-
-<div class="panel">
-<textarea id="prompt" class="prompt" placeholder="Create a premium black gaming company website with hero, games, pricing and contact sections..."></textarea>
-
-<div class="actions">
-<button id="clearBtn">Clear</button>
-<button id="generateBtn" class="primary">Generate</button>
-</div>
-
-<div id="message" class="message"></div>
-</div>
-</section>
-
-<section id="workspace" class="workspace">
-
-<div class="toolbar">
-
-<div class="toolbar-left">
-<span class="tool-title">Live Preview</span>
-
-<button class="device active" data-width="100%">Desktop</button>
-<button class="device" data-width="768px">Tablet</button>
-<button class="device" data-width="390px">Mobile</button>
-
-<button id="codeBtn">Code</button>
-<button id="previewEditBtn">✏️ Edit Preview</button>
-</div>
-
-<div class="toolbar-right">
-<button id="undoBtn">Undo</button>
-<button id="redoBtn">Redo</button>
-<button id="copyBtn">Copy</button>
-<button id="downloadBtn">Download</button>
-<button id="openBtn">Open</button>
-</div>
-
-</div>
-
-<div class="preview-wrap">
-
-<iframe
-id="previewFrame"
-class="preview-frame"
-title="Live Preview"
-sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin">
-</iframe>
-
-</div>
-
-<div id="previewEditBar" class="preview-edit-bar">
-
-<span style="color:#777;font-size:12px">
-✏️ Preview editing enabled — click text and edit directly.
-</span>
-
-<div style="display:flex;gap:7px">
-<button id="cancelPreviewEdit">Cancel</button>
-<button id="savePreviewEdit" class="primary">Save Preview</button>
-</div>
-
-</div>
-
-<div id="codePanel" class="code-panel">
-
-<div class="code-head">
-<span class="tool-title">Manual HTML Editor</span>
-<button id="codeCopyBtn">Copy Code</button>
-</div>
-
-<textarea id="code" class="code" spellcheck="false"></textarea>
-
-<div class="code-actions">
-<button id="resetCodeBtn">Reset</button>
-<button id="applyCodeBtn" class="primary">Apply Code</button>
-</div>
-
-</div>
-
-<div class="chat">
-
-<div class="chat-head">
-<strong>AI Sub-chat</strong>
-<span>Edit your current website</span>
-</div>
-
-<div id="messages" class="messages">
-<div class="msg ai">
-Your website is ready. Ask AI to change anything.
-</div>
-</div>
-
-<div class="chat-input">
-
-<textarea
-id="editPrompt"
-class="edit-prompt"
-placeholder="Make the hero more premium and add animated gradient lights..."></textarea>
-
-<button id="editBtn" class="primary">
-Apply AI Edit
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="features">
-
-<article class="feature">
-<h3>⚡ Free Generation</h3>
-<p>Basic websites are generated locally without Gemini quota.</p>
-</article>
-
-<article class="feature">
-<h3>✏️ Preview Editing</h3>
-<p>Edit visible website content directly inside the live preview.</p>
-</article>
-
-<article class="feature">
-<h3>✨ AI Editing</h3>
-<p>Use the Cloudflare Worker and Gemini for advanced modifications.</p>
-</article>
-
-</section>
-
-<footer>
-SPDP AI · Digital Platform · 2026
-</footer>
-
-</div>
-</main>
-
-<script>
-
-const WORKER_URL =
-"https://spdp-ai.spdp3127.workers.dev/";
-
-const $ =
-id => document.getElementById(id);
-
-const promptInput = $("prompt");
-const editPrompt = $("editPrompt");
-const generateBtn = $("generateBtn");
-const editBtn = $("editBtn");
-const workspace = $("workspace");
-const previewFrame = $("previewFrame");
-const code = $("code");
-const codePanel = $("codePanel");
-const messages = $("messages");
-const message = $("message");
-
-const previewEditBtn =
-$("previewEditBtn");
-
-const previewEditBar =
-$("previewEditBar");
-
-const savePreviewEdit =
-$("savePreviewEdit");
-
-const cancelPreviewEdit =
-$("cancelPreviewEdit");
-
-let currentHTML = "";
-let undoStack = [];
-let redoStack = [];
-let previewEditing = false;
-let previewOriginalHTML = "";
-
-
-/* MESSAGE */
-
-function showMessage(text){
-message.textContent = text;
-message.classList.add("show");
-}
-
-function hideMessage(){
-message.textContent = "";
-message.classList.remove("show");
-}
-
-
-/* VALID HTML */
-
-function validHTML(html){
-
-if(typeof html !== "string") return false;
-
-const x =
-html.trim().toLowerCase();
-
-return (
-x.startsWith("<!doctype html") &&
-x.includes("<html") &&
-x.includes("<head") &&
-x.includes("<body") &&
-x.includes("</html>")
-);
-
-}
-
-
-/* HISTORY */
-
-function pushHistory(){
-
-if(!currentHTML) return;
-
-undoStack.push(currentHTML);
-
-if(undoStack.length > 40){
-undoStack.shift();
-}
-
-redoStack = [];
-
-}
-
-
-/* RENDER */
-
-function renderHTML(html){
-
-const clean =
-String(html || "").trim();
-
-if(!validHTML(clean)){
-
-showMessage(
-"❌ Cannot render invalid HTML."
-);
-
-return;
-
-}
-
-currentHTML = clean;
-
-code.value = currentHTML;
-
-previewFrame.srcdoc =
-currentHTML;
-
-workspace.classList.add("show");
-
-localStorage.setItem(
-"spdp_current_html",
-currentHTML
-);
-
-}
-
-
-/* =========================
-   LOCAL GENERATOR
-========================= */
-
-function generateLocalWebsite(prompt){
-
-const p =
-prompt.toLowerCase();
-
-let title = "SPDP STUDIO";
-let subtitle =
-"Build something extraordinary.";
-
-let type =
-"Digital Experience";
-
-
-if(
-p.includes("gaming") ||
-p.includes("game")
-){
-
-title =
-"NEXUS GAMING";
-
-subtitle =
-"Enter the next generation of gaming.";
-
-type =
-"Next Generation Gaming";
-
-}
-
-
-else if(
-p.includes("portfolio") ||
-p.includes("developer") ||
-p.includes("designer")
-){
-
-title =
-"CREATIVE PORTFOLIO";
-
-subtitle =
-"Design. Build. Create.";
-
-type =
-"Creative Portfolio";
-
-}
-
-
-else if(
-p.includes("business") ||
-p.includes("company") ||
-p.includes("startup")
-){
-
-title =
-"NEXTGEN";
-
-subtitle =
-"Technology built for tomorrow.";
-
-type =
-"Modern Business";
-
-}
-
-
-else if(
-p.includes("shop") ||
-p.includes("store") ||
-p.includes("ecommerce")
-){
-
-title =
-"LUXE STORE";
-
-subtitle =
-"Premium products. Simple experience.";
-
-type =
-"Premium Commerce";
-
-}
-
-
-else if(
-p.includes("restaurant") ||
-p.includes("food") ||
-p.includes("cafe")
-){
-
-title =
-"NOIR KITCHEN";
-
-subtitle =
-"Exceptional taste. Modern experience.";
-
-type =
-"Premium Restaurant";
-
-}
-
-
-return `<!DOCTYPE html>
-<html lang="en">
-<head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
 
-<title>${escapeHTML(title)}</title>
+<title>SPDP AI — Website Builder</title>
 
 <style>
 
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-margin:0;
-font-family:Inter,system-ui,sans-serif;
-background:#050505;
-color:#fff;
+  margin:0;
+  background:#050505;
+  color:#fff;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-nav{
-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 7%;
-position:sticky;
-top:0;
-z-index:20;
-background:rgba(5,5,5,.8);
-backdrop-filter:blur(20px);
-border-bottom:1px solid #222;
+button,
+textarea,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.app{
+  min-height:100vh;
+  padding:20px;
+}
+
+.container{
+  width:min(1500px,100%);
+  margin:auto;
+}
+
+
+/* HEADER */
+
+header{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #1c1c1c;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:900;
 }
 
 .logo{
-font-weight:950;
-letter-spacing:-1px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  font-weight:950;
+  box-shadow:0 0 30px rgba(255,255,255,.08);
 }
 
-nav a{
-color:#777;
-text-decoration:none;
-margin-left:25px;
-transition:.2s;
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#777;
+  font-size:12px;
 }
 
-nav a:hover{
-color:#fff;
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#4ade80;
+  box-shadow:0 0 15px #4ade80;
 }
+
+
+/* HERO */
 
 .hero{
-min-height:82vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:90px 20px;
-background:
-radial-gradient(
-circle at 50% 15%,
-#292929,
-transparent 45%
-);
+  text-align:center;
+  padding:70px 0 35px;
 }
 
 .badge{
-padding:8px 14px;
-border:1px solid #333;
-border-radius:999px;
-color:#aaa;
-font-size:13px;
+  display:inline-flex;
+  padding:8px 14px;
+  border:1px solid #252525;
+  border-radius:999px;
+  background:#0b0b0b;
+  color:#888;
+  font-size:12px;
 }
 
 h1{
-font-size:
-clamp(52px,10vw,130px);
-line-height:.88;
-margin:28px 0;
-letter-spacing:-.08em;
-background:
-linear-gradient(#fff,#555);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
+  margin:22px 0 15px;
+  font-size:clamp(52px,8vw,110px);
+  line-height:.9;
+  letter-spacing:-.07em;
+  background:linear-gradient(180deg,#fff,#555);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
 .hero p{
-max-width:680px;
-color:#777;
-font-size:18px;
-line-height:1.7;
+  max-width:750px;
+  margin:auto;
+  color:#777;
+  line-height:1.7;
 }
 
-.btn{
-margin-top:30px;
-display:inline-block;
-padding:15px 25px;
-border-radius:12px;
-background:#fff;
-color:#000;
-text-decoration:none;
-font-weight:850;
-transition:.2s;
+
+/* PROMPT */
+
+.panel{
+  margin-top:35px;
+  padding:15px;
+  border:1px solid #202020;
+  border-radius:24px;
+  background:rgba(255,255,255,.025);
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
+  text-align:left;
 }
 
-.btn:hover{
-transform:translateY(-3px);
-box-shadow:
-0 15px 40px rgba(255,255,255,.12);
+.prompt{
+  width:100%;
+  min-height:160px;
+  resize:vertical;
+  padding:18px;
+  border:1px solid #1b1b1b;
+  border-radius:17px;
+  outline:none;
+  background:#080808;
+  color:#fff;
+  line-height:1.6;
 }
 
-section{
-padding:100px 7%;
+.prompt:focus{
+  border-color:#444;
 }
 
-.grid{
-display:grid;
-grid-template-columns:
-repeat(3,1fr);
-gap:20px;
+.prompt::placeholder{
+  color:#444;
 }
 
-.card{
-padding:30px;
-border:1px solid #222;
-border-radius:22px;
-background:
-linear-gradient(
-145deg,
-#101010,
-#080808
-);
-transition:.25s;
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:10px;
 }
 
-.card:hover{
-transform:translateY(-5px);
-border-color:#444;
+button{
+  padding:10px 15px;
+  border:1px solid #292929;
+  border-radius:11px;
+  background:#111;
+  color:#fff;
+  font-weight:750;
+  transition:.15s;
 }
 
-.card h3{
-margin-top:0;
+button:hover{
+  transform:translateY(-1px);
 }
 
-.card p{
-color:#777;
-line-height:1.7;
+.primary{
+  border-color:#fff;
+  background:#fff;
+  color:#000;
 }
 
-.about{
-max-width:800px;
-margin:auto;
-text-align:center;
+
+/* MESSAGE */
+
+.message{
+  display:none;
+  margin-top:12px;
+  padding:13px;
+  border:1px solid #292929;
+  border-radius:12px;
+  background:#101010;
+  color:#aaa;
+  white-space:pre-wrap;
+  line-height:1.5;
 }
 
-.contact{
-text-align:center;
-background:#0b0b0b;
+.message.show{
+  display:block;
 }
+
+
+/* WORKSPACE */
+
+.workspace{
+  display:none;
+  margin-top:25px;
+  overflow:hidden;
+  border:1px solid #202020;
+  border-radius:22px;
+  background:#070707;
+  box-shadow:0 35px 100px rgba(0,0,0,.5);
+}
+
+.workspace.show{
+  display:block;
+}
+
+
+/* TOOLBAR */
+
+.toolbar{
+  min-height:62px;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  border-bottom:1px solid #202020;
+}
+
+.toolbar-left,
+.toolbar-right{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.tool-title{
+  color:#777;
+  font-size:12px;
+}
+
+.device.active{
+  background:#fff;
+  color:#000;
+}
+
+
+/* PREVIEW */
+
+.preview-wrap{
+  min-height:720px;
+  padding:12px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  background:
+    radial-gradient(
+      circle at center,
+      #141414,
+      #030303 70%
+    );
+}
+
+.preview-frame{
+  width:100%;
+  height:700px;
+  border:1px solid #292929;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 20px 80px rgba(0,0,0,.5);
+  transition:.3s;
+}
+
+
+/* CODE */
+
+.code-panel{
+  display:none;
+  border-top:1px solid #202020;
+}
+
+.code-panel.show{
+  display:block;
+}
+
+.code-head{
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #202020;
+}
+
+.code{
+  width:100%;
+  height:520px;
+  resize:vertical;
+  padding:18px;
+  border:0;
+  outline:none;
+  background:#020202;
+  color:#c9ced6;
+  font:12px/1.6 Consolas,Monaco,monospace;
+}
+
+.code-actions{
+  padding:10px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  border-top:1px solid #181818;
+}
+
+
+/* CHAT */
+
+.chat{
+  border-top:1px solid #202020;
+}
+
+.chat-head{
+  padding:15px;
+  border-bottom:1px solid #1b1b1b;
+}
+
+.chat-head strong{
+  font-size:14px;
+}
+
+.chat-head span{
+  margin-left:8px;
+  color:#666;
+  font-size:12px;
+}
+
+.messages{
+  height:250px;
+  overflow-y:auto;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.msg{
+  max-width:88%;
+  padding:11px 13px;
+  border-radius:13px;
+  font-size:13px;
+  line-height:1.5;
+  white-space:pre-wrap;
+}
+
+.msg.user{
+  align-self:flex-end;
+  background:#fff;
+  color:#000;
+}
+
+.msg.ai{
+  align-self:flex-start;
+  background:#111;
+  color:#aaa;
+  border:1px solid #222;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid #191919;
+}
+
+.edit-prompt{
+  flex:1;
+  height:48px;
+  resize:none;
+  padding:12px;
+  border:1px solid #1c1c1c;
+  border-radius:12px;
+  outline:none;
+  background:#080808;
+  color:#fff;
+}
+
+
+/* MODEL STATUS */
+
+.model-status{
+  padding:9px 12px;
+  border-bottom:1px solid #191919;
+  color:#666;
+  font-size:11px;
+}
+
+.model-status strong{
+  color:#aaa;
+}
+
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:35px 0;
+}
+
+.feature{
+  padding:22px;
+  border:1px solid #1c1c1c;
+  border-radius:17px;
+  background:#090909;
+}
+
+.feature h3{
+  margin:0 0 8px;
+}
+
+.feature p{
+  margin:0;
+  color:#666;
+  line-height:1.6;
+  font-size:13px;
+}
+
+
+/* FOOTER */
 
 footer{
-text-align:center;
-padding:40px;
-color:#555;
-border-top:1px solid #191919;
+  padding:35px;
+  text-align:center;
+  color:#444;
+  font-size:12px;
 }
 
-@media(max-width:700px){
 
-nav a{
-display:none;
-}
+/* MOBILE */
 
-.grid{
-grid-template-columns:1fr;
-}
+@media(max-width:760px){
 
-section{
-padding:70px 20px;
-}
+  .app{
+    padding:12px;
+  }
 
-.hero{
-min-height:75vh;
-}
+  .status{
+    display:none;
+  }
+
+  .hero{
+    padding-top:50px;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .preview-wrap{
+    min-height:610px;
+  }
+
+  .preview-frame{
+    height:590px;
+  }
+
+  .chat-input{
+    flex-direction:column;
+  }
+
+  .chat-input button{
+    width:100%;
+  }
 
 }
 
@@ -660,999 +500,1300 @@ min-height:75vh;
 
 <body>
 
-<nav>
+<main class="app">
 
-<div class="logo">
-SPDP
-</div>
+<div class="container">
 
-<div>
-<a href="#features">Features</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</div>
+<header>
 
-</nav>
+  <div class="brand">
+
+    <div class="logo">
+      S
+    </div>
+
+    <span>
+      SPDP AI
+    </span>
+
+  </div>
+
+  <div class="status">
+
+    <span class="dot"></span>
+
+    Automatic AI Fallback
+
+  </div>
+
+</header>
+
 
 <section class="hero">
 
-<div class="badge">
-✦ ${escapeHTML(type)}
-</div>
+  <div class="badge">
+    ✦ AI Website · App · Game Builder
+  </div>
 
-<h1>
-${escapeHTML(title)}
-</h1>
+  <h1>
+    Build anything.
+  </h1>
 
-<p>
-${escapeHTML(subtitle)}
-</p>
+  <p>
+    Generate complete websites with automatic AI model
+    switching, live preview, full source code and AI editing.
+  </p>
 
-<a class="btn" href="#features">
-Explore
-</a>
 
-</section>
+  <div class="panel">
 
-<section id="features">
+    <textarea
+      id="prompt"
+      class="prompt"
+      placeholder="Example: Create a premium black gaming company website with a cinematic hero, games section, pricing, testimonials, contact form and responsive mobile design..."
+    ></textarea>
 
-<h2>Why choose us?</h2>
+    <div class="actions">
 
-<div class="grid">
+      <button id="clearBtn">
+        Clear
+      </button>
 
-<div class="card">
-<h3>01 — Powerful</h3>
-<p>
-Everything you need to launch a modern digital experience.
-</p>
-</div>
+      <button
+        id="generateBtn"
+        class="primary"
+      >
+        Generate Website
+      </button>
 
-<div class="card">
-<h3>02 — Fast</h3>
-<p>
-Designed for responsive layouts and smooth interactions.
-</p>
-</div>
+    </div>
 
-<div class="card">
-<h3>03 — Premium</h3>
-<p>
-Clean visuals, strong hierarchy and professional design.
-</p>
-</div>
+    <div
+      id="message"
+      class="message"
+    ></div>
 
-</div>
+  </div>
 
 </section>
 
-<section id="about">
-
-<div class="about">
-
-<h2>About</h2>
-
-<p style="
-color:#777;
-line-height:1.8;
-">
-
-A modern digital experience generated
-with SPDP AI Hybrid Website Builder.
-
-</p>
-
-</div>
-
-</section>
 
 <section
-id="contact"
-class="contact"
+  id="workspace"
+  class="workspace"
 >
 
-<h2>
-Ready to build?
-</h2>
 
-<p style="color:#777">
-Start creating your next digital experience.
-</p>
+<div class="toolbar">
 
-<a
-class="btn"
-href="#features"
+  <div class="toolbar-left">
+
+    <span class="tool-title">
+      Live Preview
+    </span>
+
+    <button
+      class="device active"
+      data-width="100%"
+    >
+      Desktop
+    </button>
+
+    <button
+      class="device"
+      data-width="768px"
+    >
+      Tablet
+    </button>
+
+    <button
+      class="device"
+      data-width="390px"
+    >
+      Mobile
+    </button>
+
+    <button id="codeBtn">
+      Code
+    </button>
+
+  </div>
+
+
+  <div class="toolbar-right">
+
+    <button id="undoBtn">
+      Undo
+    </button>
+
+    <button id="redoBtn">
+      Redo
+    </button>
+
+    <button id="copyBtn">
+      Copy
+    </button>
+
+    <button id="downloadBtn">
+      Download
+    </button>
+
+    <button id="openBtn">
+      Open
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  id="modelStatus"
+  class="model-status"
 >
-Get Started
-</a>
+  Ready.
+</div>
+
+
+<div class="preview-wrap">
+
+  <iframe
+    id="previewFrame"
+    class="preview-frame"
+    title="Live Website Preview"
+    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+  ></iframe>
+
+</div>
+
+
+<div
+  id="codePanel"
+  class="code-panel"
+>
+
+  <div class="code-head">
+
+    <span class="tool-title">
+      Full HTML Source
+    </span>
+
+    <button id="codeCopyBtn">
+      Copy Code
+    </button>
+
+  </div>
+
+
+  <textarea
+    id="code"
+    class="code"
+    spellcheck="false"
+  ></textarea>
+
+
+  <div class="code-actions">
+
+    <button id="resetCodeBtn">
+      Reset
+    </button>
+
+    <button
+      id="applyCodeBtn"
+      class="primary"
+    >
+      Apply Code
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="chat">
+
+  <div class="chat-head">
+
+    <strong>
+      AI Sub-chat
+    </strong>
+
+    <span>
+      Edit your current website
+    </span>
+
+  </div>
+
+
+  <div
+    id="messages"
+    class="messages"
+  >
+
+    <div class="msg ai">
+      Generate a website first. Then tell me what you want changed.
+    </div>
+
+  </div>
+
+
+  <div class="chat-input">
+
+    <textarea
+      id="editPrompt"
+      class="edit-prompt"
+      placeholder="Example: Make the hero more premium, add glowing gradient lights and add a mobile menu..."
+    ></textarea>
+
+    <button
+      id="editBtn"
+      class="primary"
+    >
+      Apply AI Edit
+    </button>
+
+  </div>
+
+</div>
 
 </section>
 
+
+<section class="features">
+
+  <article class="feature">
+
+    <h3>
+      ⚡ Automatic Fallback
+    </h3>
+
+    <p>
+      If one configured AI provider or model fails,
+      the Worker automatically tries the next one.
+    </p>
+
+  </article>
+
+
+  <article class="feature">
+
+    <h3>
+      🖥 Live Preview
+    </h3>
+
+    <p>
+      See the complete generated website immediately
+      and switch between desktop, tablet and mobile.
+    </p>
+
+  </article>
+
+
+  <article class="feature">
+
+    <h3>
+      ✨ AI Sub-chat
+    </h3>
+
+    <p>
+      Keep the current website and ask AI to modify
+      specific sections without starting again.
+    </p>
+
+  </article>
+
+</section>
+
+
 <footer>
-SPDP AI · 2026
+  SPDP AI · Digital Platform · 2026
 </footer>
+
+</div>
+
+</main>
+
 
 <script>
 
-document
-.querySelectorAll(
-"a[href^='#']"
-)
-.forEach(a=>{
+const WORKER_URL =
+  "https://spdp-ai.spdp3127.workers.dev/";
 
-a.addEventListener(
-"click",
-e=>{
 
-const target =
-document.querySelector(
-a.getAttribute("href")
-);
+const $ = id =>
+  document.getElementById(id);
 
-if(target){
 
-e.preventDefault();
+const promptInput =
+  $("prompt");
 
-target.scrollIntoView({
-behavior:"smooth"
-});
+const editPrompt =
+  $("editPrompt");
 
+const generateBtn =
+  $("generateBtn");
+
+const editBtn =
+  $("editBtn");
+
+const workspace =
+  $("workspace");
+
+const previewFrame =
+  $("previewFrame");
+
+const code =
+  $("code");
+
+const codePanel =
+  $("codePanel");
+
+const messages =
+  $("messages");
+
+const message =
+  $("message");
+
+const modelStatus =
+  $("modelStatus");
+
+
+let currentHTML = "";
+
+let undoStack = [];
+
+let redoStack = [];
+
+
+/* =========================================================
+   UI
+========================================================= */
+
+function showMessage(text){
+
+  message.textContent =
+    text;
+
+  message.classList.add(
+    "show"
+  );
 }
 
-});
 
-});
+function hideMessage(){
 
-<\/script>
+  message.textContent =
+    "";
 
-</body>
-</html>`;
-
+  message.classList.remove(
+    "show"
+  );
 }
 
 
-function escapeHTML(value){
+function setModelStatus(
+  provider,
+  model,
+  fallback
+){
 
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+  if(!provider){
 
+    modelStatus.innerHTML =
+      "Ready.";
+
+    return;
+  }
+
+  modelStatus.innerHTML =
+    "<strong>" +
+    provider +
+    "</strong> · " +
+    model +
+    (fallback
+      ? " · automatic fallback"
+      : "");
 }
 
 
-/* =========================
+/* =========================================================
+   VALID HTML
+========================================================= */
+
+function validHTML(html){
+
+  if(
+    typeof html !== "string" ||
+    !html.trim()
+  ){
+    return false;
+  }
+
+  const x =
+    html.trim().toLowerCase();
+
+  return (
+    x.startsWith("<!doctype html") &&
+    x.includes("<html") &&
+    x.includes("<head") &&
+    x.includes("<body") &&
+    x.includes("</html>")
+  );
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderHTML(html){
+
+  currentHTML =
+    String(html || "").trim();
+
+  previewFrame.srcdoc =
+    currentHTML;
+
+  code.value =
+    currentHTML;
+
+  workspace.classList.add(
+    "show"
+  );
+
+  localStorage.setItem(
+    "spdp_current_html",
+    currentHTML
+  );
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function pushHistory(){
+
+  if(!currentHTML){
+    return;
+  }
+
+  undoStack.push(
+    currentHTML
+  );
+
+  if(
+    undoStack.length > 40
+  ){
+    undoStack.shift();
+  }
+
+  redoStack = [];
+}
+
+
+/* =========================================================
+   API
+========================================================= */
+
+async function workerRequest(
+  payload
+){
+
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(payload)
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try{
+
+    data =
+      JSON.parse(text);
+
+  }catch{
+
+    throw new Error(
+      "Worker returned invalid JSON."
+    );
+  }
+
+
+  if(
+    !response.ok ||
+    !data.success
+  ){
+
+    const error =
+      data.error ||
+      "AI request failed.";
+
+    throw new Error(
+      error
+    );
+  }
+
+
+  return data;
+}
+
+
+/* =========================================================
    GENERATE
-========================= */
+========================================================= */
 
 async function generateWebsite(){
 
-const text =
-promptInput.value.trim();
+  const prompt =
+    promptInput.value.trim();
 
-if(!text){
 
-showMessage(
-"Type what you want to build."
-);
+  if(!prompt){
 
-return;
+    showMessage(
+      "Type what you want to build."
+    );
 
+    return;
+  }
+
+
+  hideMessage();
+
+
+  generateBtn.disabled =
+    true;
+
+  generateBtn.textContent =
+    "AI Generating...";
+
+
+  modelStatus.innerHTML =
+    "Trying available AI models...";
+
+
+  try{
+
+    const data =
+      await workerRequest({
+        action:"create",
+        prompt
+      });
+
+
+    if(
+      !validHTML(data.html)
+    ){
+
+      throw new Error(
+        "AI returned invalid HTML."
+      );
+    }
+
+
+    undoStack = [];
+
+    redoStack = [];
+
+
+    renderHTML(
+      data.html
+    );
+
+
+    setModelStatus(
+      data.provider,
+      data.model,
+      data.fallback
+    );
+
+
+    addMessage(
+      "user",
+      prompt
+    );
+
+
+    addMessage(
+      "ai",
+      "Website generated using " +
+      data.model +
+      (data.fallback
+        ? " after automatic fallback."
+        : ".")
+    );
+
+
+    workspace.scrollIntoView({
+      behavior:"smooth"
+    });
+
+
+  }catch(error){
+
+    showMessage(
+      "❌ " +
+      error.message
+    );
+
+
+    addMessage(
+      "ai",
+      "❌ " +
+      error.message
+    );
+
+
+  }finally{
+
+    generateBtn.disabled =
+      false;
+
+    generateBtn.textContent =
+      "Generate Website";
+  }
 }
 
-hideMessage();
 
-generateBtn.disabled = true;
-generateBtn.textContent =
-"Generating...";
-
-try{
-
-const html =
-generateLocalWebsite(text);
-
-undoStack = [];
-redoStack = [];
-
-renderHTML(html);
-
-addMessage(
-"user",
-text
-);
-
-addMessage(
-"ai",
-"Website generated locally for free."
-);
-
-workspace.scrollIntoView({
-behavior:"smooth"
-});
-
-}catch(error){
-
-showMessage(
-"❌ " + error.message
-);
-
-}finally{
-
-generateBtn.disabled = false;
-generateBtn.textContent =
-"Generate";
-
-}
-
-}
-
-
-/* =========================
+/* =========================================================
    AI EDIT
-========================= */
+========================================================= */
 
 async function editWebsite(){
 
-if(!currentHTML){
+  if(!currentHTML){
 
-showMessage(
-"Generate a website first."
-);
+    showMessage(
+      "Generate a website first."
+    );
 
-return;
+    return;
+  }
 
+
+  const instruction =
+    editPrompt.value.trim();
+
+
+  if(!instruction){
+    return;
+  }
+
+
+  pushHistory();
+
+
+  addMessage(
+    "user",
+    instruction
+  );
+
+
+  editPrompt.value =
+    "";
+
+
+  editBtn.disabled =
+    true;
+
+  editBtn.textContent =
+    "AI Working...";
+
+
+  modelStatus.innerHTML =
+    "Trying available AI models...";
+
+
+  try{
+
+    const data =
+      await workerRequest({
+        action:"edit",
+        prompt:instruction,
+        currentHTML:currentHTML
+      });
+
+
+    if(
+      !validHTML(data.html)
+    ){
+
+      throw new Error(
+        "AI returned invalid HTML."
+      );
+    }
+
+
+    renderHTML(
+      data.html
+    );
+
+
+    setModelStatus(
+      data.provider,
+      data.model,
+      data.fallback
+    );
+
+
+    addMessage(
+      "ai",
+      "Done. Updated using " +
+      data.model +
+      (data.fallback
+        ? " after automatic fallback."
+        : ".")
+    );
+
+
+  }catch(error){
+
+    if(
+      undoStack.length
+    ){
+      undoStack.pop();
+    }
+
+
+    addMessage(
+      "ai",
+      "❌ " +
+      error.message
+    );
+
+
+    showMessage(
+      "❌ " +
+      error.message
+    );
+
+
+  }finally{
+
+    editBtn.disabled =
+      false;
+
+    editBtn.textContent =
+      "Apply AI Edit";
+  }
 }
 
-const instruction =
-editPrompt.value.trim();
 
-if(!instruction) return;
-
-pushHistory();
-
-addMessage(
-"user",
-instruction
-);
-
-editPrompt.value = "";
-
-editBtn.disabled = true;
-editBtn.textContent =
-"AI Working...";
-
-try{
-
-const response =
-await fetch(
-WORKER_URL,
-{
-method:"POST",
-headers:{
-"Content-Type":
-"application/json"
-},
-body:JSON.stringify({
-action:"edit",
-prompt:instruction,
-currentHTML:currentHTML
-})
-}
-);
-
-const data =
-await response.json();
-
-if(!response.ok ||
-!data.success){
-
-throw new Error(
-data.error ||
-"AI edit failed."
-);
-
-}
-
-if(!validHTML(data.html)){
-
-throw new Error(
-"AI returned invalid HTML."
-);
-
-}
-
-renderHTML(
-data.html
-);
-
-addMessage(
-"ai",
-"Done. AI updated your website."
-);
-
-}catch(error){
-
-if(undoStack.length){
-undoStack.pop();
-}
-
-addMessage(
-"ai",
-"❌ " + error.message
-);
-
-showMessage(
-"❌ " + error.message
-);
-
-}finally{
-
-editBtn.disabled = false;
-editBtn.textContent =
-"Apply AI Edit";
-
-}
-
-}
-
-
-/* MESSAGE */
+/* =========================================================
+   CHAT
+========================================================= */
 
 function addMessage(
-type,
-text
+  type,
+  text
 ){
 
-const div =
-document.createElement(
-"div"
-);
+  const div =
+    document.createElement(
+      "div"
+    );
 
-div.className =
-"msg " + type;
+  div.className =
+    "msg " +
+    type;
 
-div.textContent =
-text;
+  div.textContent =
+    text;
 
-messages.appendChild(
-div
-);
+  messages.appendChild(
+    div
+  );
 
-messages.scrollTop =
-messages.scrollHeight;
-
+  messages.scrollTop =
+    messages.scrollHeight;
 }
 
 
-/* =========================
-   CODE PANEL
-========================= */
-
-$("codeBtn").onclick = () => {
-
-if(!currentHTML){
-
-showMessage(
-"Generate a website first."
-);
-
-return;
-
-}
-
-code.value =
-currentHTML;
-
-codePanel.classList.toggle(
-"show"
-);
-
-if(
-codePanel.classList.contains(
-"show"
-)
-){
-
-setTimeout(()=>{
-
-codePanel.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-},50);
-
-}
-
-};
-
-
-/* LIVE CODE PREVIEW */
-
-code.addEventListener(
-"input",
-()=>{
-
-const value =
-code.value.trim();
-
-if(value){
-
-previewFrame.srcdoc =
-value;
-
-}
-
-}
-);
-
-
-/* APPLY CODE */
-
-$("applyCodeBtn").onclick = () => {
-
-const newHTML =
-code.value.trim();
-
-if(!validHTML(newHTML)){
-
-showMessage(
-"❌ Invalid HTML."
-);
-
-return;
-
-}
-
-if(newHTML === currentHTML){
-
-showMessage(
-"No code changes detected."
-);
-
-return;
-
-}
-
-pushHistory();
-
-renderHTML(
-newHTML
-);
-
-addMessage(
-"ai",
-"Manual code changes applied."
-);
-
-showMessage(
-"✓ Code applied."
-);
-
-};
-
-
-/* RESET CODE */
-
-$("resetCodeBtn").onclick = () => {
-
-code.value =
-currentHTML;
-
-previewFrame.srcdoc =
-currentHTML;
-
-};
-
-
-/* =========================
-   PREVIEW EDITOR
-========================= */
-
-previewEditBtn.onclick = () => {
-
-if(!currentHTML){
-
-showMessage(
-"Generate a website first."
-);
-
-return;
-
-}
-
-previewOriginalHTML =
-currentHTML;
-
-previewEditing = true;
-
-previewEditBar.style.display =
-"flex";
-
-previewEditBtn.disabled =
-true;
-
-enablePreviewEditing();
-
-showMessage(
-"✏️ Click text inside the preview and edit it."
-);
-
-};
-
-
-function enablePreviewEditing(){
-
-const doc =
-previewFrame.contentDocument;
-
-if(!doc || !doc.body) return;
-
-doc.body.setAttribute(
-"contenteditable",
-"true"
-);
-
-doc.body.style.outline =
-"2px dashed rgba(255,255,255,.25)";
-
-doc.body.style.outlineOffset =
-"-4px";
-
-
-doc.querySelectorAll("a")
-.forEach(link=>{
-
-link.dataset.originalHref =
-link.getAttribute("href") || "";
-
-link.addEventListener(
-"click",
-e=>{
-e.preventDefault();
-}
-);
-
-});
-
-}
-
-
-previewFrame.addEventListener(
-"load",
-()=>{
-
-if(previewEditing){
-
-setTimeout(
-enablePreviewEditing,
-50
-);
-
-}
-
-}
-);
-
-
-/* SAVE PREVIEW */
-
-savePreviewEdit.onclick = () => {
-
-const doc =
-previewFrame.contentDocument;
-
-if(!doc ||
-!doc.documentElement){
-
-showMessage(
-"❌ Could not read preview."
-);
-
-return;
-
-}
-
-const newHTML =
-"<!DOCTYPE html>\n" +
-doc.documentElement.outerHTML;
-
-if(!validHTML(newHTML)){
-
-showMessage(
-"❌ Invalid preview HTML."
-);
-
-return;
-
-}
-
-pushHistory();
-
-renderHTML(
-newHTML
-);
-
-disablePreviewEditing();
-
-addMessage(
-"ai",
-"Preview edits saved successfully."
-);
-
-showMessage(
-"✓ Preview changes saved."
-);
-
-};
-
-
-/* CANCEL PREVIEW */
-
-cancelPreviewEdit.onclick = () => {
-
-renderHTML(
-previewOriginalHTML
-);
-
-disablePreviewEditing();
-
-showMessage(
-"Preview changes cancelled."
-);
-
-};
-
-
-function disablePreviewEditing(){
-
-previewEditing = false;
-
-previewEditBar.style.display =
-"none";
-
-previewEditBtn.disabled =
-false;
-
-}
-
-
-/* =========================
+/* =========================================================
    UNDO
-========================= */
+========================================================= */
 
-$("undoBtn").onclick = () => {
+$("undoBtn").onclick =
+  () => {
 
-if(!undoStack.length){
+    if(
+      !undoStack.length
+    ){
 
-showMessage(
-"Nothing to undo."
-);
+      showMessage(
+        "Nothing to undo."
+      );
 
-return;
-
-}
-
-redoStack.push(
-currentHTML
-);
-
-const previous =
-undoStack.pop();
-
-renderHTML(
-previous
-);
-
-};
+      return;
+    }
 
 
-/* =========================
+    redoStack.push(
+      currentHTML
+    );
+
+
+    renderHTML(
+      undoStack.pop()
+    );
+  };
+
+
+/* =========================================================
    REDO
-========================= */
+========================================================= */
 
-$("redoBtn").onclick = () => {
+$("redoBtn").onclick =
+  () => {
 
-if(!redoStack.length){
+    if(
+      !redoStack.length
+    ){
 
-showMessage(
-"Nothing to redo."
-);
+      showMessage(
+        "Nothing to redo."
+      );
 
-return;
-
-}
-
-undoStack.push(
-currentHTML
-);
-
-const next =
-redoStack.pop();
-
-renderHTML(
-next
-);
-
-};
+      return;
+    }
 
 
-/* =========================
+    undoStack.push(
+      currentHTML
+    );
+
+
+    renderHTML(
+      redoStack.pop()
+    );
+  };
+
+
+/* =========================================================
+   CODE PANEL
+========================================================= */
+
+$("codeBtn").onclick =
+  () => {
+
+    codePanel.classList.toggle(
+      "show"
+    );
+  };
+
+
+/* =========================================================
+   APPLY CODE
+========================================================= */
+
+$("applyCodeBtn").onclick =
+  () => {
+
+    const newHTML =
+      code.value.trim();
+
+
+    if(
+      !validHTML(newHTML)
+    ){
+
+      showMessage(
+        "❌ Invalid HTML."
+      );
+
+      return;
+    }
+
+
+    pushHistory();
+
+
+    renderHTML(
+      newHTML
+    );
+
+
+    addMessage(
+      "ai",
+      "Manual HTML changes applied."
+    );
+
+
+    showMessage(
+      "✓ Code applied."
+    );
+  };
+
+
+/* =========================================================
+   RESET CODE
+========================================================= */
+
+$("resetCodeBtn").onclick =
+  () => {
+
+    code.value =
+      currentHTML;
+  };
+
+
+/* =========================================================
    COPY
-========================= */
+========================================================= */
 
-async function copyText(text){
+async function copyText(
+  text
+){
 
-if(!text) return;
+  if(!text){
+    return;
+  }
 
-try{
 
-await navigator.clipboard
-.writeText(text);
+  try{
 
-showMessage(
-"✓ Copied."
-);
+    await navigator.clipboard
+      .writeText(text);
 
-setTimeout(
-hideMessage,
-1500
-);
 
-}catch{
+    showMessage(
+      "✓ Copied."
+    );
 
-showMessage(
-"Copy failed."
-);
 
-}
+    setTimeout(
+      hideMessage,
+      1500
+    );
 
+
+  }catch{
+
+    showMessage(
+      "Copy failed."
+    );
+  }
 }
 
 
 $("copyBtn").onclick =
-() => copyText(
-currentHTML
-);
+  () =>
+    copyText(
+      currentHTML
+    );
+
 
 $("codeCopyBtn").onclick =
-() => copyText(
-code.value
-);
+  () =>
+    copyText(
+      code.value
+    );
 
 
-/* =========================
+/* =========================================================
    DOWNLOAD
-========================= */
+========================================================= */
 
-$("downloadBtn").onclick = () => {
+$("downloadBtn").onclick =
+  () => {
 
-if(!currentHTML) return;
-
-const blob =
-new Blob(
-[currentHTML],
-{type:"text/html"}
-);
-
-const url =
-URL.createObjectURL(
-blob
-);
-
-const a =
-document.createElement(
-"a"
-);
-
-a.href = url;
-
-a.download =
-"spdp-ai-website.html";
-
-document.body.appendChild(a);
-
-a.click();
-
-a.remove();
-
-URL.revokeObjectURL(
-url
-);
-
-};
+    if(!currentHTML){
+      return;
+    }
 
 
-/* =========================
+    const blob =
+      new Blob(
+        [currentHTML],
+        {
+          type:
+            "text/html"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    const a =
+      document.createElement(
+        "a"
+      );
+
+
+    a.href =
+      url;
+
+    a.download =
+      "spdp-ai-website.html";
+
+
+    document.body.appendChild(
+      a
+    );
+
+    a.click();
+
+    a.remove();
+
+
+    URL.revokeObjectURL(
+      url
+    );
+  };
+
+
+/* =========================================================
    OPEN
-========================= */
+========================================================= */
 
-$("openBtn").onclick = () => {
+$("openBtn").onclick =
+  () => {
 
-if(!currentHTML) return;
-
-const blob =
-new Blob(
-[currentHTML],
-{type:"text/html"}
-);
-
-const url =
-URL.createObjectURL(
-blob
-);
-
-window.open(
-url,
-"_blank"
-);
-
-};
+    if(!currentHTML){
+      return;
+    }
 
 
-/* =========================
-   DEVICES
-========================= */
+    const blob =
+      new Blob(
+        [currentHTML],
+        {
+          type:
+            "text/html"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    window.open(
+      url,
+      "_blank"
+    );
+  };
+
+
+/* =========================================================
+   DEVICE SWITCHER
+========================================================= */
 
 document
-.querySelectorAll(".device")
-.forEach(btn=>{
+  .querySelectorAll(
+    ".device"
+  )
+  .forEach(
+    button => {
 
-btn.onclick = () => {
+      button.onclick =
+        () => {
 
-document
-.querySelectorAll(".device")
-.forEach(x =>
-x.classList.remove(
-"active"
-)
-);
-
-btn.classList.add(
-"active"
-);
-
-const width =
-btn.dataset.width;
-
-previewFrame.style.width =
-width;
-
-previewFrame.style.margin =
-width === "100%"
-? "0"
-: "0 auto";
-
-};
-
-});
+          document
+            .querySelectorAll(
+              ".device"
+            )
+            .forEach(
+              x =>
+                x.classList.remove(
+                  "active"
+                )
+            );
 
 
-/* =========================
+          button.classList.add(
+            "active"
+          );
+
+
+          const width =
+            button.dataset.width;
+
+
+          previewFrame.style.width =
+            width;
+
+
+          previewFrame.style.margin =
+            width === "100%"
+              ? "0"
+              : "0 auto";
+        };
+    }
+  );
+
+
+/* =========================================================
    CLEAR
-========================= */
+========================================================= */
 
-$("clearBtn").onclick = () => {
+$("clearBtn").onclick =
+  () => {
 
-if(
-!confirm(
-"Clear current project?"
-)
-) return;
-
-currentHTML = "";
-undoStack = [];
-redoStack = [];
-
-promptInput.value = "";
-editPrompt.value = "";
-code.value = "";
-
-previewFrame.srcdoc = "";
-
-workspace.classList.remove(
-"show"
-);
-
-previewEditBar.style.display =
-"none";
-
-previewEditing = false;
-
-localStorage.removeItem(
-"spdp_current_html"
-);
-
-messages.innerHTML = `
-<div class="msg ai">
-Your website is ready.
-</div>
-`;
-
-hideMessage();
-
-};
+    if(
+      !confirm(
+        "Clear current project?"
+      )
+    ){
+      return;
+    }
 
 
-/* =========================
-   KEYBOARD
-========================= */
+    currentHTML =
+      "";
+
+    undoStack =
+      [];
+
+    redoStack =
+      [];
+
+
+    promptInput.value =
+      "";
+
+    editPrompt.value =
+      "";
+
+    code.value =
+      "";
+
+    previewFrame.srcdoc =
+      "";
+
+
+    workspace.classList.remove(
+      "show"
+    );
+
+
+    localStorage.removeItem(
+      "spdp_current_html"
+    );
+
+
+    messages.innerHTML =
+      `
+      <div class="msg ai">
+        Generate a website to begin.
+      </div>
+      `;
+
+
+    setModelStatus();
+
+    hideMessage();
+  };
+
+
+/* =========================================================
+   KEYBOARD SHORTCUTS
+========================================================= */
 
 promptInput.addEventListener(
-"keydown",
-e=>{
+  "keydown",
+  event => {
 
-if(
-(e.ctrlKey || e.metaKey) &&
-e.key === "Enter"
-){
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key === "Enter"
+    ){
 
-e.preventDefault();
+      event.preventDefault();
 
-generateWebsite();
-
-}
-
-}
+      generateWebsite();
+    }
+  }
 );
 
 
 editPrompt.addEventListener(
-"keydown",
-e=>{
+  "keydown",
+  event => {
 
-if(
-(e.ctrlKey || e.metaKey) &&
-e.key === "Enter"
-){
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key === "Enter"
+    ){
 
-e.preventDefault();
+      event.preventDefault();
 
-editWebsite();
-
-}
-
-}
+      editWebsite();
+    }
+  }
 );
 
 
-/* =========================
+/* =========================================================
    BUTTONS
-========================= */
+========================================================= */
 
 generateBtn.onclick =
-generateWebsite;
+  generateWebsite;
 
 editBtn.onclick =
-editWebsite;
+  editWebsite;
 
 
-/* =========================
-   LOAD SAVED PROJECT
-========================= */
+/* =========================================================
+   LOAD SAVED WEBSITE
+========================================================= */
 
 window.addEventListener(
-"load",
-()=>{
+  "load",
+  () => {
 
-const saved =
-localStorage.getItem(
-"spdp_current_html"
-);
+    const saved =
+      localStorage.getItem(
+        "spdp_current_html"
+      );
 
-if(
-saved &&
-validHTML(saved)
-){
 
-renderHTML(saved);
+    if(
+      saved &&
+      validHTML(saved)
+    ){
 
-}
+      renderHTML(
+        saved
+      );
 
-}
+
+      addMessage(
+        "ai",
+        "Previous project restored."
+      );
+    }
+  }
 );
 
 </script>
+
 </body>
 </html>
