@@ -1,405 +1,1805 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPDP AI — Website Builder v2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>SPDP AI — AI Website Builder</title>
 
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden}
+
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
 body{
-  margin:0;min-height:100vh;overflow-x:hidden;overflow-y:auto;
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
   background:
-    radial-gradient(circle at 15% 0%,rgba(100,120,255,.14),transparent 30%),
-    radial-gradient(circle at 90% 20%,rgba(255,255,255,.06),transparent 25%),
+    radial-gradient(circle at 10% 0%,rgba(90,110,255,.15),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(255,255,255,.06),transparent 25%),
     #050505;
   color:#fff;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-button,textarea{font:inherit}
-button{cursor:pointer}
-.app{min-height:100vh;padding:24px}
-.container{width:min(1250px,100%);margin:auto}
+
+button,
+textarea,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.app{
+  min-height:100vh;
+  padding:18px;
+}
+
+.container{
+  width:min(1400px,100%);
+  margin:auto;
+}
+
+/* HEADER */
 
 header{
-  height:64px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:25px
+  height:62px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  margin-bottom:20px;
 }
-.brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:850}
-.logo{
-  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
-  background:linear-gradient(135deg,#fff,#777);color:#000;font-weight:950
-}
-.status{font-size:12px;color:#888;display:flex;gap:8px;align-items:center}
-.dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 12px #4ade80}
 
-.hero{text-align:center;padding:35px 0 25px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:19px;
+  font-weight:850;
+}
+
+.logo{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#fff,#777);
+  color:#000;
+  font-weight:950;
+  box-shadow:0 8px 35px rgba(255,255,255,.08);
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#777;
+  font-size:12px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#4ade80;
+  box-shadow:0 0 12px #4ade80;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:35px 0 25px;
+}
+
 .badge{
-  display:inline-flex;padding:8px 14px;border:1px solid #222;
-  background:#0d0d0d;border-radius:999px;color:#aaa;font-size:12px
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 14px;
+  border:1px solid #222;
+  background:#0d0d0d;
+  border-radius:999px;
+  color:#999;
+  font-size:12px;
 }
+
 h1{
-  font-size:clamp(45px,8vw,85px);line-height:.92;
-  letter-spacing:-.07em;margin:22px 0 15px;
-  background:linear-gradient(#fff,#666);
-  -webkit-background-clip:text;background-clip:text;color:transparent
+  margin:21px 0 14px;
+  font-size:clamp(46px,8vw,90px);
+  line-height:.91;
+  letter-spacing:-.075em;
+  background:linear-gradient(180deg,#fff 15%,#666);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
-.hero p{max-width:680px;margin:auto;color:#888;line-height:1.7}
+
+.hero>p{
+  max-width:700px;
+  margin:auto;
+  color:#858585;
+  line-height:1.7;
+  font-size:15px;
+}
+
+/* BUILDER */
 
 .panel{
-  margin-top:25px;border:1px solid #202020;border-radius:24px;
-  background:rgba(255,255,255,.035);padding:18px;
-  box-shadow:0 25px 80px rgba(0,0,0,.4)
+  margin-top:26px;
+  border:1px solid #202020;
+  border-radius:24px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  padding:15px;
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
+  backdrop-filter:blur(18px);
 }
-textarea{
-  width:100%;min-height:155px;resize:vertical;
-  border:1px solid #181818;border-radius:17px;outline:none;
-  background:#080808;color:#fff;padding:18px;
-  line-height:1.6;font-size:15px
+
+.prompt-wrap{
+  position:relative;
 }
-textarea:focus{border-color:#3b3b3b}
-.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px;flex-wrap:wrap}
+
+#prompt{
+  width:100%;
+  min-height:145px;
+  resize:vertical;
+  border:1px solid #191919;
+  border-radius:18px;
+  outline:none;
+  background:#080808;
+  color:#fff;
+  padding:19px 64px 19px 18px;
+  line-height:1.65;
+  font-size:15px;
+  transition:border .2s,box-shadow .2s;
+}
+
+#prompt:focus{
+  border-color:#3c3c3c;
+  box-shadow:0 0 0 3px rgba(255,255,255,.025);
+}
+
+#prompt::placeholder{
+  color:#4f4f4f;
+}
+
+/* MIC */
+
+.mic-button{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  width:43px;
+  height:43px;
+  border-radius:13px;
+  border:1px solid #292929;
+  background:#111;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:18px;
+  transition:.2s;
+}
+
+.mic-button:hover{
+  background:#1b1b1b;
+  transform:translateY(-2px);
+}
+
+.mic-button.recording{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+  animation:pulseMic 1s infinite;
+}
+
+@keyframes pulseMic{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.15)}
+  50%{box-shadow:0 0 0 9px rgba(255,255,255,0)}
+}
+
+.voice-status{
+  display:none;
+  padding:9px 12px;
+  margin-top:8px;
+  border-radius:10px;
+  background:#101010;
+  color:#888;
+  font-size:12px;
+}
+
+.voice-status.show{
+  display:block;
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:9px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+
 button{
-  border:0;border-radius:11px;padding:11px 16px;font-weight:750;
-  transition:.2s
+  border:0;
+  border-radius:11px;
+  padding:11px 16px;
+  font-weight:750;
+  transition:transform .2s,background .2s,opacity .2s;
 }
-button:hover{transform:translateY(-1px)}
-button:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.primary{background:#fff;color:#000}
-.secondary{background:#111;color:#fff;border:1px solid #292929}
-.danger{background:#241010;color:#ff9a9a;border:1px solid #402020}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+.primary{
+  background:#fff;
+  color:#000;
+}
+
+.secondary{
+  background:#111;
+  color:#fff;
+  border:1px solid #292929;
+}
+
+.danger{
+  background:#251010;
+  color:#ff9a9a;
+  border:1px solid #402020;
+}
+
+/* LOADING */
+
+.loading{
+  display:none;
+  align-items:center;
+  gap:8px;
+}
+
+.loading.show{
+  display:inline-flex;
+}
+
+.spinner{
+  width:14px;
+  height:14px;
+  border:2px solid #555;
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* MESSAGE */
 
 .message{
-  display:none;margin-top:12px;padding:13px 15px;border-radius:12px;
-  background:#101010;border:1px solid #222;color:#aaa;white-space:pre-wrap
+  display:none;
+  margin-top:12px;
+  padding:13px 15px;
+  border-radius:12px;
+  background:#101010;
+  border:1px solid #222;
+  color:#aaa;
+  line-height:1.5;
+  white-space:pre-wrap;
 }
-.message.show{display:block}
+
+.message.show{
+  display:block;
+}
+
+/* CONVERSATION */
+
+.conversation{
+  display:none;
+  margin-top:12px;
+  border:1px solid #202020;
+  border-radius:15px;
+  background:#080808;
+  padding:12px;
+}
+
+.conversation.show{
+  display:block;
+}
+
+.conversation-title{
+  color:#666;
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.conversation-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.conversation-actions button{
+  font-size:12px;
+  padding:8px 11px;
+}
+
+/* WORKSPACE */
 
 .workspace{
-  display:none;margin-top:25px;border:1px solid #202020;
-  border-radius:22px;background:#080808;overflow:hidden
+  display:none;
+  margin-top:24px;
+  border:1px solid #202020;
+  border-radius:22px;
+  background:#080808;
+  overflow:hidden;
+  box-shadow:0 25px 90px rgba(0,0,0,.35);
 }
-.workspace.show{display:block}
+
+.workspace.show{
+  display:block;
+}
+
+/* TOOLBAR */
 
 .toolbar{
-  min-height:58px;padding:10px 12px;border-bottom:1px solid #1d1d1d;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;flex-wrap:wrap
+  min-height:60px;
+  padding:10px 12px;
+  border-bottom:1px solid #1c1c1c;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#090909;
 }
-.toolbar-left,.toolbar-right{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.tool-title{font-size:13px;color:#999;margin-right:8px}
-.device.active{background:#fff;color:#000}
 
-.preview-wrap{padding:12px;background:#030303}
-.preview-frame{
-  width:100%;height:700px;border:1px solid #222;border-radius:15px;
-  background:#fff;display:block
+.toolbar-left,
+.toolbar-right{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
 }
+
+.tool-title{
+  color:#888;
+  font-size:12px;
+  margin-right:7px;
+}
+
+.toolbar button{
+  font-size:12px;
+  padding:9px 12px;
+}
+
+.device.active,
+.mode.active{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+}
+
+/* PREVIEW AREA */
+
+.preview-wrap{
+  padding:14px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.04),transparent 30%),
+    #030303;
+  min-height:720px;
+  position:relative;
+}
+
+.preview-stage{
+  width:100%;
+  min-height:680px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  transition:.35s ease;
+}
+
+.preview-frame{
+  width:100%;
+  height:700px;
+  border:1px solid #292929;
+  border-radius:15px;
+  background:#fff;
+  display:block;
+  box-shadow:0 20px 80px rgba(0,0,0,.5);
+  transition:
+    width .4s cubic-bezier(.22,1,.36,1),
+    height .3s ease,
+    box-shadow .3s ease;
+}
+
+/* SMOOTH MODE */
+
+.preview-frame.smooth{
+  scroll-behavior:smooth;
+}
+
+/* 3D BADGE */
+
+.three-badge{
+  display:none;
+  position:absolute;
+  top:24px;
+  left:25px;
+  z-index:5;
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(10px);
+  border-radius:999px;
+  color:#aaa;
+  font-size:11px;
+}
+
+.three-badge.show{
+  display:block;
+}
+
+/* FULLSCREEN */
+
+.workspace.fullscreen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  margin:0;
+  border-radius:0;
+  background:#030303;
+}
+
+.workspace.fullscreen .preview-wrap{
+  height:calc(100vh - 60px);
+  min-height:0;
+}
+
+.workspace.fullscreen .preview-stage{
+  height:100%;
+  min-height:0;
+}
+
+.workspace.fullscreen .preview-frame{
+  height:100%;
+}
+
+/* CODE */
 
 .code-panel{
-  display:none;border-top:1px solid #202020;background:#050505
+  display:none;
+  border-top:1px solid #202020;
+  background:#050505;
 }
-.code-panel.show{display:block}
+
+.code-panel.show{
+  display:block;
+}
+
 .code-head{
-  padding:12px 15px;border-bottom:1px solid #1b1b1b;
-  display:flex;justify-content:space-between;align-items:center
+  padding:11px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #1c1c1c;
 }
+
 .code{
-  width:100%;height:500px;resize:vertical;border:0;outline:0;
-  background:#020202;color:#bfc5cc;padding:18px;
-  font:12px/1.6 Consolas,monospace
+  width:100%;
+  height:470px;
+  resize:vertical;
+  border:0;
+  outline:0;
+  background:#020202;
+  color:#c5cad1;
+  padding:18px;
+  font:12px/1.6 Consolas,monospace;
 }
+
+/* VISUAL EDITOR */
+
+.editor-panel{
+  display:none;
+  border-top:1px solid #202020;
+  background:#090909;
+  padding:14px;
+}
+
+.editor-panel.show{
+  display:block;
+}
+
+.editor-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:9px;
+}
+
+.editor-field label{
+  display:block;
+  color:#666;
+  font-size:10px;
+  margin-bottom:5px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.editor-field input,
+.editor-field select{
+  width:100%;
+  border:1px solid #252525;
+  background:#101010;
+  color:#fff;
+  border-radius:8px;
+  padding:8px;
+  outline:none;
+}
+
+.selected-info{
+  color:#888;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.selected-info strong{
+  color:#fff;
+}
+
+/* CHAT */
 
 .chat{
-  border-top:1px solid #202020;background:#080808
+  border-top:1px solid #202020;
+  background:#080808;
 }
-.chat-head{padding:15px;border-bottom:1px solid #1b1b1b}
-.chat-head strong{font-size:14px}
-.chat-head span{font-size:12px;color:#666;margin-left:8px}
+
+.chat-head{
+  padding:15px;
+  border-bottom:1px solid #1b1b1b;
+}
+
+.chat-head strong{
+  font-size:14px;
+}
+
+.chat-head span{
+  font-size:12px;
+  color:#666;
+  margin-left:8px;
+}
+
 .messages{
-  height:240px;overflow-y:auto;padding:15px;display:flex;
-  flex-direction:column;gap:10px
+  height:230px;
+  overflow-y:auto;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
+
 .msg{
-  max-width:85%;padding:11px 13px;border-radius:13px;
-  font-size:13px;line-height:1.5;white-space:pre-wrap
+  max-width:85%;
+  padding:10px 13px;
+  border-radius:13px;
+  font-size:13px;
+  line-height:1.5;
+  white-space:pre-wrap;
 }
-.msg.user{align-self:flex-end;background:#fff;color:#000}
-.msg.ai{align-self:flex-start;background:#111;color:#aaa;border:1px solid #222}
-.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #1a1a1a}
+
+.msg.user{
+  align-self:flex-end;
+  background:#fff;
+  color:#000;
+}
+
+.msg.ai{
+  align-self:flex-start;
+  background:#111;
+  color:#aaa;
+  border:1px solid #222;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid #1a1a1a;
+}
+
 .chat-input textarea{
-  min-height:48px;height:48px;resize:none;padding:12px
+  flex:1;
+  min-height:48px;
+  height:48px;
+  resize:none;
+  padding:12px;
+  border:1px solid #191919;
+  border-radius:11px;
+  background:#090909;
+  color:#fff;
+  outline:none;
 }
-.chat-input button{height:48px}
+
+.chat-input button{
+  height:48px;
+}
+
+/* FEATURES */
 
 .features{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;margin:30px 0
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:28px 0;
 }
+
 .feature{
-  padding:22px;border:1px solid #1b1b1b;border-radius:17px;background:#090909
+  padding:21px;
+  border:1px solid #1b1b1b;
+  border-radius:17px;
+  background:#090909;
 }
-.feature h3{margin:0 0 8px;font-size:15px}
-.feature p{margin:0;color:#666;font-size:13px;line-height:1.6}
 
-.loading{display:none;align-items:center;gap:8px}
-.loading.show{display:inline-flex}
-.spinner{
-  width:14px;height:14px;border:2px solid #555;border-top-color:#fff;
-  border-radius:50%;animation:spin .8s linear infinite
+.feature h3{
+  margin:0 0 8px;
+  font-size:14px;
 }
-@keyframes spin{to{transform:rotate(360deg)}}
 
-footer{text-align:center;padding:30px;color:#444;font-size:12px}
+.feature p{
+  margin:0;
+  color:#666;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  padding:11px 15px;
+  border:1px solid #2a2a2a;
+  background:#101010;
+  color:#ddd;
+  border-radius:12px;
+  font-size:12px;
+  z-index:10000;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .editor-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .toolbar{
+    align-items:flex-start;
+  }
+}
 
 @media(max-width:760px){
-  .app{padding:14px}
-  header{height:55px}
-  .status{display:none}
-  .features{grid-template-columns:1fr}
-  .preview-frame{height:600px}
-  .toolbar{align-items:flex-start}
-  .chat-input{flex-direction:column}
-  .chat-input button{width:100%}
+
+  .app{
+    padding:12px;
+  }
+
+  header{
+    height:55px;
+  }
+
+  .status{
+    display:none;
+  }
+
+  .hero{
+    padding-top:30px;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .preview-wrap{
+    padding:8px;
+    min-height:610px;
+  }
+
+  .preview-frame{
+    height:600px;
+  }
+
+  .preview-stage{
+    min-height:580px;
+  }
+
+  .toolbar-left,
+  .toolbar-right{
+    width:100%;
+  }
+
+  .toolbar-left button,
+  .toolbar-right button{
+    flex:1;
+  }
+
+  .editor-grid{
+    grid-template-columns:1fr;
+  }
+
+  .chat-input{
+    flex-direction:column;
+  }
+
+  .chat-input button{
+    width:100%;
+  }
+}
+
+@media(max-width:480px){
+
+  h1{
+    font-size:54px;
+  }
+
+  .actions button{
+    flex:1;
+  }
+
+  .preview-frame{
+    height:560px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <main class="app">
 <div class="container">
 
 <header>
+
   <div class="brand">
     <div class="logo">S</div>
     <span>SPDP AI</span>
   </div>
+
   <div class="status">
     <span class="dot"></span>
-    Builder Online
+    AI Builder Online
   </div>
+
 </header>
 
 <section class="hero">
-  <div class="badge">✦ AI Website · App · Game Builder</div>
+
+  <div class="badge">
+    ✦ AI Website · App · Game Builder
+  </div>
+
   <h1>Build anything.</h1>
+
   <p>
-    Generate a complete website, web app or playable game,
-    then keep editing the same project with AI.
+    Describe what you want, speak naturally or type a prompt.
+    Generate it, preview it live and keep editing with AI.
   </p>
 
   <div class="panel">
-    <textarea id="prompt"
-      placeholder="Example: Create a premium black 3D gaming website with Three.js, animated hero, games, features, pricing and footer."></textarea>
+
+    <div class="prompt-wrap">
+
+      <textarea
+        id="prompt"
+        placeholder="Try: I need a premium black gaming website with a 3D hero, animated particles, games section, pricing and footer..."
+      ></textarea>
+
+      <button
+        id="micBtn"
+        class="mic-button"
+        type="button"
+        title="Voice prompt"
+      >🎤</button>
+
+    </div>
+
+    <div id="voiceStatus" class="voice-status">
+      Listening... speak naturally.
+    </div>
 
     <div class="actions">
-      <button id="clearBtn" class="secondary">Clear</button>
 
-      <button id="generateBtn" class="primary">
-        <span id="generateText">Generate</span>
-        <span id="loading" class="loading">
+      <button
+        id="clearBtn"
+        class="secondary"
+        type="button"
+      >
+        Clear
+      </button>
+
+      <button
+        id="generateBtn"
+        class="primary"
+        type="button"
+      >
+
+        <span id="generateText">
+          Generate
+        </span>
+
+        <span
+          id="loading"
+          class="loading"
+        >
           <span class="spinner"></span>
           Generating...
         </span>
+
       </button>
+
     </div>
 
-    <div id="message" class="message"></div>
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+    <div
+      id="conversation"
+      class="conversation"
+    >
+
+      <div class="conversation-title">
+        AI understood this as a conversation. What would you like to build?
+      </div>
+
+      <div class="conversation-actions">
+
+        <button
+          class="secondary quick"
+          data-prompt="Create a website for me"
+        >
+          Create a website
+        </button>
+
+        <button
+          class="secondary quick"
+          data-prompt="Create a web application for me"
+        >
+          Create a web app
+        </button>
+
+        <button
+          class="secondary quick"
+          data-prompt="Create a playable game for me"
+        >
+          Create a game
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
+
 </section>
 
-<section id="workspace" class="workspace">
+<section
+  id="workspace"
+  class="workspace"
+>
 
   <div class="toolbar">
 
     <div class="toolbar-left">
-      <span class="tool-title">Preview</span>
 
-      <button class="secondary device active" data-width="100%">Desktop</button>
-      <button class="secondary device" data-width="768px">Tablet</button>
-      <button class="secondary device" data-width="390px">Mobile</button>
+      <span class="tool-title">
+        Live Preview
+      </span>
 
-      <button id="codeBtn" class="secondary">Code</button>
+      <button
+        class="secondary device active"
+        data-width="100%"
+      >
+        Desktop
+      </button>
+
+      <button
+        class="secondary device"
+        data-width="768px"
+      >
+        Tablet
+      </button>
+
+      <button
+        class="secondary device"
+        data-width="390px"
+      >
+        Mobile
+      </button>
+
+      <button
+        id="smoothBtn"
+        class="secondary mode active"
+      >
+        ✨ Smooth
+      </button>
+
+      <button
+        id="threeBtn"
+        class="secondary mode"
+      >
+        ◈ 3D
+      </button>
+
+      <button
+        id="visualBtn"
+        class="secondary"
+      >
+        ✦ Visual Edit
+      </button>
+
+      <button
+        id="codeBtn"
+        class="secondary"
+      >
+        Code
+      </button>
+
     </div>
 
     <div class="toolbar-right">
-      <button id="undoBtn" class="secondary">Undo</button>
-      <button id="redoBtn" class="secondary">Redo</button>
-      <button id="copyBtn" class="secondary">Copy</button>
-      <button id="downloadBtn" class="secondary">Download</button>
-      <button id="openBtn" class="secondary">Open</button>
+
+      <button
+        id="undoBtn"
+        class="secondary"
+      >
+        ↶ Undo
+      </button>
+
+      <button
+        id="redoBtn"
+        class="secondary"
+      >
+        ↷ Redo
+      </button>
+
+      <button
+        id="copyBtn"
+        class="secondary"
+      >
+        Copy
+      </button>
+
+      <button
+        id="downloadBtn"
+        class="secondary"
+      >
+        Download
+      </button>
+
+      <button
+        id="fullscreenBtn"
+        class="secondary"
+      >
+        ⛶ Fullscreen
+      </button>
+
     </div>
 
   </div>
 
   <div class="preview-wrap">
-    <iframe
-      id="previewFrame"
-      class="preview-frame"
-      title="SPDP AI Preview"
-      sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin">
-    </iframe>
+
+    <div
+      id="threeBadge"
+      class="three-badge"
+    >
+      ◈ Three.js / 3D Experience
+    </div>
+
+    <div class="preview-stage">
+
+      <iframe
+        id="previewFrame"
+        class="preview-frame smooth"
+        title="SPDP AI Live Preview"
+        sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+      ></iframe>
+
+    </div>
+
   </div>
 
-  <div id="codePanel" class="code-panel">
-    <div class="code-head">
-      <span class="tool-title">Generated HTML</span>
-      <button id="codeCopyBtn" class="secondary">Copy Code</button>
+  <div
+    id="editorPanel"
+    class="editor-panel"
+  >
+
+    <div
+      id="selectedInfo"
+      class="selected-info"
+    >
+      Click an element inside the preview to select it.
     </div>
-    <textarea id="code" class="code" spellcheck="false"></textarea>
+
+    <div class="editor-grid">
+
+      <div class="editor-field">
+
+        <label>Text</label>
+
+        <input
+          id="editText"
+          type="text"
+          placeholder="Element text"
+        >
+
+      </div>
+
+      <div class="editor-field">
+
+        <label>Font Size</label>
+
+        <input
+          id="editFontSize"
+          type="text"
+          placeholder="e.g. 32px"
+        >
+
+      </div>
+
+      <div class="editor-field">
+
+        <label>Color</label>
+
+        <input
+          id="editColor"
+          type="text"
+          placeholder="#ffffff"
+        >
+
+      </div>
+
+      <div class="editor-field">
+
+        <label>Background</label>
+
+        <input
+          id="editBackground"
+          type="text"
+          placeholder="#111111"
+        >
+
+      </div>
+
+      <div class="editor-field">
+
+        <label>Border Radius</label>
+
+        <input
+          id="editRadius"
+          type="text"
+          placeholder="16px"
+        >
+
+      </div>
+
+      <div class="editor-field">
+
+        <label>Padding</label>
+
+        <input
+          id="editPadding"
+          type="text"
+          placeholder="20px"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div
+    id="codePanel"
+    class="code-panel"
+  >
+
+    <div class="code-head">
+
+      <span class="tool-title">
+        Generated HTML
+      </span>
+
+      <button
+        id="codeCopyBtn"
+        class="secondary"
+      >
+        Copy Code
+      </button>
+
+    </div>
+
+    <textarea
+      id="code"
+      class="code"
+      spellcheck="false"
+    ></textarea>
+
   </div>
 
   <div class="chat">
+
     <div class="chat-head">
-      <strong>AI Sub-chat</strong>
-      <span>Edit your current website</span>
+
+      <strong>
+        AI Sub-chat
+      </strong>
+
+      <span>
+        Edit your current website
+      </span>
+
     </div>
 
-    <div id="messages" class="messages">
+    <div
+      id="messages"
+      class="messages"
+    >
+
       <div class="msg ai">
-        Your generated website will stay here. Ask me to modify it.
-        Example: “Make the hero section more premium and add animated particles.”
+        Your generated website will stay here.
+        Ask me to change anything.
+
+        Example:
+        “Make the hero more premium and add animated particles.”
       </div>
+
     </div>
 
     <div class="chat-input">
-      <textarea id="editPrompt"
-        placeholder="Tell AI what to change in the current website..."></textarea>
-      <button id="editBtn" class="primary">Apply Edit</button>
+
+      <textarea
+        id="editPrompt"
+        placeholder="Tell AI what to change in the current website..."
+      ></textarea>
+
+      <button
+        id="editMicBtn"
+        class="secondary"
+        type="button"
+        title="Voice edit"
+      >
+        🎤
+      </button>
+
+      <button
+        id="editBtn"
+        class="primary"
+        type="button"
+      >
+        Apply Edit
+      </button>
+
     </div>
+
   </div>
 
 </section>
 
 <section class="features">
+
   <article class="feature">
-    <h3>Complete Websites</h3>
-    <p>Generate responsive landing pages, portfolios, business sites and long-form experiences.</p>
+
+    <h3>🎤 Speak Naturally</h3>
+
+    <p>
+      Use your microphone and describe your idea
+      naturally instead of typing everything.
+    </p>
+
   </article>
+
   <article class="feature">
-    <h3>Real 3D</h3>
-    <p>Generate Three.js scenes with lighting, cameras, materials, animation and interaction.</p>
+
+    <h3>◈ Real 3D</h3>
+
+    <p>
+      Three.js websites and games can be previewed
+      inside the live builder.
+    </p>
+
   </article>
+
   <article class="feature">
-    <h3>Playable Games</h3>
-    <p>Generate browser games with controls, gameplay systems, collision, score and restart.</p>
+
+    <h3>✦ Visual + AI Edit</h3>
+
+    <p>
+      Select elements visually or tell the AI what
+      you want changed through Sub-chat.
+    </p>
+
   </article>
+
 </section>
 
-<footer>SPDP AI · Digital Platform · 2026</footer>
+<footer>
+  SPDP AI · Digital Platform · 2026
+</footer>
 
 </div>
 </main>
 
+<div
+  id="toast"
+  class="toast"
+></div>
+
 <script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
 const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
-const $ = id => document.getElementById(id);
 
-const promptInput = $("prompt");
-const editPrompt = $("editPrompt");
-const generateBtn = $("generateBtn");
-const editBtn = $("editBtn");
-const clearBtn = $("clearBtn");
-const message = $("message");
-const loading = $("loading");
-const generateText = $("generateText");
-const workspace = $("workspace");
-const previewFrame = $("previewFrame");
-const code = $("code");
-const codePanel = $("codePanel");
-const messages = $("messages");
+/* =========================================================
+   DOM
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+const promptInput =
+  $("prompt");
+
+const editPrompt =
+  $("editPrompt");
+
+const generateBtn =
+  $("generateBtn");
+
+const editBtn =
+  $("editBtn");
+
+const clearBtn =
+  $("clearBtn");
+
+const micBtn =
+  $("micBtn");
+
+const editMicBtn =
+  $("editMicBtn");
+
+const voiceStatus =
+  $("voiceStatus");
+
+const message =
+  $("message");
+
+const loading =
+  $("loading");
+
+const generateText =
+  $("generateText");
+
+const workspace =
+  $("workspace");
+
+const previewFrame =
+  $("previewFrame");
+
+const code =
+  $("code");
+
+const codePanel =
+  $("codePanel");
+
+const editorPanel =
+  $("editorPanel");
+
+const messages =
+  $("messages");
+
+const threeBadge =
+  $("threeBadge");
+
+const toast =
+  $("toast");
+
+
+/* =========================================================
+   STATE
+========================================================= */
 
 let currentHTML = "";
+
 let undoStack = [];
+
 let redoStack = [];
 
+let selectedElement = null;
+
+let recognition = null;
+
+let activeVoiceTarget = "prompt";
+
+let smoothMode = true;
+
+
+/* =========================================================
+   BASIC UI
+========================================================= */
+
 function showMessage(text){
+
   message.textContent = text;
+
   message.classList.add("show");
 }
 
+
 function hideMessage(){
+
   message.textContent = "";
+
   message.classList.remove("show");
 }
 
+
+function showToast(text){
+
+  toast.textContent = text;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    showToast.timer
+  );
+
+  showToast.timer =
+    setTimeout(
+      function(){
+        toast.classList.remove("show");
+      },
+      1800
+    );
+}
+
+
 function setGenerating(value){
+
   generateBtn.disabled = value;
+
   editBtn.disabled = value;
 
   if(value){
-    generateText.style.display = "none";
-    loading.classList.add("show");
+
+    generateText.style.display =
+      "none";
+
+    loading.classList.add(
+      "show"
+    );
+
   }else{
-    generateText.style.display = "inline";
-    loading.classList.remove("show");
+
+    generateText.style.display =
+      "inline";
+
+    loading.classList.remove(
+      "show"
+    );
   }
 }
 
-function validHTML(html){
-  if(typeof html !== "string") return false;
 
-  const x = html.trim().toLowerCase();
+/* =========================================================
+   HTML VALIDATION
+========================================================= */
+
+function validHTML(html){
+
+  if(typeof html !== "string"){
+    return false;
+  }
+
+  const value =
+    html.trim().toLowerCase();
 
   return (
-    x.startsWith("<!doctype html") &&
-    x.includes("<html") &&
-    x.includes("</html>")
+    value.startsWith(
+      "<!doctype html"
+    ) &&
+    value.includes("<html") &&
+    value.includes("<head") &&
+    value.includes("<body") &&
+    value.includes("</html>")
   );
 }
 
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
 function saveState(){
-  if(currentHTML){
-    undoStack.push(currentHTML);
-    if(undoStack.length > 30) undoStack.shift();
-    redoStack = [];
+
+  if(!currentHTML){
+    return;
+  }
+
+  undoStack.push(
+    currentHTML
+  );
+
+  if(
+    undoStack.length > 40
+  ){
+    undoStack.shift();
+  }
+
+  redoStack = [];
+}
+
+
+/* =========================================================
+   3D DETECTION
+========================================================= */
+
+function detectThree(html){
+
+  const lower =
+    html.toLowerCase();
+
+  return (
+    lower.includes("three.min.js") ||
+    lower.includes("three.module.js") ||
+    lower.includes("new three.") ||
+    lower.includes("three.scene") ||
+    lower.includes("webglrenderer")
+  );
+}
+
+
+function update3DBadge(){
+
+  if(
+    detectThree(currentHTML)
+  ){
+
+    threeBadge.classList.add(
+      "show"
+    );
+
+    threeBtn.classList.add(
+      "active"
+    );
+
+  }else{
+
+    threeBadge.classList.remove(
+      "show"
+    );
+
+    threeBtn.classList.remove(
+      "active"
+    );
   }
 }
 
-function renderHTML(html){
-  currentHTML = html.trim();
 
-  previewFrame.srcdoc = currentHTML;
-  code.value = currentHTML;
+/* =========================================================
+   INJECT VISUAL EDITOR
+========================================================= */
 
-  workspace.classList.add("show");
+function injectEditor(html){
+
+  const marker =
+    "</head>";
+
+  const lower =
+    html.toLowerCase();
+
+  const position =
+    lower.lastIndexOf(
+      marker
+    );
+
+  if(position === -1){
+    return html;
+  }
+
+  const script = `
+<script>
+(function(){
+
+  var selected = null;
+
+  function send(type,data){
+
+    try{
+
+      parent.postMessage({
+        source:"SPDP_AI_EDITOR",
+        type:type,
+        data:data || {}
+      },"*");
+
+    }catch(e){}
+
+  }
+
+  document.addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target.closest &&
+        event.target.closest(
+          "[data-spdp-ignore]"
+        )
+      ){
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(selected){
+        selected.removeAttribute(
+          "data-spdp-selected"
+        );
+
+        selected.style.outline =
+          selected.dataset.spdpOldOutline || "";
+      }
+
+      selected =
+        event.target;
+
+      selected.dataset.spdpOldOutline =
+        selected.style.outline || "";
+
+      selected.setAttribute(
+        "data-spdp-selected",
+        "true"
+      );
+
+      selected.style.outline =
+        "2px solid #4f7cff";
+
+      var computed =
+        window.getComputedStyle(
+          selected
+        );
+
+      send(
+        "select",
+        {
+          tag:selected.tagName,
+          text:selected.innerText || "",
+          fontSize:computed.fontSize,
+          color:computed.color,
+          background:computed.backgroundColor,
+          radius:computed.borderRadius,
+          padding:computed.padding
+        }
+      );
+
+    },
+    true
+  );
+
+  window.addEventListener(
+    "message",
+    function(event){
+
+      var data =
+        event.data;
+
+      if(
+        !data ||
+        data.source !==
+          "SPDP_AI_EDITOR"
+      ){
+        return;
+      }
+
+      if(
+        data.type ===
+        "apply-style"
+      ){
+
+        if(!selected){
+          return;
+        }
+
+        var changes =
+          data.changes || {};
+
+        if(
+          changes.text !== undefined &&
+          changes.text !== ""
+        ){
+          selected.innerText =
+            changes.text;
+        }
+
+        if(changes.fontSize){
+          selected.style.fontSize =
+            changes.fontSize;
+        }
+
+        if(changes.color){
+          selected.style.color =
+            changes.color;
+        }
+
+        if(changes.background){
+          selected.style.background =
+            changes.background;
+        }
+
+        if(changes.radius){
+          selected.style.borderRadius =
+            changes.radius;
+        }
+
+        if(changes.padding){
+          selected.style.padding =
+            changes.padding;
+        }
+
+        send(
+          "changed",
+          {}
+        );
+      }
+
+    }
+  );
+
+})();
+<\/script>
+`;
+
+  return (
+    html.slice(
+      0,
+      position
+    ) +
+    script +
+    html.slice(position)
+  );
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderHTML(
+  html,
+  addHistory
+){
+
+  if(
+    addHistory &&
+    currentHTML
+  ){
+    saveState();
+  }
+
+  currentHTML =
+    html.trim();
+
+  const editorHTML =
+    injectEditor(
+      currentHTML
+    );
+
+  previewFrame.srcdoc =
+    editorHTML;
+
+  code.value =
+    currentHTML;
+
+  workspace.classList.add(
+    "show"
+  );
 
   localStorage.setItem(
     "spdp_current_html",
     currentHTML
   );
+
+  update3DBadge();
 }
 
-async function callWorker(payload){
 
-  const response = await fetch(WORKER_URL,{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify(payload)
-  });
+/* =========================================================
+   WORKER
+========================================================= */
 
-  const raw = await response.text();
+async function callWorker(
+  payload
+){
+
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(
+            payload
+          )
+      }
+    );
+
+  const raw =
+    await response.text();
 
   let data;
 
   try{
-    data = JSON.parse(raw);
-  }catch{
+
+    data =
+      JSON.parse(raw);
+
+  }catch(error){
+
     throw new Error(
       "Worker returned invalid JSON."
     );
   }
 
   if(!response.ok){
+
     throw new Error(
-      data?.error ||
-      "Worker request failed."
+      data &&
+      data.error
+        ? data.error
+        : "Worker request failed."
     );
   }
 
@@ -408,13 +1808,19 @@ async function callWorker(payload){
     data.success !== true ||
     typeof data.html !== "string"
   ){
+
     throw new Error(
-      data?.error ||
-      "AI did not return valid HTML."
+      data &&
+      data.error
+        ? data.error
+        : "AI did not return valid HTML."
     );
   }
 
-  if(!validHTML(data.html)){
+  if(
+    !validHTML(data.html)
+  ){
+
     throw new Error(
       "AI returned incomplete HTML."
     );
@@ -423,34 +1829,153 @@ async function callWorker(payload){
   return data.html.trim();
 }
 
+
+/* =========================================================
+   INTENT DETECTION
+========================================================= */
+
+function looksLikeWebsiteRequest(
+  text
+){
+
+  const x =
+    text.toLowerCase();
+
+  const words = [
+
+    "website",
+    "web site",
+    "web app",
+    "webapp",
+    "landing page",
+    "portfolio",
+    "dashboard",
+    "application",
+    "app",
+    "game",
+    "gaming",
+    "3d",
+    "three.js",
+    "threejs",
+    "page",
+    "site",
+    "shop",
+    "store",
+    "blog",
+    "saas",
+    "builder",
+    "homepage",
+    "home page",
+
+    "വെബ്സൈറ്റ്",
+    "വെബ്‌സൈറ്റ്",
+    "സൈറ്റ്",
+    "വെബ്",
+    "ആപ്പ്",
+    "ഗെയിം"
+
+  ];
+
+  return words.some(
+    function(word){
+      return x.includes(word);
+    }
+  );
+}
+
+
+/* =========================================================
+   CASUAL RESPONSE
+========================================================= */
+
+function handleCasualInput(
+  text
+){
+
+  const x =
+    text.toLowerCase().trim();
+
+  if(
+    x === "hi" ||
+    x === "hai" ||
+    x === "hello" ||
+    x === "hey"
+  ){
+
+    addMessage(
+      "user",
+      text
+    );
+
+    addMessage(
+      "ai",
+      "Hey! Tell me what you want to build. You can type it or use the 🎤 microphone."
+    );
+
+    return true;
+  }
+
+  if(
+    x.includes("help") ||
+    x.includes("what can you do")
+  ){
+
+    addMessage(
+      "user",
+      text
+    );
+
+    addMessage(
+      "ai",
+      "I can build websites, web apps and browser games. You can describe your idea normally, then I can generate it and keep editing the same project."
+    );
+
+    return true;
+  }
+
+  return false;
+}
+
+
+/* =========================================================
+   GENERATE
+========================================================= */
+
 async function generateWebsite(){
 
   const prompt =
     promptInput.value.trim();
 
   if(!prompt){
+
     showMessage(
-      "Please enter a prompt first."
+      "Tell me what you want to build first."
     );
+
     promptInput.focus();
+
     return;
   }
 
-  hideMessage();
-  setGenerating(true);
+  if(
+    !looksLikeWebsiteRequest(
+      prompt
+    )
+  ){
 
-  try{
-
-    const html =
-      await callWorker({
-        action:"create",
+    if(
+      handleCasualInput(
         prompt
-      });
+      )
+    ){
 
-    undoStack = [];
-    redoStack = [];
+      return;
+    }
 
-    renderHTML(html);
+    $("conversation")
+      .classList.add(
+        "show"
+      );
 
     addMessage(
       "user",
@@ -459,7 +1984,46 @@ async function generateWebsite(){
 
     addMessage(
       "ai",
-      "Website generated successfully. You can now edit it using Sub-chat."
+      "Got it. What are you trying to build — a website, web app, or game?"
+    );
+
+    return;
+  }
+
+  hideMessage();
+
+  $("conversation")
+    .classList.remove(
+      "show"
+    );
+
+  setGenerating(true);
+
+  addMessage(
+    "user",
+    prompt
+  );
+
+  try{
+
+    const html =
+      await callWorker({
+        action:"create",
+        prompt:prompt
+      });
+
+    undoStack = [];
+
+    redoStack = [];
+
+    renderHTML(
+      html,
+      false
+    );
+
+    addMessage(
+      "ai",
+      "Done. Your website is live in the preview. You can visually edit it or use AI Sub-chat."
     );
 
     workspace.scrollIntoView({
@@ -469,25 +2033,45 @@ async function generateWebsite(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "SPDP AI Generate:",
+      error
+    );
 
     showMessage(
       "❌ " +
-      (error?.message ||
-      "Website generation failed.")
+      (
+        error &&
+        error.message
+          ? error.message
+          : "Website generation failed."
+      )
+    );
+
+    addMessage(
+      "ai",
+      "I couldn't generate the website. Check the Worker connection and try again."
     );
 
   }finally{
+
     setGenerating(false);
   }
 }
 
+
+/* =========================================================
+   AI EDIT
+========================================================= */
+
 async function editWebsite(){
 
   if(!currentHTML){
+
     showMessage(
       "Generate a website first."
     );
+
     return;
   }
 
@@ -495,11 +2079,14 @@ async function editWebsite(){
     editPrompt.value.trim();
 
   if(!instruction){
+
     editPrompt.focus();
+
     return;
   }
 
   hideMessage();
+
   setGenerating(true);
 
   addMessage(
@@ -520,7 +2107,10 @@ async function editWebsite(){
         currentHTML:currentHTML
       });
 
-    renderHTML(html);
+    renderHTML(
+      html,
+      false
+    );
 
     addMessage(
       "ai",
@@ -529,268 +2119,607 @@ async function editWebsite(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "SPDP AI Edit:",
+      error
+    );
 
-    if(undoStack.length){
+    if(
+      undoStack.length
+    ){
       undoStack.pop();
     }
 
     showMessage(
       "❌ " +
-      (error?.message ||
-      "Edit failed.")
+      (
+        error &&
+        error.message
+          ? error.message
+          : "Edit failed."
+      )
     );
 
     addMessage(
       "ai",
-      "I couldn't apply that edit. Please try again."
+      "I couldn't apply that edit. Try describing the change more specifically."
     );
 
   }finally{
+
     setGenerating(false);
   }
 }
 
-function addMessage(type,text){
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+function addMessage(
+  type,
+  text
+){
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   div.className =
     "msg " + type;
 
-  div.textContent = text;
+  div.textContent =
+    text;
 
-  messages.appendChild(div);
+  messages.appendChild(
+    div
+  );
+
   messages.scrollTop =
     messages.scrollHeight;
 }
 
-function copyText(text){
 
-  if(!text) return;
+/* =========================================================
+   COPY
+========================================================= */
 
-  navigator.clipboard
-    .writeText(text)
-    .then(()=>{
-      showMessage(
-        "✓ Copied to clipboard."
-      );
-      setTimeout(hideMessage,1800);
-    })
-    .catch(()=>{
-      showMessage(
-        "Copy failed. Please copy manually."
-      );
-    });
+async function copyText(
+  text
+){
+
+  if(!text){
+    return;
+  }
+
+  try{
+
+    await navigator.clipboard
+      .writeText(text);
+
+    showToast(
+      "✓ Copied"
+    );
+
+  }catch(error){
+
+    showMessage(
+      "Copy failed. Please copy manually."
+    );
+  }
 }
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
 
 function downloadHTML(){
 
-  if(!currentHTML) return;
+  if(!currentHTML){
+    return;
+  }
 
   const blob =
     new Blob(
       [currentHTML],
-      {type:"text/html"}
+      {
+        type:"text/html"
+      }
     );
 
   const url =
-    URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
 
   const a =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
 
-  a.href = url;
-  a.download = "spdp-ai-website.html";
+  a.href =
+    url;
+
+  a.download =
+    "spdp-ai-website.html";
+
+  document.body.appendChild(
+    a
+  );
+
   a.click();
 
+  a.remove();
+
   setTimeout(
-    ()=>URL.revokeObjectURL(url),
+    function(){
+      URL.revokeObjectURL(
+        url
+      );
+    },
     1000
+  );
+
+  showToast(
+    "✓ HTML downloaded"
   );
 }
 
-generateBtn.addEventListener(
-  "click",
-  generateWebsite
-);
 
-editBtn.addEventListener(
-  "click",
-  editWebsite
-);
+/* =========================================================
+   OPEN
+========================================================= */
 
-clearBtn.addEventListener(
-  "click",
-  ()=>{
-    if(
-      !confirm(
-        "Clear the current project?"
-      )
-    ) return;
+function openHTML(){
 
-    currentHTML = "";
-    undoStack = [];
-    redoStack = [];
+  if(!currentHTML){
+    return;
+  }
 
-    promptInput.value = "";
-    editPrompt.value = "";
-    code.value = "";
-    previewFrame.srcdoc = "";
-
-    workspace.classList.remove("show");
-
-    localStorage.removeItem(
-      "spdp_current_html"
+  const blob =
+    new Blob(
+      [currentHTML],
+      {
+        type:"text/html"
+      }
     );
 
-    hideMessage();
-  }
-);
+  const url =
+    URL.createObjectURL(
+      blob
+    );
 
-$("codeBtn").addEventListener(
-  "click",
-  ()=>{
-    codePanel.classList.toggle("show");
-  }
-);
+  window.open(
+    url,
+    "_blank"
+  );
 
-$("copyBtn").addEventListener(
-  "click",
-  ()=>{
-    copyText(currentHTML);
-  }
-);
-
-$("codeCopyBtn").addEventListener(
-  "click",
-  ()=>{
-    copyText(code.value);
-  }
-);
-
-$("downloadBtn").addEventListener(
-  "click",
-  downloadHTML
-);
-
-$("openBtn").addEventListener(
-  "click",
-  ()=>{
-    if(!currentHTML) return;
-
-    const blob =
-      new Blob(
-        [currentHTML],
-        {type:"text/html"}
+  setTimeout(
+    function(){
+      URL.revokeObjectURL(
+        url
       );
+    },
+    60000
+  );
+}
 
-    const url =
-      URL.createObjectURL(blob);
 
-    window.open(
-      url,
-      "_blank"
-    );
+/* =========================================================
+   DEVICE PREVIEW
+========================================================= */
 
-    setTimeout(
-      ()=>URL.revokeObjectURL(url),
-      60000
-    );
-  }
-);
+document
+  .querySelectorAll(
+    ".device"
+  )
+  .forEach(
+    function(button){
 
-$("undoBtn").addEventListener(
-  "click",
-  ()=>{
-    if(!undoStack.length) return;
+      button.addEventListener(
+        "click",
+        function(){
 
-    redoStack.push(currentHTML);
+          document
+            .querySelectorAll(
+              ".device"
+            )
+            .forEach(
+              function(item){
+                item.classList.remove(
+                  "active"
+                );
+              }
+            );
 
-    const previous =
-      undoStack.pop();
+          button.classList.add(
+            "active"
+          );
 
-    renderHTML(previous);
-  }
-);
+          previewFrame.style.width =
+            button.dataset.width;
 
-$("redoBtn").addEventListener(
-  "click",
-  ()=>{
-    if(!redoStack.length) return;
+          if(
+            button.dataset.width ===
+            "100%"
+          ){
 
-    undoStack.push(currentHTML);
+            previewFrame.style.margin =
+              "0";
 
-    const next =
-      redoStack.pop();
+          }else{
 
-    renderHTML(next);
-  }
-);
-
-document.querySelectorAll(".device")
-.forEach(button=>{
-
-  button.addEventListener(
-    "click",
-    ()=>{
-      document
-        .querySelectorAll(".device")
-        .forEach(x =>
-          x.classList.remove("active")
-        );
-
-      button.classList.add("active");
-
-      previewFrame.style.maxWidth =
-        button.dataset.width;
-
-      previewFrame.style.margin =
-        button.dataset.width === "100%"
-          ? "0"
-          : "0 auto";
+            previewFrame.style.margin =
+              "0 auto";
+          }
+        }
+      );
     }
   );
-});
 
-promptInput.addEventListener(
-  "keydown",
-  event=>{
+
+/* =========================================================
+   SMOOTH PREVIEW
+========================================================= */
+
+$("smoothBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      smoothMode =
+        !smoothMode;
+
+      previewFrame.classList.toggle(
+        "smooth",
+        smoothMode
+      );
+
+      this.classList.toggle(
+        "active",
+        smoothMode
+      );
+
+      showToast(
+        smoothMode
+          ? "✨ Smooth preview enabled"
+          : "Smooth preview disabled"
+      );
+    }
+  );
+
+
+/* =========================================================
+   3D MODE
+========================================================= */
+
+$("threeBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      if(
+        detectThree(
+          currentHTML
+        )
+      ){
+
+        showToast(
+          "◈ 3D experience detected"
+        );
+
+        previewFrame.classList.add(
+          "smooth"
+        );
+
+      }else{
+
+        showToast(
+          "No Three.js scene detected"
+        );
+      }
+    }
+  );
+
+
+/* =========================================================
+   CODE PANEL
+========================================================= */
+
+$("codeBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      codePanel.classList.toggle(
+        "show"
+      );
+    }
+  );
+
+
+$("copyBtn")
+  .addEventListener(
+    "click",
+    function(){
+      copyText(
+        currentHTML
+      );
+    }
+  );
+
+
+$("codeCopyBtn")
+  .addEventListener(
+    "click",
+    function(){
+      copyText(
+        code.value
+      );
+    }
+  );
+
+
+$("downloadBtn")
+  .addEventListener(
+    "click",
+    downloadHTML
+  );
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+$("fullscreenBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      workspace.classList.toggle(
+        "fullscreen"
+      );
+
+      this.textContent =
+        workspace.classList.contains(
+          "fullscreen"
+        )
+          ? "✕ Exit Fullscreen"
+          : "⛶ Fullscreen";
+    }
+  );
+
+
+/* =========================================================
+   VISUAL EDITOR
+========================================================= */
+
+$("visualBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      editorPanel.classList.toggle(
+        "show"
+      );
+
+      this.classList.toggle(
+        "active"
+      );
+
+      if(
+        editorPanel.classList.contains(
+          "show"
+        )
+      ){
+
+        showToast(
+          "Click an element in the preview"
+        );
+      }
+    }
+  );
+
+
+/* =========================================================
+   RECEIVE PREVIEW EVENTS
+========================================================= */
+
+window.addEventListener(
+  "message",
+  function(event){
+
+    const data =
+      event.data;
+
     if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key === "Enter"
+      !data ||
+      data.source !==
+        "SPDP_AI_EDITOR"
     ){
-      event.preventDefault();
-      generateWebsite();
+      return;
+    }
+
+    if(
+      data.type ===
+      "select"
+    ){
+
+      selectedElement =
+        true;
+
+      const info =
+        data.data || {};
+
+      $("selectedInfo").innerHTML =
+        "Selected: <strong>" +
+        (
+          info.tag ||
+          "ELEMENT"
+        ) +
+        "</strong>";
+
+      $("editText").value =
+        info.text || "";
+
+      $("editFontSize").value =
+        info.fontSize || "";
+
+      $("editColor").value =
+        info.color || "";
+
+      $("editBackground").value =
+        info.background || "";
+
+      $("editRadius").value =
+        info.radius || "";
+
+      $("editPadding").value =
+        info.padding || "";
+    }
+
+    if(
+      data.type ===
+      "changed"
+    ){
+
+      syncPreviewToCode();
+
+      showToast(
+        "✓ Visual change applied"
+      );
     }
   }
 );
 
-editPrompt.addEventListener(
-  "keydown",
-  event=>{
-    if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key === "Enter"
-    ){
-      event.preventDefault();
-      editWebsite();
-    }
+
+/* =========================================================
+   APPLY VISUAL EDIT
+========================================================= */
+
+function applyVisualChanges(){
+
+  if(!selectedElement){
+
+    showToast(
+      "Select an element first"
+    );
+
+    return;
+  }
+
+  const changes = {
+
+    text:
+      $("editText").value,
+
+    fontSize:
+      $("editFontSize").value,
+
+    color:
+      $("editColor").value,
+
+    background:
+      $("editBackground").value,
+
+    radius:
+      $("editRadius").value,
+
+    padding:
+      $("editPadding").value
+  };
+
+  previewFrame.contentWindow.postMessage(
+    {
+      source:
+        "SPDP_AI_EDITOR",
+
+      type:
+        "apply-style",
+
+      changes:
+        changes
+    },
+    "*"
+  );
+}
+
+
+/* =========================================================
+   VISUAL INPUT EVENTS
+========================================================= */
+
+[
+  "editText",
+  "editFontSize",
+  "editColor",
+  "editBackground",
+  "editRadius",
+  "editPadding"
+]
+.forEach(
+  function(id){
+
+    $(id).addEventListener(
+      "change",
+      applyVisualChanges
+    );
   }
 );
 
-code.addEventListener(
-  "input",
-  ()=>{
-    const value =
-      code.value.trim();
 
-    if(validHTML(value)){
-      currentHTML = value;
-      previewFrame.srcdoc =
+/* =========================================================
+   SYNC PREVIEW → CODE
+========================================================= */
+
+function syncPreviewToCode(){
+
+  try{
+
+    const doc =
+      previewFrame.contentDocument;
+
+    if(!doc){
+      return;
+    }
+
+    const clone =
+      doc.documentElement.cloneNode(
+        true
+      );
+
+    clone
+      .querySelectorAll(
+        "[data-spdp-selected]"
+      )
+      .forEach(
+        function(el){
+
+          el.removeAttribute(
+            "data-spdp-selected"
+          );
+
+          el.style.outline =
+            el.dataset.spdpOldOutline || "";
+
+          delete el.dataset.spdpOldOutline;
+        }
+      );
+
+    const result =
+      "<!DOCTYPE html>\n" +
+      clone.outerHTML;
+
+    if(
+      validHTML(result)
+    ){
+
+      currentHTML =
+        result;
+
+      code.value =
         currentHTML;
 
       localStorage.setItem(
@@ -798,23 +2727,525 @@ code.addEventListener(
         currentHTML
       );
     }
+
+  }catch(error){
+
+    console.warn(
+      "Could not sync visual edit:",
+      error
+    );
+  }
+}
+
+
+/* =========================================================
+   UNDO
+========================================================= */
+
+$("undoBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      if(
+        !undoStack.length
+      ){
+
+        showToast(
+          "Nothing to undo"
+        );
+
+        return;
+      }
+
+      redoStack.push(
+        currentHTML
+      );
+
+      const previous =
+        undoStack.pop();
+
+      renderHTML(
+        previous,
+        false
+      );
+
+      showToast(
+        "↶ Undo"
+      );
+    }
+  );
+
+
+/* =========================================================
+   REDO
+========================================================= */
+
+$("redoBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      if(
+        !redoStack.length
+      ){
+
+        showToast(
+          "Nothing to redo"
+        );
+
+        return;
+      }
+
+      undoStack.push(
+        currentHTML
+      );
+
+      const next =
+        redoStack.pop();
+
+      renderHTML(
+        next,
+        false
+      );
+
+      showToast(
+        "↷ Redo"
+      );
+    }
+  );
+
+
+/* =========================================================
+   CODE MANUAL EDIT
+========================================================= */
+
+code.addEventListener(
+  "input",
+  function(){
+
+    const value =
+      code.value.trim();
+
+    if(
+      validHTML(value)
+    ){
+
+      currentHTML =
+        value;
+
+      previewFrame.srcdoc =
+        injectEditor(
+          currentHTML
+        );
+
+      localStorage.setItem(
+        "spdp_current_html",
+        currentHTML
+      );
+
+      update3DBadge();
+    }
   }
 );
 
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+clearBtn.addEventListener(
+  "click",
+  function(){
+
+    if(
+      !confirm(
+        "Clear the current project?"
+      )
+    ){
+      return;
+    }
+
+    currentHTML = "";
+
+    undoStack = [];
+
+    redoStack = [];
+
+    selectedElement = null;
+
+    promptInput.value = "";
+
+    editPrompt.value = "";
+
+    code.value = "";
+
+    previewFrame.srcdoc = "";
+
+    workspace.classList.remove(
+      "show"
+    );
+
+    editorPanel.classList.remove(
+      "show"
+    );
+
+    codePanel.classList.remove(
+      "show"
+    );
+
+    localStorage.removeItem(
+      "spdp_current_html"
+    );
+
+    hideMessage();
+
+    showToast(
+      "Project cleared"
+    );
+  }
+);
+
+
+/* =========================================================
+   KEYBOARD SHORTCUTS
+========================================================= */
+
+promptInput.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key === "Enter"
+    ){
+
+      event.preventDefault();
+
+      generateWebsite();
+    }
+  }
+);
+
+
+editPrompt.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key === "Enter"
+    ){
+
+      event.preventDefault();
+
+      editWebsite();
+    }
+  }
+);
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+generateBtn.addEventListener(
+  "click",
+  generateWebsite
+);
+
+
+editBtn.addEventListener(
+  "click",
+  editWebsite
+);
+
+
+/* =========================================================
+   QUICK CONVERSATION
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".quick"
+  )
+  .forEach(
+    function(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          promptInput.value =
+            button.dataset.prompt;
+
+          $("conversation")
+            .classList.remove(
+              "show"
+            );
+
+          promptInput.focus();
+        }
+      );
+    }
+  );
+
+
+/* =========================================================
+   SPEECH RECOGNITION
+========================================================= */
+
+function setupSpeech(){
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if(
+    !SpeechRecognition
+  ){
+
+    micBtn.disabled =
+      true;
+
+    editMicBtn.disabled =
+      true;
+
+    micBtn.title =
+      "Speech recognition is not supported in this browser.";
+
+    return;
+  }
+
+  recognition =
+    new SpeechRecognition();
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    true;
+
+  recognition.lang =
+    "en-IN";
+
+  recognition.onstart =
+    function(){
+
+      voiceStatus.classList.add(
+        "show"
+      );
+
+      voiceStatus.textContent =
+        "🎤 Listening... speak naturally.";
+
+      if(
+        activeVoiceTarget ===
+        "prompt"
+      ){
+
+        micBtn.classList.add(
+          "recording"
+        );
+
+      }else{
+
+        editMicBtn.classList.add(
+          "recording"
+        );
+      }
+    };
+
+
+  recognition.onresult =
+    function(event){
+
+      let transcript = "";
+
+      for(
+        let i =
+          event.resultIndex;
+        i <
+          event.results.length;
+        i++
+      ){
+
+        transcript +=
+          event.results[i][0]
+            .transcript;
+      }
+
+      transcript =
+        transcript.trim();
+
+      if(
+        activeVoiceTarget ===
+        "prompt"
+      ){
+
+        promptInput.value =
+          transcript;
+
+      }else{
+
+        editPrompt.value =
+          transcript;
+      }
+    };
+
+
+  recognition.onerror =
+    function(event){
+
+      console.warn(
+        "Speech error:",
+        event.error
+      );
+
+      voiceStatus.textContent =
+        "Microphone error: " +
+        event.error;
+
+      setTimeout(
+        function(){
+          voiceStatus.classList.remove(
+            "show"
+          );
+        },
+        2200
+      );
+    };
+
+
+  recognition.onend =
+    function(){
+
+      micBtn.classList.remove(
+        "recording"
+      );
+
+      editMicBtn.classList.remove(
+        "recording"
+      );
+
+      voiceStatus.classList.remove(
+        "show"
+      );
+
+      if(
+        activeVoiceTarget ===
+        "prompt"
+      ){
+
+        promptInput.focus();
+
+      }else{
+
+        editPrompt.focus();
+      }
+    };
+}
+
+
+/* =========================================================
+   START VOICE
+========================================================= */
+
+function startVoice(
+  target
+){
+
+  if(!recognition){
+
+    showMessage(
+      "Voice input is not supported in this browser. Use Chrome or Edge."
+    );
+
+    return;
+  }
+
+  activeVoiceTarget =
+    target;
+
+  try{
+
+    recognition.start();
+
+  }catch(error){
+
+    try{
+
+      recognition.stop();
+
+    }catch(e){}
+
+    setTimeout(
+      function(){
+
+        try{
+          recognition.start();
+        }catch(e){}
+
+      },
+      200
+    );
+  }
+}
+
+
+micBtn.addEventListener(
+  "click",
+  function(){
+
+    startVoice(
+      "prompt"
+    );
+  }
+);
+
+
+editMicBtn.addEventListener(
+  "click",
+  function(){
+
+    startVoice(
+      "edit"
+    );
+  }
+);
+
+
+/* =========================================================
+   LOAD SAVED PROJECT
+========================================================= */
+
 window.addEventListener(
   "load",
-  ()=>{
+  function(){
+
+    setupSpeech();
+
     const saved =
       localStorage.getItem(
         "spdp_current_html"
       );
 
-    if(saved && validHTML(saved)){
-      renderHTML(saved);
+    if(
+      saved &&
+      validHTML(saved)
+    ){
+
+      renderHTML(
+        saved,
+        false
+      );
     }
   }
 );
+
 </script>
+
 </body>
 </html>
-```
