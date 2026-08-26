@@ -3,112 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>SPDP AI — Website Builder</title>
+<title>SPDP AI — Hybrid Website Builder</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#050505;color:#fff;font-family:Inter,system-ui,sans-serif}
+body{overflow-x:hidden}
+button,textarea,input{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
 
-html{
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-  overflow-y:auto;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 15% 0%,rgba(100,100,255,.14),transparent 30%),
-    radial-gradient(circle at 85% 10%,rgba(255,255,255,.06),transparent 25%),
-    #050505;
-  color:white;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  overflow-x:hidden;
-  overflow-y:auto;
-}
-
-button,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.app{
-  padding:20px;
-  min-height:100vh;
-}
-
-.container{
-  width:min(1450px,100%);
-  margin:auto;
-}
+.app{padding:20px}
+.container{width:min(1450px,100%);margin:auto}
 
 header{
   height:64px;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #181818;
+  border-bottom:1px solid #191919;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:850;
-}
-
+.brand{display:flex;align-items:center;gap:10px;font-weight:850}
 .logo{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
+  width:40px;height:40px;border-radius:12px;
+  display:grid;place-items:center;
   background:linear-gradient(135deg,#fff,#777);
-  color:#000;
-  font-weight:950;
+  color:#000;font-weight:950
 }
 
-.status{
-  color:#777;
-  font-size:12px;
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
+.status{font-size:12px;color:#777;display:flex;gap:8px;align-items:center}
 .dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#4ade80;
-  box-shadow:0 0 15px #4ade80;
+  width:7px;height:7px;border-radius:50%;
+  background:#4ade80;box-shadow:0 0 15px #4ade80
 }
 
-.hero{
-  text-align:center;
-  padding:55px 0 30px;
-}
-
+.hero{text-align:center;padding:55px 0 30px}
 .badge{
-  display:inline-block;
-  padding:8px 14px;
-  border:1px solid #242424;
-  border-radius:999px;
-  background:#0b0b0b;
-  color:#888;
-  font-size:12px;
+  display:inline-block;padding:8px 14px;border:1px solid #242424;
+  border-radius:999px;background:#0b0b0b;color:#888;font-size:12px
 }
 
 h1{
@@ -119,413 +52,141 @@ h1{
   background:linear-gradient(180deg,#fff,#555);
   -webkit-background-clip:text;
   background-clip:text;
-  color:transparent;
+  color:transparent
 }
 
-.hero p{
-  max-width:720px;
-  margin:auto;
-  color:#777;
-  line-height:1.7;
-}
+.hero p{max-width:720px;margin:auto;color:#777;line-height:1.7}
 
 .panel{
-  margin-top:30px;
-  padding:16px;
-  border:1px solid #202020;
-  border-radius:24px;
-  background:rgba(255,255,255,.025);
-  box-shadow:0 30px 100px rgba(0,0,0,.45);
-  text-align:left;
+  margin-top:30px;padding:16px;border:1px solid #202020;
+  border-radius:24px;background:rgba(255,255,255,.025);
+  box-shadow:0 30px 100px rgba(0,0,0,.45);text-align:left
 }
 
-.prompt-wrap{
-  position:relative;
-}
-
-textarea{
-  outline:none;
-}
-
+.prompt-wrap{position:relative}
 .prompt{
-  width:100%;
-  min-height:145px;
-  resize:vertical;
-  border:1px solid #1b1b1b;
-  border-radius:17px;
-  background:#080808;
-  color:white;
-  padding:18px 60px 18px 18px;
-  line-height:1.6;
+  width:100%;min-height:145px;resize:vertical;
+  border:1px solid #1b1b1b;border-radius:17px;
+  background:#080808;color:white;padding:18px;
+  outline:none;line-height:1.6
 }
+.prompt:focus{border-color:#444}
+.prompt::placeholder{color:#444}
 
-.prompt:focus{
-  border-color:#444;
-}
-
-.prompt::placeholder{
-  color:#444;
-}
-
-.mic{
-  position:absolute;
-  right:12px;
-  top:12px;
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  border:1px solid #292929;
-  background:#111;
-  color:white;
-}
-
-.mic.recording{
-  background:#4b1111;
-  animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-  50%{
-    box-shadow:0 0 0 8px rgba(255,50,50,.08);
-  }
-}
-
-.actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:10px;
-}
-
+.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
 button{
-  border-radius:11px;
-  padding:10px 15px;
-  border:1px solid #292929;
-  background:#111;
-  color:white;
-  font-weight:750;
+  border-radius:11px;padding:10px 15px;
+  border:1px solid #292929;background:#111;color:#fff;
+  font-weight:750;transition:.15s
 }
-
-button:hover{
-  transform:translateY(-1px);
-}
-
-.primary{
-  background:#fff;
-  color:#000;
-  border-color:#fff;
-}
+button:hover{transform:translateY(-1px)}
+.primary{background:#fff;color:#000;border-color:#fff}
 
 .message{
-  display:none;
-  margin-top:12px;
-  padding:13px;
-  border-radius:12px;
-  background:#101010;
-  border:1px solid #292929;
-  color:#aaa;
-  white-space:pre-wrap;
+  display:none;margin-top:12px;padding:13px;border-radius:12px;
+  background:#101010;border:1px solid #292929;color:#aaa;
+  white-space:pre-wrap
 }
-
-.message.show{
-  display:block;
-}
+.message.show{display:block}
 
 .workspace{
-  display:none;
-  margin-top:25px;
-  border:1px solid #202020;
-  border-radius:22px;
-  overflow:hidden;
-  background:#070707;
-  box-shadow:0 35px 100px rgba(0,0,0,.5);
+  display:none;margin-top:25px;border:1px solid #202020;
+  border-radius:22px;overflow:hidden;background:#070707;
+  box-shadow:0 35px 100px rgba(0,0,0,.5)
 }
-
-.workspace.show{
-  display:block;
-}
+.workspace.show{display:block}
 
 .toolbar{
-  min-height:62px;
-  padding:10px;
-  border-bottom:1px solid #202020;
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  flex-wrap:wrap;
+  min-height:62px;padding:10px;border-bottom:1px solid #202020;
+  display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap
 }
-
-.toolbar-left,
-.toolbar-right{
-  display:flex;
-  gap:7px;
-  align-items:center;
-  flex-wrap:wrap;
+.toolbar-left,.toolbar-right{
+  display:flex;gap:7px;align-items:center;flex-wrap:wrap
 }
-
-.tool-title{
-  color:#777;
-  font-size:12px;
-}
-
-.device.active{
-  background:white;
-  color:black;
-}
+.tool-title{color:#777;font-size:12px}
+.device.active{background:#fff;color:#000}
 
 .preview-wrap{
-  min-height:720px;
-  padding:12px;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  background:
-    radial-gradient(circle at center,#121212,#030303 70%);
+  min-height:720px;padding:12px;
+  display:flex;justify-content:center;align-items:flex-start;
+  background:radial-gradient(circle at center,#121212,#030303 70%)
 }
 
 .preview-frame{
-  width:100%;
-  height:700px;
-  border:1px solid #292929;
-  border-radius:15px;
-  background:white;
+  width:100%;height:700px;border:1px solid #292929;
+  border-radius:15px;background:#fff;
   box-shadow:0 20px 80px rgba(0,0,0,.5);
-  transition:.3s;
+  transition:.3s
 }
 
-.code-panel{
-  display:none;
-  border-top:1px solid #202020;
-}
-
-.code-panel.show{
-  display:block;
-}
+.code-panel{display:none;border-top:1px solid #202020}
+.code-panel.show{display:block}
 
 .code-head{
-  padding:12px;
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px solid #202020;
+  padding:12px;display:flex;justify-content:space-between;
+  border-bottom:1px solid #202020
 }
 
 .code{
-  width:100%;
-  height:500px;
-  resize:vertical;
-  background:#020202;
-  color:#c9ced6;
-  border:0;
-  padding:18px;
-  font:12px/1.6 Consolas,monospace;
+  width:100%;height:500px;resize:vertical;
+  background:#020202;color:#c9ced6;border:0;
+  padding:18px;font:12px/1.6 Consolas,monospace;outline:none
 }
 
 .code-actions{
-  padding:10px;
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  border-top:1px solid #181818;
+  padding:10px;display:flex;justify-content:flex-end;
+  gap:8px;border-top:1px solid #181818
 }
 
-.chat{
-  border-top:1px solid #202020;
-}
-
-.chat-head{
-  padding:15px;
-  border-bottom:1px solid #1b1b1b;
-}
-
-.chat-head strong{
-  font-size:14px;
-}
-
-.chat-head span{
-  color:#666;
-  font-size:12px;
-  margin-left:8px;
-}
+.chat{border-top:1px solid #202020}
+.chat-head{padding:15px;border-bottom:1px solid #1b1b1b}
+.chat-head strong{font-size:14px}
+.chat-head span{color:#666;font-size:12px;margin-left:8px}
 
 .messages{
-  height:240px;
-  overflow-y:auto;
-  padding:15px;
-  display:flex;
-  flex-direction:column;
-  gap:9px;
+  height:240px;overflow-y:auto;padding:15px;
+  display:flex;flex-direction:column;gap:9px
 }
 
 .msg{
-  max-width:85%;
-  padding:11px 13px;
-  border-radius:13px;
-  font-size:13px;
-  white-space:pre-wrap;
-  line-height:1.5;
+  max-width:85%;padding:11px 13px;border-radius:13px;
+  font-size:13px;white-space:pre-wrap;line-height:1.5
 }
-
-.msg.user{
-  align-self:flex-end;
-  background:white;
-  color:black;
-}
-
-.msg.ai{
-  align-self:flex-start;
-  background:#111;
-  color:#aaa;
-  border:1px solid #222;
-}
+.msg.user{align-self:flex-end;background:#fff;color:#000}
+.msg.ai{align-self:flex-start;background:#111;color:#aaa;border:1px solid #222}
 
 .chat-input{
-  display:flex;
-  gap:8px;
-  padding:12px;
-  border-top:1px solid #191919;
-}
-
-.edit-wrap{
-  flex:1;
-  position:relative;
+  display:flex;gap:8px;padding:12px;border-top:1px solid #191919
 }
 
 .edit-prompt{
-  width:100%;
-  height:48px;
-  resize:none;
-  border-radius:12px;
-  border:1px solid #1c1c1c;
-  background:#080808;
-  color:white;
-  padding:12px 48px 12px 12px;
-}
-
-.edit-mic{
-  position:absolute;
-  right:5px;
-  top:5px;
-  width:38px;
-  height:38px;
-  padding:0;
-}
-
-.suggestions{
-  border-top:1px solid #202020;
-  padding:15px;
-  display:none;
-}
-
-.suggestions.show{
-  display:block;
-}
-
-.suggestion{
-  padding:12px;
-  border:1px solid #202020;
-  background:#0c0c0c;
-  border-radius:12px;
-  margin-top:8px;
-  color:#aaa;
-  font-size:13px;
-  cursor:pointer;
-}
-
-.suggestion:hover{
-  border-color:#444;
-  color:white;
+  flex:1;height:48px;resize:none;border-radius:12px;
+  border:1px solid #1c1c1c;background:#080808;
+  color:#fff;padding:12px;outline:none
 }
 
 .features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin:35px 0;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;margin:35px 0
 }
 
 .feature{
-  padding:22px;
-  border:1px solid #1c1c1c;
-  border-radius:17px;
-  background:#090909;
+  padding:22px;border:1px solid #1c1c1c;
+  border-radius:17px;background:#090909
 }
+.feature h3{margin:0 0 8px}
+.feature p{margin:0;color:#666;line-height:1.6;font-size:13px}
 
-.feature h3{
-  margin:0 0 8px;
-}
-
-.feature p{
-  margin:0;
-  color:#666;
-  line-height:1.6;
-  font-size:13px;
-}
-
-.loading{
-  display:none;
-  align-items:center;
-  gap:7px;
-}
-
-.loading.show{
-  display:inline-flex;
-}
-
-.spinner{
-  width:14px;
-  height:14px;
-  border:2px solid #777;
-  border-top-color:#000;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-footer{
-  text-align:center;
-  padding:35px;
-  color:#444;
-  font-size:12px;
-}
+footer{text-align:center;padding:35px;color:#444;font-size:12px}
 
 @media(max-width:760px){
-
-  .app{
-    padding:12px;
-  }
-
-  .status{
-    display:none;
-  }
-
-  .hero{
-    padding-top:40px;
-  }
-
-  .features{
-    grid-template-columns:1fr;
-  }
-
-  .preview-wrap{
-    min-height:610px;
-  }
-
-  .preview-frame{
-    height:590px;
-  }
-
-  .chat-input{
-    flex-direction:column;
-  }
-
-  .chat-input button{
-    width:100%;
-  }
+  .app{padding:12px}
+  .status{display:none}
+  .features{grid-template-columns:1fr}
+  .preview-wrap{min-height:610px}
+  .preview-frame{height:590px}
+  .chat-input{flex-direction:column}
+  .chat-input button{width:100%}
 }
 </style>
 </head>
@@ -543,152 +204,68 @@ footer{
 
   <div class="status">
     <span class="dot"></span>
-    Builder Online
+    Hybrid Builder Online
   </div>
 </header>
 
 <section class="hero">
 
-  <div class="badge">
-    ✦ AI Website · App · Game Builder
-  </div>
+  <div class="badge">✦ AI Website · App · Game Builder</div>
 
   <h1>Build anything.</h1>
 
   <p>
-    Describe your idea naturally. Type it, speak it,
-    generate it, then edit the same website manually
-    or with AI.
+    Generate basic websites instantly without an AI request.
+    Use AI only when you need advanced generation or editing.
   </p>
 
   <div class="panel">
 
-    <div class="prompt-wrap">
-
-      <textarea
-        id="prompt"
-        class="prompt"
-        placeholder="Create a premium black 3D website for a gaming company..."
-      ></textarea>
-
-      <button
-        id="micBtn"
-        class="mic"
-        type="button"
-      >🎙️</button>
-
-    </div>
+    <textarea
+      id="prompt"
+      class="prompt"
+      placeholder="Example: Create a premium black gaming company website with a hero section, games, pricing and contact section..."
+    ></textarea>
 
     <div class="actions">
 
-      <button
-        id="clearBtn"
-        type="button"
-      >
-        Clear
-      </button>
+      <button id="clearBtn">Clear</button>
 
-      <button
-        id="generateBtn"
-        class="primary"
-        type="button"
-      >
-        <span id="generateText">Generate</span>
-
-        <span
-          id="loading"
-          class="loading"
-        >
-          <span class="spinner"></span>
-          Working...
-        </span>
+      <button id="generateBtn" class="primary">
+        Generate
       </button>
 
     </div>
 
-    <div
-      id="message"
-      class="message"
-    ></div>
+    <div id="message" class="message"></div>
 
   </div>
 
 </section>
 
-<section
-  id="workspace"
-  class="workspace"
->
+<section id="workspace" class="workspace">
 
 <div class="toolbar">
 
   <div class="toolbar-left">
 
-    <span class="tool-title">
-      Live Preview
-    </span>
+    <span class="tool-title">Live Preview</span>
 
-    <button
-      class="device active"
-      data-width="100%"
-      type="button"
-    >
-      Desktop
-    </button>
+    <button class="device active" data-width="100%">Desktop</button>
+    <button class="device" data-width="768px">Tablet</button>
+    <button class="device" data-width="390px">Mobile</button>
 
-    <button
-      class="device"
-      data-width="768px"
-      type="button"
-    >
-      Tablet
-    </button>
-
-    <button
-      class="device"
-      data-width="390px"
-      type="button"
-    >
-      Mobile
-    </button>
-
-    <button
-      id="codeBtn"
-      type="button"
-    >
-      Code
-    </button>
-
-    <button
-      id="suggestBtn"
-      type="button"
-    >
-      ✨ AI Suggestions
-    </button>
+    <button id="codeBtn">Code</button>
 
   </div>
 
   <div class="toolbar-right">
 
-    <button id="undoBtn" type="button">
-      Undo
-    </button>
-
-    <button id="redoBtn" type="button">
-      Redo
-    </button>
-
-    <button id="copyBtn" type="button">
-      Copy
-    </button>
-
-    <button id="downloadBtn" type="button">
-      Download
-    </button>
-
-    <button id="openBtn" type="button">
-      Open
-    </button>
+    <button id="undoBtn">Undo</button>
+    <button id="redoBtn">Redo</button>
+    <button id="copyBtn">Copy</button>
+    <button id="downloadBtn">Download</button>
+    <button id="openBtn">Open</button>
 
   </div>
 
@@ -705,61 +282,27 @@ footer{
 
 </div>
 
-<div
-  id="codePanel"
-  class="code-panel"
->
+<div id="codePanel" class="code-panel">
 
   <div class="code-head">
 
-    <span class="tool-title">
-      Manual HTML Editor
-    </span>
+    <span class="tool-title">Manual HTML Editor</span>
 
-    <button
-      id="codeCopyBtn"
-      type="button"
-    >
-      Copy Code
-    </button>
+    <button id="codeCopyBtn">Copy Code</button>
 
   </div>
 
-  <textarea
-    id="code"
-    class="code"
-    spellcheck="false"
-  ></textarea>
+  <textarea id="code" class="code" spellcheck="false"></textarea>
 
   <div class="code-actions">
 
-    <button
-      id="resetCodeBtn"
-      type="button"
-    >
-      Reset
-    </button>
+    <button id="resetCodeBtn">Reset</button>
 
-    <button
-      id="applyCodeBtn"
-      class="primary"
-      type="button"
-    >
+    <button id="applyCodeBtn" class="primary">
       Apply Code
     </button>
 
   </div>
-
-</div>
-
-<div
-  id="suggestions"
-  class="suggestions"
->
-
-  <strong>AI Suggestions</strong>
-
-  <div id="suggestionList"></div>
 
 </div>
 
@@ -769,49 +312,27 @@ footer{
 
     <strong>AI Sub-chat</strong>
 
-    <span>
-      Edit your current website
-    </span>
+    <span>Edit your current website</span>
 
   </div>
 
-  <div
-    id="messages"
-    class="messages"
-  >
+  <div id="messages" class="messages">
 
     <div class="msg ai">
-      Your generated website will stay here.
-      Ask AI to change anything.
+      Your website is ready. Ask AI to change something when you need advanced editing.
     </div>
 
   </div>
 
   <div class="chat-input">
 
-    <div class="edit-wrap">
+    <textarea
+      id="editPrompt"
+      class="edit-prompt"
+      placeholder="Example: Make the hero more premium and add animated gradient lights..."
+    ></textarea>
 
-      <textarea
-        id="editPrompt"
-        class="edit-prompt"
-        placeholder="Make the hero more premium..."
-      ></textarea>
-
-      <button
-        id="editMic"
-        class="edit-mic"
-        type="button"
-      >
-        🎙️
-      </button>
-
-    </div>
-
-    <button
-      id="editBtn"
-      class="primary"
-      type="button"
-    >
+    <button id="editBtn" class="primary">
       Apply Edit
     </button>
 
@@ -824,26 +345,23 @@ footer{
 <section class="features">
 
   <article class="feature">
-    <h3>AI Generation</h3>
+    <h3>⚡ Free Generation</h3>
     <p>
-      Generate complete websites, apps and games
-      from natural language.
+      Common website requests are generated locally without consuming Gemini quota.
     </p>
   </article>
 
   <article class="feature">
-    <h3>Manual Editing</h3>
+    <h3>🛠 Manual Editing</h3>
     <p>
-      Open the HTML and directly modify the generated
-      website yourself.
+      Open the generated HTML and modify it directly.
     </p>
   </article>
 
   <article class="feature">
-    <h3>AI Suggestions</h3>
+    <h3>✨ AI Editing</h3>
     <p>
-      Ask AI to review your current website and suggest
-      useful improvements.
+      Complex changes can be sent to your Cloudflare Worker and Gemini.
     </p>
   </article>
 
@@ -861,60 +379,23 @@ footer{
 const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
-const $ =
-  id => document.getElementById(id);
+const $ = id =>
+  document.getElementById(id);
 
-const promptInput =
-  $("prompt");
-
-const editPrompt =
-  $("editPrompt");
-
-const generateBtn =
-  $("generateBtn");
-
-const editBtn =
-  $("editBtn");
-
-const loading =
-  $("loading");
-
-const generateText =
-  $("generateText");
-
-const workspace =
-  $("workspace");
-
-const previewFrame =
-  $("previewFrame");
-
-const code =
-  $("code");
-
-const codePanel =
-  $("codePanel");
-
-const messages =
-  $("messages");
-
-const message =
-  $("message");
-
-const suggestions =
-  $("suggestions");
-
-const suggestionList =
-  $("suggestionList");
+const promptInput = $("prompt");
+const editPrompt = $("editPrompt");
+const generateBtn = $("generateBtn");
+const editBtn = $("editBtn");
+const workspace = $("workspace");
+const previewFrame = $("previewFrame");
+const code = $("code");
+const codePanel = $("codePanel");
+const messages = $("messages");
+const message = $("message");
 
 let currentHTML = "";
-
 let undoStack = [];
-
 let redoStack = [];
-
-let recognition = null;
-
-let activeVoiceTarget = null;
 
 
 /* MESSAGE */
@@ -930,53 +411,11 @@ function hideMessage(){
 }
 
 
-/* LOADING */
-
-function setLoading(value){
-
-  generateBtn.disabled = value;
-  editBtn.disabled = value;
-  $("suggestBtn").disabled = value;
-
-  if(value){
-    generateText.style.display = "none";
-    loading.classList.add("show");
-  }else{
-    generateText.style.display = "inline";
-    loading.classList.remove("show");
-  }
-}
-
-
-/* VALID HTML */
-
-function validHTML(html){
-
-  if(typeof html !== "string"){
-    return false;
-  }
-
-  const x =
-    html.trim().toLowerCase();
-
-  return (
-    x.startsWith("<!doctype html") &&
-    x.includes("<html") &&
-    x.includes("<head") &&
-    x.includes("<body") &&
-    x.includes("<script") &&
-    x.includes("</html>")
-  );
-}
-
-
-/* SAVE HISTORY */
+/* HISTORY */
 
 function pushHistory(){
 
-  if(!currentHTML){
-    return;
-  }
+  if(!currentHTML) return;
 
   undoStack.push(currentHTML);
 
@@ -988,18 +427,32 @@ function pushHistory(){
 }
 
 
+/* VALID HTML */
+
+function validHTML(html){
+
+  if(typeof html !== "string") return false;
+
+  const x = html.trim().toLowerCase();
+
+  return (
+    x.startsWith("<!doctype html") &&
+    x.includes("<html") &&
+    x.includes("<head") &&
+    x.includes("<body") &&
+    x.includes("</html>")
+  );
+}
+
+
 /* RENDER */
 
 function renderHTML(html){
 
-  currentHTML =
-    html.trim();
+  currentHTML = html.trim();
 
-  previewFrame.srcdoc =
-    currentHTML;
-
-  code.value =
-    currentHTML;
+  previewFrame.srcdoc = currentHTML;
+  code.value = currentHTML;
 
   workspace.classList.add("show");
 
@@ -1010,57 +463,341 @@ function renderHTML(html){
 }
 
 
-/* WORKER */
+/* =========================
+   LOCAL GENERATOR
+========================= */
 
-async function callWorker(payload){
+function generateLocalWebsite(prompt){
 
-  const response =
-    await fetch(
-      WORKER_URL,
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:
-          JSON.stringify(payload)
-      }
-    );
+  const p = prompt.toLowerCase();
 
-  const raw =
-    await response.text();
+  let title = "SPDP Studio";
+  let subtitle = "Build something extraordinary.";
+  let theme = "dark";
 
-  let data;
-
-  try{
-    data =
-      JSON.parse(raw);
-  }catch{
-    throw new Error(
-      "Worker returned invalid JSON:\n" +
-      raw.substring(0,500)
-    );
+  if(p.includes("gaming") || p.includes("game")){
+    title = "NEXUS GAMING";
+    subtitle = "Enter the next generation of gaming.";
   }
 
-  if(!response.ok){
-    throw new Error(
-      data?.error ||
-      "Worker request failed."
-    );
+  if(p.includes("portfolio")){
+    title = "CREATIVE PORTFOLIO";
+    subtitle = "Design. Build. Create.";
   }
 
-  if(data.success !== true){
-    throw new Error(
-      data?.error ||
-      "Request failed."
-    );
+  if(p.includes("business") || p.includes("company")){
+    title = "NEXTGEN COMPANY";
+    subtitle = "Technology built for tomorrow.";
   }
 
-  return data;
+  if(p.includes("shop") || p.includes("store")){
+    title = "LUXE STORE";
+    subtitle = "Premium products. Simple experience.";
+  }
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>${escapeHTML(title)}</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  background:#050505;
+  color:white;
+}
+
+nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  border-bottom:1px solid #222;
+  position:sticky;
+  top:0;
+  background:rgba(5,5,5,.8);
+  backdrop-filter:blur(20px);
+  z-index:10;
+}
+
+.logo{
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+nav a{
+  color:#888;
+  text-decoration:none;
+  margin-left:25px;
+}
+
+.hero{
+  min-height:80vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 20px;
+  background:
+    radial-gradient(circle at 50% 20%,#252525,transparent 45%);
+}
+
+.badge{
+  padding:8px 14px;
+  border:1px solid #333;
+  border-radius:999px;
+  color:#aaa;
+  font-size:13px;
+}
+
+h1{
+  font-size:clamp(50px,10vw,120px);
+  line-height:.9;
+  margin:25px 0;
+  letter-spacing:-.07em;
+  background:linear-gradient(#fff,#555);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:650px;
+  color:#777;
+  line-height:1.7;
+}
+
+.btn{
+  margin-top:30px;
+  display:inline-block;
+  padding:14px 24px;
+  border-radius:12px;
+  background:white;
+  color:black;
+  text-decoration:none;
+  font-weight:800;
+}
+
+section{
+  padding:100px 7%;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  padding:30px;
+  border:1px solid #222;
+  border-radius:20px;
+  background:#0b0b0b;
+}
+
+.card h3{
+  margin-top:0;
+}
+
+.card p{
+  color:#777;
+  line-height:1.6;
+}
+
+.contact{
+  text-align:center;
+  background:#0b0b0b;
+}
+
+footer{
+  text-align:center;
+  padding:40px;
+  color:#555;
+}
+
+@media(max-width:700px){
+
+  nav a{
+    display:none;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:70px 20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+SPDP
+</div>
+
+<div>
+<a href="#features">Features</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="badge">
+✦ BUILT WITH SPDP AI
+</div>
+
+<h1>
+${escapeHTML(title)}
+</h1>
+
+<p>
+${escapeHTML(subtitle)}
+</p>
+
+<a class="btn" href="#features">
+Explore
+</a>
+
+</section>
+
+<section id="features">
+
+<h2>
+Why choose us?
+</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>01 — Powerful</h3>
+<p>
+Everything you need to launch a modern digital experience.
+</p>
+</div>
+
+<div class="card">
+<h3>02 — Fast</h3>
+<p>
+Designed with performance and responsive layouts in mind.
+</p>
+</div>
+
+<div class="card">
+<h3>03 — Premium</h3>
+<p>
+Clean visuals, smooth interactions and professional design.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2>
+About
+</h2>
+
+<p style="color:#777;max-width:700px;line-height:1.8">
+This website was generated using the SPDP AI Hybrid Builder.
+Basic layouts can be generated locally without consuming AI API quota.
+</p>
+
+</section>
+
+<section id="contact" class="contact">
+
+<h2>
+Ready to build?
+</h2>
+
+<p style="color:#777">
+Start creating your next digital experience.
+</p>
+
+<a class="btn" href="#top">
+Get Started
+</a>
+
+</section>
+
+<footer>
+SPDP AI · 2026
+</footer>
+
+<script>
+
+document.querySelectorAll("a[href^='#']").forEach(a=>{
+
+  a.addEventListener("click",e=>{
+
+    const target =
+      document.querySelector(a.getAttribute("href"));
+
+    if(target){
+
+      e.preventDefault();
+
+      target.scrollIntoView({
+        behavior:"smooth"
+      });
+
+    }
+
+  });
+
+});
+
+<\/script>
+
+</body>
+</html>`;
 }
 
 
-/* GENERATE */
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =========================
+   GENERATE
+========================= */
 
 async function generateWebsite(){
 
@@ -1070,7 +807,7 @@ async function generateWebsite(){
   if(!text){
 
     showMessage(
-      "Type or speak what you want to build."
+      "Type what you want to build."
     );
 
     return;
@@ -1078,37 +815,30 @@ async function generateWebsite(){
 
   hideMessage();
 
-  setLoading(true);
+  generateBtn.disabled = true;
+  generateBtn.textContent = "Generating...";
 
   try{
 
-    const data =
-      await callWorker({
-        action:"create",
-        prompt:text
-      });
+    /*
+     * LOCAL FIRST
+     *
+     * No Gemini API call.
+     */
 
-    if(!validHTML(data.html)){
-      throw new Error(
-        "AI returned invalid HTML."
-      );
-    }
+    const html =
+      generateLocalWebsite(text);
 
     undoStack = [];
     redoStack = [];
 
-    renderHTML(
-      data.html
-    );
+    renderHTML(html);
 
-    addMessage(
-      "user",
-      text
-    );
+    addMessage("user",text);
 
     addMessage(
       "ai",
-      "Website generated successfully."
+      "Website generated locally without using Gemini quota."
     );
 
     workspace.scrollIntoView({
@@ -1117,21 +847,21 @@ async function generateWebsite(){
 
   }catch(error){
 
-    console.error(error);
-
     showMessage(
-      "❌ " +
-      error.message
+      "❌ " + error.message
     );
 
   }finally{
 
-    setLoading(false);
+    generateBtn.disabled = false;
+    generateBtn.textContent = "Generate";
   }
 }
 
 
-/* AI EDIT */
+/* =========================
+   AI EDIT
+========================= */
 
 async function editWebsite(){
 
@@ -1160,30 +890,50 @@ async function editWebsite(){
 
   editPrompt.value = "";
 
-  setLoading(true);
+  editBtn.disabled = true;
+  editBtn.textContent = "AI Working...";
 
   try{
 
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+            action:"edit",
+            prompt:instruction,
+            currentHTML:currentHTML
+          })
+        }
+      );
+
     const data =
-      await callWorker({
-        action:"edit",
-        prompt:instruction,
-        currentHTML
-      });
+      await response.json();
+
+    if(!response.ok || !data.success){
+
+      throw new Error(
+        data.error ||
+        "AI edit failed."
+      );
+    }
 
     if(!validHTML(data.html)){
+
       throw new Error(
         "AI returned invalid HTML."
       );
     }
 
-    renderHTML(
-      data.html
-    );
+    renderHTML(data.html);
 
     addMessage(
       "ai",
-      "Done. Website updated."
+      "Done. AI updated your website."
     );
 
   }catch(error){
@@ -1203,12 +953,13 @@ async function editWebsite(){
 
   }finally{
 
-    setLoading(false);
+    editBtn.disabled = false;
+    editBtn.textContent = "Apply Edit";
   }
 }
 
 
-/* ADD MESSAGE */
+/* MESSAGE */
 
 function addMessage(type,text){
 
@@ -1228,13 +979,102 @@ function addMessage(type,text){
 }
 
 
+/* UNDO */
+
+$("undoBtn").onclick = () => {
+
+  if(!undoStack.length){
+
+    showMessage(
+      "Nothing to undo."
+    );
+
+    return;
+  }
+
+  redoStack.push(currentHTML);
+
+  renderHTML(
+    undoStack.pop()
+  );
+};
+
+
+/* REDO */
+
+$("redoBtn").onclick = () => {
+
+  if(!redoStack.length){
+
+    showMessage(
+      "Nothing to redo."
+    );
+
+    return;
+  }
+
+  undoStack.push(currentHTML);
+
+  renderHTML(
+    redoStack.pop()
+  );
+};
+
+
+/* CODE */
+
+$("codeBtn").onclick = () => {
+
+  codePanel.classList.toggle("show");
+
+};
+
+
+/* APPLY CODE */
+
+$("applyCodeBtn").onclick = () => {
+
+  const newHTML =
+    code.value.trim();
+
+  if(!validHTML(newHTML)){
+
+    showMessage(
+      "❌ Invalid HTML."
+    );
+
+    return;
+  }
+
+  pushHistory();
+
+  renderHTML(newHTML);
+
+  addMessage(
+    "ai",
+    "Manual code changes applied."
+  );
+
+  showMessage(
+    "✓ Code applied."
+  );
+};
+
+
+/* RESET */
+
+$("resetCodeBtn").onclick = () => {
+
+  code.value =
+    currentHTML;
+};
+
+
 /* COPY */
 
 async function copyText(text){
 
-  if(!text){
-    return;
-  }
+  if(!text) return;
 
   try{
 
@@ -1257,14 +1097,18 @@ async function copyText(text){
   }
 }
 
+$("copyBtn").onclick =
+  () => copyText(currentHTML);
+
+$("codeCopyBtn").onclick =
+  () => copyText(code.value);
+
 
 /* DOWNLOAD */
 
-function downloadHTML(){
+$("downloadBtn").onclick = () => {
 
-  if(!currentHTML){
-    return;
-  }
+  if(!currentHTML) return;
 
   const blob =
     new Blob(
@@ -1282,23 +1126,17 @@ function downloadHTML(){
   a.download =
     "spdp-ai-website.html";
 
-  document.body.appendChild(a);
-
   a.click();
 
-  a.remove();
-
   URL.revokeObjectURL(url);
-}
+};
 
 
 /* OPEN */
 
-function openHTML(){
+$("openBtn").onclick = () => {
 
-  if(!currentHTML){
-    return;
-  }
+  if(!currentHTML) return;
 
   const blob =
     new Blob(
@@ -1309,467 +1147,128 @@ function openHTML(){
   const url =
     URL.createObjectURL(blob);
 
-  window.open(
-    url,
-    "_blank"
-  );
-}
-
-
-/* UNDO */
-
-$("undoBtn").onclick = () => {
-
-  if(!undoStack.length){
-    showMessage("Nothing to undo.");
-    return;
-  }
-
-  redoStack.push(currentHTML);
-
-  const previous =
-    undoStack.pop();
-
-  renderHTML(previous);
+  window.open(url,"_blank");
 };
 
 
-/* REDO */
-
-$("redoBtn").onclick = () => {
-
-  if(!redoStack.length){
-    showMessage("Nothing to redo.");
-    return;
-  }
-
-  undoStack.push(currentHTML);
-
-  const next =
-    redoStack.pop();
-
-  renderHTML(next);
-};
-
-
-/* COPY */
-
-$("copyBtn").onclick =
-  () => copyText(currentHTML);
-
-$("codeCopyBtn").onclick =
-  () => copyText(code.value);
-
-
-/* DOWNLOAD */
-
-$("downloadBtn").onclick =
-  downloadHTML;
-
-
-/* OPEN */
-
-$("openBtn").onclick =
-  openHTML;
-
-
-/* GENERATE */
-
-generateBtn.onclick =
-  generateWebsite;
-
-
-/* EDIT */
-
-editBtn.onclick =
-  editWebsite;
-
-
-/* CODE PANEL */
-
-$("codeBtn").onclick =
-  () => {
-
-    codePanel.classList.toggle(
-      "show"
-    );
-  };
-
-
-/* APPLY MANUAL CODE */
-
-$("applyCodeBtn").onclick =
-  () => {
-
-    const newHTML =
-      code.value.trim();
-
-    if(!validHTML(newHTML)){
-
-      showMessage(
-        "❌ Invalid HTML. Make sure it contains <!DOCTYPE html>, <html>, <head>, <body>, <script> and </html>."
-      );
-
-      return;
-    }
-
-    pushHistory();
-
-    renderHTML(
-      newHTML
-    );
-
-    addMessage(
-      "ai",
-      "Manual code changes applied to the live preview."
-    );
-
-    showMessage(
-      "✓ Code applied."
-    );
-  };
-
-
-/* RESET CODE */
-
-$("resetCodeBtn").onclick =
-  () => {
-
-    code.value =
-      currentHTML;
-  };
-
-
-/* LIVE CODE */
-
-code.addEventListener(
-  "input",
-  () => {
-
-    const value =
-      code.value.trim();
-
-    if(validHTML(value)){
-
-      previewFrame.srcdoc =
-        value;
-    }
-  }
-);
-
-
-/* DEVICE */
+/* DEVICES */
 
 document
-  .querySelectorAll(".device")
-  .forEach(btn => {
+.querySelectorAll(".device")
+.forEach(btn=>{
 
-    btn.onclick = () => {
+  btn.onclick = () => {
 
-      document
-        .querySelectorAll(".device")
-        .forEach(x =>
-          x.classList.remove("active")
-        );
+    document
+    .querySelectorAll(".device")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
 
-      btn.classList.add("active");
+    btn.classList.add("active");
 
-      const width =
-        btn.dataset.width;
+    const width =
+      btn.dataset.width;
 
-      previewFrame.style.width =
-        width;
+    previewFrame.style.width =
+      width;
 
-      previewFrame.style.margin =
-        width === "100%"
-          ? "0"
-          : "0 auto";
-    };
-  });
-
-
-/* AI SUGGESTIONS */
-
-$("suggestBtn").onclick =
-  async () => {
-
-    if(!currentHTML){
-
-      showMessage(
-        "Generate a website first."
-      );
-
-      return;
-    }
-
-    setLoading(true);
-
-    try{
-
-      const data =
-        await callWorker({
-          action:"suggest",
-          currentHTML
-        });
-
-      suggestionList.innerHTML =
-        "";
-
-      let list =
-        Array.isArray(data.suggestions)
-          ? data.suggestions
-          : [String(data.suggestions)];
-
-      list.forEach(
-        suggestion => {
-
-          const item =
-            document.createElement("div");
-
-          item.className =
-            "suggestion";
-
-          item.textContent =
-            suggestion;
-
-          item.onclick =
-            () => {
-
-              editPrompt.value =
-                suggestion;
-
-              editPrompt.focus();
-            };
-
-          suggestionList.appendChild(
-            item
-          );
-        }
-      );
-
-      suggestions.classList.add(
-        "show"
-      );
-
-    }catch(error){
-
-      showMessage(
-        "❌ " + error.message
-      );
-
-    }finally{
-
-      setLoading(false);
-    }
+    previewFrame.style.margin =
+      width === "100%"
+        ? "0"
+        : "0 auto";
   };
+
+});
 
 
 /* CLEAR */
 
-$("clearBtn").onclick =
-  () => {
+$("clearBtn").onclick = () => {
 
-    if(
-      !confirm(
-        "Clear current project?"
-      )
-    ){
-      return;
-    }
+  if(
+    !confirm(
+      "Clear current project?"
+    )
+  ) return;
 
-    currentHTML = "";
+  currentHTML = "";
+  undoStack = [];
+  redoStack = [];
 
-    undoStack = [];
+  promptInput.value = "";
+  editPrompt.value = "";
+  code.value = "";
 
-    redoStack = [];
+  previewFrame.srcdoc = "";
 
-    promptInput.value = "";
+  workspace.classList.remove("show");
 
-    editPrompt.value = "";
+  localStorage.removeItem(
+    "spdp_current_html"
+  );
 
-    code.value = "";
+  messages.innerHTML = `
+    <div class="msg ai">
+      Your generated website will stay here.
+    </div>
+  `;
 
-    previewFrame.srcdoc = "";
-
-    workspace.classList.remove(
-      "show"
-    );
-
-    suggestions.classList.remove(
-      "show"
-    );
-
-    localStorage.removeItem(
-      "spdp_current_html"
-    );
-
-    messages.innerHTML = `
-      <div class="msg ai">
-        Your generated website will stay here.
-      </div>
-    `;
-
-    hideMessage();
-  };
+  hideMessage();
+};
 
 
 /* KEYBOARD */
 
 promptInput.addEventListener(
   "keydown",
-  event => {
+  e => {
 
     if(
-      (event.ctrlKey || event.metaKey) &&
-      event.key === "Enter"
+      (e.ctrlKey || e.metaKey) &&
+      e.key === "Enter"
     ){
 
-      event.preventDefault();
+      e.preventDefault();
 
       generateWebsite();
     }
+
   }
 );
 
 editPrompt.addEventListener(
   "keydown",
-  event => {
+  e => {
 
     if(
-      (event.ctrlKey || event.metaKey) &&
-      event.key === "Enter"
+      (e.ctrlKey || e.metaKey) &&
+      e.key === "Enter"
     ){
 
-      event.preventDefault();
+      e.preventDefault();
 
       editWebsite();
     }
+
   }
 );
 
 
-/* VOICE */
+/* BUTTONS */
 
-function setupVoice(){
+generateBtn.onclick =
+  generateWebsite;
 
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if(!SpeechRecognition){
-
-    micBtn.disabled = true;
-    editMic.disabled = true;
-
-    return;
-  }
-
-  recognition =
-    new SpeechRecognition();
-
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  recognition.lang = "en-US";
-
-  recognition.onstart =
-    () => {
-
-      if(activeVoiceTarget === "prompt"){
-        micBtn.classList.add("recording");
-      }else{
-        editMic.classList.add("recording");
-      }
-    };
-
-  recognition.onresult =
-    event => {
-
-      const text =
-        event.results[0][0].transcript;
-
-      if(
-        activeVoiceTarget === "prompt"
-      ){
-
-        const old =
-          promptInput.value.trim();
-
-        promptInput.value =
-          old
-            ? old + " " + text
-            : text;
-
-      }else{
-
-        const old =
-          editPrompt.value.trim();
-
-        editPrompt.value =
-          old
-            ? old + " " + text
-            : text;
-      }
-    };
-
-  recognition.onerror =
-    error => {
-
-      if(error.error === "not-allowed"){
-
-        showMessage(
-          "🎙️ Microphone permission denied."
-        );
-      }
-    };
-
-  recognition.onend =
-    () => {
-
-      micBtn.classList.remove(
-        "recording"
-      );
-
-      editMic.classList.remove(
-        "recording"
-      );
-    };
-}
+editBtn.onclick =
+  editWebsite;
 
 
-function startVoice(target){
-
-  if(!recognition){
-
-    showMessage(
-      "Voice input is not supported. Use Chrome or Edge."
-    );
-
-    return;
-  }
-
-  activeVoiceTarget =
-    target;
-
-  try{
-    recognition.start();
-  }catch{}
-}
-
-
-micBtn.onclick =
-  () => startVoice("prompt");
-
-editMic.onclick =
-  () => startVoice("edit");
-
-
-/* LOAD SAVED PROJECT */
+/* LOAD */
 
 window.addEventListener(
   "load",
   () => {
-
-    setupVoice();
 
     const saved =
       localStorage.getItem(
@@ -1782,7 +1281,9 @@ window.addEventListener(
     ){
 
       renderHTML(saved);
+
     }
+
   }
 );
 
