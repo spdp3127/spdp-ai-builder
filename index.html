@@ -1,2790 +1,845 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SPDP AI Website Builder</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background:
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(88, 101, 242, 0.16),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(0, 210, 255, 0.10),
+          transparent 30%
+        ),
+        #07080c;
+      color: #fff;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 28px;
+
+      background: rgba(7, 8, 12, 0.82);
+      backdrop-filter: blur(22px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 12px;
+
+      background: linear-gradient(
+        135deg,
+        #ffffff,
+        #777
+      );
+
+      color: #050505;
+
+      font-weight: 900;
+      letter-spacing: -1px;
+
+      box-shadow:
+        0 8px 30px rgba(255,255,255,0.08);
+    }
 
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>SPDP AI — Website Builder</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,Arial,sans-serif;
-}
-
-html{
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-}
-
-body{
-  min-height:100vh;
-  background:#050505;
-  color:#fff;
-  overflow-x:hidden;
-  overflow-y:auto;
-}
-
-button,
-textarea,
-input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-body::before,
-body::after{
-  content:"";
-  position:fixed;
-  border-radius:50%;
-  pointer-events:none;
-  z-index:0;
-}
-
-body::before{
-  width:600px;
-  height:600px;
-  top:-250px;
-  left:-200px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.07),
-      transparent 65%
-    );
-}
-
-body::after{
-  width:500px;
-  height:500px;
-  right:-150px;
-  bottom:-250px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(120,120,120,.06),
-      transparent 65%
-    );
-}
-
-header{
-  height:72px;
-  border-bottom:1px solid #1d1d1d;
-  background:rgba(8,8,8,.94);
-  backdrop-filter:blur(20px);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 28px;
-  position:relative;
-  z-index:50;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo{
-  width:38px;
-  height:38px;
-  border-radius:11px;
-  background:linear-gradient(145deg,#fff,#777);
-  color:#050505;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  font-size:15px;
-}
-
-.brand-name{
-  font-size:18px;
-  font-weight:800;
-}
-
-.brand-name span{
-  color:#777;
-  font-weight:500;
-}
-
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.header-btn,
-.publish{
-  border-radius:9px;
-  padding:10px 15px;
-  transition:.2s;
-}
-
-.header-btn{
-  background:#101010;
-  border:1px solid #292929;
-  color:#ddd;
-}
-
-.header-btn:hover{
-  border-color:#555;
-  color:#fff;
-  transform:translateY(-1px);
-}
-
-.publish{
-  background:#fff;
-  color:#050505;
-  border:0;
-  font-weight:800;
-  padding:11px 18px;
-}
-
-.publish:hover{
-  transform:translateY(-1px);
-}
-
-.user-btn{
-  max-width:170px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.app{
-  height:calc(100vh - 72px);
-  min-height:600px;
-  display:grid;
-  grid-template-columns:330px minmax(0,1fr) 330px;
-  position:relative;
-  z-index:1;
-}
-
-.sidebar{
-  background:#080808;
-  border-right:1px solid #1c1c1c;
-  padding:24px;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
-
-.small-label{
-  color:#777;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:9px;
-}
-
-.sidebar h1{
-  font-size:25px;
-  letter-spacing:-1px;
-  margin-bottom:8px;
-}
-
-.desc{
-  color:#777;
-  font-size:13px;
-  line-height:1.6;
-  margin-bottom:22px;
-}
-
-.prompt-box{
-  background:#0d0d0d;
-  border:1px solid #272727;
-  border-radius:14px;
-  padding:13px;
-}
-
-.prompt-box:focus-within{
-  border-color:#555;
-}
-
-textarea{
-  width:100%;
-  resize:none;
-  background:transparent;
-  border:0;
-  outline:0;
-  color:#fff;
-}
-
-#prompt{
-  height:145px;
-  font-size:14px;
-  line-height:1.6;
-}
-
-textarea::placeholder{
-  color:#555;
-}
-
-.generate{
-  width:100%;
-  margin-top:10px;
-  border:0;
-  border-radius:11px;
-  padding:14px;
-  background:linear-gradient(135deg,#fff,#aaa);
-  color:#050505;
-  font-size:14px;
-  font-weight:900;
-  transition:.2s;
-}
-
-.generate:hover{
-  transform:translateY(-2px);
-}
-
-.generate:disabled{
-  opacity:.5;
-  cursor:wait;
-  transform:none;
-}
-
-.divider{
-  height:1px;
-  background:#1c1c1c;
-  margin:25px 0;
-}
-
-.examples-title{
-  color:#666;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.4px;
-  margin-bottom:11px;
-}
-
-.example{
-  padding:12px 13px;
-  border:1px solid #1d1d1d;
-  background:#0c0c0c;
-  border-radius:10px;
-  margin-bottom:8px;
-  color:#aaa;
-  font-size:12px;
-  transition:.2s;
-}
-
-.example:hover{
-  background:#111;
-  color:#fff;
-  border-color:#333;
-  transform:translateX(3px);
-}
-
-.preview{
-  display:flex;
-  flex-direction:column;
-  background:#0b0b0b;
-  min-width:0;
-  min-height:0;
-}
-
-.preview-top{
-  height:55px;
-  flex:none;
-  border-bottom:1px solid #1c1c1c;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-}
-
-.preview-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#999;
-  font-size:12px;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#40ff88;
-  box-shadow:0 0 12px rgba(64,255,136,.5);
-}
-
-.preview-tools{
-  display:flex;
-  gap:7px;
-}
-
-.tool{
-  width:32px;
-  height:30px;
-  border:1px solid #242424;
-  background:#101010;
-  color:#888;
-  border-radius:7px;
-}
-
-.tool:hover{
-  color:#fff;
-  border-color:#555;
-}
-
-.canvas{
-  flex:1;
-  min-height:0;
-  padding:25px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:auto;
-}
-
-.website{
-  width:min(100%,1050px);
-  height:700px;
-  min-height:520px;
-  flex-shrink:0;
-  background:#fff;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 35px 100px rgba(0,0,0,.55);
-  position:relative;
-}
-
-#previewFrame{
-  width:100%;
-  height:100%;
-  min-height:520px;
-  border:0;
-  display:block;
-  background:#fff;
-}
-
-.ai-chat{
-  background:#080808;
-  border-left:1px solid #1c1c1c;
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-  min-height:0;
-}
-
-.chat-header{
-  height:55px;
-  flex:none;
-  border-bottom:1px solid #1c1c1c;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 17px;
-}
-
-.chat-title{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-size:13px;
-  font-weight:800;
-}
-
-.ai-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 0 15px rgba(255,255,255,.6);
-}
-
-.chat-clear{
-  background:#101010;
-  color:#888;
-  border:1px solid #242424;
-  border-radius:7px;
-  padding:6px 9px;
-  font-size:11px;
-}
-
-.chat-messages{
-  flex:1;
-  min-height:0;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:16px;
-}
-
-.chat-empty{
-  color:#666;
-  font-size:12px;
-  line-height:1.7;
-  padding:12px;
-  border:1px solid #1d1d1d;
-  border-radius:10px;
-  background:#0d0d0d;
-}
-
-.message{
-  margin-bottom:12px;
-  max-width:92%;
-}
-
-.message.user{
-  margin-left:auto;
-}
-
-.message-bubble{
-  padding:10px 12px;
-  border-radius:11px;
-  font-size:12px;
-  line-height:1.5;
-  white-space:pre-wrap;
-}
-
-.message.ai .message-bubble{
-  background:#101010;
-  border:1px solid #222;
-  color:#bbb;
-}
-
-.message.user .message-bubble{
-  background:#fff;
-  color:#111;
-}
-
-.chat-input-area{
-  flex:none;
-  padding:12px;
-  border-top:1px solid #1c1c1c;
-}
-
-.chat-input{
-  min-height:75px;
-  max-height:150px;
-  resize:vertical;
-  background:#0e0e0e;
-  border:1px solid #282828;
-  border-radius:11px;
-  padding:11px;
-  color:#fff;
-  outline:none;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.chat-input:focus{
-  border-color:#555;
-}
-
-.chat-send{
-  width:100%;
-  margin-top:7px;
-  padding:11px;
-  border:0;
-  border-radius:9px;
-  background:#fff;
-  color:#111;
-  font-weight:800;
-}
-
-.chat-send:disabled{
-  opacity:.5;
-  cursor:wait;
-}
-
-.loading{
-  position:absolute;
-  inset:0;
-  background:rgba(255,255,255,.96);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:18px;
-  color:#111;
-  z-index:5;
-}
-
-.loading.show{
-  display:flex;
-}
-
-.spinner{
-  width:42px;
-  height:42px;
-  border:4px solid #ddd;
-  border-top-color:#111;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.loading-text{
-  font-size:14px;
-  font-weight:800;
-}
-
-.toast{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  background:#fff;
-  color:#111;
-  padding:13px 18px;
-  border-radius:10px;
-  font-size:13px;
-  font-weight:700;
-  transform:translateY(100px);
-  opacity:0;
-  transition:.3s;
-  z-index:1000;
-  max-width:400px;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(15px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:500;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.auth-box{
-  width:min(92%,420px);
-  background:#0d0d0d;
-  border:1px solid #292929;
-  border-radius:18px;
-  padding:25px;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
-}
-
-.auth-box h2{
-  font-size:25px;
-  margin-bottom:7px;
-}
-
-.auth-desc{
-  color:#777;
-  font-size:13px;
-  margin-bottom:22px;
-  line-height:1.5;
-}
-
-.auth-input{
-  width:100%;
-  padding:13px;
-  margin-bottom:10px;
-  background:#080808;
-  border:1px solid #292929;
-  border-radius:9px;
-  color:#fff;
-  outline:none;
-}
-
-.auth-input:focus{
-  border-color:#555;
-}
-
-.auth-action{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:9px;
-  background:#fff;
-  color:#111;
-  font-weight:900;
-  margin-top:4px;
-}
-
-.auth-switch{
-  text-align:center;
-  color:#666;
-  font-size:12px;
-  margin-top:15px;
-}
-
-.auth-switch span{
-  color:#fff;
-  font-weight:700;
-}
-
-.close-modal{
-  float:right;
-  border:0;
-  background:transparent;
-  color:#777;
-  font-size:20px;
-}
-
-.projects-panel{
-  position:fixed;
-  top:72px;
-  left:20px;
-  width:310px;
-  max-height:calc(100vh - 100px);
-  background:#0b0b0b;
-  border:1px solid #292929;
-  border-radius:15px;
-  z-index:200;
-  display:none;
-  overflow:hidden;
-  box-shadow:0 25px 80px rgba(0,0,0,.65);
-}
-
-.projects-panel.show{
-  display:block;
-}
-
-.projects-head{
-  padding:15px;
-  border-bottom:1px solid #222;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.projects-list{
-  padding:10px;
-  max-height:500px;
-  overflow:auto;
-}
-
-.project-item{
-  padding:12px;
-  background:#101010;
-  border:1px solid #202020;
-  border-radius:10px;
-  margin-bottom:8px;
-}
-
-.project-item:hover{
-  border-color:#444;
-}
-
-.project-name{
-  font-weight:800;
-  font-size:13px;
-  margin-bottom:4px;
-  padding-right:20px;
-}
-
-.project-date{
-  color:#666;
-  font-size:10px;
-}
-
-.project-delete{
-  float:right;
-  border:0;
-  background:transparent;
-  color:#777;
-  font-size:18px;
-}
-
-@media(max-width:1150px){
-
-  .app{
-    grid-template-columns:300px minmax(0,1fr);
-  }
-
-  .ai-chat{
-    position:fixed;
-    right:0;
-    top:72px;
-    bottom:0;
-    width:330px;
-    transform:translateX(100%);
-    transition:.3s;
-    z-index:100;
-  }
-
-  .ai-chat.open{
-    transform:translateX(0);
-  }
-}
-
-@media(max-width:850px){
-
-  body{
-    overflow-x:hidden;
-    overflow-y:auto;
-  }
-
-  header{
-    padding:0 15px;
-  }
-
-  .header-btn{
-    display:none;
-  }
-
-  .app{
-    height:auto;
-    min-height:0;
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    border-right:0;
-    border-bottom:1px solid #1c1c1c;
-  }
-
-  .preview{
-    min-height:750px;
-  }
-
-  .canvas{
-    padding:15px;
-    min-height:700px;
-  }
-
-  .website{
-    width:100%;
-    min-height:600px;
-    height:700px;
-  }
-
-  .ai-chat{
-    top:72px;
-    width:100%;
-  }
-}
-
-</style>
+    .brand-text {
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
 
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: #9da3b4;
+      font-size: 13px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: #38d996;
+
+      box-shadow:
+        0 0 12px rgba(56,217,150,.7);
+    }
+
+    .main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 70px 0 100px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 13px;
+
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+
+      background: rgba(255,255,255,.035);
+
+      color: #aeb5c7;
+      font-size: 13px;
+    }
+
+    .hero h1 {
+      margin: 22px auto 14px;
+
+      max-width: 850px;
+
+      font-size: clamp(42px, 7vw, 82px);
+
+      line-height: .95;
+
+      letter-spacing: -5px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #aeb5c7 100%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+
+      color: #8f96a8;
+
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .builder {
+      border: 1px solid rgba(255,255,255,.09);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.055),
+          rgba(255,255,255,.018)
+        );
+
+      border-radius: 24px;
+
+      padding: 18px;
+
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.35);
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 190px;
+
+      resize: vertical;
+
+      padding: 20px;
+
+      border-radius: 17px;
+
+      border: 1px solid rgba(255,255,255,.09);
+
+      outline: none;
+
+      color: #fff;
+
+      background: rgba(0,0,0,.32);
+
+      line-height: 1.65;
+
+      font-size: 16px;
+    }
+
+    textarea:focus {
+      border-color: rgba(255,255,255,.22);
+
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,.025);
+    }
+
+    textarea::placeholder {
+      color: #656c7c;
+    }
+
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 16px;
+
+      margin-top: 14px;
+    }
+
+    .hint {
+      color: #656c7c;
+      font-size: 12px;
+    }
+
+    .generate {
+      border: 0;
+
+      padding: 13px 21px;
+
+      border-radius: 13px;
+
+      background: #fff;
+      color: #050505;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+    }
+
+    .generate:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 35px rgba(255,255,255,.16);
+    }
+
+    .generate:disabled {
+      opacity: .45;
+      cursor: wait;
+      transform: none;
+    }
+
+    .message {
+      margin-top: 16px;
+
+      display: none;
+
+      padding: 14px 16px;
+
+      border-radius: 13px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      color: #ff9eaa;
+      background: rgba(255, 70, 90, .08);
+      border: 1px solid rgba(255,70,90,.15);
+    }
+
+    .message.success {
+      color: #82e8bd;
+      background: rgba(50,220,150,.07);
+      border: 1px solid rgba(50,220,150,.13);
+    }
+
+    .preview-section {
+      margin-top: 34px;
+    }
+
+    .preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 12px;
+    }
+
+    .preview-head h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .open-btn {
+      display: none;
+
+      border: 1px solid rgba(255,255,255,.1);
+
+      background: rgba(255,255,255,.04);
+
+      color: #fff;
+
+      padding: 8px 12px;
+
+      border-radius: 9px;
+
+      cursor: pointer;
+    }
+
+    .preview {
+      width: 100%;
+      height: 650px;
+
+      border: 0;
+
+      border-radius: 18px;
+
+      background: #fff;
+
+      display: none;
+    }
+
+    .preview.visible {
+      display: block;
+    }
+
+    .loading {
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      margin-top: 20px;
+
+      color: #9da3b4;
+
+      font-size: 14px;
+    }
+
+    .loading.show {
+      display: flex;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+
+      border-radius: 50%;
+
+      border: 2px solid rgba(255,255,255,.12);
+
+      border-top-color: #fff;
+
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    footer {
+      margin-top: auto;
+
+      padding: 30px 20px;
+
+      text-align: center;
+
+      color: #565d6d;
+
+      font-size: 12px;
+
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+
+    @media (max-width: 700px) {
+      .header {
+        min-height: 64px;
+        padding: 0 16px;
+      }
+
+      .status {
+        display: none;
+      }
+
+      .main {
+        width: min(100% - 20px, 1100px);
+        padding-top: 45px;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .builder {
+        padding: 11px;
+        border-radius: 18px;
+      }
+
+      textarea {
+        min-height: 220px;
+      }
+
+      .bottom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hint {
+        text-align: center;
+      }
+
+      .generate {
+        width: 100%;
+      }
+
+      .preview {
+        height: 550px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-<header>
-
-  <div class="brand">
-
-    <div class="logo">
-      SP
-    </div>
-
-    <div class="brand-name">
-      SPDP <span>AI</span>
-    </div>
-
-  </div>
-
-  <div class="header-right">
-
-    <button
-      class="header-btn"
-      onclick="toggleProjects()">
-      Projects
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="newProject()">
-      New Project
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="downloadWebsite()">
-      Download
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="toggleChat()">
-      AI Edit
-    </button>
-
-    <button
-      class="publish"
-      onclick="publishSite()">
-      Publish
-    </button>
-
-    <button
-      class="header-btn user-btn"
-      id="authButton"
-      onclick="handleAuthButton()">
-      Sign In
-    </button>
-
-  </div>
-
-</header>
 
 <div class="app">
 
-  <aside class="sidebar">
+  <header class="header">
 
-    <div class="small-label">
-      SPDP AI BUILDER
-    </div>
+    <div class="brand">
 
-    <h1>
-      Create with AI.
-    </h1>
+      <div class="logo">SP</div>
 
-    <p class="desc">
-      Describe anything you want to build.
-      Websites, web apps and playable games.
-    </p>
-
-    <div class="prompt-box">
-
-      <textarea
-        id="prompt"
-        placeholder="Describe anything...
-
-Examples:
-
-Create a premium gaming website
-
-Create a playable 2D car game
-
-Create a 3D racing game
-
-Create a long scrolling website"></textarea>
-
-    </div>
-
-    <button
-      class="generate"
-      id="generateButton"
-      onclick="generate()">
-
-      ✦ Generate
-
-    </button>
-
-    <div class="divider"></div>
-
-    <div class="examples-title">
-      TRY AN IDEA
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a premium long scrolling website for a futuristic AI company with hero, features, services, testimonials, pricing, FAQ, CTA and footer')">
-
-      ✦ Long Scrolling AI Website
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a premium 3D scrolling website using Three.js for a futuristic technology company. Add a real interactive 3D object that reacts to page scrolling, multiple sections, navigation and footer')">
-
-      ◈ 3D Scrolling Website
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a playable 2D car racing game with keyboard and mobile controls, enemies, score, collision detection, start screen and restart button')">
-
-      🏎️ Playable 2D Car Game
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a playable 3D futuristic racing game using Three.js with player controls, enemy cars, score, collision detection and restart')">
-
-      🏁 Playable 3D Racing Game
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a premium black gaming website with hero, features, pricing, testimonials and contact')">
-
-      🎮 Gaming Website
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a modern restaurant website with menu, reservation and contact sections')">
-
-      🍽️ Restaurant
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a premium portfolio website for a professional designer')">
-
-      ✦ Portfolio
-
-    </div>
-
-    <div
-      class="example"
-      onclick="example('Create a modern online store for premium sneakers')">
-
-      🛒 Online Store
-
-    </div>
-
-  </aside>
-
-  <section class="preview">
-
-    <div class="preview-top">
-
-      <div class="preview-left">
-
-        <div class="dot"></div>
-
-        Live Preview
-
-      </div>
-
-      <div class="preview-tools">
-
-        <button
-          class="tool"
-          onclick="desktopPreview()"
-          title="Desktop">
-          ▣
-        </button>
-
-        <button
-          class="tool"
-          onclick="mobilePreview()"
-          title="Mobile">
-          ▯
-        </button>
-
-        <button
-          class="tool"
-          onclick="fullscreenPreview()"
-          title="Fullscreen">
-          ⛶
-        </button>
-
+      <div class="brand-text">
+        SPDP AI
       </div>
 
     </div>
 
-    <div class="canvas">
+    <div class="status">
+      <span class="status-dot"></span>
+      AI Builder Online
+    </div>
 
-      <div
-        class="website"
-        id="website">
+  </header>
 
-        <iframe
-          id="previewFrame"
-          title="SPDP AI Generated Preview"
-          sandbox="allow-scripts allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin"
-          allow="autoplay; fullscreen; gamepad; microphone; camera"
-          scrolling="yes"
-          allowfullscreen>
-        </iframe>
+  <main class="main">
 
-        <div
-          class="loading"
-          id="loading">
+    <section class="hero">
 
-          <div class="spinner"></div>
+      <div class="badge">
+        ✦ AI Website Generator
+      </div>
 
-          <div class="loading-text">
-            SPDP AI is building...
-          </div>
+      <h1>
+        Build anything<br>
+        with AI.
+      </h1>
 
+      <p>
+        Describe the website, web app or game you want.
+        SPDP AI generates a complete functional HTML experience.
+      </p>
+
+    </section>
+
+    <section class="builder">
+
+      <div class="input-wrap">
+
+        <textarea
+          id="prompt"
+          placeholder="Example: Create a premium black 3D portfolio website for a software company with Three.js, animated sections, services, projects, testimonials and contact form..."
+        ></textarea>
+
+      </div>
+
+      <div class="bottom">
+
+        <div class="hint">
+          Press Ctrl + Enter to generate
         </div>
 
-      </div>
-
-    </div>
-
-  </section>
-
-  <aside
-    class="ai-chat"
-    id="aiChat">
-
-    <div class="chat-header">
-
-      <div class="chat-title">
-
-        <div class="ai-dot"></div>
-
-        AI Website Editor
+        <button
+          class="generate"
+          id="generateBtn"
+          type="button"
+        >
+          Generate Website
+        </button>
 
       </div>
 
-      <button
-        class="chat-clear"
-        onclick="clearChat()">
+      <div
+        id="loading"
+        class="loading"
+      >
+        <span class="spinner"></span>
 
-        Clear
+        <span id="loadingText">
+          SPDP AI is generating your website...
+        </span>
+      </div>
 
-      </button>
+      <div
+        id="message"
+        class="message"
+      ></div>
 
-    </div>
+    </section>
 
-    <div
-      class="chat-messages"
-      id="chatMessages">
+    <section class="preview-section">
 
-      <div class="chat-empty">
+      <div class="preview-head">
 
-        Your generated website can be edited here.
+        <h2>
+          Live Preview
+        </h2>
 
-        <br><br>
-
-        Try:
-
-        <br>
-        • Make the background black
-        <br>
-        • Change the hero title
-        <br>
-        • Add a pricing section
-        <br>
-        • Make the button blue
-        <br>
-        • Make the website scrollable
-        <br>
-        • Add a 3D animation
+        <button
+          class="open-btn"
+          id="openBtn"
+          type="button"
+        >
+          Open
+        </button>
 
       </div>
 
-    </div>
+      <iframe
+        id="preview"
+        class="preview"
+        title="Generated Website Preview"
+        sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
+      ></iframe>
 
-    <div class="chat-input-area">
+    </section>
 
-      <textarea
-        id="chatInput"
-        class="chat-input"
-        placeholder="Tell AI what to change..."></textarea>
+  </main>
 
-      <button
-        id="chatSend"
-        class="chat-send"
-        onclick="editWebsite()">
+  <footer>
+    SPDP AI · Website & Web Game Builder · 2026
+  </footer>
 
-        ✦ Update Website
-
-      </button>
-
-    </div>
-
-  </aside>
-
-</div>
-
-<div
-  class="projects-panel"
-  id="projectsPanel">
-
-  <div class="projects-head">
-
-    <strong>
-      My Projects
-    </strong>
-
-    <button
-      class="chat-clear"
-      onclick="toggleProjects()">
-      Close
-    </button>
-
-  </div>
-
-  <div
-    class="projects-list"
-    id="projectsList">
-
-    Loading...
-
-  </div>
-
-</div>
-
-<div
-  class="modal"
-  id="authModal">
-
-  <div class="auth-box">
-
-    <button
-      class="close-modal"
-      onclick="closeAuth()">
-      ×
-    </button>
-
-    <h2 id="authTitle">
-      Sign in
-    </h2>
-
-    <p
-      class="auth-desc"
-      id="authDesc">
-
-      Sign in to save and manage your SPDP AI projects.
-
-    </p>
-
-    <input
-      class="auth-input"
-      id="authEmail"
-      type="email"
-      placeholder="Email">
-
-    <input
-      class="auth-input"
-      id="authPassword"
-      type="password"
-      placeholder="Password">
-
-    <button
-      class="auth-action"
-      id="authAction"
-      onclick="submitAuth()">
-
-      Sign In
-
-    </button>
-
-    <div
-      class="auth-switch"
-      id="authSwitch"
-      onclick="toggleAuthMode()">
-
-      Don't have an account?
-      <span>Sign Up</span>
-
-    </div>
-
-  </div>
-
-</div>
-
-<div
-  class="toast"
-  id="toast">
-  Done
 </div>
 
 <script>
+  const WORKER_URL =
+    "https://spdp-ai.spdp3127.workers.dev";
 
-/* =========================================
-   CONFIG
-========================================= */
+  const promptInput =
+    document.getElementById("prompt");
 
-const SUPABASE_URL =
-  "https://zwabvtywvxoapjnspqwz.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_ZKOYBYdIgUA_R7WjspKhoA_-iCPTZoT";
-
-const WORKER_URL =
-  "https://spdp-ai.spdp3127.workers.dev/";
-
-
-/* =========================================
-   SUPABASE
-========================================= */
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-/* =========================================
-   STATE
-========================================= */
-
-let generatedHTML = "";
-
-let currentProjectId = null;
-
-let currentUser = null;
-
-let authMode = "signin";
-
-
-/* =========================================
-   EXAMPLE
-========================================= */
-
-function example(text){
-
-  document.getElementById(
-    "prompt"
-  ).value = text;
-
-}
-
-
-/* =========================================
-   AUTH
-========================================= */
-
-function openAuth(){
-
-  document
-    .getElementById("authModal")
-    .classList.add("show");
-
-}
-
-function closeAuth(){
-
-  document
-    .getElementById("authModal")
-    .classList.remove("show");
-
-}
-
-function toggleAuthMode(){
-
-  authMode =
-    authMode === "signin"
-      ? "signup"
-      : "signin";
-
-  const title =
-    document.getElementById(
-      "authTitle"
-    );
-
-  const desc =
-    document.getElementById(
-      "authDesc"
-    );
-
-  const action =
-    document.getElementById(
-      "authAction"
-    );
-
-  const switchText =
-    document.getElementById(
-      "authSwitch"
-    );
-
-  if(authMode === "signup"){
-
-    title.innerText =
-      "Create account";
-
-    desc.innerText =
-      "Create your SPDP AI account and save your projects.";
-
-    action.innerText =
-      "Sign Up";
-
-    switchText.innerHTML =
-      "Already have an account? <span>Sign In</span>";
-
-  }else{
-
-    title.innerText =
-      "Sign in";
-
-    desc.innerText =
-      "Sign in to save and manage your SPDP AI projects.";
-
-    action.innerText =
-      "Sign In";
-
-    switchText.innerHTML =
-      "Don't have an account? <span>Sign Up</span>";
-  }
-}
-
-
-async function submitAuth(){
-
-  const email =
-    document
-      .getElementById("authEmail")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("authPassword")
-      .value;
-
-  if(!email || !password){
-
-    showToast(
-      "Enter email and password"
-    );
-
-    return;
-  }
-
-  if(password.length < 6){
-
-    showToast(
-      "Password must be at least 6 characters"
-    );
-
-    return;
-  }
-
-  const action =
-    document.getElementById(
-      "authAction"
-    );
-
-  action.disabled = true;
-
-  try{
-
-    if(authMode === "signup"){
-
-      const result =
-        await supabaseClient.auth.signUp({
-          email,
-          password
-        });
-
-      if(result.error){
-        throw result.error;
-      }
-
-      if(result.data.session){
-
-        currentUser =
-          result.data.session.user;
-
-        updateAuthUI();
-
-        closeAuth();
-
-        showToast(
-          "✓ Account created"
-        );
-
-        if(generatedHTML){
-          await saveProject();
-        }
-
-      }else{
-
-        showToast(
-          "✓ Account created. Check your email."
-        );
-      }
-
-    }else{
-
-      const result =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
-      if(result.error){
-        throw result.error;
-      }
-
-      currentUser =
-        result.data.user;
-
-      updateAuthUI();
-
-      closeAuth();
-
-      showToast(
-        "✓ Signed in successfully"
-      );
-
-      await loadProjects();
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "AUTH ERROR:",
-      error
-    );
-
-    showToast(
-      "❌ " + error.message
-    );
-
-  }finally{
-
-    action.disabled = false;
-
-  }
-}
-
-
-async function loadUser(){
-
-  try{
-
-    const result =
-      await supabaseClient.auth.getSession();
-
-    if(result.error){
-      throw result.error;
-    }
-
-    currentUser =
-      result.data.session?.user || null;
-
-    updateAuthUI();
-
-    if(currentUser){
-      await loadProjects();
-    }
-
-  }catch(error){
-
-    console.error(
-      "SESSION ERROR:",
-      error
-    );
-
-  }
-}
-
-
-supabaseClient.auth.onAuthStateChange(
-  (event, session)=>{
-
-    currentUser =
-      session?.user || null;
-
-    updateAuthUI();
-
-  }
-);
-
-
-async function handleAuthButton(){
-
-  if(!currentUser){
-
-    openAuth();
-
-    return;
-  }
-
-  const result =
-    await supabaseClient.auth.signOut();
-
-  if(result.error){
-
-    showToast(
-      "❌ " + result.error.message
-    );
-
-    return;
-  }
-
-  currentUser = null;
-
-  currentProjectId = null;
-
-  updateAuthUI();
-
-  document
-    .getElementById("projectsPanel")
-    .classList.remove("show");
-
-  showToast(
-    "Signed out"
-  );
-}
-
-
-function updateAuthUI(){
-
-  const button =
-    document.getElementById(
-      "authButton"
-    );
-
-  if(currentUser){
-
-    button.innerText =
-      currentUser.email;
-
-    button.title =
-      "Sign out";
-
-  }else{
-
-    button.innerText =
-      "Sign In";
-
-    button.title =
-      "Sign in";
-  }
-}
-
-
-/* =========================================
-   FRAME
-========================================= */
-
-function showHTML(html){
-
-  generatedHTML = html;
-
-  const frame =
-    document.getElementById(
-      "previewFrame"
-    );
-
-  frame.srcdoc = "";
-
-  requestAnimationFrame(()=>{
-
-    frame.srcdoc =
-      generatedHTML;
-
-  });
-}
-
-
-/* =========================================
-   GENERATE
-========================================= */
-
-async function generate(){
-
-  const prompt =
-    document
-      .getElementById("prompt")
-      .value
-      .trim();
-
-  const button =
-    document.getElementById(
-      "generateButton"
-    );
+  const generateBtn =
+    document.getElementById("generateBtn");
 
   const loading =
-    document.getElementById(
-      "loading"
-    );
+    document.getElementById("loading");
 
-  if(!prompt){
-
-    showToast(
-      "Describe what you want to build"
-    );
-
-    return;
-  }
-
-  button.disabled = true;
-
-  loading.classList.add("show");
-
-  try{
-
-    showToast(
-      "SPDP AI is generating..."
-    );
-
-    const response =
-      await fetch(
-        WORKER_URL,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            prompt
-          })
-        }
-      );
-
-    const text =
-      await response.text();
-
-    let data;
-
-    try{
-
-      data =
-        JSON.parse(text);
-
-    }catch{
-
-      throw new Error(
-        "Worker returned invalid JSON: " +
-        text.substring(0,200)
-      );
-    }
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Worker request failed."
-      );
-    }
-
-    if(!data.html){
-
-      throw new Error(
-        "AI returned no HTML."
-      );
-    }
-
-    currentProjectId = null;
-
-    showHTML(
-      data.html
-    );
-
-    showToast(
-      "✨ Website generated successfully"
-    );
-
-    if(currentUser){
-
-      await saveProject();
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "GENERATE ERROR:",
-      error
-    );
-
-    showToast(
-      "❌ " + error.message
-    );
-
-  }finally{
-
-    loading.classList.remove(
-      "show"
-    );
-
-    button.disabled = false;
-
-  }
-}
-
-
-/* =========================================
-   SAVE
-========================================= */
-
-async function saveProject(){
-
-  if(!currentUser){
-
-    return false;
-  }
-
-  if(!generatedHTML){
-
-    return false;
-  }
-
-  const prompt =
-    document
-      .getElementById("prompt")
-      .value
-      .trim();
-
-  let name =
-    prompt
-      .split("\n")[0]
-      .trim()
-      .substring(0,80);
-
-  if(!name){
-    name = "Untitled Project";
-  }
-
-  try{
-
-    let result;
-
-    if(currentProjectId){
-
-      result =
-        await supabaseClient
-          .from("projects")
-          .update({
-            name,
-            prompt,
-            html:generatedHTML,
-            updated_at:
-              new Date().toISOString()
-          })
-          .eq(
-            "id",
-            currentProjectId
-          )
-          .eq(
-            "user_id",
-            currentUser.id
-          );
-
-    }else{
-
-      result =
-        await supabaseClient
-          .from("projects")
-          .insert({
-            user_id:
-              currentUser.id,
-            name,
-            prompt,
-            html:generatedHTML
-          })
-          .select()
-          .single();
-
-      if(
-        !result.error &&
-        result.data
-      ){
-
-        currentProjectId =
-          result.data.id;
-      }
-    }
-
-    if(result.error){
-      throw result.error;
-    }
-
-    await loadProjects();
-
-    return true;
-
-  }catch(error){
-
-    console.error(
-      "SAVE ERROR:",
-      error
-    );
-
-    showToast(
-      "❌ Save failed: " +
-      error.message
-    );
-
-    return false;
-  }
-}
-
-
-/* =========================================
-   PROJECTS
-========================================= */
-
-async function loadProjects(){
-
-  if(!currentUser){
-    return;
-  }
-
-  const list =
-    document.getElementById(
-      "projectsList"
-    );
-
-  list.innerHTML =
-    "Loading...";
-
-  try{
-
-    const result =
-      await supabaseClient
-        .from("projects")
-        .select("*")
-        .eq(
-          "user_id",
-          currentUser.id
-        )
-        .order(
-          "updated_at",
-          {
-            ascending:false
-          }
-        );
-
-    if(result.error){
-      throw result.error;
-    }
-
-    const data =
-      result.data || [];
-
-    if(!data.length){
-
-      list.innerHTML = `
-        <div style="
-          color:#666;
-          padding:15px;
-          font-size:12px;
-        ">
-          No saved projects yet.
-        </div>
-      `;
-
-      return;
-    }
-
-    list.innerHTML = "";
-
-    data.forEach(project=>{
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-      item.className =
-        "project-item";
-
-      const name =
-        escapeHTML(
-          project.name ||
-          "Untitled"
-        );
-
-      const date =
-        project.updated_at ||
-        project.created_at ||
-        "";
-
-      item.innerHTML = `
-        <button
-          class="project-delete"
-          title="Delete">
-          ×
-        </button>
-
-        <div class="project-name">
-          ${name}
-        </div>
-
-        <div class="project-date">
-          ${
-            date
-              ? new Date(date)
-                  .toLocaleString()
-              : ""
-          }
-        </div>
-      `;
-
-      item.onclick =
-        ()=>loadProject(
-          project
-        );
-
-      item
-        .querySelector(
-          ".project-delete"
-        )
-        .onclick =
-        async(event)=>{
-
-          event.stopPropagation();
-
-          await deleteProject(
-            project.id
-          );
-        };
-
-      list.appendChild(
-        item
-      );
-
-    });
-
-  }catch(error){
-
-    console.error(
-      "LOAD PROJECTS ERROR:",
-      error
-    );
-
-    list.innerHTML = `
-      <div style="
-        color:#ff7777;
-        padding:15px;
-        font-size:12px;
-      ">
-        Unable to load projects.
-      </div>
-    `;
-  }
-}
-
-
-function loadProject(project){
-
-  currentProjectId =
-    project.id;
-
-  generatedHTML =
-    project.html || "";
-
-  document.getElementById(
-    "prompt"
-  ).value =
-    project.prompt || "";
-
-  showHTML(
-    generatedHTML
-  );
-
-  document
-    .getElementById(
-      "projectsPanel"
-    )
-    .classList.remove("show");
-
-  showToast(
-    "✓ Project loaded"
-  );
-}
-
-
-async function deleteProject(id){
-
-  if(!currentUser){
-    return;
-  }
-
-  if(
-    !confirm(
-      "Delete this project?"
-    )
-  ){
-    return;
-  }
-
-  try{
-
-    const result =
-      await supabaseClient
-        .from("projects")
-        .delete()
-        .eq(
-          "id",
-          id
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        );
-
-    if(result.error){
-      throw result.error;
-    }
-
-    if(
-      currentProjectId === id
-    ){
-
-      currentProjectId =
-        null;
-
-      generatedHTML =
-        "";
-
-      newProject();
-    }
-
-    await loadProjects();
-
-    showToast(
-      "Project deleted"
-    );
-
-  }catch(error){
-
-    showToast(
-      "❌ Delete failed: " +
-      error.message
-    );
-  }
-}
-
-
-function toggleProjects(){
-
-  if(!currentUser){
-
-    openAuth();
-
-    showToast(
-      "Sign in to view projects"
-    );
-
-    return;
-  }
-
-  const panel =
-    document.getElementById(
-      "projectsPanel"
-    );
-
-  panel.classList.toggle(
-    "show"
-  );
-
-  if(
-    panel.classList.contains(
-      "show"
-    )
-  ){
-
-    loadProjects();
-  }
-}
-
-
-/* =========================================
-   AI EDIT
-========================================= */
-
-function toggleChat(){
-
-  document
-    .getElementById(
-      "aiChat"
-    )
-    .classList.toggle(
-      "open"
-    );
-}
-
-
-function clearChat(){
-
-  document.getElementById(
-    "chatMessages"
-  ).innerHTML = `
-    <div class="chat-empty">
-      Your generated website can be edited here.
-      <br><br>
-      Try:
-      <br>
-      • Make the website scrollable
-      <br>
-      • Add a 3D section
-      <br>
-      • Change the hero
-      <br>
-      • Add pricing
-      <br>
-      • Change colors
-    </div>
-  `;
-}
-
-
-function addChatMessage(
-  type,
-  text
-){
-
-  const container =
-    document.getElementById(
-      "chatMessages"
-    );
-
-  const empty =
-    container.querySelector(
-      ".chat-empty"
-    );
-
-  if(empty){
-    empty.remove();
-  }
+  const loadingText =
+    document.getElementById("loadingText");
 
   const message =
-    document.createElement(
-      "div"
-    );
+    document.getElementById("message");
 
-  message.className =
-    "message " + type;
+  const preview =
+    document.getElementById("preview");
 
-  const bubble =
-    document.createElement(
-      "div"
-    );
+  const openBtn =
+    document.getElementById("openBtn");
 
-  bubble.className =
-    "message-bubble";
-
-  bubble.innerText =
-    text;
-
-  message.appendChild(
-    bubble
-  );
-
-  container.appendChild(
-    message
-  );
-
-  container.scrollTop =
-    container.scrollHeight;
-}
-
-
-async function editWebsite(){
-
-  if(!generatedHTML){
-
-    showToast(
-      "Generate a website first"
-    );
-
-    return;
+  function showMessage(text, type = "error") {
+    message.textContent = text;
+    message.className = "message show " + type;
   }
 
-  const input =
-    document.getElementById(
-      "chatInput"
-    );
-
-  const send =
-    document.getElementById(
-      "chatSend"
-    );
-
-  const instruction =
-    input.value.trim();
-
-  if(!instruction){
-
-    showToast(
-      "Tell AI what to change"
-    );
-
-    return;
+  function clearMessage() {
+    message.textContent = "";
+    message.className = "message";
   }
 
-  addChatMessage(
-    "user",
-    instruction
-  );
+  function setLoading(active) {
+    loading.classList.toggle("show", active);
+    generateBtn.disabled = active;
 
-  input.value = "";
-
-  send.disabled = true;
-
-  try{
-
-    showToast(
-      "AI is editing your website..."
-    );
-
-    const prompt = `
-EDIT THIS EXISTING WEBSITE.
-
-USER REQUEST:
-${instruction}
-
-CURRENT HTML:
-${generatedHTML}
-
-IMPORTANT:
-
-Preserve all working functionality.
-
-Preserve all existing JavaScript.
-
-Preserve all existing game mechanics.
-
-Preserve useful sections.
-
-Apply the user's requested modification.
-
-If the user asks for scrolling:
-
-- Make the entire page vertically scrollable.
-- Use normal document flow.
-- Do not use body overflow:hidden.
-- Do not use html overflow:hidden.
-- Do not prevent wheel scrolling.
-- Do not prevent touch scrolling.
-- Do not lock the body.
-- Add enough sections/content for real scrolling.
-- Keep navigation working.
-- Keep smooth scrolling.
-- Keep animations working.
-
-If the website uses Three.js:
-
-- Keep Three.js.
-- Keep the 3D scene.
-- Keep the animation loop.
-- Keep resize handling.
-- Do not block normal page scrolling.
-
-If the website is a game:
-
-- Keep it playable.
-- Keep controls.
-- Keep collisions.
-- Keep score.
-- Keep start/restart.
-
-Return the COMPLETE updated HTML.
-
-Return ONLY HTML.
-
-Start with:
-<!DOCTYPE html>
-
-End with:
-</html>
-`;
-
-    const response =
-      await fetch(
-        WORKER_URL,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-            prompt
-          })
-        }
-      );
-
-    const text =
-      await response.text();
-
-    let data;
-
-    try{
-
-      data =
-        JSON.parse(text);
-
-    }catch{
-
-      throw new Error(
-        "Worker returned invalid JSON: " +
-        text.substring(0,200)
-      );
+    if (active) {
+      loadingText.textContent =
+        "SPDP AI is generating your website...";
     }
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "AI editing failed."
-      );
-    }
-
-    if(!data.html){
-
-      throw new Error(
-        "AI returned no HTML."
-      );
-    }
-
-    showHTML(
-      data.html
-    );
-
-    addChatMessage(
-      "ai",
-      "✓ Website updated successfully."
-    );
-
-    showToast(
-      "✨ Website updated"
-    );
-
-    if(currentUser){
-
-      await saveProject();
-    }
-
-  }catch(error){
-
-    console.error(
-      "EDIT ERROR:",
-      error
-    );
-
-    addChatMessage(
-      "ai",
-      "❌ " + error.message
-    );
-
-    showToast(
-      "❌ " + error.message
-    );
-
-  }finally{
-
-    send.disabled = false;
-  }
-}
-
-
-/* =========================================
-   DOWNLOAD
-========================================= */
-
-function downloadWebsite(){
-
-  if(!generatedHTML){
-
-    showToast(
-      "Generate something first"
-    );
-
-    return;
   }
 
-  const blob =
-    new Blob(
-      [generatedHTML],
-      {
-        type:
-          "text/html;charset=utf-8"
-      }
-    );
+  async function generateWebsite() {
+    const prompt =
+      promptInput.value.trim();
 
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-  const a =
-    document.createElement(
-      "a"
-    );
-
-  a.href =
-    url;
-
-  a.download =
-    "spdp-generated-website.html";
-
-  document.body.appendChild(
-    a
-  );
-
-  a.click();
-
-  a.remove();
-
-  setTimeout(
-    ()=>{
-      URL.revokeObjectURL(
-        url
+    if (!prompt) {
+      showMessage(
+        "Please enter a website prompt."
       );
-    },
-    1000
-  );
 
-  showToast(
-    "Website downloaded"
-  );
-}
-
-
-/* =========================================
-   NEW PROJECT
-========================================= */
-
-function newProject(){
-
-  generatedHTML = "";
-
-  currentProjectId = null;
-
-  document.getElementById(
-    "prompt"
-  ).value = "";
-
-  showHTML(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SPDP AI</title>
-
-<style>
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  min-height:200vh;
-  font-family:Arial,sans-serif;
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff,
-      #eeeeee
-    );
-  color:#111;
-}
-
-section{
-  min-height:70vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:80px 30px;
-}
-
-.container{
-  max-width:800px;
-  text-align:center;
-}
-
-.badge{
-  display:inline-block;
-  padding:8px 14px;
-  border:1px solid #ddd;
-  border-radius:30px;
-  font-size:12px;
-  margin-bottom:20px;
-}
-
-h1{
-  font-size:clamp(42px,7vw,80px);
-  margin:0 0 20px;
-  letter-spacing:-4px;
-}
-
-p{
-  color:#666;
-  line-height:1.8;
-}
-
-</style>
-</head>
-
-<body>
-
-<section>
-  <div class="container">
-    <div class="badge">
-      POWERED BY SPDP AI
-    </div>
-
-    <h1>
-      Build Something Extraordinary.
-    </h1>
-
-    <p>
-      Describe your idea and let SPDP AI create it.
-    </p>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2>
-      Your website will appear here.
-    </h2>
-
-    <p>
-      Use the prompt box to generate a complete website,
-      web application, 2D game or 3D experience.
-    </p>
-  </div>
-</section>
-
-</body>
-</html>
-  `);
-}
-
-
-/* =========================================
-   PREVIEW
-========================================= */
-
-function desktopPreview(){
-
-  const website =
-    document.getElementById(
-      "website"
-    );
-
-  website.style.width =
-    "min(100%,1050px)";
-
-  website.style.height =
-    "700px";
-
-  showToast(
-    "Desktop preview"
-  );
-}
-
-
-function mobilePreview(){
-
-  const website =
-    document.getElementById(
-      "website"
-    );
-
-  website.style.width =
-    "390px";
-
-  website.style.height =
-    "700px";
-
-  showToast(
-    "Mobile preview"
-  );
-}
-
-
-async function fullscreenPreview(){
-
-  const website =
-    document.getElementById(
-      "website"
-    );
-
-  try{
-
-    if(
-      document.fullscreenElement
-    ){
-
-      await document.exitFullscreen();
+      promptInput.focus();
 
       return;
     }
 
-    if(
-      website.requestFullscreen
-    ){
+    clearMessage();
+    setLoading(true);
 
-      await website.requestFullscreen();
+    preview.classList.remove("visible");
+    openBtn.style.display = "none";
 
-    }else{
+    try {
+      const response = await fetch(
+        WORKER_URL,
+        {
+          method: "POST",
 
-      showToast(
-        "Fullscreen is not supported"
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+
+          body: JSON.stringify({
+            prompt: prompt
+          })
+        }
+      );
+
+      const raw = await response.text();
+
+      let data;
+
+      try {
+        data = JSON.parse(raw);
+      } catch (parseError) {
+        console.error(
+          "Worker raw response:",
+          raw
+        );
+
+        throw new Error(
+          "Worker returned invalid JSON. HTTP " +
+          response.status
+        );
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ||
+          "Worker request failed. HTTP " +
+          response.status
+        );
+      }
+
+      if (
+        !data ||
+        data.success !== true ||
+        typeof data.html !== "string"
+      ) {
+        throw new Error(
+          data?.error ||
+          "AI did not return website HTML."
+        );
+      }
+
+      const html = data.html.trim();
+
+      if (
+        !html
+          .toLowerCase()
+          .startsWith("<!doctype html")
+      ) {
+        throw new Error(
+          "AI returned invalid HTML."
+        );
+      }
+
+      preview.srcdoc = html;
+
+      preview.classList.add("visible");
+
+      openBtn.style.display = "block";
+
+      showMessage(
+        "Website generated successfully.",
+        "success"
+      );
+
+      try {
+        localStorage.setItem(
+          "spdp_last_generated_html",
+          html
+        );
+      } catch {}
+
+    } catch (error) {
+      console.error(
+        "SPDP AI ERROR:",
+        error
+      );
+
+      showMessage(
+        error?.message ||
+        "Something went wrong."
+      );
+
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  generateBtn.addEventListener(
+    "click",
+    generateWebsite
+  );
+
+  promptInput.addEventListener(
+    "keydown",
+    function(event) {
+      if (
+        event.ctrlKey &&
+        event.key === "Enter"
+      ) {
+        event.preventDefault();
+        generateWebsite();
+      }
+    }
+  );
+
+  openBtn.addEventListener(
+    "click",
+    function() {
+      const html =
+        preview.srcdoc;
+
+      if (!html) return;
+
+      const blob =
+        new Blob(
+          [html],
+          {
+            type: "text/html"
+          }
+        );
+
+      const url =
+        URL.createObjectURL(blob);
+
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      setTimeout(
+        function() {
+          URL.revokeObjectURL(url);
+        },
+        60000
       );
     }
-
-  }catch(error){
-
-    showToast(
-      "Fullscreen failed"
-    );
-  }
-}
-
-
-/* =========================================
-   PUBLISH
-========================================= */
-
-function publishSite(){
-
-  if(!generatedHTML){
-
-    showToast(
-      "Generate something first"
-    );
-
-    return;
-  }
-
-  showToast(
-    "Publish endpoint is not configured yet."
-  );
-}
-
-
-/* =========================================
-   ESCAPE
-========================================= */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-}
-
-
-/* =========================================
-   TOAST
-========================================= */
-
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-  toast.innerText =
-    message;
-
-  toast.classList.add(
-    "show"
   );
 
-  clearTimeout(
-    window.toastTimer
-  );
+  try {
+    const saved =
+      localStorage.getItem(
+        "spdp_last_generated_html"
+      );
 
-  window.toastTimer =
-    setTimeout(
-      ()=>{
-        toast.classList.remove(
-          "show"
-        );
-      },
-      3500
-    );
-}
-
-
-/* =========================================
-   KEYBOARD
-========================================= */
-
-document
-  .getElementById(
-    "prompt"
-  )
-  .addEventListener(
-    "keydown",
-    event=>{
-
-      if(
-        (event.ctrlKey ||
-         event.metaKey) &&
-        event.key === "Enter"
-      ){
-
-        event.preventDefault();
-
-        generate();
-      }
+    if (
+      saved &&
+      saved
+        .trim()
+        .toLowerCase()
+        .startsWith("<!doctype html")
+    ) {
+      preview.srcdoc = saved;
+      preview.classList.add("visible");
+      openBtn.style.display = "block";
     }
-  );
-
-
-document
-  .getElementById(
-    "chatInput"
-  )
-  .addEventListener(
-    "keydown",
-    event=>{
-
-      if(
-        (event.ctrlKey ||
-         event.metaKey) &&
-        event.key === "Enter"
-      ){
-
-        event.preventDefault();
-
-        editWebsite();
-      }
-    }
-  );
-
-
-/* =========================================
-   START
-========================================= */
-
-newProject();
-
-loadUser();
-
+  } catch {}
 </script>
 
 </body>
