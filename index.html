@@ -4,339 +4,201 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SPDP AI — Hybrid Website Builder</title>
-
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:#050505;color:#fff;font-family:Inter,system-ui,sans-serif}
-body{overflow-x:hidden}
-button,textarea,input{font:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:#050505;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+button,textarea{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
-
+button:disabled{opacity:.45;cursor:not-allowed}
 .app{padding:20px}
 .container{width:min(1450px,100%);margin:auto}
-
-header{
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid #191919;
-}
-
+header{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #191919}
 .brand{display:flex;align-items:center;gap:10px;font-weight:850}
-.logo{
-  width:40px;height:40px;border-radius:12px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,#fff,#777);
-  color:#000;font-weight:950
-}
-
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#777);color:#000;font-weight:950}
 .status{font-size:12px;color:#777;display:flex;gap:8px;align-items:center}
-.dot{
-  width:7px;height:7px;border-radius:50%;
-  background:#4ade80;box-shadow:0 0 15px #4ade80
-}
-
+.dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 15px #4ade80}
 .hero{text-align:center;padding:55px 0 30px}
-.badge{
-  display:inline-block;padding:8px 14px;border:1px solid #242424;
-  border-radius:999px;background:#0b0b0b;color:#888;font-size:12px
-}
-
-h1{
-  margin:22px 0 15px;
-  font-size:clamp(50px,8vw,94px);
-  line-height:.9;
-  letter-spacing:-.07em;
-  background:linear-gradient(180deg,#fff,#555);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent
-}
-
+.badge{display:inline-block;padding:8px 14px;border:1px solid #242424;border-radius:999px;background:#0b0b0b;color:#888;font-size:12px}
+h1{margin:22px 0 15px;font-size:clamp(50px,8vw,94px);line-height:.9;letter-spacing:-.07em;background:linear-gradient(180deg,#fff,#555);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{max-width:720px;margin:auto;color:#777;line-height:1.7}
-
-.panel{
-  margin-top:30px;padding:16px;border:1px solid #202020;
-  border-radius:24px;background:rgba(255,255,255,.025);
-  box-shadow:0 30px 100px rgba(0,0,0,.45);text-align:left
-}
-
-.prompt-wrap{position:relative}
-.prompt{
-  width:100%;min-height:145px;resize:vertical;
-  border:1px solid #1b1b1b;border-radius:17px;
-  background:#080808;color:white;padding:18px;
-  outline:none;line-height:1.6
-}
+.panel{margin-top:30px;padding:16px;border:1px solid #202020;border-radius:24px;background:rgba(255,255,255,.025);box-shadow:0 30px 100px rgba(0,0,0,.45);text-align:left}
+.prompt{width:100%;min-height:145px;resize:vertical;border:1px solid #1b1b1b;border-radius:17px;background:#080808;color:#fff;padding:18px;outline:none;line-height:1.6}
 .prompt:focus{border-color:#444}
 .prompt::placeholder{color:#444}
-
 .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
-button{
-  border-radius:11px;padding:10px 15px;
-  border:1px solid #292929;background:#111;color:#fff;
-  font-weight:750;transition:.15s
-}
+button{border-radius:11px;padding:10px 15px;border:1px solid #292929;background:#111;color:#fff;font-weight:750;transition:.15s}
 button:hover{transform:translateY(-1px)}
 .primary{background:#fff;color:#000;border-color:#fff}
-
-.message{
-  display:none;margin-top:12px;padding:13px;border-radius:12px;
-  background:#101010;border:1px solid #292929;color:#aaa;
-  white-space:pre-wrap
-}
+.message{display:none;margin-top:12px;padding:13px;border-radius:12px;background:#101010;border:1px solid #292929;color:#aaa;white-space:pre-wrap}
 .message.show{display:block}
-
-.workspace{
-  display:none;margin-top:25px;border:1px solid #202020;
-  border-radius:22px;overflow:hidden;background:#070707;
-  box-shadow:0 35px 100px rgba(0,0,0,.5)
-}
+.workspace{display:none;margin-top:25px;border:1px solid #202020;border-radius:22px;overflow:hidden;background:#070707;box-shadow:0 35px 100px rgba(0,0,0,.5)}
 .workspace.show{display:block}
-
-.toolbar{
-  min-height:62px;padding:10px;border-bottom:1px solid #202020;
-  display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap
-}
-.toolbar-left,.toolbar-right{
-  display:flex;gap:7px;align-items:center;flex-wrap:wrap
-}
+.toolbar{min-height:62px;padding:10px;border-bottom:1px solid #202020;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.toolbar-left,.toolbar-right{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
 .tool-title{color:#777;font-size:12px}
 .device.active{background:#fff;color:#000}
-
-.preview-wrap{
-  min-height:720px;padding:12px;
-  display:flex;justify-content:center;align-items:flex-start;
-  background:radial-gradient(circle at center,#121212,#030303 70%)
-}
-
-.preview-frame{
-  width:100%;height:700px;border:1px solid #292929;
-  border-radius:15px;background:#fff;
-  box-shadow:0 20px 80px rgba(0,0,0,.5);
-  transition:.3s
-}
-
+.preview-wrap{min-height:720px;padding:12px;display:flex;justify-content:center;align-items:flex-start;background:radial-gradient(circle at center,#121212,#030303 70%)}
+.preview-frame{width:100%;height:700px;border:1px solid #292929;border-radius:15px;background:#fff;box-shadow:0 20px 80px rgba(0,0,0,.5);transition:.3s}
+.preview-edit-bar{display:none;padding:10px 12px;background:#0b0b0b;border-top:1px solid #202020;border-bottom:1px solid #202020;align-items:center;justify-content:space-between;gap:10px}
 .code-panel{display:none;border-top:1px solid #202020}
 .code-panel.show{display:block}
-
-.code-head{
-  padding:12px;display:flex;justify-content:space-between;
-  border-bottom:1px solid #202020
-}
-
-.code{
-  width:100%;height:500px;resize:vertical;
-  background:#020202;color:#c9ced6;border:0;
-  padding:18px;font:12px/1.6 Consolas,monospace;outline:none
-}
-
-.code-actions{
-  padding:10px;display:flex;justify-content:flex-end;
-  gap:8px;border-top:1px solid #181818
-}
-
+.code-head{padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #202020}
+.code{width:100%;height:500px;resize:vertical;background:#020202;color:#c9ced6;border:0;padding:18px;font:12px/1.6 Consolas,monospace;outline:none}
+.code-actions{padding:10px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid #181818}
 .chat{border-top:1px solid #202020}
 .chat-head{padding:15px;border-bottom:1px solid #1b1b1b}
 .chat-head strong{font-size:14px}
 .chat-head span{color:#666;font-size:12px;margin-left:8px}
-
-.messages{
-  height:240px;overflow-y:auto;padding:15px;
-  display:flex;flex-direction:column;gap:9px
-}
-
-.msg{
-  max-width:85%;padding:11px 13px;border-radius:13px;
-  font-size:13px;white-space:pre-wrap;line-height:1.5
-}
+.messages{height:240px;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:9px}
+.msg{max-width:85%;padding:11px 13px;border-radius:13px;font-size:13px;white-space:pre-wrap;line-height:1.5}
 .msg.user{align-self:flex-end;background:#fff;color:#000}
 .msg.ai{align-self:flex-start;background:#111;color:#aaa;border:1px solid #222}
-
-.chat-input{
-  display:flex;gap:8px;padding:12px;border-top:1px solid #191919
-}
-
-.edit-prompt{
-  flex:1;height:48px;resize:none;border-radius:12px;
-  border:1px solid #1c1c1c;background:#080808;
-  color:#fff;padding:12px;outline:none
-}
-
-.features{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;margin:35px 0
-}
-
-.feature{
-  padding:22px;border:1px solid #1c1c1c;
-  border-radius:17px;background:#090909
-}
+.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #191919}
+.edit-prompt{flex:1;height:48px;resize:none;border-radius:12px;border:1px solid #1c1c1c;background:#080808;color:#fff;padding:12px;outline:none}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:35px 0}
+.feature{padding:22px;border:1px solid #1c1c1c;border-radius:17px;background:#090909}
 .feature h3{margin:0 0 8px}
 .feature p{margin:0;color:#666;line-height:1.6;font-size:13px}
-
 footer{text-align:center;padding:35px;color:#444;font-size:12px}
-
 @media(max-width:760px){
-  .app{padding:12px}
-  .status{display:none}
-  .features{grid-template-columns:1fr}
-  .preview-wrap{min-height:610px}
-  .preview-frame{height:590px}
-  .chat-input{flex-direction:column}
-  .chat-input button{width:100%}
+.app{padding:12px}
+.status{display:none}
+.features{grid-template-columns:1fr}
+.preview-wrap{min-height:610px}
+.preview-frame{height:590px}
+.chat-input{flex-direction:column}
+.chat-input button{width:100%}
+.preview-edit-bar{align-items:flex-start;flex-direction:column}
 }
 </style>
 </head>
 
 <body>
-
 <main class="app">
 <div class="container">
 
 <header>
-  <div class="brand">
-    <div class="logo">S</div>
-    <span>SPDP AI</span>
-  </div>
-
-  <div class="status">
-    <span class="dot"></span>
-    Hybrid Builder Online
-  </div>
+<div class="brand">
+<div class="logo">S</div>
+<span>SPDP AI</span>
+</div>
+<div class="status">
+<span class="dot"></span>
+Hybrid Builder Online
+</div>
 </header>
 
 <section class="hero">
+<div class="badge">✦ AI Website · App · Game Builder</div>
+<h1>Build anything.</h1>
+<p>
+Generate websites locally for free, edit the code directly,
+edit the live preview, or use AI for advanced changes.
+</p>
 
-  <div class="badge">✦ AI Website · App · Game Builder</div>
+<div class="panel">
+<textarea id="prompt" class="prompt" placeholder="Create a premium black gaming company website with hero, games, pricing and contact sections..."></textarea>
 
-  <h1>Build anything.</h1>
+<div class="actions">
+<button id="clearBtn">Clear</button>
+<button id="generateBtn" class="primary">Generate</button>
+</div>
 
-  <p>
-    Generate basic websites instantly without an AI request.
-    Use AI only when you need advanced generation or editing.
-  </p>
-
-  <div class="panel">
-
-    <textarea
-      id="prompt"
-      class="prompt"
-      placeholder="Example: Create a premium black gaming company website with a hero section, games, pricing and contact section..."
-    ></textarea>
-
-    <div class="actions">
-
-      <button id="clearBtn">Clear</button>
-
-      <button id="generateBtn" class="primary">
-        Generate
-      </button>
-
-    </div>
-
-    <div id="message" class="message"></div>
-
-  </div>
-
+<div id="message" class="message"></div>
+</div>
 </section>
 
 <section id="workspace" class="workspace">
 
 <div class="toolbar">
 
-  <div class="toolbar-left">
+<div class="toolbar-left">
+<span class="tool-title">Live Preview</span>
 
-    <span class="tool-title">Live Preview</span>
+<button class="device active" data-width="100%">Desktop</button>
+<button class="device" data-width="768px">Tablet</button>
+<button class="device" data-width="390px">Mobile</button>
 
-    <button class="device active" data-width="100%">Desktop</button>
-    <button class="device" data-width="768px">Tablet</button>
-    <button class="device" data-width="390px">Mobile</button>
+<button id="codeBtn">Code</button>
+<button id="previewEditBtn">✏️ Edit Preview</button>
+</div>
 
-    <button id="codeBtn">Code</button>
-
-  </div>
-
-  <div class="toolbar-right">
-
-    <button id="undoBtn">Undo</button>
-    <button id="redoBtn">Redo</button>
-    <button id="copyBtn">Copy</button>
-    <button id="downloadBtn">Download</button>
-    <button id="openBtn">Open</button>
-
-  </div>
+<div class="toolbar-right">
+<button id="undoBtn">Undo</button>
+<button id="redoBtn">Redo</button>
+<button id="copyBtn">Copy</button>
+<button id="downloadBtn">Download</button>
+<button id="openBtn">Open</button>
+</div>
 
 </div>
 
 <div class="preview-wrap">
 
-  <iframe
-    id="previewFrame"
-    class="preview-frame"
-    title="Live Preview"
-    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-  ></iframe>
+<iframe
+id="previewFrame"
+class="preview-frame"
+title="Live Preview"
+sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin">
+</iframe>
+
+</div>
+
+<div id="previewEditBar" class="preview-edit-bar">
+
+<span style="color:#777;font-size:12px">
+✏️ Preview editing enabled — click text and edit directly.
+</span>
+
+<div style="display:flex;gap:7px">
+<button id="cancelPreviewEdit">Cancel</button>
+<button id="savePreviewEdit" class="primary">Save Preview</button>
+</div>
 
 </div>
 
 <div id="codePanel" class="code-panel">
 
-  <div class="code-head">
+<div class="code-head">
+<span class="tool-title">Manual HTML Editor</span>
+<button id="codeCopyBtn">Copy Code</button>
+</div>
 
-    <span class="tool-title">Manual HTML Editor</span>
+<textarea id="code" class="code" spellcheck="false"></textarea>
 
-    <button id="codeCopyBtn">Copy Code</button>
-
-  </div>
-
-  <textarea id="code" class="code" spellcheck="false"></textarea>
-
-  <div class="code-actions">
-
-    <button id="resetCodeBtn">Reset</button>
-
-    <button id="applyCodeBtn" class="primary">
-      Apply Code
-    </button>
-
-  </div>
+<div class="code-actions">
+<button id="resetCodeBtn">Reset</button>
+<button id="applyCodeBtn" class="primary">Apply Code</button>
+</div>
 
 </div>
 
 <div class="chat">
 
-  <div class="chat-head">
+<div class="chat-head">
+<strong>AI Sub-chat</strong>
+<span>Edit your current website</span>
+</div>
 
-    <strong>AI Sub-chat</strong>
+<div id="messages" class="messages">
+<div class="msg ai">
+Your website is ready. Ask AI to change anything.
+</div>
+</div>
 
-    <span>Edit your current website</span>
+<div class="chat-input">
 
-  </div>
+<textarea
+id="editPrompt"
+class="edit-prompt"
+placeholder="Make the hero more premium and add animated gradient lights..."></textarea>
 
-  <div id="messages" class="messages">
+<button id="editBtn" class="primary">
+Apply AI Edit
+</button>
 
-    <div class="msg ai">
-      Your website is ready. Ask AI to change something when you need advanced editing.
-    </div>
-
-  </div>
-
-  <div class="chat-input">
-
-    <textarea
-      id="editPrompt"
-      class="edit-prompt"
-      placeholder="Example: Make the hero more premium and add animated gradient lights..."
-    ></textarea>
-
-    <button id="editBtn" class="primary">
-      Apply Edit
-    </button>
-
-  </div>
+</div>
 
 </div>
 
@@ -344,31 +206,25 @@ footer{text-align:center;padding:35px;color:#444;font-size:12px}
 
 <section class="features">
 
-  <article class="feature">
-    <h3>⚡ Free Generation</h3>
-    <p>
-      Common website requests are generated locally without consuming Gemini quota.
-    </p>
-  </article>
+<article class="feature">
+<h3>⚡ Free Generation</h3>
+<p>Basic websites are generated locally without Gemini quota.</p>
+</article>
 
-  <article class="feature">
-    <h3>🛠 Manual Editing</h3>
-    <p>
-      Open the generated HTML and modify it directly.
-    </p>
-  </article>
+<article class="feature">
+<h3>✏️ Preview Editing</h3>
+<p>Edit visible website content directly inside the live preview.</p>
+</article>
 
-  <article class="feature">
-    <h3>✨ AI Editing</h3>
-    <p>
-      Complex changes can be sent to your Cloudflare Worker and Gemini.
-    </p>
-  </article>
+<article class="feature">
+<h3>✨ AI Editing</h3>
+<p>Use the Cloudflare Worker and Gemini for advanced modifications.</p>
+</article>
 
 </section>
 
 <footer>
-  SPDP AI · Digital Platform · 2026
+SPDP AI · Digital Platform · 2026
 </footer>
 
 </div>
@@ -377,10 +233,10 @@ footer{text-align:center;padding:35px;color:#444;font-size:12px}
 <script>
 
 const WORKER_URL =
-  "https://spdp-ai.spdp3127.workers.dev/";
+"https://spdp-ai.spdp3127.workers.dev/";
 
-const $ = id =>
-  document.getElementById(id);
+const $ =
+id => document.getElementById(id);
 
 const promptInput = $("prompt");
 const editPrompt = $("editPrompt");
@@ -393,37 +249,35 @@ const codePanel = $("codePanel");
 const messages = $("messages");
 const message = $("message");
 
+const previewEditBtn =
+$("previewEditBtn");
+
+const previewEditBar =
+$("previewEditBar");
+
+const savePreviewEdit =
+$("savePreviewEdit");
+
+const cancelPreviewEdit =
+$("cancelPreviewEdit");
+
 let currentHTML = "";
 let undoStack = [];
 let redoStack = [];
+let previewEditing = false;
+let previewOriginalHTML = "";
 
 
 /* MESSAGE */
 
 function showMessage(text){
-  message.textContent = text;
-  message.classList.add("show");
+message.textContent = text;
+message.classList.add("show");
 }
 
 function hideMessage(){
-  message.textContent = "";
-  message.classList.remove("show");
-}
-
-
-/* HISTORY */
-
-function pushHistory(){
-
-  if(!currentHTML) return;
-
-  undoStack.push(currentHTML);
-
-  if(undoStack.length > 40){
-    undoStack.shift();
-  }
-
-  redoStack = [];
+message.textContent = "";
+message.classList.remove("show");
 }
 
 
@@ -431,17 +285,36 @@ function pushHistory(){
 
 function validHTML(html){
 
-  if(typeof html !== "string") return false;
+if(typeof html !== "string") return false;
 
-  const x = html.trim().toLowerCase();
+const x =
+html.trim().toLowerCase();
 
-  return (
-    x.startsWith("<!doctype html") &&
-    x.includes("<html") &&
-    x.includes("<head") &&
-    x.includes("<body") &&
-    x.includes("</html>")
-  );
+return (
+x.startsWith("<!doctype html") &&
+x.includes("<html") &&
+x.includes("<head") &&
+x.includes("<body") &&
+x.includes("</html>")
+);
+
+}
+
+
+/* HISTORY */
+
+function pushHistory(){
+
+if(!currentHTML) return;
+
+undoStack.push(currentHTML);
+
+if(undoStack.length > 40){
+undoStack.shift();
+}
+
+redoStack = [];
+
 }
 
 
@@ -449,17 +322,33 @@ function validHTML(html){
 
 function renderHTML(html){
 
-  currentHTML = html.trim();
+const clean =
+String(html || "").trim();
 
-  previewFrame.srcdoc = currentHTML;
-  code.value = currentHTML;
+if(!validHTML(clean)){
 
-  workspace.classList.add("show");
+showMessage(
+"❌ Cannot render invalid HTML."
+);
 
-  localStorage.setItem(
-    "spdp_current_html",
-    currentHTML
-  );
+return;
+
+}
+
+currentHTML = clean;
+
+code.value = currentHTML;
+
+previewFrame.srcdoc =
+currentHTML;
+
+workspace.classList.add("show");
+
+localStorage.setItem(
+"spdp_current_html",
+currentHTML
+);
+
 }
 
 
@@ -469,33 +358,107 @@ function renderHTML(html){
 
 function generateLocalWebsite(prompt){
 
-  const p = prompt.toLowerCase();
+const p =
+prompt.toLowerCase();
 
-  let title = "SPDP Studio";
-  let subtitle = "Build something extraordinary.";
-  let theme = "dark";
+let title = "SPDP STUDIO";
+let subtitle =
+"Build something extraordinary.";
 
-  if(p.includes("gaming") || p.includes("game")){
-    title = "NEXUS GAMING";
-    subtitle = "Enter the next generation of gaming.";
-  }
+let type =
+"Digital Experience";
 
-  if(p.includes("portfolio")){
-    title = "CREATIVE PORTFOLIO";
-    subtitle = "Design. Build. Create.";
-  }
 
-  if(p.includes("business") || p.includes("company")){
-    title = "NEXTGEN COMPANY";
-    subtitle = "Technology built for tomorrow.";
-  }
+if(
+p.includes("gaming") ||
+p.includes("game")
+){
 
-  if(p.includes("shop") || p.includes("store")){
-    title = "LUXE STORE";
-    subtitle = "Premium products. Simple experience.";
-  }
+title =
+"NEXUS GAMING";
 
-  return `<!DOCTYPE html>
+subtitle =
+"Enter the next generation of gaming.";
+
+type =
+"Next Generation Gaming";
+
+}
+
+
+else if(
+p.includes("portfolio") ||
+p.includes("developer") ||
+p.includes("designer")
+){
+
+title =
+"CREATIVE PORTFOLIO";
+
+subtitle =
+"Design. Build. Create.";
+
+type =
+"Creative Portfolio";
+
+}
+
+
+else if(
+p.includes("business") ||
+p.includes("company") ||
+p.includes("startup")
+){
+
+title =
+"NEXTGEN";
+
+subtitle =
+"Technology built for tomorrow.";
+
+type =
+"Modern Business";
+
+}
+
+
+else if(
+p.includes("shop") ||
+p.includes("store") ||
+p.includes("ecommerce")
+){
+
+title =
+"LUXE STORE";
+
+subtitle =
+"Premium products. Simple experience.";
+
+type =
+"Premium Commerce";
+
+}
+
+
+else if(
+p.includes("restaurant") ||
+p.includes("food") ||
+p.includes("cafe")
+){
+
+title =
+"NOIR KITCHEN";
+
+subtitle =
+"Exceptional taste. Modern experience.";
+
+type =
+"Premium Restaurant";
+
+}
+
+
+return `<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -509,142 +472,185 @@ content="width=device-width,initial-scale=1.0">
 <style>
 
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  font-family:Inter,system-ui,sans-serif;
-  background:#050505;
-  color:white;
+margin:0;
+font-family:Inter,system-ui,sans-serif;
+background:#050505;
+color:#fff;
 }
 
 nav{
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 7%;
-  border-bottom:1px solid #222;
-  position:sticky;
-  top:0;
-  background:rgba(5,5,5,.8);
-  backdrop-filter:blur(20px);
-  z-index:10;
+height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 7%;
+position:sticky;
+top:0;
+z-index:20;
+background:rgba(5,5,5,.8);
+backdrop-filter:blur(20px);
+border-bottom:1px solid #222;
 }
 
 .logo{
-  font-weight:900;
-  letter-spacing:-1px;
+font-weight:950;
+letter-spacing:-1px;
 }
 
 nav a{
-  color:#888;
-  text-decoration:none;
-  margin-left:25px;
+color:#777;
+text-decoration:none;
+margin-left:25px;
+transition:.2s;
+}
+
+nav a:hover{
+color:#fff;
 }
 
 .hero{
-  min-height:80vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:80px 20px;
-  background:
-    radial-gradient(circle at 50% 20%,#252525,transparent 45%);
+min-height:82vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:90px 20px;
+background:
+radial-gradient(
+circle at 50% 15%,
+#292929,
+transparent 45%
+);
 }
 
 .badge{
-  padding:8px 14px;
-  border:1px solid #333;
-  border-radius:999px;
-  color:#aaa;
-  font-size:13px;
+padding:8px 14px;
+border:1px solid #333;
+border-radius:999px;
+color:#aaa;
+font-size:13px;
 }
 
 h1{
-  font-size:clamp(50px,10vw,120px);
-  line-height:.9;
-  margin:25px 0;
-  letter-spacing:-.07em;
-  background:linear-gradient(#fff,#555);
-  -webkit-background-clip:text;
-  color:transparent;
+font-size:
+clamp(52px,10vw,130px);
+line-height:.88;
+margin:28px 0;
+letter-spacing:-.08em;
+background:
+linear-gradient(#fff,#555);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 
 .hero p{
-  max-width:650px;
-  color:#777;
-  line-height:1.7;
+max-width:680px;
+color:#777;
+font-size:18px;
+line-height:1.7;
 }
 
 .btn{
-  margin-top:30px;
-  display:inline-block;
-  padding:14px 24px;
-  border-radius:12px;
-  background:white;
-  color:black;
-  text-decoration:none;
-  font-weight:800;
+margin-top:30px;
+display:inline-block;
+padding:15px 25px;
+border-radius:12px;
+background:#fff;
+color:#000;
+text-decoration:none;
+font-weight:850;
+transition:.2s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:
+0 15px 40px rgba(255,255,255,.12);
 }
 
 section{
-  padding:100px 7%;
+padding:100px 7%;
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+gap:20px;
 }
 
 .card{
-  padding:30px;
-  border:1px solid #222;
-  border-radius:20px;
-  background:#0b0b0b;
+padding:30px;
+border:1px solid #222;
+border-radius:22px;
+background:
+linear-gradient(
+145deg,
+#101010,
+#080808
+);
+transition:.25s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#444;
 }
 
 .card h3{
-  margin-top:0;
+margin-top:0;
 }
 
 .card p{
-  color:#777;
-  line-height:1.6;
+color:#777;
+line-height:1.7;
+}
+
+.about{
+max-width:800px;
+margin:auto;
+text-align:center;
 }
 
 .contact{
-  text-align:center;
-  background:#0b0b0b;
+text-align:center;
+background:#0b0b0b;
 }
 
 footer{
-  text-align:center;
-  padding:40px;
-  color:#555;
+text-align:center;
+padding:40px;
+color:#555;
+border-top:1px solid #191919;
 }
 
 @media(max-width:700px){
 
-  nav a{
-    display:none;
-  }
+nav a{
+display:none;
+}
 
-  .grid{
-    grid-template-columns:1fr;
-  }
+.grid{
+grid-template-columns:1fr;
+}
 
-  section{
-    padding:70px 20px;
-  }
+section{
+padding:70px 20px;
+}
+
+.hero{
+min-height:75vh;
+}
 
 }
 
@@ -671,7 +677,7 @@ SPDP
 <section class="hero">
 
 <div class="badge">
-✦ BUILT WITH SPDP AI
+✦ ${escapeHTML(type)}
 </div>
 
 <h1>
@@ -690,9 +696,7 @@ Explore
 
 <section id="features">
 
-<h2>
-Why choose us?
-</h2>
+<h2>Why choose us?</h2>
 
 <div class="grid">
 
@@ -706,14 +710,14 @@ Everything you need to launch a modern digital experience.
 <div class="card">
 <h3>02 — Fast</h3>
 <p>
-Designed with performance and responsive layouts in mind.
+Designed for responsive layouts and smooth interactions.
 </p>
 </div>
 
 <div class="card">
 <h3>03 — Premium</h3>
 <p>
-Clean visuals, smooth interactions and professional design.
+Clean visuals, strong hierarchy and professional design.
 </p>
 </div>
 
@@ -723,18 +727,28 @@ Clean visuals, smooth interactions and professional design.
 
 <section id="about">
 
-<h2>
-About
-</h2>
+<div class="about">
 
-<p style="color:#777;max-width:700px;line-height:1.8">
-This website was generated using the SPDP AI Hybrid Builder.
-Basic layouts can be generated locally without consuming AI API quota.
+<h2>About</h2>
+
+<p style="
+color:#777;
+line-height:1.8;
+">
+
+A modern digital experience generated
+with SPDP AI Hybrid Website Builder.
+
 </p>
+
+</div>
 
 </section>
 
-<section id="contact" class="contact">
+<section
+id="contact"
+class="contact"
+>
 
 <h2>
 Ready to build?
@@ -744,7 +758,10 @@ Ready to build?
 Start creating your next digital experience.
 </p>
 
-<a class="btn" href="#top">
+<a
+class="btn"
+href="#features"
+>
 Get Started
 </a>
 
@@ -756,24 +773,32 @@ SPDP AI · 2026
 
 <script>
 
-document.querySelectorAll("a[href^='#']").forEach(a=>{
+document
+.querySelectorAll(
+"a[href^='#']"
+)
+.forEach(a=>{
 
-  a.addEventListener("click",e=>{
+a.addEventListener(
+"click",
+e=>{
 
-    const target =
-      document.querySelector(a.getAttribute("href"));
+const target =
+document.querySelector(
+a.getAttribute("href")
+);
 
-    if(target){
+if(target){
 
-      e.preventDefault();
+e.preventDefault();
 
-      target.scrollIntoView({
-        behavior:"smooth"
-      });
+target.scrollIntoView({
+behavior:"smooth"
+});
 
-    }
+}
 
-  });
+});
 
 });
 
@@ -781,17 +806,19 @@ document.querySelectorAll("a[href^='#']").forEach(a=>{
 
 </body>
 </html>`;
+
 }
 
 
 function escapeHTML(value){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
 }
 
 
@@ -801,61 +828,63 @@ function escapeHTML(value){
 
 async function generateWebsite(){
 
-  const text =
-    promptInput.value.trim();
+const text =
+promptInput.value.trim();
 
-  if(!text){
+if(!text){
 
-    showMessage(
-      "Type what you want to build."
-    );
+showMessage(
+"Type what you want to build."
+);
 
-    return;
-  }
+return;
 
-  hideMessage();
+}
 
-  generateBtn.disabled = true;
-  generateBtn.textContent = "Generating...";
+hideMessage();
 
-  try{
+generateBtn.disabled = true;
+generateBtn.textContent =
+"Generating...";
 
-    /*
-     * LOCAL FIRST
-     *
-     * No Gemini API call.
-     */
+try{
 
-    const html =
-      generateLocalWebsite(text);
+const html =
+generateLocalWebsite(text);
 
-    undoStack = [];
-    redoStack = [];
+undoStack = [];
+redoStack = [];
 
-    renderHTML(html);
+renderHTML(html);
 
-    addMessage("user",text);
+addMessage(
+"user",
+text
+);
 
-    addMessage(
-      "ai",
-      "Website generated locally without using Gemini quota."
-    );
+addMessage(
+"ai",
+"Website generated locally for free."
+);
 
-    workspace.scrollIntoView({
-      behavior:"smooth"
-    });
+workspace.scrollIntoView({
+behavior:"smooth"
+});
 
-  }catch(error){
+}catch(error){
 
-    showMessage(
-      "❌ " + error.message
-    );
+showMessage(
+"❌ " + error.message
+);
 
-  }finally{
+}finally{
 
-    generateBtn.disabled = false;
-    generateBtn.textContent = "Generate";
-  }
+generateBtn.disabled = false;
+generateBtn.textContent =
+"Generate";
+
+}
+
 }
 
 
@@ -865,429 +894,765 @@ async function generateWebsite(){
 
 async function editWebsite(){
 
-  if(!currentHTML){
+if(!currentHTML){
 
-    showMessage(
-      "Generate a website first."
-    );
+showMessage(
+"Generate a website first."
+);
 
-    return;
-  }
+return;
 
-  const instruction =
-    editPrompt.value.trim();
+}
 
-  if(!instruction){
-    return;
-  }
+const instruction =
+editPrompt.value.trim();
 
-  pushHistory();
+if(!instruction) return;
 
-  addMessage(
-    "user",
-    instruction
-  );
+pushHistory();
 
-  editPrompt.value = "";
+addMessage(
+"user",
+instruction
+);
 
-  editBtn.disabled = true;
-  editBtn.textContent = "AI Working...";
+editPrompt.value = "";
 
-  try{
+editBtn.disabled = true;
+editBtn.textContent =
+"AI Working...";
 
-    const response =
-      await fetch(
-        WORKER_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            action:"edit",
-            prompt:instruction,
-            currentHTML:currentHTML
-          })
-        }
-      );
+try{
 
-    const data =
-      await response.json();
+const response =
+await fetch(
+WORKER_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":
+"application/json"
+},
+body:JSON.stringify({
+action:"edit",
+prompt:instruction,
+currentHTML:currentHTML
+})
+}
+);
 
-    if(!response.ok || !data.success){
+const data =
+await response.json();
 
-      throw new Error(
-        data.error ||
-        "AI edit failed."
-      );
-    }
+if(!response.ok ||
+!data.success){
 
-    if(!validHTML(data.html)){
+throw new Error(
+data.error ||
+"AI edit failed."
+);
 
-      throw new Error(
-        "AI returned invalid HTML."
-      );
-    }
+}
 
-    renderHTML(data.html);
+if(!validHTML(data.html)){
 
-    addMessage(
-      "ai",
-      "Done. AI updated your website."
-    );
+throw new Error(
+"AI returned invalid HTML."
+);
 
-  }catch(error){
+}
 
-    if(undoStack.length){
-      undoStack.pop();
-    }
+renderHTML(
+data.html
+);
 
-    addMessage(
-      "ai",
-      "❌ " + error.message
-    );
+addMessage(
+"ai",
+"Done. AI updated your website."
+);
 
-    showMessage(
-      "❌ " + error.message
-    );
+}catch(error){
 
-  }finally{
+if(undoStack.length){
+undoStack.pop();
+}
 
-    editBtn.disabled = false;
-    editBtn.textContent = "Apply Edit";
-  }
+addMessage(
+"ai",
+"❌ " + error.message
+);
+
+showMessage(
+"❌ " + error.message
+);
+
+}finally{
+
+editBtn.disabled = false;
+editBtn.textContent =
+"Apply AI Edit";
+
+}
+
 }
 
 
 /* MESSAGE */
 
-function addMessage(type,text){
+function addMessage(
+type,
+text
+){
 
-  const div =
-    document.createElement("div");
+const div =
+document.createElement(
+"div"
+);
 
-  div.className =
-    "msg " + type;
+div.className =
+"msg " + type;
 
-  div.textContent =
-    text;
+div.textContent =
+text;
 
-  messages.appendChild(div);
+messages.appendChild(
+div
+);
 
-  messages.scrollTop =
-    messages.scrollHeight;
+messages.scrollTop =
+messages.scrollHeight;
+
 }
 
 
-/* UNDO */
-
-$("undoBtn").onclick = () => {
-
-  if(!undoStack.length){
-
-    showMessage(
-      "Nothing to undo."
-    );
-
-    return;
-  }
-
-  redoStack.push(currentHTML);
-
-  renderHTML(
-    undoStack.pop()
-  );
-};
-
-
-/* REDO */
-
-$("redoBtn").onclick = () => {
-
-  if(!redoStack.length){
-
-    showMessage(
-      "Nothing to redo."
-    );
-
-    return;
-  }
-
-  undoStack.push(currentHTML);
-
-  renderHTML(
-    redoStack.pop()
-  );
-};
-
-
-/* CODE */
+/* =========================
+   CODE PANEL
+========================= */
 
 $("codeBtn").onclick = () => {
 
-  codePanel.classList.toggle("show");
+if(!currentHTML){
+
+showMessage(
+"Generate a website first."
+);
+
+return;
+
+}
+
+code.value =
+currentHTML;
+
+codePanel.classList.toggle(
+"show"
+);
+
+if(
+codePanel.classList.contains(
+"show"
+)
+){
+
+setTimeout(()=>{
+
+codePanel.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+},50);
+
+}
 
 };
+
+
+/* LIVE CODE PREVIEW */
+
+code.addEventListener(
+"input",
+()=>{
+
+const value =
+code.value.trim();
+
+if(value){
+
+previewFrame.srcdoc =
+value;
+
+}
+
+}
+);
 
 
 /* APPLY CODE */
 
 $("applyCodeBtn").onclick = () => {
 
-  const newHTML =
-    code.value.trim();
+const newHTML =
+code.value.trim();
 
-  if(!validHTML(newHTML)){
+if(!validHTML(newHTML)){
 
-    showMessage(
-      "❌ Invalid HTML."
-    );
+showMessage(
+"❌ Invalid HTML."
+);
 
-    return;
-  }
+return;
 
-  pushHistory();
+}
 
-  renderHTML(newHTML);
+if(newHTML === currentHTML){
 
-  addMessage(
-    "ai",
-    "Manual code changes applied."
-  );
+showMessage(
+"No code changes detected."
+);
 
-  showMessage(
-    "✓ Code applied."
-  );
+return;
+
+}
+
+pushHistory();
+
+renderHTML(
+newHTML
+);
+
+addMessage(
+"ai",
+"Manual code changes applied."
+);
+
+showMessage(
+"✓ Code applied."
+);
+
 };
 
 
-/* RESET */
+/* RESET CODE */
 
 $("resetCodeBtn").onclick = () => {
 
-  code.value =
-    currentHTML;
+code.value =
+currentHTML;
+
+previewFrame.srcdoc =
+currentHTML;
+
 };
 
 
-/* COPY */
+/* =========================
+   PREVIEW EDITOR
+========================= */
+
+previewEditBtn.onclick = () => {
+
+if(!currentHTML){
+
+showMessage(
+"Generate a website first."
+);
+
+return;
+
+}
+
+previewOriginalHTML =
+currentHTML;
+
+previewEditing = true;
+
+previewEditBar.style.display =
+"flex";
+
+previewEditBtn.disabled =
+true;
+
+enablePreviewEditing();
+
+showMessage(
+"✏️ Click text inside the preview and edit it."
+);
+
+};
+
+
+function enablePreviewEditing(){
+
+const doc =
+previewFrame.contentDocument;
+
+if(!doc || !doc.body) return;
+
+doc.body.setAttribute(
+"contenteditable",
+"true"
+);
+
+doc.body.style.outline =
+"2px dashed rgba(255,255,255,.25)";
+
+doc.body.style.outlineOffset =
+"-4px";
+
+
+doc.querySelectorAll("a")
+.forEach(link=>{
+
+link.dataset.originalHref =
+link.getAttribute("href") || "";
+
+link.addEventListener(
+"click",
+e=>{
+e.preventDefault();
+}
+);
+
+});
+
+}
+
+
+previewFrame.addEventListener(
+"load",
+()=>{
+
+if(previewEditing){
+
+setTimeout(
+enablePreviewEditing,
+50
+);
+
+}
+
+}
+);
+
+
+/* SAVE PREVIEW */
+
+savePreviewEdit.onclick = () => {
+
+const doc =
+previewFrame.contentDocument;
+
+if(!doc ||
+!doc.documentElement){
+
+showMessage(
+"❌ Could not read preview."
+);
+
+return;
+
+}
+
+const newHTML =
+"<!DOCTYPE html>\n" +
+doc.documentElement.outerHTML;
+
+if(!validHTML(newHTML)){
+
+showMessage(
+"❌ Invalid preview HTML."
+);
+
+return;
+
+}
+
+pushHistory();
+
+renderHTML(
+newHTML
+);
+
+disablePreviewEditing();
+
+addMessage(
+"ai",
+"Preview edits saved successfully."
+);
+
+showMessage(
+"✓ Preview changes saved."
+);
+
+};
+
+
+/* CANCEL PREVIEW */
+
+cancelPreviewEdit.onclick = () => {
+
+renderHTML(
+previewOriginalHTML
+);
+
+disablePreviewEditing();
+
+showMessage(
+"Preview changes cancelled."
+);
+
+};
+
+
+function disablePreviewEditing(){
+
+previewEditing = false;
+
+previewEditBar.style.display =
+"none";
+
+previewEditBtn.disabled =
+false;
+
+}
+
+
+/* =========================
+   UNDO
+========================= */
+
+$("undoBtn").onclick = () => {
+
+if(!undoStack.length){
+
+showMessage(
+"Nothing to undo."
+);
+
+return;
+
+}
+
+redoStack.push(
+currentHTML
+);
+
+const previous =
+undoStack.pop();
+
+renderHTML(
+previous
+);
+
+};
+
+
+/* =========================
+   REDO
+========================= */
+
+$("redoBtn").onclick = () => {
+
+if(!redoStack.length){
+
+showMessage(
+"Nothing to redo."
+);
+
+return;
+
+}
+
+undoStack.push(
+currentHTML
+);
+
+const next =
+redoStack.pop();
+
+renderHTML(
+next
+);
+
+};
+
+
+/* =========================
+   COPY
+========================= */
 
 async function copyText(text){
 
-  if(!text) return;
+if(!text) return;
 
-  try{
+try{
 
-    await navigator.clipboard.writeText(text);
+await navigator.clipboard
+.writeText(text);
 
-    showMessage(
-      "✓ Copied."
-    );
+showMessage(
+"✓ Copied."
+);
 
-    setTimeout(
-      hideMessage,
-      1500
-    );
+setTimeout(
+hideMessage,
+1500
+);
 
-  }catch{
+}catch{
 
-    showMessage(
-      "Copy failed."
-    );
-  }
+showMessage(
+"Copy failed."
+);
+
 }
 
+}
+
+
 $("copyBtn").onclick =
-  () => copyText(currentHTML);
+() => copyText(
+currentHTML
+);
 
 $("codeCopyBtn").onclick =
-  () => copyText(code.value);
+() => copyText(
+code.value
+);
 
 
-/* DOWNLOAD */
+/* =========================
+   DOWNLOAD
+========================= */
 
 $("downloadBtn").onclick = () => {
 
-  if(!currentHTML) return;
+if(!currentHTML) return;
 
-  const blob =
-    new Blob(
-      [currentHTML],
-      {type:"text/html"}
-    );
+const blob =
+new Blob(
+[currentHTML],
+{type:"text/html"}
+);
 
-  const url =
-    URL.createObjectURL(blob);
+const url =
+URL.createObjectURL(
+blob
+);
 
-  const a =
-    document.createElement("a");
+const a =
+document.createElement(
+"a"
+);
 
-  a.href = url;
-  a.download =
-    "spdp-ai-website.html";
+a.href = url;
 
-  a.click();
+a.download =
+"spdp-ai-website.html";
 
-  URL.revokeObjectURL(url);
+document.body.appendChild(a);
+
+a.click();
+
+a.remove();
+
+URL.revokeObjectURL(
+url
+);
+
 };
 
 
-/* OPEN */
+/* =========================
+   OPEN
+========================= */
 
 $("openBtn").onclick = () => {
 
-  if(!currentHTML) return;
+if(!currentHTML) return;
 
-  const blob =
-    new Blob(
-      [currentHTML],
-      {type:"text/html"}
-    );
+const blob =
+new Blob(
+[currentHTML],
+{type:"text/html"}
+);
 
-  const url =
-    URL.createObjectURL(blob);
+const url =
+URL.createObjectURL(
+blob
+);
 
-  window.open(url,"_blank");
+window.open(
+url,
+"_blank"
+);
+
 };
 
 
-/* DEVICES */
+/* =========================
+   DEVICES
+========================= */
 
 document
 .querySelectorAll(".device")
 .forEach(btn=>{
 
-  btn.onclick = () => {
+btn.onclick = () => {
 
-    document
-    .querySelectorAll(".device")
-    .forEach(x =>
-      x.classList.remove("active")
-    );
+document
+.querySelectorAll(".device")
+.forEach(x =>
+x.classList.remove(
+"active"
+)
+);
 
-    btn.classList.add("active");
+btn.classList.add(
+"active"
+);
 
-    const width =
-      btn.dataset.width;
+const width =
+btn.dataset.width;
 
-    previewFrame.style.width =
-      width;
+previewFrame.style.width =
+width;
 
-    previewFrame.style.margin =
-      width === "100%"
-        ? "0"
-        : "0 auto";
-  };
+previewFrame.style.margin =
+width === "100%"
+? "0"
+: "0 auto";
+
+};
 
 });
 
 
-/* CLEAR */
+/* =========================
+   CLEAR
+========================= */
 
 $("clearBtn").onclick = () => {
 
-  if(
-    !confirm(
-      "Clear current project?"
-    )
-  ) return;
+if(
+!confirm(
+"Clear current project?"
+)
+) return;
 
-  currentHTML = "";
-  undoStack = [];
-  redoStack = [];
+currentHTML = "";
+undoStack = [];
+redoStack = [];
 
-  promptInput.value = "";
-  editPrompt.value = "";
-  code.value = "";
+promptInput.value = "";
+editPrompt.value = "";
+code.value = "";
 
-  previewFrame.srcdoc = "";
+previewFrame.srcdoc = "";
 
-  workspace.classList.remove("show");
+workspace.classList.remove(
+"show"
+);
 
-  localStorage.removeItem(
-    "spdp_current_html"
-  );
+previewEditBar.style.display =
+"none";
 
-  messages.innerHTML = `
-    <div class="msg ai">
-      Your generated website will stay here.
-    </div>
-  `;
+previewEditing = false;
 
-  hideMessage();
+localStorage.removeItem(
+"spdp_current_html"
+);
+
+messages.innerHTML = `
+<div class="msg ai">
+Your website is ready.
+</div>
+`;
+
+hideMessage();
+
 };
 
 
-/* KEYBOARD */
+/* =========================
+   KEYBOARD
+========================= */
 
 promptInput.addEventListener(
-  "keydown",
-  e => {
+"keydown",
+e=>{
 
-    if(
-      (e.ctrlKey || e.metaKey) &&
-      e.key === "Enter"
-    ){
+if(
+(e.ctrlKey || e.metaKey) &&
+e.key === "Enter"
+){
 
-      e.preventDefault();
+e.preventDefault();
 
-      generateWebsite();
-    }
+generateWebsite();
 
-  }
+}
+
+}
 );
+
 
 editPrompt.addEventListener(
-  "keydown",
-  e => {
+"keydown",
+e=>{
 
-    if(
-      (e.ctrlKey || e.metaKey) &&
-      e.key === "Enter"
-    ){
+if(
+(e.ctrlKey || e.metaKey) &&
+e.key === "Enter"
+){
 
-      e.preventDefault();
+e.preventDefault();
 
-      editWebsite();
-    }
+editWebsite();
 
-  }
+}
+
+}
 );
 
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 
 generateBtn.onclick =
-  generateWebsite;
+generateWebsite;
 
 editBtn.onclick =
-  editWebsite;
+editWebsite;
 
 
-/* LOAD */
+/* =========================
+   LOAD SAVED PROJECT
+========================= */
 
 window.addEventListener(
-  "load",
-  () => {
+"load",
+()=>{
 
-    const saved =
-      localStorage.getItem(
-        "spdp_current_html"
-      );
+const saved =
+localStorage.getItem(
+"spdp_current_html"
+);
 
-    if(
-      saved &&
-      validHTML(saved)
-    ){
+if(
+saved &&
+validHTML(saved)
+){
 
-      renderHTML(saved);
+renderHTML(saved);
 
-    }
+}
 
-  }
+}
 );
 
 </script>
-
 </body>
 </html>
