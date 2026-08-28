@@ -17,13 +17,10 @@ body{
   margin:0;
   width:100%;
   height:100%;
+  overflow:hidden;
   background:#050505;
   color:#fff;
   font-family:Inter,Arial,sans-serif;
-}
-
-body{
-  overflow:hidden;
 }
 
 button,
@@ -37,7 +34,7 @@ button{
 }
 
 button:disabled{
-  opacity:.55;
+  opacity:.5;
   cursor:not-allowed;
 }
 
@@ -112,7 +109,6 @@ button:disabled{
 .main{
   flex:1;
   min-width:0;
-  height:100%;
   display:flex;
   flex-direction:column;
 }
@@ -133,18 +129,18 @@ button:disabled{
 }
 
 .layout{
-  flex:1;
-  min-height:0;
+  height:calc(100vh - 62px);
   display:grid;
   grid-template-columns:350px minmax(0,1fr);
+  min-height:0;
 }
 
 .left{
-  min-height:0;
   padding:14px;
   border-right:1px solid #222;
   display:flex;
   flex-direction:column;
+  min-height:0;
 }
 
 .label{
@@ -190,18 +186,10 @@ button:disabled{
   padding:9px 11px;
 }
 
-.btn:hover{
-  background:#191919;
-}
-
 .primary{
   background:#7056e8;
   border-color:#7056e8;
   color:#fff;
-}
-
-.primary:hover{
-  background:#8068ef;
 }
 
 .full{
@@ -228,11 +216,6 @@ button:disabled{
   padding:6px 8px;
   border-radius:7px;
   font-size:11px;
-  cursor:pointer;
-}
-
-.file:hover{
-  background:#191919;
 }
 
 .chat{
@@ -254,7 +237,6 @@ button:disabled{
 
 .messages{
   flex:1;
-  min-height:0;
   overflow:auto;
   padding:9px;
 }
@@ -279,7 +261,6 @@ button:disabled{
 }
 
 .edit{
-  width:100%;
   height:65px;
   border:0;
   border-top:1px solid #222;
@@ -348,12 +329,10 @@ button:disabled{
   border:1px solid #292929;
   border-radius:9px;
   background:#fff;
-  transition:width .2s ease;
 }
 
 .codePanel{
   height:48%;
-  min-height:260px;
   display:none;
   flex-direction:column;
   border-top:1px solid #222;
@@ -365,7 +344,6 @@ button:disabled{
 
 .codeTitle{
   height:40px;
-  flex:none;
   padding:0 10px;
   display:flex;
   align-items:center;
@@ -435,72 +413,27 @@ button:disabled{
   border-radius:9px;
   font-size:12px;
   display:none;
-  z-index:999999;
-  max-width:min(90vw,700px);
-  text-align:center;
+  z-index:999;
 }
 
 .toast.show{
   display:block;
 }
 
-.statusDot{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#35d07f;
-  margin-right:4px;
-}
-
-.emptyPreview{
-  height:100%;
-  min-height:450px;
-  display:grid;
-  place-items:center;
-  color:#666;
-  background:#0b0b0b;
-  border:1px solid #292929;
-  border-radius:9px;
-  text-align:center;
-  padding:30px;
-}
-
 @media(max-width:850px){
-
-  body{
-    overflow:auto;
-  }
 
   .side{
     display:none;
   }
 
-  .app{
-    min-height:100vh;
-    height:auto;
-  }
-
-  .main{
-    min-height:100vh;
-  }
-
   .layout{
     grid-template-columns:1fr;
-    min-height:calc(100vh - 62px);
   }
 
   .left{
     display:none;
   }
 
-  .toolbar{
-    overflow-x:auto;
-  }
-
-  .previewArea{
-    min-height:calc(100vh - 114px);
-  }
 }
 </style>
 </head>
@@ -533,8 +466,8 @@ button:disabled{
   <div class="nav">
 
     <button
-      id="builderNav"
       class="active"
+      id="builderNav"
     >
       ✦ Builder
     </button>
@@ -554,12 +487,15 @@ button:disabled{
   </div>
 
   <div class="bottom">
+
     Cloudflare Workers AI
+
     <br>
+
     <span class="green">
-      <span class="statusDot"></span>
-      Ready
+      ● Ready
     </span>
+
   </div>
 
 </aside>
@@ -574,8 +510,13 @@ button:disabled{
   </b>
 
   <span class="ready">
-    <span class="green">●</span>
+
+    <span class="green">
+      ●
+    </span>
+
     Ready
+
   </span>
 
 </header>
@@ -583,228 +524,232 @@ button:disabled{
 
 <div class="layout">
 
+
 <section class="left">
 
-  <div class="label">
-    Website prompt
-  </div>
+<div class="label">
+  Website prompt
+</div>
 
-  <textarea
-    id="prompt"
-    class="prompt"
-    placeholder="Create a premium black 3D gaming website with hero, games, pricing, about and contact sections..."
-  ></textarea>
+<textarea
+  id="prompt"
+  class="prompt"
+  placeholder="Create a premium black 3D gaming website with hero, games, pricing, about and contact sections..."
+></textarea>
 
-  <div class="actions">
 
-    <button
-      id="plus"
-      class="btn"
-    >
-      ＋ Add
-    </button>
-
-    <button
-      id="clear"
-      class="btn"
-    >
-      Clear
-    </button>
-
-  </div>
+<div class="actions">
 
   <button
-    id="generate"
-    class="btn primary full"
+    id="plus"
+    class="btn"
   >
-    Generate Website
+    ＋ Add
   </button>
 
+  <button
+    id="clear"
+    class="btn"
+  >
+    Clear
+  </button>
+
+</div>
+
+
+<button
+  id="generate"
+  class="btn primary full"
+>
+  Generate Website
+</button>
+
+
+<div
+  id="files"
+  class="files"
+></div>
+
+
+<input
+  id="imgInput"
+  type="file"
+  accept="image/*"
+  multiple
+  hidden
+>
+
+<input
+  id="vidInput"
+  type="file"
+  accept="video/*"
+  multiple
+  hidden
+>
+
+<input
+  id="fileInput"
+  type="file"
+  accept=".html,.css,.js,.json,.txt,.md,.pdf,.zip,.doc,.docx"
+  multiple
+  hidden
+>
+
+
+<div class="chat">
+
+  <div class="chathead">
+
+    <b>
+      AI Sub-chat
+    </b>
+
+    <br>
+
+    <span style="color:#666">
+      Modify the current website
+    </span>
+
+  </div>
+
+
   <div
-    id="files"
-    class="files"
-  ></div>
-
-  <input
-    id="imgInput"
-    type="file"
-    accept="image/*"
-    multiple
-    hidden
+    id="messages"
+    class="messages"
   >
 
-  <input
-    id="vidInput"
-    type="file"
-    accept="video/*"
-    multiple
-    hidden
-  >
-
-  <input
-    id="fileInput"
-    type="file"
-    accept=".html,.css,.js,.json,.txt,.md,.pdf,.zip,.doc,.docx"
-    multiple
-    hidden
-  >
-
-  <div class="chat">
-
-    <div class="chathead">
-
-      <b>
-        AI Sub-chat
-      </b>
-
-      <br>
-
-      <span style="color:#666">
-        Modify the current website
-      </span>
-
-    </div>
-
-
-    <div
-      id="messages"
-      class="messages"
-    >
-
-      <div class="msg ai">
-        Generate a website, then tell me what you want to change.
-      </div>
-
-    </div>
-
-
-    <textarea
-      id="edit"
-      class="edit"
-      placeholder="Make the navbar glassmorphism and add 3D animations..."
-    ></textarea>
-
-
-    <div class="chatfoot">
-
-      <button
-        id="applyEdit"
-        class="btn primary"
-        style="width:100%"
-      >
-        Apply AI Edit
-      </button>
-
+    <div class="msg ai">
+      Generate a website, then tell me what you want to change.
     </div>
 
   </div>
 
-</section>
+
+  <textarea
+    id="edit"
+    class="edit"
+    placeholder="Make the navbar glassmorphism and add 3D animations..."
+  ></textarea>
 
 
-<section class="right">
-
-<div class="toolbar">
-
-  <div class="tools">
-
-    <button
-      id="previewBtn"
-      class="tool active"
-    >
-      Preview
-    </button>
+  <div class="chatfoot">
 
     <button
-      id="codeBtn"
-      class="tool"
+      id="applyEdit"
+      class="btn primary"
+      style="width:100%"
     >
-      Code
-    </button>
-
-    <button
-      id="previewEdit"
-      class="tool"
-    >
-      ✎ Edit Preview
-    </button>
-
-    <button
-      id="three"
-      class="tool"
-    >
-      ◇ 3D
-    </button>
-
-    <button
-      id="desk"
-      class="tool"
-    >
-      Desktop
-    </button>
-
-    <button
-      id="tab"
-      class="tool"
-    >
-      Tablet
-    </button>
-
-    <button
-      id="mob"
-      class="tool"
-    >
-      Mobile
-    </button>
-
-  </div>
-
-
-  <div class="tools">
-
-    <button
-      id="undo"
-      class="tool"
-      title="Undo"
-    >
-      ↶
-    </button>
-
-    <button
-      id="redo"
-      class="tool"
-      title="Redo"
-    >
-      ↷
-    </button>
-
-    <button
-      id="copy"
-      class="tool"
-    >
-      Copy
-    </button>
-
-    <button
-      id="download"
-      class="tool"
-    >
-      Download
+      Apply AI Edit
     </button>
 
   </div>
 
 </div>
 
+</section>
+
+
+<section class="right">
+
+
+<div class="toolbar">
+
+<div class="tools">
+
+<button
+  id="previewBtn"
+  class="tool active"
+>
+  Preview
+</button>
+
+<button
+  id="codeBtn"
+  class="tool"
+>
+  Code
+</button>
+
+<button
+  id="previewEdit"
+  class="tool"
+>
+  ✎ Edit Preview
+</button>
+
+<button
+  id="three"
+  class="tool"
+>
+  ◇ 3D
+</button>
+
+<button
+  id="desk"
+  class="tool"
+>
+  Desktop
+</button>
+
+<button
+  id="tab"
+  class="tool"
+>
+  Tablet
+</button>
+
+<button
+  id="mob"
+  class="tool"
+>
+  Mobile
+</button>
+
+</div>
+
+
+<div class="tools">
+
+<button
+  id="undo"
+  class="tool"
+>
+  ↶
+</button>
+
+<button
+  id="redo"
+  class="tool"
+>
+  ↷
+</button>
+
+<button
+  id="copy"
+  class="tool"
+>
+  Copy
+</button>
+
+<button
+  id="download"
+  class="tool"
+>
+  Download
+</button>
+
+</div>
+
+</div>
+
 
 <div class="previewArea">
 
-  <iframe
-    id="frame"
-    class="frame"
-    title="Website Preview"
-    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-  ></iframe>
+<iframe
+  id="frame"
+  class="frame"
+  sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+></iframe>
 
 </div>
 
@@ -814,46 +759,46 @@ button:disabled{
   class="codePanel"
 >
 
-  <div class="codeTitle">
+<div class="codeTitle">
 
-    <b>
-      HTML / CSS / JS
-    </b>
+  <b>
+    HTML / CSS / JS
+  </b>
 
-    <button
-      id="copyCode"
-      class="tool"
-    >
-      Copy Code
-    </button>
+  <button
+    id="copyCode"
+    class="tool"
+  >
+    Copy Code
+  </button>
 
-  </div>
-
-
-  <textarea
-    id="code"
-    class="code"
-    spellcheck="false"
-  ></textarea>
+</div>
 
 
-  <div class="codeBottom">
+<textarea
+  id="code"
+  class="code"
+  spellcheck="false"
+></textarea>
 
-    <button
-      id="reset"
-      class="tool"
-    >
-      Reset
-    </button>
 
-    <button
-      id="applyCode"
-      class="tool primary"
-    >
-      Apply Code
-    </button>
+<div class="codeBottom">
 
-  </div>
+  <button
+    id="reset"
+    class="tool"
+  >
+    Reset
+  </button>
+
+  <button
+    id="applyCode"
+    class="tool primary"
+  >
+    Apply Code
+  </button>
+
+</div>
 
 </div>
 
@@ -871,17 +816,17 @@ button:disabled{
   class="menu"
 >
 
-  <button data-open="img">
-    🖼️ Image
-  </button>
+<button data-open="img">
+  🖼️ Image
+</button>
 
-  <button data-open="vid">
-    🎬 Video
-  </button>
+<button data-open="vid">
+  🎬 Video
+</button>
 
-  <button data-open="file">
-    📄 File
-  </button>
+<button data-open="file">
+  📄 File
+</button>
 
 </div>
 
@@ -893,31 +838,21 @@ button:disabled{
 
 
 <script>
-"use strict";
-
-
-/* =========================================================
-   CONFIG
-========================================================= */
 
 const WORKER_URL =
-  "https://spdp-ai.spdp3127.workers.dev";
+  "https://spdp-ai.spdp3127.workers.dev/";
 
 
-/* =========================================================
-   DOM
-========================================================= */
-
-const $ = id =>
+const $ =
+  id =>
   document.getElementById(id);
 
 
-/* =========================================================
-   STATE
-========================================================= */
-
 let html =
-  localStorage.getItem("spdp_html") || "";
+  localStorage.getItem(
+    "spdp_html"
+  ) || "";
+
 
 let undoStack = [];
 let redoStack = [];
@@ -927,104 +862,143 @@ let picked = [];
 let editing = false;
 
 
-/* =========================================================
+/* =========================
    TOAST
-========================================================= */
+========================= */
 
 function toast(text){
 
-  const box = $("toast");
+  $("toast").textContent =
+    text;
 
-  box.textContent = String(text);
-
-  box.classList.add("show");
-
-  clearTimeout(
-    window.spdpToastTimer
+  $("toast").classList.add(
+    "show"
   );
 
-  window.spdpToastTimer =
-    setTimeout(() => {
+  clearTimeout(
+    window.toastTimer
+  );
 
-      box.classList.remove("show");
-
-    }, 2600);
+  window.toastTimer =
+    setTimeout(
+      () => {
+        $("toast")
+          .classList.remove(
+            "show"
+          );
+      },
+      2600
+    );
 }
 
 
-/* =========================================================
-   HTML CLEAN
-========================================================= */
+/* =========================
+   CLEAN HTML
+========================= */
 
-function clean(value){
+function cleanHTML(value){
 
   let s =
     String(value || "")
-      .replace(/\u0000/g, "")
       .trim();
 
-  s = s.replace(
-    /^```(?:html|HTML|javascript|JavaScript|js|JS)?\s*/i,
-    ""
-  );
+  s =
+    s.replace(
+      /^```html\s*/i,
+      ""
+    );
 
-  s = s.replace(
-    /\s*```$/i,
-    ""
-  );
+  s =
+    s.replace(
+      /^```HTML\s*/i,
+      ""
+    );
+
+  s =
+    s.replace(
+      /^```\s*/i,
+      ""
+    );
+
+  s =
+    s.replace(
+      /\s*```$/i,
+      ""
+    );
 
   const lower =
     s.toLowerCase();
 
   let start =
-    lower.indexOf("<!doctype html");
+    lower.indexOf(
+      "<!doctype html"
+    );
 
   if(start < 0){
+
     start =
-      lower.indexOf("<html");
+      lower.indexOf(
+        "<html"
+      );
+
   }
 
   if(start >= 0){
+
     s =
-      s.slice(start);
+      s.substring(start);
+
   }
 
   const end =
-    s.toLowerCase()
-      .lastIndexOf("</html>");
+    s
+      .toLowerCase()
+      .lastIndexOf(
+        "</html>"
+      );
 
   if(end >= 0){
+
     s =
-      s.slice(0,end + 7);
+      s.substring(
+        0,
+        end + 7
+      );
+
   }
 
   return s.trim();
 }
 
 
-/* =========================================================
-   VALID HTML
-========================================================= */
+/* =========================
+   VALIDATE
+========================= */
 
-function valid(value){
+function validHTML(s){
 
   const x =
-    String(value || "")
+    String(s || "")
       .trim()
       .toLowerCase();
 
-  if(!x){
+  if(
+    !(
+      x.startsWith(
+        "<!doctype html"
+      ) ||
+      x.startsWith(
+        "<html"
+      )
+    )
+  ){
     return false;
   }
 
-  const starts =
-    x.startsWith("<!doctype html") ||
-    x.startsWith("<html");
-
   return (
-    starts &&
     x.includes("<html") &&
     x.includes("<head") &&
+    x.includes("</head>") &&
     x.includes("<body") &&
     x.includes("</body>") &&
     x.includes("</html>")
@@ -1032,40 +1006,33 @@ function valid(value){
 }
 
 
-/* =========================================================
+/* =========================
    PREVIEW
-========================================================= */
+========================= */
 
-function preview(value){
+function preview(s){
 
-  const frame =
-    $("frame");
-
-  if(!value){
-    frame.srcdoc = "";
-    return;
-  }
-
-  frame.srcdoc = value;
+  $("frame").srcdoc =
+    s;
 }
 
 
-/* =========================================================
-   SET HTML
-========================================================= */
+/* =========================
+   SAVE HTML
+========================= */
 
 function setHTML(
   value,
   saveHistory = true
 ){
 
-  const cleaned =
-    clean(value);
+  const s =
+    cleanHTML(value);
 
-  if(!valid(cleaned)){
+  if(!validHTML(s)){
 
     toast(
-      "The website code is incomplete."
+      "❌ Invalid HTML"
     );
 
     return false;
@@ -1073,38 +1040,44 @@ function setHTML(
 
   if(
     saveHistory &&
-    html &&
-    html !== cleaned
+    html
   ){
-    undoStack.push(html);
 
-    if(undoStack.length > 30){
+    undoStack.push(
+      html
+    );
+
+    if(
+      undoStack.length > 30
+    ){
+
       undoStack.shift();
+
     }
+
   }
 
   redoStack = [];
 
-  html =
-    cleaned;
+  html = s;
 
   $("code").value =
-    html;
+    s;
 
-  preview(html);
+  preview(s);
 
   localStorage.setItem(
     "spdp_html",
-    html
+    s
   );
 
   return true;
 }
 
 
-/* =========================================================
-   MESSAGE
-========================================================= */
+/* =========================
+   CHAT MESSAGE
+========================= */
 
 function msg(
   type,
@@ -1112,7 +1085,9 @@ function msg(
 ){
 
   const d =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   d.className =
     "msg " + type;
@@ -1123,16 +1098,20 @@ function msg(
   $("messages")
     .appendChild(d);
 
-  $("messages").scrollTop =
-    $("messages").scrollHeight;
+  $("messages")
+    .scrollTop =
+    $("messages")
+      .scrollHeight;
 }
 
 
-/* =========================================================
+/* =========================
    API
-========================================================= */
+========================= */
 
-async function api(payload){
+async function api(
+  payload
+){
 
   let response;
 
@@ -1150,7 +1129,9 @@ async function api(payload){
           },
 
           body:
-            JSON.stringify(payload)
+            JSON.stringify(
+              payload
+            )
         }
       );
 
@@ -1159,11 +1140,13 @@ async function api(payload){
     throw new Error(
       "Cannot connect to SPDP AI Worker."
     );
+
   }
 
 
   const text =
     await response.text();
+
 
   let data;
 
@@ -1180,56 +1163,50 @@ async function api(payload){
     );
 
     throw new Error(
-      "Worker returned invalid JSON."
+      "Worker returned invalid JSON: " +
+      text.substring(
+        0,
+        300
+      )
     );
+
   }
-
-
-  /*
-    Worker supports both ok and success.
-  */
-
-  const successful =
-    data &&
-    (
-      data.success === true ||
-      data.ok === true
-    );
 
 
   if(
     !response.ok ||
-    !successful
+    data.success !== true
   ){
 
     throw new Error(
-      data?.error ||
-      `AI request failed (${response.status}).`
+      data.error ||
+      "AI request failed."
     );
+
   }
+
 
   return data;
 }
 
 
-/* =========================================================
-   ADD FILE MENU
-========================================================= */
+/* =========================
+   ADD MENU
+========================= */
 
 $("plus").onclick =
   event => {
 
-    const r =
+    const rect =
       $("plus")
         .getBoundingClientRect();
 
     $("menu").style.left =
-      r.left + "px";
+      rect.left + "px";
 
     $("menu").style.top =
-      Math.max(
-        10,
-        r.top - 130
+      (
+        rect.top - 125
       ) + "px";
 
     $("menu")
@@ -1237,16 +1214,20 @@ $("plus").onclick =
       .toggle("show");
 
     event.stopPropagation();
+
   };
 
 
-document.addEventListener(
-  "click",
+document.onclick =
   event => {
 
     if(
-      !event.target.closest("#menu") &&
-      !event.target.closest("#plus")
+      !event.target.closest(
+        "#menu"
+      ) &&
+      !event.target.closest(
+        "#plus"
+      )
     ){
 
       $("menu")
@@ -1255,72 +1236,88 @@ document.addEventListener(
 
     }
 
-  }
-);
+  };
 
-
-/* =========================================================
-   FILE PICKERS
-========================================================= */
 
 document
-  .querySelectorAll("[data-open]")
-  .forEach(button => {
+  .querySelectorAll(
+    "[data-open]"
+  )
+  .forEach(
+    button => {
 
-    button.onclick = () => {
+      button.onclick =
+        () => {
 
-      const type =
-        button.dataset.open;
+          const type =
+            button.dataset.open;
 
-      $("menu")
-        .classList
-        .remove("show");
+          $("menu")
+            .classList
+            .remove("show");
 
-      if(type === "img"){
-        $("imgInput").click();
-      }
+          if(
+            type === "img"
+          ){
 
-      if(type === "vid"){
-        $("vidInput").click();
-      }
+            $("imgInput").click();
 
-      if(type === "file"){
-        $("fileInput").click();
-      }
+          }
 
-    };
+          if(
+            type === "vid"
+          ){
 
-  });
+            $("vidInput").click();
 
+          }
+
+          if(
+            type === "file"
+          ){
+
+            $("fileInput").click();
+
+          }
+
+        };
+
+    }
+  );
+
+
+/* =========================
+   FILES
+========================= */
 
 [
   "imgInput",
   "vidInput",
   "fileInput"
 ]
-.forEach(id => {
+.forEach(
+  id => {
 
-  $(id).onchange =
-    event => {
+    $(id).onchange =
+      event => {
 
-      picked.push(
-        ...Array.from(
-          event.target.files || []
-        )
-      );
+        picked.push(
+          ...Array.from(
+            event.target.files ||
+            []
+          )
+        );
 
-      renderFiles();
+        renderFiles();
 
-      event.target.value =
-        "";
-    };
+        event.target.value =
+          "";
 
-});
+      };
 
+  }
+);
 
-/* =========================================================
-   FILE UI
-========================================================= */
 
 function renderFiles(){
 
@@ -1351,25 +1348,28 @@ function renderFiles(){
         file.name +
         " ×";
 
-      d.onclick = () => {
+      d.onclick =
+        () => {
 
-        picked.splice(
-          index,
-          1
-        );
+          picked.splice(
+            index,
+            1
+          );
 
-        renderFiles();
-      };
+          renderFiles();
+
+        };
 
       box.appendChild(d);
+
     }
   );
 }
 
 
-/* =========================================================
-   GENERATE
-========================================================= */
+/* =========================
+   GENERATE WEBSITE
+========================= */
 
 $("generate").onclick =
   async () => {
@@ -1382,61 +1382,63 @@ $("generate").onclick =
     if(!prompt){
 
       toast(
-        "Write a website prompt first."
+        "Write a prompt first."
       );
 
       return;
     }
 
-    const button =
-      $("generate");
 
-    button.disabled =
+    $("generate").disabled =
       true;
 
-    button.textContent =
+    $("generate").textContent =
       "Generating...";
+
 
     msg(
       "user",
       prompt
     );
 
+
     try{
 
       const attachments =
-        picked.map(file => ({
-          name:file.name,
-          type:file.type,
-          size:file.size
-        }));
+        picked.map(
+          file => ({
+            name:file.name,
+            type:file.type,
+            size:file.size
+          })
+        );
 
 
       const data =
         await api({
-
           action:"create",
-
           prompt,
-
           currentHTML:"",
-
           attachments
-
         });
 
 
       const generated =
-        clean(
-          data.html || ""
+        cleanHTML(
+          data.html
         );
 
 
-      if(!valid(generated)){
+      if(
+        !validHTML(
+          generated
+        )
+      ){
 
         throw new Error(
-          "AI returned incomplete website code."
+          "AI generated an incomplete website."
         );
+
       }
 
 
@@ -1444,16 +1446,10 @@ $("generate").onclick =
       redoStack = [];
 
 
-      if(
-        !setHTML(
-          generated,
-          false
-        )
-      ){
-        throw new Error(
-          "Generated website could not be loaded."
-        );
-      }
+      setHTML(
+        generated,
+        false
+      );
 
 
       msg(
@@ -1461,17 +1457,20 @@ $("generate").onclick =
         "✓ Website generated successfully."
       );
 
+
       toast(
-        "Website ready."
+        "Website ready"
       );
 
     }catch(error){
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       msg(
         "ai",
-        "Unable to generate the website. " +
+        "❌ " +
         error.message
       );
 
@@ -1481,19 +1480,20 @@ $("generate").onclick =
 
     }finally{
 
-      button.disabled =
+      $("generate").disabled =
         false;
 
-      button.textContent =
+      $("generate").textContent =
         "Generate Website";
+
     }
 
   };
 
 
-/* =========================================================
+/* =========================
    AI EDIT
-========================================================= */
+========================= */
 
 $("applyEdit").onclick =
   async () => {
@@ -1503,9 +1503,16 @@ $("applyEdit").onclick =
         .value
         .trim();
 
+
     if(!instruction){
+
+      toast(
+        "Write an edit first."
+      );
+
       return;
     }
+
 
     if(!html){
 
@@ -1517,13 +1524,10 @@ $("applyEdit").onclick =
     }
 
 
-    const button =
-      $("applyEdit");
-
-    button.disabled =
+    $("applyEdit").disabled =
       true;
 
-    button.textContent =
+    $("applyEdit").textContent =
       "AI Working...";
 
 
@@ -1537,64 +1541,60 @@ $("applyEdit").onclick =
 
       const data =
         await api({
-
           action:"edit",
-
-          prompt:
-            instruction,
-
-          currentHTML:
-            html
-
+          prompt:instruction,
+          currentHTML:html
         });
 
 
       const updated =
-        clean(
-          data.html || ""
+        cleanHTML(
+          data.html
         );
-
-
-      if(!valid(updated)){
-
-        throw new Error(
-          "AI returned incomplete website code."
-        );
-      }
 
 
       if(
-        !setHTML(
-          updated,
-          true
+        !validHTML(
+          updated
         )
       ){
 
         throw new Error(
-          "The updated website could not be loaded."
+          "AI returned incomplete HTML."
         );
+
       }
+
+
+      setHTML(
+        updated,
+        true
+      );
 
 
       $("edit").value =
         "";
 
+
       msg(
         "ai",
-        "✓ Website updated successfully."
+        "✓ Change applied."
       );
 
+
       toast(
-        "Website updated."
+        "Updated"
       );
 
     }catch(error){
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       msg(
         "ai",
-        "The website was kept unchanged. " +
+        "❌ " +
         error.message
       );
 
@@ -1604,52 +1604,46 @@ $("applyEdit").onclick =
 
     }finally{
 
-      button.disabled =
+      $("applyEdit").disabled =
         false;
 
-      button.textContent =
+      $("applyEdit").textContent =
         "Apply AI Edit";
+
     }
 
   };
 
 
-/* =========================================================
+/* =========================
    CODE PANEL
-========================================================= */
+========================= */
 
 $("codeBtn").onclick =
   () => {
 
-    const panel =
-      $("codePanel");
-
-    const show =
-      !panel.classList.contains(
-        "show"
-      );
-
-    panel.classList.toggle(
-      "show",
-      show
-    );
+    const visible =
+      $("codePanel")
+        .classList
+        .toggle("show");
 
     $("codeBtn")
       .classList
       .toggle(
         "active",
-        show
+        visible
       );
 
     $("previewBtn")
       .classList
       .toggle(
         "active",
-        !show
+        !visible
       );
 
     $("code").value =
       html;
+
   };
 
 
@@ -1668,13 +1662,46 @@ $("previewBtn").onclick =
       .classList
       .remove("active");
 
-    preview(html);
   };
 
 
-/* =========================================================
-   CODE APPLY
-========================================================= */
+$("codeNav").onclick =
+  () => {
+
+    $("codePanel")
+      .classList
+      .add("show");
+
+    $("code").value =
+      html;
+
+  };
+
+
+$("previewNav").onclick =
+  () => {
+
+    $("codePanel")
+      .classList
+      .remove("show");
+
+    preview(html);
+
+  };
+
+
+$("assetsNav").onclick =
+  () => {
+
+    toast(
+      picked.length
+        ? picked.length +
+          " asset(s) selected"
+        : "No assets selected"
+    );
+
+  };
+
 
 $("applyCode").onclick =
   () => {
@@ -1687,8 +1714,9 @@ $("applyCode").onclick =
     ){
 
       toast(
-        "✓ Code applied."
+        "✓ Code applied"
       );
+
     }
 
   };
@@ -1700,84 +1728,75 @@ $("reset").onclick =
     $("code").value =
       html;
 
-    toast(
-      "Code reset."
-    );
   };
 
 
-/* =========================================================
+/* =========================
    COPY
-========================================================= */
-
-async function copyText(text){
-
-  try{
-
-    await navigator.clipboard
-      .writeText(text);
-
-    toast(
-      "Copied."
-    );
-
-  }catch{
-
-    const area =
-      document.createElement(
-        "textarea"
-      );
-
-    area.value =
-      text;
-
-    document.body.appendChild(
-      area
-    );
-
-    area.select();
-
-    document.execCommand(
-      "copy"
-    );
-
-    area.remove();
-
-    toast(
-      "Copied."
-    );
-  }
-}
-
+========================= */
 
 $("copy").onclick =
-  () => {
+  async () => {
 
     if(!html){
 
       toast(
-        "Generate a website first."
+        "No website yet"
       );
 
       return;
     }
 
-    copyText(html);
+    try{
+
+      await navigator
+        .clipboard
+        .writeText(html);
+
+      toast(
+        "Copied"
+      );
+
+    }catch{
+
+      toast(
+        "Copy failed"
+      );
+
+    }
+
   };
 
 
 $("copyCode").onclick =
-  () => {
+  async () => {
 
-    copyText(
-      $("code").value
-    );
+    try{
+
+      await navigator
+        .clipboard
+        .writeText(
+          $("code").value
+        );
+
+      toast(
+        "Copied"
+      );
+
+    }catch{
+
+      toast(
+        "Copy failed"
+      );
+
+    }
+
   };
 
 
-/* =========================================================
+/* =========================
    DOWNLOAD
-========================================================= */
+========================= */
 
 $("download").onclick =
   () => {
@@ -1785,7 +1804,7 @@ $("download").onclick =
     if(!html){
 
       toast(
-        "Generate a website first."
+        "No website yet"
       );
 
       return;
@@ -1797,13 +1816,15 @@ $("download").onclick =
         [html],
         {
           type:
-            "text/html;charset=utf-8"
+            "text/html"
         }
       );
 
 
     const url =
-      URL.createObjectURL(blob);
+      URL.createObjectURL(
+        blob
+      );
 
 
     const a =
@@ -1817,7 +1838,8 @@ $("download").onclick =
     a.download =
       "spdp-website.html";
 
-    document.body.appendChild(a);
+    document.body
+      .appendChild(a);
 
     a.click();
 
@@ -1825,77 +1847,74 @@ $("download").onclick =
 
     setTimeout(
       () =>
-        URL.revokeObjectURL(url),
+        URL.revokeObjectURL(
+          url
+        ),
       1000
     );
 
-    toast(
-      "Website downloaded."
-    );
   };
 
 
-/* =========================================================
+/* =========================
    DEVICE PREVIEW
-========================================================= */
+========================= */
 
-function setFrameWidth(value){
+function frameWidth(
+  value
+){
 
-  $("frame").style.width =
-    value;
+  $("frame")
+    .style
+    .width =
+      value;
+
 }
 
 
 $("desk").onclick =
   () => {
 
-    setFrameWidth(
+    frameWidth(
       "100%"
     );
 
-    toast(
-      "Desktop preview."
-    );
   };
 
 
 $("tab").onclick =
   () => {
 
-    setFrameWidth(
+    frameWidth(
       "768px"
     );
 
-    toast(
-      "Tablet preview."
-    );
   };
 
 
 $("mob").onclick =
   () => {
 
-    setFrameWidth(
+    frameWidth(
       "390px"
     );
 
-    toast(
-      "Mobile preview."
-    );
   };
 
 
-/* =========================================================
+/* =========================
    UNDO
-========================================================= */
+========================= */
 
 $("undo").onclick =
   () => {
 
-    if(!undoStack.length){
+    if(
+      !undoStack.length
+    ){
 
       toast(
-        "Nothing to undo."
+        "Nothing to undo"
       );
 
       return;
@@ -1914,33 +1933,37 @@ $("undo").onclick =
     html =
       previous;
 
-    $("code").value =
-      html;
 
-    preview(html);
+    $("code").value =
+      previous;
+
+
+    preview(
+      previous
+    );
+
 
     localStorage.setItem(
       "spdp_html",
-      html
+      previous
     );
 
-    toast(
-      "Undo complete."
-    );
   };
 
 
-/* =========================================================
+/* =========================
    REDO
-========================================================= */
+========================= */
 
 $("redo").onclick =
   () => {
 
-    if(!redoStack.length){
+    if(
+      !redoStack.length
+    ){
 
       toast(
-        "Nothing to redo."
+        "Nothing to redo"
       );
 
       return;
@@ -1959,25 +1982,27 @@ $("redo").onclick =
     html =
       next;
 
-    $("code").value =
-      html;
 
-    preview(html);
+    $("code").value =
+      next;
+
+
+    preview(
+      next
+    );
+
 
     localStorage.setItem(
       "spdp_html",
-      html
+      next
     );
 
-    toast(
-      "Redo complete."
-    );
   };
 
 
-/* =========================================================
+/* =========================
    PREVIEW EDIT
-========================================================= */
+========================= */
 
 $("previewEdit").onclick =
   () => {
@@ -1985,7 +2010,7 @@ $("previewEdit").onclick =
     if(!html){
 
       toast(
-        "Generate a website first."
+        "Generate a website first"
       );
 
       return;
@@ -2007,6 +2032,7 @@ $("previewEdit").onclick =
     const injected = `
 
 <style>
+
 body.spdp-editing *{
   cursor:pointer!important;
 }
@@ -2015,89 +2041,99 @@ body.spdp-editing *:hover{
   outline:2px dashed #7c5cff!important;
   outline-offset:2px;
 }
+
 </style>
 
 <script>
+
 (function(){
 
-  let enabled = false;
+let enabled = false;
 
-  window.addEventListener(
-    "message",
-    function(event){
+window.addEventListener(
+  "message",
+  function(event){
 
-      if(
-        event.data &&
-        event.data.type === "SPDP_EDIT"
-      ){
+    if(
+      event.data &&
+      event.data.type === "EDIT"
+    ){
 
-        enabled =
-          !!event.data.enabled;
+      enabled =
+        !!event.data.on;
 
-        document.body.classList.toggle(
+      document.body
+        .classList
+        .toggle(
           "spdp-editing",
           enabled
         );
-      }
 
     }
-  );
+
+  }
+);
 
 
-  document.addEventListener(
-    "click",
-    function(event){
+document.addEventListener(
+  "click",
+  function(event){
 
-      if(!enabled){
-        return;
-      }
-
-      const target =
-        event.target;
-
-      if(
-        !target ||
-        target === document.body ||
-        target === document.documentElement
-      ){
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
+    if(!enabled){
+      return;
+    }
 
 
-      target.contentEditable =
-        "true";
-
-      target.focus();
+    const element =
+      event.target;
 
 
-      target.onblur =
-        function(){
+    if(
+      !element ||
+      element === document.body
+    ){
 
-          target.contentEditable =
-            "false";
+      return;
+    }
 
-          parent.postMessage(
-            {
-              type:"SPDP_SAVE",
 
-              html:
-                "<!DOCTYPE html>" +
-                document.documentElement
-                  .outerHTML
-            },
-            "*"
-          );
+    event.preventDefault();
+    event.stopPropagation();
 
-        };
 
-    },
-    true
-  );
+    element.contentEditable =
+      "true";
+
+    element.focus();
+
+
+    element.onblur =
+      function(){
+
+        element.contentEditable =
+          "false";
+
+
+        parent.postMessage(
+          {
+            type:"SAVE",
+
+            html:
+              "<!DOCTYPE html>" +
+              document.documentElement
+                .outerHTML
+          },
+          "*"
+        );
+
+      };
+
+  },
+  true
+);
 
 })();
+
 <\/script>
 `;
 
@@ -2113,22 +2149,22 @@ body.spdp-editing *:hover{
     setTimeout(
       () => {
 
-        try{
+        if(
+          $("frame")
+            .contentWindow
+        ){
 
           $("frame")
             .contentWindow
             .postMessage(
               {
-                type:
-                  "SPDP_EDIT",
-
-                enabled:
-                  editing
+                type:"EDIT",
+                on:editing
               },
               "*"
             );
 
-        }catch{}
+        }
 
       },
       150
@@ -2137,46 +2173,44 @@ body.spdp-editing *:hover{
 
     toast(
       editing
-        ? "Preview editing enabled."
-        : "Preview editing disabled."
+        ? "Preview edit ON"
+        : "Preview edit OFF"
     );
+
   };
 
 
-/* =========================================================
-   PREVIEW SAVE
-========================================================= */
+/* =========================
+   RECEIVE PREVIEW EDIT
+========================= */
 
 window.addEventListener(
   "message",
   event => {
 
     if(
-      !event.data ||
-      event.data.type !== "SPDP_SAVE"
-    ){
-      return;
-    }
-
-
-    const updated =
-      clean(
-        event.data.html || ""
-      );
-
-
-    if(
-      valid(updated)
+      event.data &&
+      event.data.type === "SAVE"
     ){
 
-      setHTML(
-        updated,
-        true
-      );
+      const updated =
+        cleanHTML(
+          event.data.html
+        );
 
-      toast(
-        "Preview changes saved."
-      );
+
+      if(
+        validHTML(
+          updated
+        )
+      ){
+
+        setHTML(
+          updated,
+          true
+        );
+
+      }
 
     }
 
@@ -2184,9 +2218,9 @@ window.addEventListener(
 );
 
 
-/* =========================================================
+/* =========================
    3D PREVIEW
-========================================================= */
+========================= */
 
 $("three").onclick =
   () => {
@@ -2194,7 +2228,7 @@ $("three").onclick =
     if(!html){
 
       toast(
-        "Generate a website first."
+        "Generate a website first"
       );
 
       return;
@@ -2206,169 +2240,165 @@ $("three").onclick =
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"><\/script>
 
 <style>
+
 #spdp3d{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:170px;
-  height:170px;
-  background:#050505;
-  border:1px solid #333;
-  border-radius:18px;
-  z-index:99999;
-  overflow:hidden;
-  box-shadow:0 15px 45px rgba(0,0,0,.5);
+
+position:fixed;
+
+right:18px;
+
+bottom:18px;
+
+width:170px;
+
+height:170px;
+
+background:#050505;
+
+border:1px solid #333;
+
+border-radius:18px;
+
+z-index:99999;
+
+overflow:hidden;
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.5);
+
 }
 
-#spdp3d canvas{
-  display:block;
-}
 </style>
 
 <div id="spdp3d"></div>
 
 <script>
+
 (function(){
 
-  function start(){
+if(!window.THREE){
+  return;
+}
 
-    if(!window.THREE){
-      return;
-    }
+const container =
+  document.getElementById(
+    "spdp3d"
+  );
 
-    const container =
-      document.getElementById("spdp3d");
+if(!container){
+  return;
+}
 
-    if(!container){
-      return;
-    }
-
-    const scene =
-      new THREE.Scene();
-
-    const camera =
-      new THREE.PerspectiveCamera(
-        45,
-        1,
-        .1,
-        100
-      );
-
-    camera.position.z =
-      3;
+const scene =
+  new THREE.Scene();
 
 
-    const renderer =
-      new THREE.WebGLRenderer({
-        antialias:true,
-        alpha:true
-      });
+const camera =
+  new THREE.PerspectiveCamera(
+    45,
+    1,
+    .1,
+    100
+  );
 
 
-    renderer.setPixelRatio(
-      Math.min(
-        window.devicePixelRatio || 1,
-        2
-      )
-    );
+camera.position.z =
+  3;
 
 
-    renderer.setSize(
-      170,
-      170
-    );
+const renderer =
+  new THREE.WebGLRenderer({
+    antialias:true,
+    alpha:true
+  });
 
 
-    container.appendChild(
-      renderer.domElement
-    );
+renderer.setSize(
+  170,
+  170
+);
 
 
-    const geometry =
-      new THREE.IcosahedronGeometry(
-        .75,
-        2
-      );
+container.appendChild(
+  renderer.domElement
+);
 
 
-    const material =
-      new THREE.MeshStandardMaterial({
-        color:0x7c5cff,
-        metalness:.8,
-        roughness:.2
-      });
+const object =
+  new THREE.Mesh(
+
+    new THREE.IcosahedronGeometry(
+      .75,
+      2
+    ),
+
+    new THREE.MeshStandardMaterial({
+      color:0x7c5cff,
+      metalness:.8,
+      roughness:.2
+    })
+
+  );
 
 
-    const object =
-      new THREE.Mesh(
-        geometry,
-        material
-      );
+scene.add(
+  object
+);
 
 
-    scene.add(object);
+const light =
+  new THREE.PointLight(
+    0xffffff,
+    4
+  );
 
 
-    const light =
-      new THREE.PointLight(
-        0xffffff,
-        4
-      );
+light.position.set(
+  2,
+  2,
+  3
+);
 
 
-    light.position.set(
-      2,
-      2,
-      3
-    );
+scene.add(
+  light
+);
 
 
-    scene.add(light);
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .7
+  )
+);
 
 
-    scene.add(
-      new THREE.AmbientLight(
-        0xffffff,
-        .7
-      )
-    );
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
 
 
-    function animate(){
+  object.rotation.x +=
+    .01;
 
-      requestAnimationFrame(
-        animate
-      );
-
-      object.rotation.x += .01;
-      object.rotation.y += .015;
-
-      renderer.render(
-        scene,
-        camera
-      );
-    }
+  object.rotation.y +=
+    .015;
 
 
-    animate();
+  renderer.render(
+    scene,
+    camera
+  );
 
-  }
+}
 
 
-  if(
-    window.THREE
-  ){
-    start();
-  }else{
-
-    window.addEventListener(
-      "load",
-      start
-    );
-
-  }
+animate();
 
 })();
+
 <\/script>
 `;
 
@@ -2382,23 +2412,25 @@ $("three").onclick =
 
 
     toast(
-      "3D preview enabled."
+      "3D preview ON"
     );
+
   };
 
 
-/* =========================================================
+/* =========================
    CLEAR
-========================================================= */
+========================= */
 
 $("clear").onclick =
   () => {
 
     if(
       !confirm(
-        "Clear the current project?"
+        "Clear project?"
       )
     ){
+
       return;
     }
 
@@ -2414,6 +2446,7 @@ $("clear").onclick =
 
     picked =
       [];
+
 
     $("code").value =
       "";
@@ -2438,136 +2471,35 @@ $("clear").onclick =
 
 
     toast(
-      "Project cleared."
+      "Cleared"
     );
+
   };
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* =========================
+   LOAD
+========================= */
 
-$("codeNav").onclick =
-  () => {
-
-    $("codeBtn").click();
-  };
-
-
-$("previewNav").onclick =
-  () => {
-
-    $("previewBtn").click();
-  };
-
-
-$("assetsNav").onclick =
-  () => {
-
-    $("plus").click();
-
-    toast(
-      "Choose an asset type."
-    );
-  };
-
-
-/* =========================================================
-   KEYBOARD SHORTCUTS
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key.toLowerCase() === "s"
-    ){
-
-      event.preventDefault();
-
-      if(html){
-
-        const blob =
-          new Blob(
-            [html],
-            {
-              type:
-                "text/html;charset=utf-8"
-            }
-          );
-
-        const url =
-          URL.createObjectURL(
-            blob
-          );
-
-        const a =
-          document.createElement(
-            "a"
-          );
-
-        a.href =
-          url;
-
-        a.download =
-          "spdp-website.html";
-
-        a.click();
-
-        setTimeout(
-          () =>
-            URL.revokeObjectURL(url),
-          1000
-        );
-
-        toast(
-          "Website saved."
-        );
-      }
-
-    }
-
-
-    if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key.toLowerCase() === "enter"
-    ){
-
-      event.preventDefault();
-
-      $("generate").click();
-    }
-
-  }
-);
-
-
-/* =========================================================
-   LOAD SAVED PROJECT
-========================================================= */
-
-window.addEventListener(
-  "load",
+window.onload =
   () => {
 
     if(
       html &&
-      valid(html)
+      validHTML(html)
     ){
 
-      preview(html);
+      preview(
+        html
+      );
 
       $("code").value =
         html;
 
     }
 
-  }
-);
+  };
+
 </script>
 
 </body>
