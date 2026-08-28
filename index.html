@@ -3,850 +3,2477 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050505">
 <title>SPDP AI — Website Builder</title>
 
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;font-family:Inter,system-ui,sans-serif;background:#050505;color:#fff}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
+*{
+  box-sizing:border-box;
+}
 
-.app{min-height:100vh}
-.container{width:min(1500px,100%);margin:auto;padding:0 18px}
+html{
+  scroll-behavior:smooth;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:#050505;
+  color:#fff;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+button,
+textarea,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.app{
+  padding:18px;
+}
+
+.container{
+  width:min(1500px,100%);
+  margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-height:68px;border-bottom:1px solid #202020;
-display:flex;align-items:center;justify-content:space-between
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #191919;
 }
-.brand{display:flex;gap:10px;align-items:center;font-weight:900}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:850;
+  letter-spacing:-.02em;
+}
+
 .logo{
-width:40px;height:40px;border-radius:12px;
-display:grid;place-items:center;
-background:#fff;color:#000;font-weight:950
-}
-.status{font-size:12px;color:#777}
-.status i{
-display:inline-block;width:7px;height:7px;border-radius:50%;
-background:#4ade80;box-shadow:0 0 14px #4ade80;margin-right:7px
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#fff,#777);
+  color:#000;
+  font-weight:950;
+  box-shadow:0 0 30px rgba(255,255,255,.08);
 }
 
-.hero{text-align:center;padding:65px 0 35px}
+.status{
+  font-size:12px;
+  color:#777;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#4ade80;
+  box-shadow:0 0 15px #4ade80;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  text-align:center;
+  padding:55px 0 30px;
+}
+
 .badge{
-display:inline-block;border:1px solid #292929;
-background:#0c0c0c;border-radius:999px;
-padding:8px 14px;font-size:12px;color:#888
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 14px;
+  border:1px solid #242424;
+  border-radius:999px;
+  background:#0b0b0b;
+  color:#888;
+  font-size:12px;
 }
+
 h1{
-font-size:clamp(48px,8vw,92px);
-letter-spacing:-.07em;line-height:.9;margin:22px 0 18px;
-background:linear-gradient(#fff,#555);
--webkit-background-clip:text;color:transparent
+  margin:22px 0 15px;
+  font-size:clamp(50px,8vw,94px);
+  line-height:.9;
+  letter-spacing:-.075em;
+  background:linear-gradient(180deg,#fff,#555);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
-.hero>p{max-width:720px;margin:auto;color:#777;line-height:1.7}
 
-.generator{
-margin:30px auto 0;max-width:900px;
-padding:14px;border:1px solid #222;border-radius:22px;
-background:#090909;box-shadow:0 30px 100px #000
+.hero p{
+  max-width:720px;
+  margin:auto;
+  color:#777;
+  line-height:1.7;
 }
-textarea{
-outline:none
-}
-#prompt{
-width:100%;min-height:140px;resize:vertical;
-background:#050505;border:1px solid #202020;
-border-radius:15px;color:#fff;padding:16px;line-height:1.6
-}
-.gen-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
-.btn{
-border:1px solid #292929;background:#111;color:#fff;
-padding:10px 15px;border-radius:11px;font-weight:750
-}
-.primary{background:#fff;color:#000;border-color:#fff}
 
-.notice{
-display:none;text-align:left;margin-top:10px;
-padding:12px;border:1px solid #292929;border-radius:12px;
-background:#101010;color:#aaa;white-space:pre-wrap
-}
-.notice.show{display:block}
+/* =========================
+   GENERATOR PANEL
+========================= */
 
-/* BUILDER */
-
-.builder{
-display:none;margin:20px 0 40px;
-border:1px solid #222;border-radius:20px;
-overflow:hidden;background:#070707
+.panel{
+  margin-top:30px;
+  padding:15px;
+  border:1px solid #202020;
+  border-radius:24px;
+  background:rgba(255,255,255,.025);
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
+  text-align:left;
 }
-.builder.show{display:block}
+
+.prompt-shell{
+  position:relative;
+}
+
+.prompt{
+  width:100%;
+  min-height:155px;
+  resize:vertical;
+  border:1px solid #1b1b1b;
+  border-radius:18px;
+  background:#080808;
+  color:white;
+  padding:18px;
+  padding-bottom:64px;
+  outline:none;
+  line-height:1.6;
+}
+
+.prompt:focus{
+  border-color:#444;
+  box-shadow:0 0 0 3px rgba(255,255,255,.025);
+}
+
+.prompt::placeholder{
+  color:#444;
+}
+
+/* =========================
+   PROMPT BOTTOM BAR
+========================= */
+
+.prompt-bottom{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  pointer-events:none;
+}
+
+.prompt-tools,
+.prompt-submit{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  pointer-events:auto;
+}
+
+.plus-btn{
+  width:42px;
+  height:42px;
+  padding:0;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  line-height:1;
+  background:#111;
+  border:1px solid #292929;
+  color:#fff;
+}
+
+.plus-btn:hover{
+  background:#181818;
+  border-color:#444;
+  transform:translateY(-1px);
+}
+
+.generate-small{
+  min-height:42px;
+}
+
+/* =========================
+   ATTACHMENTS
+========================= */
+
+.attachments{
+  display:none;
+  margin-top:10px;
+  padding:10px;
+  border:1px solid #1b1b1b;
+  border-radius:15px;
+  background:#080808;
+}
+
+.attachments.show{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+}
+
+.attachment{
+  position:relative;
+  width:110px;
+  min-height:92px;
+  overflow:hidden;
+  border:1px solid #252525;
+  border-radius:12px;
+  background:#101010;
+}
+
+.attachment-preview{
+  height:62px;
+  background:#151515;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+.attachment-preview img,
+.attachment-preview video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.file-icon{
+  font-size:27px;
+}
+
+.attachment-info{
+  height:30px;
+  padding:5px 7px;
+  font-size:9px;
+  color:#aaa;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.remove-file{
+  position:absolute;
+  top:4px;
+  right:4px;
+  width:21px;
+  height:21px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,0,0,.75);
+  color:#fff;
+  font-size:13px;
+  z-index:2;
+}
+
+.remove-file:hover{
+  background:#fff;
+  color:#000;
+}
+
+.attachment-note{
+  width:100%;
+  color:#555;
+  font-size:10px;
+  padding:2px 3px 0;
+}
+
+.hidden-input{
+  display:none;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:10px;
+}
+
+button{
+  border-radius:11px;
+  padding:10px 15px;
+  border:1px solid #292929;
+  background:#111;
+  color:#fff;
+  font-weight:750;
+  transition:.15s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+  border-color:#3b3b3b;
+}
+
+.primary{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+}
+
+.primary:hover{
+  background:#eee;
+  border-color:#eee;
+}
+
+.message{
+  display:none;
+  margin-top:12px;
+  padding:13px;
+  border-radius:12px;
+  background:#101010;
+  border:1px solid #292929;
+  color:#aaa;
+  white-space:pre-wrap;
+  line-height:1.5;
+}
+
+.message.show{
+  display:block;
+}
+
+/* =========================
+   WORKSPACE
+========================= */
+
+.workspace{
+  display:none;
+  margin-top:25px;
+  border:1px solid #202020;
+  border-radius:22px;
+  overflow:hidden;
+  background:#070707;
+  box-shadow:0 35px 100px rgba(0,0,0,.5);
+}
+
+.workspace.show{
+  display:block;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
 
 .toolbar{
-min-height:62px;border-bottom:1px solid #222;
-display:flex;justify-content:space-between;gap:8px;
-padding:9px;flex-wrap:wrap
-}
-.toolbar-group{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.small{font-size:12px;color:#666;margin:0 5px}
-
-.device.active{background:#fff;color:#000}
-
-.preview-area{
-padding:12px;min-height:730px;
-background:radial-gradient(circle,#171717,#020202 70%);
-display:flex;justify-content:center
+  min-height:62px;
+  padding:10px;
+  border-bottom:1px solid #202020;
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.preview-shell{
-width:100%;height:700px;
-background:#fff;border:1px solid #333;border-radius:14px;
-overflow:hidden;transition:.25s
+.toolbar-left,
+.toolbar-right{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  flex-wrap:wrap;
 }
 
-#preview{
-width:100%;height:100%;border:0;background:#fff
+.tool-title{
+  color:#777;
+  font-size:12px;
+  margin-right:5px;
 }
 
-/* CODE */
-
-.code-panel{display:none;border-top:1px solid #222}
-.code-panel.show{display:block}
-.code-title{
-padding:12px;border-bottom:1px solid #222;
-display:flex;justify-content:space-between;align-items:center
-}
-#code{
-width:100%;height:560px;border:0;resize:vertical;
-background:#020202;color:#d5d9df;padding:18px;
-font:12px/1.6 Consolas,monospace;outline:none
+.device.active{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
 }
 
-/* CHAT */
+/* =========================
+   PREVIEW
+========================= */
 
-.chat{border-top:1px solid #222}
-.chat-title{padding:15px;border-bottom:1px solid #1d1d1d}
-.chat-title strong{font-size:14px}
-.chat-title span{font-size:12px;color:#666;margin-left:8px}
+.preview-wrap{
+  min-height:720px;
+  padding:12px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  background:radial-gradient(
+    circle at center,
+    #151515,
+    #030303 72%
+  );
+}
+
+.preview-frame{
+  width:100%;
+  height:700px;
+  border:1px solid #292929;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 20px 80px rgba(0,0,0,.5);
+  transition:width .3s ease;
+}
+
+/* =========================
+   CODE PANEL
+========================= */
+
+.code-panel{
+  display:none;
+  border-top:1px solid #202020;
+}
+
+.code-panel.show{
+  display:block;
+}
+
+.code-head{
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #202020;
+}
+
+.code{
+  display:block;
+  width:100%;
+  height:560px;
+  resize:vertical;
+  background:#020202;
+  color:#c9ced6;
+  border:0;
+  padding:18px;
+  font:12px/1.6 Consolas,Monaco,"Courier New",monospace;
+  outline:none;
+  tab-size:2;
+}
+
+.code:focus{
+  box-shadow:inset 0 0 0 1px #333;
+}
+
+.code-actions{
+  padding:10px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  border-top:1px solid #181818;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat{
+  border-top:1px solid #202020;
+}
+
+.chat-head{
+  padding:15px;
+  border-bottom:1px solid #1b1b1b;
+}
+
+.chat-head strong{
+  font-size:14px;
+}
+
+.chat-head span{
+  color:#666;
+  font-size:12px;
+  margin-left:8px;
+}
 
 .messages{
-height:240px;overflow:auto;padding:14px;
-display:flex;flex-direction:column;gap:8px
+  height:250px;
+  overflow-y:auto;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
+
 .msg{
-max-width:85%;padding:10px 13px;
-border-radius:13px;font-size:13px;
-line-height:1.5;white-space:pre-wrap
+  max-width:85%;
+  padding:11px 13px;
+  border-radius:13px;
+  font-size:13px;
+  white-space:pre-wrap;
+  line-height:1.5;
 }
-.msg.user{align-self:flex-end;background:#fff;color:#000}
-.msg.ai{align-self:flex-start;background:#111;color:#aaa;border:1px solid #222}
+
+.msg.user{
+  align-self:flex-end;
+  background:#fff;
+  color:#000;
+}
+
+.msg.ai{
+  align-self:flex-start;
+  background:#111;
+  color:#aaa;
+  border:1px solid #222;
+}
 
 .chat-input{
-display:flex;gap:8px;padding:12px;border-top:1px solid #1b1b1b
-}
-#editPrompt{
-flex:1;height:48px;resize:none;
-background:#080808;border:1px solid #222;
-border-radius:12px;color:#fff;padding:12px
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid #191919;
 }
 
-/* FILES */
-
-.file-area{
-padding:12px;border-top:1px solid #222;
-display:flex;align-items:center;gap:8px;flex-wrap:wrap
+.edit-prompt{
+  flex:1;
+  height:48px;
+  resize:none;
+  border-radius:12px;
+  border:1px solid #1c1c1c;
+  background:#080808;
+  color:#fff;
+  padding:12px;
+  outline:none;
 }
-#fileInput{display:none}
-.file-label{
-padding:9px 13px;border:1px solid #292929;
-border-radius:10px;background:#111;font-size:12px;cursor:pointer
-}
-.file-list{font-size:12px;color:#666}
 
-/* FEATURES */
+.edit-prompt:focus{
+  border-color:#444;
+}
+
+/* =========================
+   FEATURES
+========================= */
 
 .features{
-display:grid;grid-template-columns:repeat(3,1fr);
-gap:12px;margin:35px 0
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:35px 0;
 }
-.feature{
-border:1px solid #1d1d1d;border-radius:16px;
-padding:20px;background:#090909
-}
-.feature h3{margin:0 0 7px}
-.feature p{margin:0;color:#666;font-size:13px;line-height:1.6}
 
-footer{text-align:center;color:#444;font-size:12px;padding:30px}
+.feature{
+  padding:22px;
+  border:1px solid #1c1c1c;
+  border-radius:17px;
+  background:#090909;
+}
+
+.feature h3{
+  margin:0 0 8px;
+}
+
+.feature p{
+  margin:0;
+  color:#666;
+  line-height:1.6;
+  font-size:13px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  padding:35px;
+  color:#444;
+  font-size:12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:760px){
-.container{padding:0 10px}
-.status{display:none}
-.features{grid-template-columns:1fr}
-.preview-area{min-height:610px}
-.preview-shell{height:590px}
-.chat-input{flex-direction:column}
-.chat-input button{width:100%}
-.toolbar{flex-direction:column}
-.toolbar-group{width:100%}
+
+  .app{
+    padding:12px;
+  }
+
+  .status{
+    display:none;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .preview-wrap{
+    min-height:610px;
+  }
+
+  .preview-frame{
+    height:590px;
+  }
+
+  .chat-input{
+    flex-direction:column;
+  }
+
+  .chat-input button{
+    width:100%;
+  }
+
+  .code{
+    height:450px;
+  }
+
+  .toolbar{
+    flex-direction:column;
+  }
+
+  .toolbar-left,
+  .toolbar-right{
+    width:100%;
+  }
+
+  .toolbar-left button,
+  .toolbar-right button{
+    flex:1;
+  }
+
+  .attachment{
+    width:92px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<main class="app">
 <div class="container">
 
 <header>
-<div class="brand">
-<div class="logo">S</div>
-<span>SPDP AI</span>
-</div>
-<div class="status"><i></i>AI Builder Online</div>
+  <div class="brand">
+    <div class="logo">S</div>
+    <span>SPDP AI</span>
+  </div>
+
+  <div class="status">
+    <span class="dot"></span>
+    Hybrid Builder Online
+  </div>
 </header>
 
 <section class="hero">
 
-<div class="badge">✦ AI Website · App · Game Builder</div>
+  <div class="badge">
+    ✦ AI Website · App · Game Builder
+  </div>
 
-<h1>Build anything.</h1>
+  <h1>Build anything.</h1>
 
-<p>
-Describe what you want. SPDP AI generates the website,
-shows the real source code, gives you a live preview,
-and lets you modify the same project with AI.
-</p>
+  <p>
+    Describe your idea and let AI create it.
+    Preview the result, edit the actual source code,
+    attach files and use AI Sub-chat to improve your project.
+  </p>
 
-<div class="generator">
+  <div class="panel">
 
-<textarea id="prompt"
-placeholder="Example: Create a premium 3D black gaming website with animated hero, games, pricing, about and contact sections..."></textarea>
+    <div class="prompt-shell">
 
-<div class="gen-actions">
-<button class="btn" id="clearBtn">Clear</button>
-<button class="btn primary" id="generateBtn">Generate</button>
-</div>
+      <textarea
+        id="prompt"
+        class="prompt"
+        placeholder="Create a premium black gaming company website with hero, games, pricing, about and contact sections..."
+      ></textarea>
 
-<div id="notice" class="notice"></div>
+      <div class="prompt-bottom">
 
-</div>
-</section>
+        <div class="prompt-tools">
 
-<section id="builder" class="builder">
+          <button
+            id="plusBtn"
+            class="plus-btn"
+            type="button"
+            title="Add files, images or videos"
+            aria-label="Add files"
+          >
+            +
+          </button>
 
-<div class="toolbar">
+          <input
+            id="fileInput"
+            class="hidden-input"
+            type="file"
+            multiple
+            accept="*/*"
+          >
 
-<div class="toolbar-group">
-<span class="small">PREVIEW</span>
+        </div>
 
-<button class="btn device active" data-width="100%">Desktop</button>
-<button class="btn device" data-width="768px">Tablet</button>
-<button class="btn device" data-width="390px">Mobile</button>
+        <div class="prompt-submit">
 
-<button class="btn" id="codeBtn">Code</button>
-</div>
+          <button
+            id="generateBtn"
+            class="primary generate-small"
+          >
+            Generate
+          </button>
 
-<div class="toolbar-group">
-<button class="btn" id="undoBtn">Undo</button>
-<button class="btn" id="redoBtn">Redo</button>
-<button class="btn" id="copyBtn">Copy</button>
-<button class="btn" id="downloadBtn">Download</button>
-<button class="btn" id="openBtn">Open</button>
-</div>
+        </div>
 
-</div>
+      </div>
 
-<div class="preview-area">
-<div class="preview-shell" id="previewShell">
-<iframe
-id="preview"
-sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-></iframe>
-</div>
-</div>
+    </div>
 
-<div class="code-panel" id="codePanel">
+    <!-- ATTACHMENTS -->
 
-<div class="code-title">
-<span class="small">HTML / CSS / JAVASCRIPT</span>
-<div>
-<button class="btn" id="copyCodeBtn">Copy</button>
-<button class="btn primary" id="applyCodeBtn">Apply</button>
-</div>
-</div>
+    <div
+      id="attachments"
+      class="attachments"
+    ></div>
 
-<textarea id="code" spellcheck="false"></textarea>
+    <div class="actions">
 
-</div>
+      <button id="clearBtn">
+        Clear
+      </button>
 
-<div class="file-area">
-<label class="file-label" for="fileInput">＋ Add Files / Images</label>
-<input id="fileInput" type="file" multiple accept="image/*,.html,.css,.js,.json,.txt">
-<div id="fileList" class="file-list">No files selected</div>
-</div>
+    </div>
 
-<div class="chat">
+    <div
+      id="message"
+      class="message"
+    ></div>
 
-<div class="chat-title">
-<strong>AI Sub-chat</strong>
-<span>Modify the current website</span>
-</div>
-
-<div class="messages" id="messages">
-<div class="msg ai">Generate a website first, then tell me what you want to change.</div>
-</div>
-
-<div class="chat-input">
-<textarea id="editPrompt"
-placeholder="Example: Make the hero more premium, add 3D animations and improve the mobile design..."></textarea>
-<button class="btn primary" id="editBtn">Apply Edit</button>
-</div>
-
-</div>
+  </div>
 
 </section>
+
+
+<!-- =========================
+     WORKSPACE
+========================= -->
+
+<section
+  id="workspace"
+  class="workspace"
+>
+
+  <div class="toolbar">
+
+    <div class="toolbar-left">
+
+      <span class="tool-title">
+        Live Preview
+      </span>
+
+      <button
+        class="device active"
+        data-width="100%"
+      >
+        Desktop
+      </button>
+
+      <button
+        class="device"
+        data-width="768px"
+      >
+        Tablet
+      </button>
+
+      <button
+        class="device"
+        data-width="390px"
+      >
+        Mobile
+      </button>
+
+      <button id="codeBtn">
+        Code
+      </button>
+
+    </div>
+
+    <div class="toolbar-right">
+
+      <button id="undoBtn">
+        Undo
+      </button>
+
+      <button id="redoBtn">
+        Redo
+      </button>
+
+      <button id="copyBtn">
+        Copy
+      </button>
+
+      <button id="downloadBtn">
+        Download
+      </button>
+
+      <button id="openBtn">
+        Open
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- LIVE PREVIEW -->
+
+  <div class="preview-wrap">
+
+    <iframe
+      id="previewFrame"
+      class="preview-frame"
+      title="Live Preview"
+      sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+    ></iframe>
+
+  </div>
+
+
+  <!-- CODE EDITOR -->
+
+  <div
+    id="codePanel"
+    class="code-panel"
+  >
+
+    <div class="code-head">
+
+      <span class="tool-title">
+        HTML / CSS / JavaScript Editor
+      </span>
+
+      <button id="codeCopyBtn">
+        Copy Code
+      </button>
+
+    </div>
+
+    <textarea
+      id="code"
+      class="code"
+      spellcheck="false"
+      wrap="off"
+    ></textarea>
+
+    <div class="code-actions">
+
+      <button id="resetCodeBtn">
+        Reset
+      </button>
+
+      <button
+        id="applyCodeBtn"
+        class="primary"
+      >
+        Apply Code
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- AI SUB CHAT -->
+
+  <div class="chat">
+
+    <div class="chat-head">
+
+      <strong>
+        AI Sub-chat
+      </strong>
+
+      <span>
+        Edit your current website
+      </span>
+
+    </div>
+
+    <div
+      id="messages"
+      class="messages"
+    >
+
+      <div class="msg ai">
+        Generate a website first. Then ask me to modify it.
+      </div>
+
+    </div>
+
+    <div class="chat-input">
+
+      <textarea
+        id="editPrompt"
+        class="edit-prompt"
+        placeholder="Example: Make the hero more premium and add animated 3D gradient lights..."
+      ></textarea>
+
+      <button
+        id="editBtn"
+        class="primary"
+      >
+        Apply Edit
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
 
 <section class="features">
 
-<div class="feature">
-<h3>⚡ AI Generation</h3>
-<p>Generate complete websites from natural-language instructions.</p>
-</div>
+  <article class="feature">
+    <h3>⚡ AI Generation</h3>
+    <p>
+      Generate complete websites using your connected Cloudflare AI Worker.
+    </p>
+  </article>
 
-<div class="feature">
-<h3>🧑‍💻 Real Code</h3>
-<p>Open the actual HTML, CSS and JavaScript and edit it yourself.</p>
-</div>
+  <article class="feature">
+    <h3>🛠 Code Editor</h3>
+    <p>
+      Open the actual generated HTML, CSS and JavaScript and edit it directly.
+    </p>
+  </article>
 
-<div class="feature">
-<h3>✨ AI Sub-chat</h3>
-<p>Keep the current project and ask AI to change only what you need.</p>
-</div>
+  <article class="feature">
+    <h3>📎 File Uploads</h3>
+    <p>
+      Attach images, videos and other files to your project request.
+    </p>
+  </article>
 
 </section>
 
-<footer>SPDP AI · Digital Platform · 2026</footer>
+
+<footer>
+  SPDP AI · Digital Platform · 2026
+</footer>
 
 </div>
-</div>
+</main>
+
 
 <script>
-const WORKER_URL="https://spdp-ai.spdp3127.workers.dev/";
 
-const $=id=>document.getElementById(id);
+/* =========================================================
+   CONFIG
+========================================================= */
 
-const promptInput=$("prompt");
-const editPrompt=$("editPrompt");
-const generateBtn=$("generateBtn");
-const editBtn=$("editBtn");
-const builder=$("builder");
-const preview=$("preview");
-const previewShell=$("previewShell");
-const code=$("code");
-const codePanel=$("codePanel");
-const notice=$("notice");
-const messages=$("messages");
+const WORKER_URL =
+  "https://spdp-ai.spdp3127.workers.dev/";
 
-let currentHTML="";
-let undoStack=[];
-let redoStack=[];
 
-function showNotice(text){
-notice.textContent=text;
-notice.classList.add("show");
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+const promptInput =
+  $("prompt");
+
+const editPrompt =
+  $("editPrompt");
+
+const generateBtn =
+  $("generateBtn");
+
+const editBtn =
+  $("editBtn");
+
+const workspace =
+  $("workspace");
+
+const previewFrame =
+  $("previewFrame");
+
+const code =
+  $("code");
+
+const codePanel =
+  $("codePanel");
+
+const messages =
+  $("messages");
+
+const message =
+  $("message");
+
+const plusBtn =
+  $("plusBtn");
+
+const fileInput =
+  $("fileInput");
+
+const attachments =
+  $("attachments");
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentHTML = "";
+
+let originalHTML = "";
+
+let undoStack = [];
+
+let redoStack = [];
+
+let selectedFiles = [];
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(text){
+
+  message.textContent = text;
+
+  message.classList.add("show");
 }
 
-function hideNotice(){
-notice.textContent="";
-notice.classList.remove("show");
+
+function hideMessage(){
+
+  message.textContent = "";
+
+  message.classList.remove("show");
 }
+
+
+/* =========================================================
+   FILE SIZE
+========================================================= */
+
+function formatSize(bytes){
+
+  if(bytes < 1024){
+    return bytes + " B";
+  }
+
+  if(bytes < 1024 * 1024){
+    return (bytes / 1024).toFixed(1) + " KB";
+  }
+
+  if(bytes < 1024 * 1024 * 1024){
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+  }
+
+  return (
+    bytes /
+    (1024 * 1024 * 1024)
+  ).toFixed(1) + " GB";
+}
+
+
+/* =========================================================
+   FILE TYPE
+========================================================= */
+
+function getFileType(file){
+
+  if(file.type.startsWith("image/")){
+    return "image";
+  }
+
+  if(file.type.startsWith("video/")){
+    return "video";
+  }
+
+  if(file.type.startsWith("audio/")){
+    return "audio";
+  }
+
+  if(file.type.startsWith("text/")){
+    return "text";
+  }
+
+  const name =
+    file.name.toLowerCase();
+
+  if(
+    name.endsWith(".html") ||
+    name.endsWith(".css") ||
+    name.endsWith(".js") ||
+    name.endsWith(".json") ||
+    name.endsWith(".md") ||
+    name.endsWith(".txt")
+  ){
+    return "text";
+  }
+
+  return "file";
+}
+
+
+/* =========================================================
+   RENDER ATTACHMENTS
+========================================================= */
+
+function renderAttachments(){
+
+  attachments.innerHTML = "";
+
+  if(!selectedFiles.length){
+
+    attachments.classList.remove("show");
+
+    return;
+  }
+
+  attachments.classList.add("show");
+
+  selectedFiles.forEach(
+    (file,index) => {
+
+      const type =
+        getFileType(file);
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "attachment";
+
+
+      const remove =
+        document.createElement("button");
+
+      remove.className =
+        "remove-file";
+
+      remove.type =
+        "button";
+
+      remove.textContent =
+        "×";
+
+      remove.title =
+        "Remove file";
+
+      remove.onclick =
+        () => {
+
+          selectedFiles.splice(
+            index,
+            1
+          );
+
+          renderAttachments();
+        };
+
+
+      const preview =
+        document.createElement("div");
+
+      preview.className =
+        "attachment-preview";
+
+
+      if(type === "image"){
+
+        const img =
+          document.createElement("img");
+
+        img.src =
+          URL.createObjectURL(file);
+
+        img.onload =
+          () => URL.revokeObjectURL(img.src);
+
+        preview.appendChild(img);
+
+      }else if(type === "video"){
+
+        const video =
+          document.createElement("video");
+
+        video.src =
+          URL.createObjectURL(file);
+
+        video.muted =
+          true;
+
+        video.playsInline =
+          true;
+
+        video.preload =
+          "metadata";
+
+        preview.appendChild(video);
+
+      }else{
+
+        const icon =
+          document.createElement("div");
+
+        icon.className =
+          "file-icon";
+
+        if(type === "audio"){
+          icon.textContent = "🎵";
+        }else if(type === "text"){
+          icon.textContent = "📄";
+        }else{
+          icon.textContent = "📁";
+        }
+
+        preview.appendChild(icon);
+      }
+
+
+      const info =
+        document.createElement("div");
+
+      info.className =
+        "attachment-info";
+
+      info.title =
+        file.name;
+
+      info.textContent =
+        file.name;
+
+
+      card.appendChild(remove);
+
+      card.appendChild(preview);
+
+      card.appendChild(info);
+
+      attachments.appendChild(card);
+    }
+  );
+
+
+  const note =
+    document.createElement("div");
+
+  note.className =
+    "attachment-note";
+
+  note.textContent =
+    "Attachments are included in the project request. Large binary files are represented by their filename/type unless your Worker implements file storage or multimodal processing.";
+
+  attachments.appendChild(note);
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+plusBtn.onclick =
+  () => fileInput.click();
+
+
+fileInput.addEventListener(
+  "change",
+  function(){
+
+    const files =
+      Array.from(
+        this.files || []
+      );
+
+    if(!files.length){
+      return;
+    }
+
+    selectedFiles.push(
+      ...files
+    );
+
+    renderAttachments();
+
+    this.value = "";
+  }
+);
+
+
+/* =========================================================
+   BUILD ATTACHMENT INFO
+========================================================= */
+
+function buildAttachmentInfo(){
+
+  if(!selectedFiles.length){
+    return [];
+  }
+
+  return selectedFiles.map(
+    file => ({
+      name:file.name,
+      type:file.type || "application/octet-stream",
+      size:file.size,
+      sizeLabel:formatSize(file.size),
+      category:getFileType(file)
+    })
+  );
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function pushHistory(){
+
+  if(!currentHTML){
+    return;
+  }
+
+  undoStack.push(
+    currentHTML
+  );
+
+  if(undoStack.length > 50){
+    undoStack.shift();
+  }
+
+  redoStack = [];
+}
+
+
+/* =========================================================
+   VALID HTML
+========================================================= */
 
 function validHTML(html){
-if(typeof html!=="string")return false;
-const x=html.trim().toLowerCase();
-return (
-(x.startsWith("<!doctype html")||x.startsWith("<html")) &&
-x.includes("<html") &&
-x.includes("<head") &&
-x.includes("<body") &&
-x.includes("</body>") &&
-x.includes("</html>")
-);
+
+  if(
+    typeof html !== "string"
+  ){
+    return false;
+  }
+
+  const x =
+    html.trim().toLowerCase();
+
+  return (
+    (
+      x.startsWith("<!doctype html") ||
+      x.startsWith("<html")
+    ) &&
+    x.includes("<html") &&
+    x.includes("<head") &&
+    x.includes("<body") &&
+    x.includes("</body>") &&
+    x.includes("</html>")
+  );
 }
 
-function cleanHTML(value){
-let html=String(value||"").trim();
 
-html=html
-.replace(/^```html\s*/i,"")
-.replace(/^```HTML\s*/i,"")
-.replace(/^```\s*/i,"")
-.replace(/\s*```$/i,"");
+/* =========================================================
+   CLEAN HTML
+========================================================= */
 
-const start1=html.search(/<!doctype\s+html/i);
-const start2=html.search(/<html[\s>]/i);
+function cleanHTML(html){
 
-let start=-1;
+  let result =
+    String(html || "").trim();
 
-if(start1>=0)start=start1;
-else if(start2>=0)start=start2;
+  result =
+    result.replace(
+      /^```html\s*/i,
+      ""
+    );
 
-if(start>=0)html=html.substring(start);
+  result =
+    result.replace(
+      /^```HTML\s*/i,
+      ""
+    );
 
-const end=html.toLowerCase().lastIndexOf("</html>");
+  result =
+    result.replace(
+      /^```\s*/i,
+      ""
+    );
 
-if(end>=0)html=html.substring(0,end+7);
+  result =
+    result.replace(
+      /\s*```$/i,
+      ""
+    );
 
-return html.trim();
+
+  const lower =
+    result.toLowerCase();
+
+  const doctype =
+    lower.indexOf(
+      "<!doctype html"
+    );
+
+  const htmlStart =
+    lower.indexOf("<html");
+
+  let start = -1;
+
+  if(doctype !== -1){
+    start = doctype;
+  }else if(htmlStart !== -1){
+    start = htmlStart;
+  }
+
+  if(start > 0){
+    result =
+      result.substring(start);
+  }
+
+
+  const end =
+    result
+      .toLowerCase()
+      .lastIndexOf("</html>");
+
+  if(end !== -1){
+
+    result =
+      result.substring(
+        0,
+        end + 7
+      );
+  }
+
+  return result.trim();
 }
 
-function render(html){
-html=cleanHTML(html);
 
-if(!validHTML(html)){
-showNotice("❌ Invalid HTML received.");
-return false;
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderHTML(html){
+
+  const cleaned =
+    cleanHTML(html);
+
+  if(!validHTML(cleaned)){
+
+    showMessage(
+      "❌ Invalid HTML received."
+    );
+
+    return false;
+  }
+
+  currentHTML =
+    cleaned;
+
+  previewFrame.srcdoc =
+    currentHTML;
+
+  code.value =
+    currentHTML;
+
+  workspace.classList.add(
+    "show"
+  );
+
+  localStorage.setItem(
+    "spdp_current_html",
+    currentHTML
+  );
+
+  return true;
 }
 
-currentHTML=html;
-preview.srcdoc=html;
-code.value=html;
-builder.classList.add("show");
 
-localStorage.setItem("spdp_current_html",html);
+/* =========================================================
+   WORKER REQUEST
+========================================================= */
 
-return true;
+async function workerRequest(payload){
+
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(payload)
+      }
+    );
+
+
+  const raw =
+    await response.text();
+
+  let data;
+
+  try{
+
+    data =
+      JSON.parse(raw);
+
+  }catch{
+
+    throw new Error(
+      "Worker returned invalid JSON."
+    );
+  }
+
+
+  if(
+    !response.ok ||
+    !data.success
+  ){
+
+    let error =
+      data.error ||
+      "AI request failed.";
+
+    if(data.code){
+      error +=
+        "\nCode: " +
+        data.code;
+    }
+
+    throw new Error(error);
+  }
+
+  return data;
 }
 
-function addMessage(type,text){
-const div=document.createElement("div");
-div.className="msg "+type;
-div.textContent=text;
-messages.appendChild(div);
-messages.scrollTop=messages.scrollHeight;
+
+/* =========================================================
+   GENERATE
+========================================================= */
+
+async function generateWebsite(){
+
+  const text =
+    promptInput.value.trim();
+
+
+  if(!text){
+
+    showMessage(
+      "Type what you want to build."
+    );
+
+    promptInput.focus();
+
+    return;
+  }
+
+
+  hideMessage();
+
+  generateBtn.disabled =
+    true;
+
+  generateBtn.textContent =
+    "Generating...";
+
+
+  try{
+
+    addMessage(
+      "user",
+      text
+    );
+
+
+    const attachmentInfo =
+      buildAttachmentInfo();
+
+
+    let finalPrompt =
+      text;
+
+
+    if(attachmentInfo.length){
+
+      finalPrompt +=
+        "\n\nPROJECT ATTACHMENTS:\n" +
+        attachmentInfo
+          .map(
+            file =>
+              `- ${file.name} | ${file.category} | ${file.type} | ${file.sizeLabel}`
+          )
+          .join("\n") +
+        "\n\nIf an attached image/video/file is referenced, preserve the filename/reference in the generated project where appropriate.";
+    }
+
+
+    const data =
+      await workerRequest({
+
+        action:"create",
+
+        prompt:finalPrompt,
+
+        attachments:
+          attachmentInfo
+      });
+
+
+    const html =
+      cleanHTML(
+        data.html
+      );
+
+
+    if(!validHTML(html)){
+
+      throw new Error(
+        "AI returned invalid HTML."
+      );
+    }
+
+
+    undoStack = [];
+
+    redoStack = [];
+
+    originalHTML =
+      html;
+
+
+    renderHTML(
+      html
+    );
+
+
+    addMessage(
+      "ai",
+      "✓ Website generated successfully." +
+      (
+        data.model
+          ? "\nModel: " +
+            data.model
+          : ""
+      )
+    );
+
+
+    workspace.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+
+  }catch(error){
+
+    addMessage(
+      "ai",
+      "❌ " +
+      error.message
+    );
+
+
+    showMessage(
+      "❌ Generation failed.\n" +
+      error.message
+    );
+
+
+  }finally{
+
+    generateBtn.disabled =
+      false;
+
+    generateBtn.textContent =
+      "Generate";
+  }
 }
 
-async function requestWorker(payload){
 
-const response=await fetch(WORKER_URL,{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(payload)
-});
-
-const raw=await response.text();
-
-let data;
-
-try{
-data=JSON.parse(raw);
-}catch{
-throw new Error("Worker returned invalid JSON.");
-}
-
-if(!response.ok||!data.success){
-throw new Error(data.error||"AI request failed.");
-}
-
-return data;
-}
-
-/* GENERATE */
-
-async function generate(){
-
-const prompt=promptInput.value.trim();
-
-if(!prompt){
-showNotice("ആദ്യം എന്താണ് website വേണ്ടതെന്ന് എഴുതുക.");
-return;
-}
-
-generateBtn.disabled=true;
-generateBtn.textContent="Generating...";
-hideNotice();
-
-addMessage("user",prompt);
-
-try{
-
-const data=await requestWorker({
-action:"create",
-prompt
-});
-
-const html=cleanHTML(data.html);
-
-if(!validHTML(html)){
-throw new Error("AI returned invalid HTML.");
-}
-
-undoStack=[];
-redoStack=[];
-
-render(html);
-
-addMessage("ai","✓ Website generated successfully.");
-
-builder.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-}catch(error){
-
-addMessage("ai","❌ "+error.message);
-showNotice("❌ Generation failed.\n"+error.message);
-
-}finally{
-
-generateBtn.disabled=false;
-generateBtn.textContent="Generate";
-
-}
-}
-
-/* EDIT */
+/* =========================================================
+   AI EDIT
+========================================================= */
 
 async function editWebsite(){
 
-if(!currentHTML){
-showNotice("ആദ്യം website generate ചെയ്യണം.");
-return;
+  if(!currentHTML){
+
+    showMessage(
+      "Generate a website first."
+    );
+
+    return;
+  }
+
+
+  const instruction =
+    editPrompt.value.trim();
+
+
+  if(!instruction){
+
+    editPrompt.focus();
+
+    return;
+  }
+
+
+  pushHistory();
+
+
+  addMessage(
+    "user",
+    instruction
+  );
+
+
+  editPrompt.value =
+    "";
+
+  editBtn.disabled =
+    true;
+
+  editBtn.textContent =
+    "AI Working...";
+
+  hideMessage();
+
+
+  try{
+
+    const data =
+      await workerRequest({
+
+        action:"edit",
+
+        prompt:instruction,
+
+        currentHTML:currentHTML,
+
+        attachments:
+          buildAttachmentInfo()
+      });
+
+
+    const html =
+      cleanHTML(
+        data.html
+      );
+
+
+    if(!validHTML(html)){
+
+      throw new Error(
+        "AI returned invalid HTML."
+      );
+    }
+
+
+    renderHTML(
+      html
+    );
+
+
+    addMessage(
+      "ai",
+      "✓ Website updated successfully." +
+      (
+        data.model
+          ? "\nModel: " +
+            data.model
+          : ""
+      )
+    );
+
+
+  }catch(error){
+
+    if(undoStack.length){
+      undoStack.pop();
+    }
+
+
+    addMessage(
+      "ai",
+      "❌ " +
+      error.message
+    );
+
+
+    showMessage(
+      "❌ AI edit failed.\n" +
+      error.message
+    );
+
+
+  }finally{
+
+    editBtn.disabled =
+      false;
+
+    editBtn.textContent =
+      "Apply Edit";
+  }
 }
 
-const prompt=editPrompt.value.trim();
 
-if(!prompt)return;
+/* =========================================================
+   CHAT
+========================================================= */
 
-const previous=currentHTML;
+function addMessage(
+  type,
+  text
+){
 
-addMessage("user",prompt);
+  const div =
+    document.createElement(
+      "div"
+    );
 
-editPrompt.value="";
-editBtn.disabled=true;
-editBtn.textContent="AI Working...";
-hideNotice();
+  div.className =
+    "msg " +
+    type;
 
-try{
+  div.textContent =
+    text;
 
-const data=await requestWorker({
-action:"edit",
-prompt,
-currentHTML
-});
+  messages.appendChild(
+    div
+  );
 
-const html=cleanHTML(data.html);
-
-if(!validHTML(html)){
-throw new Error("AI returned invalid HTML.");
+  messages.scrollTop =
+    messages.scrollHeight;
 }
 
-undoStack.push(previous);
-redoStack=[];
 
-render(html);
+/* =========================================================
+   UNDO
+========================================================= */
 
-addMessage("ai","✓ Website updated successfully.");
+$("undoBtn").onclick =
+  function(){
 
-}catch(error){
+    if(!undoStack.length){
 
-addMessage("ai","❌ "+error.message);
-showNotice("❌ AI edit failed.\n"+error.message);
+      showMessage(
+        "Nothing to undo."
+      );
 
-}finally{
+      return;
+    }
 
-editBtn.disabled=false;
-editBtn.textContent="Apply Edit";
 
-}
-}
+    redoStack.push(
+      currentHTML
+    );
 
-/* CODE */
 
-$("codeBtn").onclick=()=>{
+    const previous =
+      undoStack.pop();
 
-if(!currentHTML){
-showNotice("Generate a website first.");
-return;
-}
 
-code.value=currentHTML;
-codePanel.classList.toggle("show");
+    renderHTML(
+      previous
+    );
+  };
 
-};
 
-$("applyCodeBtn").onclick=()=>{
+/* =========================================================
+   REDO
+========================================================= */
 
-const html=cleanHTML(code.value);
+$("redoBtn").onclick =
+  function(){
 
-if(!validHTML(html)){
-showNotice("❌ Invalid HTML. Check html/head/body.");
-return;
-}
+    if(!redoStack.length){
 
-if(html===currentHTML){
-showNotice("No changes detected.");
-return;
-}
+      showMessage(
+        "Nothing to redo."
+      );
 
-undoStack.push(currentHTML);
-redoStack=[];
+      return;
+    }
 
-render(html);
 
-addMessage("ai","✓ Manual code changes applied.");
-showNotice("✓ Code applied successfully.");
+    undoStack.push(
+      currentHTML
+    );
 
-};
 
-$("copyCodeBtn").onclick=()=>copyText(code.value);
-$("copyBtn").onclick=()=>copyText(currentHTML);
+    const next =
+      redoStack.pop();
+
+
+    renderHTML(
+      next
+    );
+  };
+
+
+/* =========================================================
+   CODE PANEL
+========================================================= */
+
+$("codeBtn").onclick =
+  function(){
+
+    if(!currentHTML){
+
+      showMessage(
+        "Generate a website first."
+      );
+
+      return;
+    }
+
+
+    code.value =
+      currentHTML;
+
+
+    codePanel.classList.toggle(
+      "show"
+    );
+
+
+    if(
+      codePanel.classList.contains("show")
+    ){
+
+      setTimeout(
+        () => code.focus(),
+        50
+      );
+    }
+  };
+
+
+/* =========================================================
+   APPLY CODE
+========================================================= */
+
+$("applyCodeBtn").onclick =
+  function(){
+
+    const newHTML =
+      code.value.trim();
+
+
+    if(!newHTML){
+
+      showMessage(
+        "Code editor is empty."
+      );
+
+      return;
+    }
+
+
+    if(!validHTML(newHTML)){
+
+      showMessage(
+        "❌ Invalid HTML.\nYour code must contain html, head and body."
+      );
+
+      return;
+    }
+
+
+    if(newHTML === currentHTML){
+
+      showMessage(
+        "No changes detected."
+      );
+
+      return;
+    }
+
+
+    pushHistory();
+
+
+    if(renderHTML(newHTML)){
+
+      addMessage(
+        "ai",
+        "✓ Manual code changes applied."
+      );
+
+      showMessage(
+        "✓ Code applied successfully."
+      );
+    }
+  };
+
+
+/* =========================================================
+   RESET CODE
+========================================================= */
+
+$("resetCodeBtn").onclick =
+  function(){
+
+    if(!currentHTML){
+      return;
+    }
+
+    code.value =
+      currentHTML;
+
+    showMessage(
+      "Code editor reset."
+    );
+  };
+
+
+/* =========================================================
+   COPY
+========================================================= */
 
 async function copyText(text){
 
-if(!text){
-showNotice("Nothing to copy.");
-return;
+  if(!text){
+
+    showMessage(
+      "Nothing to copy."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      text
+    );
+
+    showMessage(
+      "✓ Copied."
+    );
+
+    setTimeout(
+      hideMessage,
+      1500
+    );
+
+  }catch{
+
+    const temporary =
+      document.createElement(
+        "textarea"
+      );
+
+    temporary.value =
+      text;
+
+    document.body.appendChild(
+      temporary
+    );
+
+    temporary.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    temporary.remove();
+
+    showMessage(
+      "✓ Copied."
+    );
+  }
 }
 
-try{
-await navigator.clipboard.writeText(text);
-showNotice("✓ Copied.");
-}catch{
-showNotice("Copy failed. Select the code manually.");
-}
 
-}
+$("copyBtn").onclick =
+  () => copyText(
+    currentHTML
+  );
 
-/* UNDO */
 
-$("undoBtn").onclick=()=>{
+$("codeCopyBtn").onclick =
+  () => copyText(
+    code.value
+  );
 
-if(!undoStack.length){
-showNotice("Nothing to undo.");
-return;
-}
 
-redoStack.push(currentHTML);
+/* =========================================================
+   DOWNLOAD
+========================================================= */
 
-render(undoStack.pop());
+$("downloadBtn").onclick =
+  function(){
 
-};
+    if(!currentHTML){
 
-/* REDO */
+      showMessage(
+        "Generate a website first."
+      );
 
-$("redoBtn").onclick=()=>{
+      return;
+    }
 
-if(!redoStack.length){
-showNotice("Nothing to redo.");
-return;
-}
 
-undoStack.push(currentHTML);
+    const blob =
+      new Blob(
+        [currentHTML],
+        {
+          type:
+            "text/html;charset=utf-8"
+        }
+      );
 
-render(redoStack.pop());
 
-};
+    const url =
+      URL.createObjectURL(blob);
 
-/* DOWNLOAD */
 
-$("downloadBtn").onclick=()=>{
+    const a =
+      document.createElement("a");
 
-if(!currentHTML)return;
 
-const blob=new Blob([currentHTML],{
-type:"text/html;charset=utf-8"
-});
+    a.href =
+      url;
 
-const url=URL.createObjectURL(blob);
+    a.download =
+      "spdp-ai-website.html";
 
-const a=document.createElement("a");
 
-a.href=url;
-a.download="spdp-ai-website.html";
+    document.body.appendChild(a);
 
-a.click();
+    a.click();
 
-URL.revokeObjectURL(url);
+    a.remove();
 
-};
 
-/* OPEN */
+    setTimeout(
+      () =>
+        URL.revokeObjectURL(url),
+      1000
+    );
+  };
 
-$("openBtn").onclick=()=>{
 
-if(!currentHTML)return;
+/* =========================================================
+   OPEN
+========================================================= */
 
-const blob=new Blob([currentHTML],{
-type:"text/html"
-});
+$("openBtn").onclick =
+  function(){
 
-const url=URL.createObjectURL(blob);
+    if(!currentHTML){
 
-window.open(url,"_blank");
+      showMessage(
+        "Generate a website first."
+      );
 
-};
+      return;
+    }
 
-/* DEVICES */
 
-document.querySelectorAll(".device").forEach(btn=>{
+    const blob =
+      new Blob(
+        [currentHTML],
+        {
+          type:
+            "text/html;charset=utf-8"
+        }
+      );
 
-btn.onclick=()=>{
 
-document.querySelectorAll(".device")
-.forEach(x=>x.classList.remove("active"));
+    const url =
+      URL.createObjectURL(blob);
 
-btn.classList.add("active");
 
-const width=btn.dataset.width;
+    window.open(
+      url,
+      "_blank"
+    );
+  };
 
-previewShell.style.width=width;
 
-};
+/* =========================================================
+   DEVICES
+========================================================= */
 
-});
+document
+  .querySelectorAll(".device")
+  .forEach(
+    btn => {
 
-/* FILES */
+      btn.onclick =
+        function(){
 
-$("fileInput").onchange=async e=>{
+          document
+            .querySelectorAll(".device")
+            .forEach(
+              x =>
+                x.classList.remove("active")
+            );
 
-const files=[...e.target.files];
 
-$("fileList").textContent=
-files.length+
-" file(s) selected: "+
-files.map(f=>f.name).join(", ");
+          btn.classList.add(
+            "active"
+          );
 
-if(!currentHTML||!files.length)return;
 
-const imageFiles=files.filter(f=>f.type.startsWith("image/"));
+          const width =
+            btn.dataset.width;
 
-if(!imageFiles.length){
-addMessage("ai","Files selected. Image embedding is available for image files.");
-return;
-}
 
-let html=currentHTML;
+          previewFrame.style.width =
+            width;
 
-for(const file of imageFiles){
 
-const dataURL=await readFile(file);
+          previewFrame.style.margin =
+            width === "100%"
+              ? "0"
+              : "0 auto";
+        };
+    }
+  );
 
-const escapedName=file.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 
-const imageHTML=
-`<img src="${dataURL}" alt="${file.name}" style="max-width:100%;height:auto;">`;
+/* =========================================================
+   CLEAR
+========================================================= */
 
-html=html.replace(
-/<\/body>/i,
-imageHTML+"</body>"
+$("clearBtn").onclick =
+  function(){
+
+    if(
+      currentHTML &&
+      !confirm(
+        "Clear current project?"
+      )
+    ){
+      return;
+    }
+
+
+    currentHTML =
+      "";
+
+    originalHTML =
+      "";
+
+    undoStack =
+      [];
+
+    redoStack =
+      [];
+
+    selectedFiles =
+      [];
+
+
+    promptInput.value =
+      "";
+
+    editPrompt.value =
+      "";
+
+    code.value =
+      "";
+
+
+    previewFrame.srcdoc =
+      "";
+
+
+    workspace.classList.remove(
+      "show"
+    );
+
+
+    codePanel.classList.remove(
+      "show"
+    );
+
+
+    localStorage.removeItem(
+      "spdp_current_html"
+    );
+
+
+    renderAttachments();
+
+
+    messages.innerHTML = `
+      <div class="msg ai">
+        Generate a website to start a new project.
+      </div>
+    `;
+
+
+    hideMessage();
+  };
+
+
+/* =========================================================
+   KEYBOARD — GENERATE
+========================================================= */
+
+promptInput.addEventListener(
+  "keydown",
+  function(e){
+
+    if(
+      (e.ctrlKey || e.metaKey) &&
+      e.key === "Enter"
+    ){
+
+      e.preventDefault();
+
+      generateWebsite();
+    }
+  }
 );
 
-}
 
-undoStack.push(currentHTML);
+/* =========================================================
+   KEYBOARD — AI EDIT
+========================================================= */
 
-render(html);
+editPrompt.addEventListener(
+  "keydown",
+  function(e){
 
-addMessage(
-"ai",
-"✓ Image file(s) added to the current preview."
+    if(
+      (e.ctrlKey || e.metaKey) &&
+      e.key === "Enter"
+    ){
+
+      e.preventDefault();
+
+      editWebsite();
+    }
+  }
 );
 
-};
 
-function readFile(file){
-return new Promise((resolve,reject)=>{
-const reader=new FileReader();
-reader.onload=()=>resolve(reader.result);
-reader.onerror=reject;
-reader.readAsDataURL(file);
-});
-}
+/* =========================================================
+   CODE TAB SUPPORT
+========================================================= */
 
-/* CLEAR */
+code.addEventListener(
+  "keydown",
+  function(e){
 
-$("clearBtn").onclick=()=>{
+    if(e.key === "Tab"){
 
-if(currentHTML&&!confirm("Clear current project?"))return;
+      e.preventDefault();
 
-currentHTML="";
-undoStack=[];
-redoStack=[];
 
-promptInput.value="";
-editPrompt.value="";
-code.value="";
-preview.srcdoc="";
+      const start =
+        this.selectionStart;
 
-builder.classList.remove("show");
-codePanel.classList.remove("show");
+      const end =
+        this.selectionEnd;
 
-messages.innerHTML=
-`<div class="msg ai">Generate a website first, then tell me what you want to change.</div>`;
 
-localStorage.removeItem("spdp_current_html");
+      this.value =
+        this.value.substring(
+          0,
+          start
+        ) +
+        "  " +
+        this.value.substring(
+          end
+        );
 
-hideNotice();
 
-};
+      this.selectionStart =
+        this.selectionEnd =
+          start + 2;
+    }
+  }
+);
 
-/* KEYBOARD */
 
-promptInput.addEventListener("keydown",e=>{
-if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){
-e.preventDefault();
-generate();
-}
-});
+/* =========================================================
+   BUTTONS
+========================================================= */
 
-editPrompt.addEventListener("keydown",e=>{
-if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){
-e.preventDefault();
-editWebsite();
-}
-});
+generateBtn.onclick =
+  generateWebsite;
 
-code.addEventListener("keydown",e=>{
+editBtn.onclick =
+  editWebsite;
 
-if(e.key==="Tab"){
 
-e.preventDefault();
+/* =========================================================
+   LOAD SAVED PROJECT
+========================================================= */
 
-const start=e.selectionStart;
-const end=e.selectionEnd;
+window.addEventListener(
+  "load",
+  function(){
 
-code.value=
-code.value.substring(0,start)+
-"  "+
-code.value.substring(end);
+    const saved =
+      localStorage.getItem(
+        "spdp_current_html"
+      );
 
-code.selectionStart=
-code.selectionEnd=start+2;
 
-}
+    if(
+      saved &&
+      validHTML(saved)
+    ){
 
-});
+      renderHTML(saved);
 
-generateBtn.onclick=generate;
-editBtn.onclick=editWebsite;
-
-/* RESTORE */
-
-window.addEventListener("load",()=>{
-
-const saved=localStorage.getItem("spdp_current_html");
-
-if(saved&&validHTML(saved)){
-
-render(saved);
-
-addMessage("ai","✓ Previous project restored.");
-
-}
-
-});
+      addMessage(
+        "ai",
+        "✓ Previous project restored."
+      );
+    }
+  }
+);
 
 </script>
+
 </body>
 </html>
