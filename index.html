@@ -2,41 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>SPDP AI — Website Builder</title>
 
 <style>
-*{box-sizing:border-box}
 
-html,body{
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
   margin:0;
   min-height:100%;
   background:#050505;
   color:#fff;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
-body{overflow-x:hidden}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
+body{
+  overflow-x:hidden;
+}
 
-.app{padding:18px}
-.container{width:min(1500px,100%);margin:auto}
+button,
+textarea,
+input{
+  font:inherit;
+}
 
-/* HEADER */
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.app{
+  min-height:100vh;
+  padding:18px;
+}
+
+.container{
+  width:min(1500px,100%);
+  margin:auto;
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
 
 header{
   height:64px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid #1b1b1b;
+  border-bottom:1px solid #191919;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:10px;
   font-weight:900;
 }
 
@@ -46,14 +86,21 @@ header{
   border-radius:12px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#fff,#777);
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #777
+    );
+
   color:#000;
   font-weight:950;
 }
 
 .status{
-  color:#777;
   font-size:12px;
+  color:#777;
   display:flex;
   align-items:center;
   gap:8px;
@@ -64,20 +111,24 @@ header{
   height:7px;
   border-radius:50%;
   background:#4ade80;
-  box-shadow:0 0 15px #4ade80;
+  box-shadow:
+    0 0 15px #4ade80;
 }
 
-/* HERO */
+
+/* =========================================================
+HERO
+========================================================= */
 
 .hero{
   text-align:center;
-  padding:60px 0 30px;
+  padding:52px 0 28px;
 }
 
 .badge{
-  display:inline-block;
+  display:inline-flex;
   padding:8px 14px;
-  border:1px solid #252525;
+  border:1px solid #242424;
   border-radius:999px;
   background:#0b0b0b;
   color:#888;
@@ -86,47 +137,82 @@ header{
 
 h1{
   margin:22px 0 15px;
-  font-size:clamp(48px,8vw,94px);
+  font-size:
+    clamp(
+      48px,
+      8vw,
+      94px
+    );
+
   line-height:.9;
   letter-spacing:-.07em;
-  background:linear-gradient(180deg,#fff,#555);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff,
+      #555
+    );
+
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  max-width:720px;
+  max-width:750px;
   margin:auto;
   color:#777;
   line-height:1.7;
 }
 
-/* PROMPT */
+
+/* =========================================================
+PROMPT
+========================================================= */
 
 .panel{
   margin-top:30px;
-  padding:15px;
+  padding:16px;
+
   border:1px solid #202020;
   border-radius:24px;
-  background:#090909;
+
+  background:
+    rgba(255,255,255,.025);
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.45);
+
+  text-align:left;
 }
 
 .prompt{
   width:100%;
   min-height:145px;
+
   resize:vertical;
-  padding:18px;
-  background:#050505;
-  color:white;
-  border:1px solid #202020;
+
+  border:1px solid #1b1b1b;
   border-radius:17px;
+
+  background:#080808;
+  color:#fff;
+
+  padding:18px;
+
   outline:none;
+
   line-height:1.6;
 }
 
-.prompt:focus,
-.edit-prompt:focus{
-  border-color:#555;
+.prompt:focus{
+  border-color:#444;
+}
+
+.prompt::placeholder{
+  color:#444;
 }
 
 .actions{
@@ -137,23 +223,26 @@ h1{
 }
 
 button{
+  border-radius:11px;
+
+  padding:
+    10px 15px;
+
   border:1px solid #292929;
+
   background:#111;
   color:#fff;
-  padding:10px 15px;
-  border-radius:11px;
+
   font-weight:750;
-  transition:.15s;
+
+  transition:
+    transform .15s,
+    background .15s;
 }
 
 button:hover{
-  transform:translateY(-1px);
-  border-color:#555;
-}
-
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
+  transform:
+    translateY(-1px);
 }
 
 .primary{
@@ -164,39 +253,67 @@ button:disabled{
 
 .message{
   display:none;
+
   margin-top:12px;
-  padding:12px;
+  padding:13px;
+
+  border-radius:12px;
+
   background:#101010;
   border:1px solid #292929;
-  border-radius:12px;
+
   color:#aaa;
+
   white-space:pre-wrap;
+  line-height:1.5;
 }
 
-.message.show{display:block}
+.message.show{
+  display:block;
+}
 
-/* WORKSPACE */
+
+/* =========================================================
+WORKSPACE
+========================================================= */
 
 .workspace{
   display:none;
+
   margin-top:25px;
+
   border:1px solid #202020;
   border-radius:22px;
+
   overflow:hidden;
+
   background:#070707;
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.5);
 }
 
-.workspace.show{display:block}
+.workspace.show{
+  display:block;
+}
 
-/* TOOLBAR */
+
+/* =========================================================
+TOOLBAR
+========================================================= */
 
 .toolbar{
-  min-height:64px;
+  min-height:62px;
+
   padding:10px;
+
   border-bottom:1px solid #202020;
+
   display:flex;
   justify-content:space-between;
-  gap:10px;
+
+  gap:8px;
   flex-wrap:wrap;
 }
 
@@ -215,131 +332,212 @@ button:disabled{
 }
 
 .device.active,
-.mode.active{
+.edit-preview.active{
   background:#fff;
   color:#000;
 }
 
-/* PREVIEW */
+
+/* =========================================================
+PREVIEW
+========================================================= */
 
 .preview-wrap{
   min-height:720px;
+
   padding:12px;
+
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  background:radial-gradient(circle,#151515,#020202 70%);
+
+  background:
+    radial-gradient(
+      circle at center,
+      #151515,
+      #030303 72%
+    );
 }
 
 .preview-frame{
   width:100%;
   height:700px;
+
   border:1px solid #292929;
   border-radius:15px;
+
   background:#fff;
-  transition:.25s;
+
+  box-shadow:
+    0 20px 80px
+    rgba(0,0,0,.5);
+
+  transition:.3s;
 }
 
-/* CODE */
+
+/* =========================================================
+CODE PANEL
+========================================================= */
 
 .code-panel{
   display:none;
   border-top:1px solid #202020;
 }
 
-.code-panel.show{display:block}
+.code-panel.show{
+  display:block;
+}
 
 .code-head{
-  min-height:55px;
   padding:12px;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
+
+  gap:10px;
+
   border-bottom:1px solid #202020;
 }
 
 .code{
+  display:block;
+
   width:100%;
   height:560px;
-  display:block;
+
   resize:vertical;
-  border:0;
-  outline:none;
-  padding:18px;
+
   background:#020202;
-  color:#d4d4d4;
-  font:12px/1.6 Consolas,Monaco,"Courier New",monospace;
+  color:#c9ced6;
+
+  border:0;
+
+  padding:18px;
+
+  font:
+    12px/1.6
+    Consolas,
+    Monaco,
+    "Courier New",
+    monospace;
+
+  outline:none;
+
   tab-size:2;
+}
+
+.code:focus{
+  box-shadow:
+    inset 0 0 0 1px #333;
 }
 
 .code-actions{
   padding:10px;
+
   display:flex;
   justify-content:flex-end;
+
   gap:8px;
-  border-top:1px solid #191919;
+
+  border-top:1px solid #181818;
 }
 
-/* VISUAL EDIT */
 
-.visual-panel{
-  display:none;
+/* =========================================================
+ASSETS
+========================================================= */
+
+.assets{
   border-top:1px solid #202020;
-  background:#090909;
 }
 
-.visual-panel.show{display:block}
+.assets-head{
+  padding:13px;
 
-.visual-head{
-  padding:14px;
-  border-bottom:1px solid #202020;
   display:flex;
-  justify-content:space-between;
-  gap:10px;
   align-items:center;
+  justify-content:space-between;
+
+  gap:10px;
+
+  border-bottom:1px solid #1b1b1b;
 }
 
-.visual-info{
-  color:#777;
-  font-size:12px;
+.assets-head strong{
+  font-size:14px;
 }
 
-.visual-tools{
-  padding:14px;
+.asset-list{
+  padding:12px;
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(120px,1fr)
+    );
+
   gap:10px;
 }
 
-.visual-tools label{
-  color:#777;
-  font-size:12px;
+.asset{
+  position:relative;
+
+  min-height:100px;
+
+  border:1px solid #252525;
+  border-radius:12px;
+
+  overflow:hidden;
+
+  background:#0b0b0b;
+
+  cursor:pointer;
 }
 
-.visual-tools input,
-.visual-tools select{
+.asset:hover{
+  border-color:#555;
+}
+
+.asset img{
   width:100%;
-  margin-top:6px;
-  padding:10px;
-  background:#050505;
-  color:#fff;
-  border:1px solid #222;
-  border-radius:9px;
+  height:80px;
+
+  object-fit:cover;
+
+  display:block;
 }
 
-.visual-tools .full{
-  grid-column:1/-1;
+.asset-name{
+  padding:6px;
+
+  font-size:10px;
+
+  color:#888;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.visual-actions{
-  padding:12px;
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  border-top:1px solid #202020;
+.asset-file{
+  height:80px;
+
+  display:grid;
+  place-items:center;
+
+  color:#777;
+
+  font-size:24px;
 }
 
-/* CHAT */
+
+/* =========================================================
+CHAT
+========================================================= */
 
 .chat{
   border-top:1px solid #202020;
@@ -347,10 +545,14 @@ button:disabled{
 
 .chat-head{
   padding:15px;
+
   border-bottom:1px solid #1b1b1b;
 }
 
-.chat-head strong{font-size:14px}
+.chat-head strong{
+  font-size:14px;
+}
+
 .chat-head span{
   color:#666;
   font-size:12px;
@@ -359,100 +561,163 @@ button:disabled{
 
 .messages{
   height:240px;
+
   overflow-y:auto;
+
   padding:15px;
+
   display:flex;
   flex-direction:column;
+
   gap:9px;
 }
 
 .msg{
   max-width:85%;
-  padding:11px 13px;
+
+  padding:
+    11px 13px;
+
   border-radius:13px;
+
   font-size:13px;
+
   white-space:pre-wrap;
+
   line-height:1.5;
 }
 
 .msg.user{
   align-self:flex-end;
+
   background:#fff;
   color:#000;
 }
 
 .msg.ai{
   align-self:flex-start;
+
   background:#111;
   color:#aaa;
+
   border:1px solid #222;
 }
 
 .chat-input{
   display:flex;
+
   gap:8px;
+
   padding:12px;
+
   border-top:1px solid #191919;
 }
 
 .edit-prompt{
   flex:1;
+
   height:48px;
+
   resize:none;
+
   border-radius:12px;
+
   border:1px solid #1c1c1c;
+
   background:#080808;
   color:#fff;
+
   padding:12px;
+
   outline:none;
 }
 
-/* FEATURES */
+.edit-prompt:focus{
+  border-color:#444;
+}
+
+
+/* =========================================================
+FEATURES
+========================================================= */
 
 .features{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:12px;
+
   margin:35px 0;
 }
 
 .feature{
   padding:22px;
+
   border:1px solid #1c1c1c;
+
   border-radius:17px;
+
   background:#090909;
 }
 
-.feature h3{margin:0 0 8px}
+.feature h3{
+  margin:
+    0 0 8px;
+}
+
 .feature p{
   margin:0;
+
   color:#666;
-  font-size:13px;
+
   line-height:1.6;
+
+  font-size:13px;
 }
+
+
+/* =========================================================
+FOOTER
+========================================================= */
 
 footer{
   text-align:center;
+
   padding:35px;
+
   color:#444;
+
   font-size:12px;
 }
 
-/* MOBILE */
+
+/* =========================================================
+HIDDEN FILE INPUT
+========================================================= */
+
+#fileInput{
+  display:none;
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(max-width:760px){
 
-  .app{padding:12px}
-
-  .status{display:none}
-
-  .toolbar{
-    flex-direction:column;
+  .app{
+    padding:12px;
   }
 
-  .toolbar-left,
-  .toolbar-right{
-    width:100%;
+  .status{
+    display:none;
+  }
+
+  .features{
+    grid-template-columns:1fr;
   }
 
   .preview-wrap{
@@ -461,10 +726,6 @@ footer{
 
   .preview-frame{
     height:590px;
-  }
-
-  .features{
-    grid-template-columns:1fr;
   }
 
   .chat-input{
@@ -479,33 +740,56 @@ footer{
     height:450px;
   }
 
-  .visual-tools{
-    grid-template-columns:1fr;
+  .toolbar{
+    flex-direction:column;
   }
 
-  .visual-tools .full{
-    grid-column:auto;
+  .toolbar-left,
+  .toolbar-right{
+    width:100%;
+  }
+
+  .toolbar-left button,
+  .toolbar-right button{
+    flex:1;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<div class="app">
+<main class="app">
+
 <div class="container">
 
+
 <header>
+
   <div class="brand">
-    <div class="logo">S</div>
-    <span>SPDP AI</span>
+
+    <div class="logo">
+      S
+    </div>
+
+    <span>
+      SPDP AI
+    </span>
+
   </div>
 
   <div class="status">
+
     <span class="dot"></span>
-    AI Builder Online
+
+    Workers AI Online
+
   </div>
+
 </header>
+
 
 <section class="hero">
 
@@ -513,351 +797,474 @@ footer{
     ✦ AI Website · App · Game Builder
   </div>
 
-  <h1>Build anything.</h1>
+  <h1>
+    Build anything.
+  </h1>
 
   <p>
-    Create a website with AI, inspect the real source code,
-    edit it manually, visually modify the preview,
-    or ask AI to change the current project.
+    Generate a complete website with AI,
+    inspect and edit the real source code,
+    directly edit the live preview,
+    upload assets and continue modifying
+    your project with AI Sub-chat.
   </p>
+
 
   <div class="panel">
 
     <textarea
       id="prompt"
       class="prompt"
-      placeholder="Example: Create a premium black 3D gaming website with hero, games, pricing, about and contact sections..."
+      placeholder="Example: Create a premium black 3D gaming company website with animated hero, games, pricing, about and contact sections..."
     ></textarea>
 
     <div class="actions">
-      <button id="clearBtn">Clear</button>
-      <button id="generateBtn" class="primary">Generate</button>
+
+      <button id="clearBtn">
+        Clear
+      </button>
+
+      <button
+        id="generateBtn"
+        class="primary"
+      >
+        Generate
+      </button>
+
     </div>
 
-    <div id="message" class="message"></div>
+    <div
+      id="message"
+      class="message"
+    ></div>
 
   </div>
+
 </section>
 
-<section id="workspace" class="workspace">
 
-  <div class="toolbar">
+<section
+  id="workspace"
+  class="workspace"
+>
 
-    <div class="toolbar-left">
 
-      <span class="tool-title">Workspace</span>
+<!-- ======================================================
+TOOLBAR
+======================================================= -->
 
-      <button
-        class="device active"
-        data-width="100%">
-        Desktop
-      </button>
+<div class="toolbar">
 
-      <button
-        class="device"
-        data-width="768px">
-        Tablet
-      </button>
+  <div class="toolbar-left">
 
-      <button
-        class="device"
-        data-width="390px">
-        Mobile
-      </button>
+    <span class="tool-title">
+      Live Preview
+    </span>
 
-      <button id="codeBtn">
-        &lt;/&gt; Code
-      </button>
+    <button
+      class="device active"
+      data-width="100%"
+    >
+      Desktop
+    </button>
 
-      <button id="visualBtn">
-        ✦ Preview Edit
-      </button>
+    <button
+      class="device"
+      data-width="768px"
+    >
+      Tablet
+    </button>
 
-    </div>
+    <button
+      class="device"
+      data-width="390px"
+    >
+      Mobile
+    </button>
 
-    <div class="toolbar-right">
+    <button
+      id="previewEditBtn"
+      class="edit-preview"
+    >
+      ✎ Edit Preview
+    </button>
 
-      <button id="undoBtn">Undo</button>
-      <button id="redoBtn">Redo</button>
-      <button id="copyBtn">Copy</button>
-      <button id="downloadBtn">Download</button>
-      <button id="openBtn">Open</button>
+    <button id="codeBtn">
+      &lt;/&gt; Code
+    </button>
 
+    <button id="filesBtn">
+      + Files
+    </button>
+
+  </div>
+
+
+  <div class="toolbar-right">
+
+    <button id="undoBtn">
+      Undo
+    </button>
+
+    <button id="redoBtn">
+      Redo
+    </button>
+
+    <button id="copyBtn">
+      Copy
+    </button>
+
+    <button id="downloadBtn">
+      Download
+    </button>
+
+    <button id="openBtn">
+      Open
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ======================================================
+PREVIEW
+======================================================= -->
+
+<div class="preview-wrap">
+
+  <iframe
+    id="previewFrame"
+    class="preview-frame"
+    title="Live Preview"
+    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+  ></iframe>
+
+</div>
+
+
+<!-- ======================================================
+CODE
+======================================================= -->
+
+<div
+  id="codePanel"
+  class="code-panel"
+>
+
+  <div class="code-head">
+
+    <span class="tool-title">
+      HTML / CSS / JavaScript Editor
+    </span>
+
+    <button id="codeCopyBtn">
+      Copy Code
+    </button>
+
+  </div>
+
+
+  <textarea
+    id="code"
+    class="code"
+    spellcheck="false"
+    wrap="off"
+  ></textarea>
+
+
+  <div class="code-actions">
+
+    <button id="resetCodeBtn">
+      Reset
+    </button>
+
+    <button
+      id="applyCodeBtn"
+      class="primary"
+    >
+      Apply Code
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ======================================================
+ASSETS
+======================================================= -->
+
+<div
+  id="assetsPanel"
+  class="assets"
+  style="display:none"
+>
+
+  <div class="assets-head">
+
+    <strong>
+      Project Assets
+    </strong>
+
+    <button id="uploadBtn">
+      Upload Files
+    </button>
+
+  </div>
+
+  <div
+    id="assetList"
+    class="asset-list"
+  ></div>
+
+</div>
+
+
+<input
+  id="fileInput"
+  type="file"
+  multiple
+  accept="image/*,.txt,.css,.js,.json,.svg,.html"
+/>
+
+
+<!-- ======================================================
+CHAT
+======================================================= -->
+
+<div class="chat">
+
+  <div class="chat-head">
+
+    <strong>
+      AI Sub-chat
+    </strong>
+
+    <span>
+      Modify the current website
+    </span>
+
+  </div>
+
+
+  <div
+    id="messages"
+    class="messages"
+  >
+
+    <div class="msg ai">
+      Generate a website first.
+      Then ask me to modify it.
     </div>
 
   </div>
 
-  <div class="preview-wrap">
 
-    <iframe
-      id="previewFrame"
-      class="preview-frame"
-      title="Live Website Preview"
-      sandbox="allow-scripts allow-forms allow-modals allow-popups">
-    </iframe>
-
-  </div>
-
-  <!-- CODE EDITOR -->
-
-  <div id="codePanel" class="code-panel">
-
-    <div class="code-head">
-
-      <span class="tool-title">
-        Full HTML / CSS / JavaScript
-      </span>
-
-      <button id="codeCopyBtn">
-        Copy Code
-      </button>
-
-    </div>
+  <div class="chat-input">
 
     <textarea
-      id="code"
-      class="code"
-      spellcheck="false"
-      wrap="off">
-    </textarea>
+      id="editPrompt"
+      class="edit-prompt"
+      placeholder="Example: Make the hero more premium, add 3D cards, improve animations, and add a portfolio section..."
+    ></textarea>
 
-    <div class="code-actions">
-
-      <button id="resetCodeBtn">
-        Reset
-      </button>
-
-      <button id="applyCodeBtn" class="primary">
-        Apply Code
-      </button>
-
-    </div>
+    <button
+      id="editBtn"
+      class="primary"
+    >
+      Apply Edit
+    </button>
 
   </div>
 
-  <!-- VISUAL EDITOR -->
+</div>
 
-  <div id="visualPanel" class="visual-panel">
-
-    <div class="visual-head">
-
-      <div>
-        <strong>Visual Preview Editor</strong>
-        <div class="visual-info">
-          Select an element inside the preview to edit it.
-        </div>
-      </div>
-
-      <button id="visualCloseBtn">
-        Close
-      </button>
-
-    </div>
-
-    <div class="visual-tools">
-
-      <div class="full">
-        <label>Selected Element</label>
-        <input id="selectedElement" readonly value="Nothing selected">
-      </div>
-
-      <div>
-        <label>Text</label>
-        <input id="visualText" placeholder="Element text">
-      </div>
-
-      <div>
-        <label>Font Size</label>
-        <input id="visualSize" placeholder="e.g. 32px">
-      </div>
-
-      <div>
-        <label>Text Color</label>
-        <input id="visualColor" type="color" value="#ffffff">
-      </div>
-
-      <div>
-        <label>Background</label>
-        <input id="visualBackground" type="color" value="#111111">
-      </div>
-
-      <div>
-        <label>Border Radius</label>
-        <input id="visualRadius" placeholder="e.g. 20px">
-      </div>
-
-      <div>
-        <label>Font Weight</label>
-        <select id="visualWeight">
-          <option value="">Keep</option>
-          <option value="400">400</option>
-          <option value="500">500</option>
-          <option value="600">600</option>
-          <option value="700">700</option>
-          <option value="800">800</option>
-          <option value="900">900</option>
-        </select>
-      </div>
-
-    </div>
-
-    <div class="visual-actions">
-
-      <button id="visualApplyBtn" class="primary">
-        Apply Visual Changes
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- AI CHAT -->
-
-  <div class="chat">
-
-    <div class="chat-head">
-
-      <strong>AI Sub-chat</strong>
-
-      <span>
-        Modify your current website
-      </span>
-
-    </div>
-
-    <div id="messages" class="messages">
-
-      <div class="msg ai">
-        Generate a website first. Then tell me what you want changed.
-      </div>
-
-    </div>
-
-    <div class="chat-input">
-
-      <textarea
-        id="editPrompt"
-        class="edit-prompt"
-        placeholder="Example: Make the hero more premium, add glowing 3D cards and improve the mobile layout..."
-      ></textarea>
-
-      <button
-        id="editBtn"
-        class="primary">
-        Apply Edit
-      </button>
-
-    </div>
-
-  </div>
 
 </section>
+
 
 <section class="features">
 
   <article class="feature">
-    <h3>⚡ AI Generation</h3>
+
+    <h3>
+      ⚡ AI Generation
+    </h3>
+
     <p>
-      Generate a complete website from a normal description.
+      Generate complete websites,
+      applications and browser games
+      using Cloudflare Workers AI.
     </p>
+
   </article>
 
-  <article class="feature">
-    <h3>&lt;/&gt; Real Code</h3>
-    <p>
-      Open the Code panel and see and edit the actual HTML, CSS and JavaScript.
-    </p>
-  </article>
 
   <article class="feature">
-    <h3>✦ Visual Editing</h3>
+
+    <h3>
+      &lt;/&gt; Real Code
+    </h3>
+
     <p>
-      Select elements in the preview and change their text and styling.
+      Open the Code panel,
+      edit the actual HTML, CSS and JavaScript,
+      then apply it directly to the preview.
     </p>
+
+  </article>
+
+
+  <article class="feature">
+
+    <h3>
+      ✨ Live AI Editing
+    </h3>
+
+    <p>
+      Use AI Sub-chat to modify the
+      existing project without starting
+      from zero.
+    </p>
+
   </article>
 
 </section>
+
 
 <footer>
   SPDP AI · Digital Platform · 2026
 </footer>
 
+
 </div>
-</div>
+
+</main>
+
 
 <script>
 
-/* =====================================================
-   CONFIG
-===================================================== */
+/* =========================================================
+CONFIG
+========================================================= */
 
 const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================================================
+ELEMENTS
+========================================================= */
 
-const $ = id => document.getElementById(id);
-
-const promptInput = $("prompt");
-const editPrompt = $("editPrompt");
-const generateBtn = $("generateBtn");
-const editBtn = $("editBtn");
-
-const workspace = $("workspace");
-const previewFrame = $("previewFrame");
-
-const codePanel = $("codePanel");
-const code = $("code");
-
-const visualPanel = $("visualPanel");
-const messages = $("messages");
-const message = $("message");
+const $ =
+  id =>
+    document.getElementById(id);
 
 
-/* =====================================================
-   STATE
-===================================================== */
+const promptInput =
+  $("prompt");
+
+const editPrompt =
+  $("editPrompt");
+
+const generateBtn =
+  $("generateBtn");
+
+const editBtn =
+  $("editBtn");
+
+const workspace =
+  $("workspace");
+
+const previewFrame =
+  $("previewFrame");
+
+const code =
+  $("code");
+
+const codePanel =
+  $("codePanel");
+
+const messages =
+  $("messages");
+
+const message =
+  $("message");
+
+const fileInput =
+  $("fileInput");
+
+const assetsPanel =
+  $("assetsPanel");
+
+const assetList =
+  $("assetList");
+
+const previewEditBtn =
+  $("previewEditBtn");
+
+
+/* =========================================================
+STATE
+========================================================= */
 
 let currentHTML = "";
+
 let originalHTML = "";
 
 let undoStack = [];
+
 let redoStack = [];
 
-let selectedPreviewElement = null;
+let previewEditMode = false;
+
+let assets = [];
 
 
-/* =====================================================
-   MESSAGE
-===================================================== */
+/* =========================================================
+MESSAGE
+========================================================= */
 
 function showMessage(text){
 
-  message.textContent = text;
-  message.classList.add("show");
+  message.textContent =
+    text;
+
+  message.classList.add(
+    "show"
+  );
 }
+
 
 function hideMessage(){
 
-  message.textContent = "";
-  message.classList.remove("show");
+  message.textContent =
+    "";
+
+  message.classList.remove(
+    "show"
+  );
 }
 
 
-/* =====================================================
-   HISTORY
-===================================================== */
+/* =========================================================
+HISTORY
+========================================================= */
 
-function saveHistory(){
+function pushHistory(){
 
-  if(!currentHTML) return;
+  if(!currentHTML){
+    return;
+  }
 
-  undoStack.push(currentHTML);
+  undoStack.push(
+    currentHTML
+  );
 
-  if(undoStack.length > 50){
+  if(
+    undoStack.length > 50
+  ){
     undoStack.shift();
   }
 
@@ -865,64 +1272,31 @@ function saveHistory(){
 }
 
 
-/* =====================================================
-   HTML CLEANER
-===================================================== */
-
-function cleanHTML(value){
-
-  let html = String(value || "").trim();
-
-  html = html
-    .replace(/^```html\s*/i,"")
-    .replace(/^```HTML\s*/i,"")
-    .replace(/^```\s*/i,"")
-    .replace(/\s*```$/i,"")
-    .trim();
-
-  const doctype =
-    html.search(/<!doctype\s+html/i);
-
-  const htmlStart =
-    html.search(/<html[\s>]/i);
-
-  let start = -1;
-
-  if(doctype !== -1){
-    start = doctype;
-  }else if(htmlStart !== -1){
-    start = htmlStart;
-  }
-
-  if(start > 0){
-    html = html.substring(start);
-  }
-
-  const end =
-    html.toLowerCase().lastIndexOf("</html>");
-
-  if(end !== -1){
-    html = html.substring(0,end + 7);
-  }
-
-  return html.trim();
-}
-
-
-/* =====================================================
-   HTML VALIDATION
-===================================================== */
+/* =========================================================
+VALID HTML
+========================================================= */
 
 function validHTML(html){
 
-  if(typeof html !== "string") return false;
+  if(
+    typeof html !== "string"
+  ){
+    return false;
+  }
 
-  const x = html.trim().toLowerCase();
+  const x =
+    html
+      .trim()
+      .toLowerCase();
 
   return (
     (
-      x.startsWith("<!doctype html") ||
-      x.startsWith("<html")
+      x.startsWith(
+        "<!doctype html"
+      ) ||
+      x.startsWith(
+        "<html"
+      )
     ) &&
     x.includes("<html") &&
     x.includes("<head") &&
@@ -933,30 +1307,315 @@ function validHTML(html){
 }
 
 
-/* =====================================================
-   RENDER
-===================================================== */
+/* =========================================================
+CLEAN HTML
+========================================================= */
 
-function renderHTML(html){
+function cleanHTML(html){
 
-  const cleaned = cleanHTML(html);
+  let result =
+    String(html || "")
+      .trim();
 
-  if(!validHTML(cleaned)){
+  result =
+    result.replace(
+      /^```html\s*/i,
+      ""
+    );
+
+  result =
+    result.replace(
+      /^```\s*/i,
+      ""
+    );
+
+  result =
+    result.replace(
+      /\s*```\s*$/i,
+      ""
+    );
+
+  const lower =
+    result.toLowerCase();
+
+  let start =
+    lower.indexOf(
+      "<!doctype html"
+    );
+
+  if(start === -1){
+
+    start =
+      lower.indexOf(
+        "<html"
+      );
+
+  }
+
+  if(start > 0){
+
+    result =
+      result.substring(start);
+
+  }
+
+  const end =
+    result
+      .toLowerCase()
+      .lastIndexOf(
+        "</html>"
+      );
+
+  if(end !== -1){
+
+    result =
+      result.substring(
+        0,
+        end + 7
+      );
+
+  }
+
+  return result.trim();
+}
+
+
+/* =========================================================
+PREVIEW EDIT SCRIPT
+========================================================= */
+
+function buildPreviewHTML(html){
+
+  const injection = `
+
+<script>
+
+(function(){
+
+  let editing = false;
+
+  function send(){
+
+    try{
+
+      window.parent.postMessage({
+
+        type:"SPDP_PREVIEW_SAVE",
+
+        html:
+          "<!DOCTYPE html>" +
+          document.documentElement.outerHTML
+
+      },"*");
+
+    }catch(e){}
+
+  }
+
+
+  window.addEventListener(
+    "message",
+    function(event){
+
+      if(
+        !event.data ||
+        event.data.type !==
+          "SPDP_EDIT_MODE"
+      ){
+        return;
+      }
+
+      editing =
+        !!event.data.enabled;
+
+
+      document.body
+        .classList.toggle(
+          "spdp-editing",
+          editing
+        );
+
+
+      const all =
+        document.querySelectorAll(
+          "body *"
+        );
+
+
+      all.forEach(
+        function(el){
+
+          if(
+            el.tagName ===
+              "SCRIPT" ||
+            el.tagName ===
+              "STYLE" ||
+            el.tagName ===
+              "IFRAME"
+          ){
+            return;
+          }
+
+          if(
+            el.closest(
+              ".spdp-editor-ui"
+            )
+          ){
+            return;
+          }
+
+          if(
+            editing
+          ){
+
+            el.setAttribute(
+              "contenteditable",
+              "true"
+            );
+
+            el.style.cursor =
+              "text";
+
+          }else{
+
+            el.removeAttribute(
+              "contenteditable"
+            );
+
+            el.style.cursor =
+              "";
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  document.addEventListener(
+    "input",
+    function(){
+
+      if(editing){
+        clearTimeout(
+          window.__spdpSaveTimer
+        );
+
+        window.__spdpSaveTimer =
+          setTimeout(
+            send,
+            400
+          );
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        editing &&
+        (
+          event.ctrlKey ||
+          event.metaKey
+        ) &&
+        event.key === "s"
+      ){
+
+        event.preventDefault();
+
+        send();
+
+      }
+
+    }
+  );
+
+
+})();
+
+</script>
+
+`;
+
+  const bodyIndex =
+    html.toLowerCase()
+      .lastIndexOf(
+        "</body>"
+      );
+
+  if(bodyIndex !== -1){
+
+    return (
+      html.substring(
+        0,
+        bodyIndex
+      ) +
+      injection +
+      html.substring(
+        bodyIndex
+      )
+    );
+
+  }
+
+  return html;
+}
+
+
+/* =========================================================
+RENDER
+========================================================= */
+
+function renderHTML(
+  html,
+  addHistory = false
+){
+
+  const cleaned =
+    cleanHTML(html);
+
+  if(
+    !validHTML(cleaned)
+  ){
 
     showMessage(
-      "❌ Invalid HTML. Changes were not applied."
+      "❌ Invalid HTML received."
     );
 
     return false;
   }
 
-  currentHTML = cleaned;
+  if(
+    addHistory &&
+    currentHTML &&
+    cleaned !== currentHTML
+  ){
+    pushHistory();
+  }
 
-  code.value = currentHTML;
+  currentHTML =
+    cleaned;
 
-  previewFrame.srcdoc = currentHTML;
+  const previewHTML =
+    buildPreviewHTML(
+      currentHTML
+    );
 
-  workspace.classList.add("show");
+  previewFrame.srcdoc =
+    previewHTML;
+
+  code.value =
+    currentHTML;
+
+  workspace.classList.add(
+    "show"
+  );
 
   localStorage.setItem(
     "spdp_current_html",
@@ -967,40 +1626,71 @@ function renderHTML(html){
 }
 
 
-/* =====================================================
-   WORKER REQUEST
-===================================================== */
+/* =========================================================
+WORKER REQUEST
+========================================================= */
 
-async function workerRequest(payload){
+async function workerRequest(
+  payload
+){
 
-  const response = await fetch(
-    WORKER_URL,
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(payload)
-    }
-  );
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
 
-  const raw = await response.text();
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(
+            payload
+          )
+      }
+    );
+
+  const raw =
+    await response.text();
 
   let data;
 
   try{
-    data = JSON.parse(raw);
+
+    data =
+      JSON.parse(raw);
+
   }catch{
+
     throw new Error(
       "Worker returned invalid JSON."
     );
+
   }
 
-  if(!response.ok || !data.success){
+  if(
+    !response.ok ||
+    !data.success
+  ){
+
+    let error =
+      data.error ||
+      "AI request failed.";
+
+    if(
+      data.details
+    ){
+
+      error +=
+        "\n" +
+        data.details;
+
+    }
 
     throw new Error(
-      data.error ||
-      "AI request failed."
+      error
     );
   }
 
@@ -1008,55 +1698,86 @@ async function workerRequest(payload){
 }
 
 
-/* =====================================================
-   GENERATE
-===================================================== */
+/* =========================================================
+GENERATE
+========================================================= */
 
 async function generateWebsite(){
 
-  const prompt = promptInput.value.trim();
+  const text =
+    promptInput.value.trim();
 
-  if(!prompt){
+  if(!text){
 
     showMessage(
-      "Type what you want to build first."
+      "Type what you want to build."
     );
 
     promptInput.focus();
+
     return;
   }
 
-  generateBtn.disabled = true;
-  generateBtn.textContent = "Generating...";
   hideMessage();
 
-  addMessage("user",prompt);
+  generateBtn.disabled =
+    true;
+
+  generateBtn.textContent =
+    "AI Generating...";
 
   try{
 
-    const data = await workerRequest({
-      action:"create",
-      prompt
-    });
+    addMessage(
+      "user",
+      text
+    );
 
-    const html = cleanHTML(data.html);
+    const data =
+      await workerRequest({
 
-    if(!validHTML(html)){
+        action:"create",
+
+        prompt:text
+
+      });
+
+    const html =
+      cleanHTML(
+        data.html
+      );
+
+    if(
+      !validHTML(html)
+    ){
+
       throw new Error(
         "AI returned invalid HTML."
       );
+
     }
 
     undoStack = [];
+
     redoStack = [];
 
-    originalHTML = html;
+    originalHTML =
+      html;
 
-    renderHTML(html);
+    renderHTML(
+      html
+    );
 
     addMessage(
       "ai",
-      "✓ Website generated successfully."
+      "✓ Website generated."
+      +
+      (
+        data.model
+          ? "\nModel: " +
+            data.model
+          : ""
+      )
     );
 
     workspace.scrollIntoView({
@@ -1068,7 +1789,8 @@ async function generateWebsite(){
 
     addMessage(
       "ai",
-      "❌ " + error.message
+      "❌ " +
+      error.message
     );
 
     showMessage(
@@ -1078,15 +1800,19 @@ async function generateWebsite(){
 
   }finally{
 
-    generateBtn.disabled = false;
-    generateBtn.textContent = "Generate";
+    generateBtn.disabled =
+      false;
+
+    generateBtn.textContent =
+      "Generate";
+
   }
 }
 
 
-/* =====================================================
-   AI EDIT
-===================================================== */
+/* =========================================================
+AI EDIT
+========================================================= */
 
 async function editWebsite(){
 
@@ -1102,57 +1828,86 @@ async function editWebsite(){
   const instruction =
     editPrompt.value.trim();
 
-  if(!instruction) return;
+  if(!instruction){
 
-  addMessage("user",instruction);
+    editPrompt.focus();
 
-  editBtn.disabled = true;
-  editBtn.textContent = "AI Working...";
+    return;
+  }
+
+  addMessage(
+    "user",
+    instruction
+  );
+
+  editPrompt.value =
+    "";
+
+  editBtn.disabled =
+    true;
+
+  editBtn.textContent =
+    "AI Working...";
 
   hideMessage();
 
-  /*
-    IMPORTANT:
-    History is saved only AFTER successful AI generation.
-    So a failed AI response cannot create a broken undo state.
-  */
-
   try{
 
-    const data = await workerRequest({
+    const oldHTML =
+      currentHTML;
 
-      action:"edit",
+    const data =
+      await workerRequest({
 
-      prompt:instruction,
+        action:"edit",
 
-      currentHTML:currentHTML
-    });
+        prompt:
+          instruction,
 
-    const html = cleanHTML(data.html);
+        currentHTML:
+          oldHTML
 
-    if(!validHTML(html)){
+      });
+
+    const html =
+      cleanHTML(
+        data.html
+      );
+
+    if(
+      !validHTML(html)
+    ){
 
       throw new Error(
         "AI returned invalid HTML."
       );
+
     }
 
-    saveHistory();
+    pushHistory();
 
-    renderHTML(html);
-
-    editPrompt.value = "";
+    renderHTML(
+      html
+    );
 
     addMessage(
       "ai",
-      "✓ Website updated successfully."
+      "✓ Website updated."
+      +
+      (
+        data.model
+          ? "\nModel: " +
+            data.model
+          : ""
+      )
     );
 
   }catch(error){
 
     addMessage(
       "ai",
-      "❌ " + error.message
+      "❌ " +
+      error.message
     );
 
     showMessage(
@@ -1162,38 +1917,116 @@ async function editWebsite(){
 
   }finally{
 
-    editBtn.disabled = false;
-    editBtn.textContent = "Apply Edit";
+    editBtn.disabled =
+      false;
+
+    editBtn.textContent =
+      "Apply Edit";
+
   }
 }
 
 
-/* =====================================================
-   CHAT
-===================================================== */
+/* =========================================================
+CHAT
+========================================================= */
 
-function addMessage(type,text){
+function addMessage(
+  type,
+  text
+){
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   div.className =
-    "msg " + type;
+    "msg " +
+    type;
 
-  div.textContent = text;
+  div.textContent =
+    text;
 
-  messages.appendChild(div);
+  messages.appendChild(
+    div
+  );
 
   messages.scrollTop =
     messages.scrollHeight;
 }
 
 
-/* =====================================================
-   CODE BUTTON
-===================================================== */
+/* =========================================================
+UNDO
+========================================================= */
 
-$("codeBtn").onclick = function(){
+$("undoBtn").onclick =
+function(){
+
+  if(
+    !undoStack.length
+  ){
+
+    showMessage(
+      "Nothing to undo."
+    );
+
+    return;
+  }
+
+  redoStack.push(
+    currentHTML
+  );
+
+  const previous =
+    undoStack.pop();
+
+  renderHTML(
+    previous
+  );
+
+};
+
+
+/* =========================================================
+REDO
+========================================================= */
+
+$("redoBtn").onclick =
+function(){
+
+  if(
+    !redoStack.length
+  ){
+
+    showMessage(
+      "Nothing to redo."
+    );
+
+    return;
+  }
+
+  undoStack.push(
+    currentHTML
+  );
+
+  const next =
+    redoStack.pop();
+
+  renderHTML(
+    next
+  );
+
+};
+
+
+/* =========================================================
+CODE PANEL
+========================================================= */
+
+$("codeBtn").onclick =
+function(){
 
   if(!currentHTML){
 
@@ -1204,50 +2037,68 @@ $("codeBtn").onclick = function(){
     return;
   }
 
-  /*
-    ALWAYS load the latest actual HTML.
-  */
+  code.value =
+    currentHTML;
 
-  code.value = currentHTML;
+  codePanel.classList.toggle(
+    "show"
+  );
 
-  codePanel.classList.toggle("show");
+  if(
+    codePanel.classList.contains(
+      "show"
+    )
+  ){
 
-  if(codePanel.classList.contains("show")){
+    setTimeout(
+      () => code.focus(),
+      50
+    );
 
-    code.focus();
-
-    setTimeout(()=>{
-      code.scrollTop = 0;
-    },50);
   }
+
 };
 
 
-/* =====================================================
-   APPLY CODE
-===================================================== */
+/* =========================================================
+APPLY CODE
+========================================================= */
 
-$("applyCodeBtn").onclick = function(){
+$("applyCodeBtn").onclick =
+function(){
 
   const newHTML =
-    cleanHTML(code.value);
+    code.value.trim();
 
-  if(!validHTML(newHTML)){
+  if(!newHTML){
 
     showMessage(
-      "❌ Invalid HTML.\n\n" +
-      "Your code must contain:\n" +
-      "<html>\n" +
-      "<head>\n" +
-      "<body>\n" +
-      "</body>\n" +
-      "</html>"
+      "Code editor is empty."
     );
 
     return;
   }
 
-  if(newHTML === currentHTML){
+  const cleaned =
+    cleanHTML(
+      newHTML
+    );
+
+  if(
+    !validHTML(cleaned)
+  ){
+
+    showMessage(
+      "❌ Invalid HTML.\n" +
+      "The document must contain html, head and body."
+    );
+
+    return;
+  }
+
+  if(
+    cleaned === currentHTML
+  ){
 
     showMessage(
       "No changes detected."
@@ -1256,9 +2107,11 @@ $("applyCodeBtn").onclick = function(){
     return;
   }
 
-  saveHistory();
+  pushHistory();
 
-  renderHTML(newHTML);
+  renderHTML(
+    cleaned
+  );
 
   addMessage(
     "ai",
@@ -1268,74 +2121,109 @@ $("applyCodeBtn").onclick = function(){
   showMessage(
     "✓ Code applied successfully."
   );
+
 };
 
 
-/* =====================================================
-   RESET CODE
-===================================================== */
+/* =========================================================
+RESET CODE
+========================================================= */
 
-$("resetCodeBtn").onclick = function(){
+$("resetCodeBtn").onclick =
+function(){
 
-  code.value = currentHTML;
+  code.value =
+    currentHTML;
 
   showMessage(
-    "Code editor reset to current website."
+    "Code editor reset."
   );
+
 };
 
 
-/* =====================================================
-   COPY
-===================================================== */
+/* =========================================================
+COPY
+========================================================= */
 
-async function copyText(text){
+async function copyText(
+  text
+){
 
   if(!text){
 
-    showMessage("Nothing to copy.");
+    showMessage(
+      "Nothing to copy."
+    );
+
     return;
   }
 
   try{
 
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(
+      text
+    );
 
-    showMessage("✓ Copied.");
+    showMessage(
+      "✓ Copied."
+    );
 
-    setTimeout(hideMessage,1500);
+    setTimeout(
+      hideMessage,
+      1500
+    );
 
   }catch{
 
     const temp =
-      document.createElement("textarea");
+      document.createElement(
+        "textarea"
+      );
 
-    temp.value = text;
+    temp.value =
+      text;
 
-    document.body.appendChild(temp);
+    document.body.appendChild(
+      temp
+    );
 
     temp.select();
 
-    document.execCommand("copy");
+    document.execCommand(
+      "copy"
+    );
 
     temp.remove();
 
-    showMessage("✓ Copied.");
+    showMessage(
+      "✓ Copied."
+    );
+
   }
 }
 
+
 $("copyBtn").onclick =
-  () => copyText(currentHTML);
+() =>
+  copyText(
+    currentHTML
+  );
+
 
 $("codeCopyBtn").onclick =
-  () => copyText(code.value);
+() =>
+  copyText(
+    code.value
+  );
 
 
-/* =====================================================
-   DOWNLOAD
-===================================================== */
+/* =========================================================
+DOWNLOAD
+========================================================= */
 
-$("downloadBtn").onclick = function(){
+$("downloadBtn").onclick =
+function(){
 
   if(!currentHTML){
 
@@ -1349,38 +2237,53 @@ $("downloadBtn").onclick = function(){
   const blob =
     new Blob(
       [currentHTML],
-      {type:"text/html;charset=utf-8"}
+      {
+        type:
+          "text/html;charset=utf-8"
+      }
     );
 
   const url =
-    URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
 
   const a =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
 
-  a.href = url;
+  a.href =
+    url;
 
   a.download =
     "spdp-ai-website.html";
 
-  document.body.appendChild(a);
+  document.body.appendChild(
+    a
+  );
 
   a.click();
 
   a.remove();
 
   setTimeout(
-    ()=>URL.revokeObjectURL(url),
+    () =>
+      URL.revokeObjectURL(
+        url
+      ),
     1000
   );
+
 };
 
 
-/* =====================================================
-   OPEN
-===================================================== */
+/* =========================================================
+OPEN
+========================================================= */
 
-$("openBtn").onclick = function(){
+$("openBtn").onclick =
+function(){
 
   if(!currentHTML){
 
@@ -1394,100 +2297,77 @@ $("openBtn").onclick = function(){
   const blob =
     new Blob(
       [currentHTML],
-      {type:"text/html"}
+      {
+        type:
+          "text/html;charset=utf-8"
+      }
     );
 
   const url =
-    URL.createObjectURL(blob);
-
-  window.open(url,"_blank");
-};
-
-
-/* =====================================================
-   UNDO
-===================================================== */
-
-$("undoBtn").onclick = function(){
-
-  if(!undoStack.length){
-
-    showMessage(
-      "Nothing to undo."
+    URL.createObjectURL(
+      blob
     );
 
-    return;
-  }
+  window.open(
+    url,
+    "_blank"
+  );
 
-  redoStack.push(currentHTML);
-
-  const previous =
-    undoStack.pop();
-
-  renderHTML(previous);
 };
 
 
-/* =====================================================
-   REDO
-===================================================== */
-
-$("redoBtn").onclick = function(){
-
-  if(!redoStack.length){
-
-    showMessage(
-      "Nothing to redo."
-    );
-
-    return;
-  }
-
-  undoStack.push(currentHTML);
-
-  const next =
-    redoStack.pop();
-
-  renderHTML(next);
-};
-
-
-/* =====================================================
-   DEVICE PREVIEW
-===================================================== */
+/* =========================================================
+DEVICE PREVIEW
+========================================================= */
 
 document
-.querySelectorAll(".device")
-.forEach(btn=>{
+.querySelectorAll(
+  ".device"
+)
+.forEach(
+  btn => {
 
-  btn.onclick = function(){
+    btn.onclick =
+    function(){
 
-    document
-    .querySelectorAll(".device")
-    .forEach(x=>
-      x.classList.remove("active")
-    );
+      document
+      .querySelectorAll(
+        ".device"
+      )
+      .forEach(
+        x =>
+          x.classList.remove(
+            "active"
+          )
+      );
 
-    btn.classList.add("active");
+      btn.classList.add(
+        "active"
+      );
 
-    const width =
-      btn.dataset.width;
+      const width =
+        btn.dataset.width;
 
-    previewFrame.style.width = width;
+      previewFrame.style.width =
+        width;
 
-    previewFrame.style.margin =
-      width === "100%"
-      ? "0"
-      : "0 auto";
-  };
-});
+      previewFrame.style.margin =
+        width === "100%"
+          ? "0"
+          : "0 auto";
+
+    };
+
+  }
+);
 
 
-/* =====================================================
-   VISUAL EDITOR
-===================================================== */
+/* =========================================================
+PREVIEW EDIT MODE
+========================================================= */
 
-$("visualBtn").onclick = function(){
+previewEditBtn.onclick =
+function(){
 
   if(!currentHTML){
 
@@ -1498,324 +2378,464 @@ $("visualBtn").onclick = function(){
     return;
   }
 
-  visualPanel.classList.toggle("show");
+  previewEditMode =
+    !previewEditMode;
 
-  if(visualPanel.classList.contains("show")){
+  previewEditBtn.classList.toggle(
+    "active",
+    previewEditMode
+  );
 
-    enablePreviewSelection();
+  previewEditBtn.textContent =
+    previewEditMode
+      ? "✓ Editing Preview"
+      : "✎ Edit Preview";
+
+  previewFrame.contentWindow.postMessage(
+    {
+      type:
+        "SPDP_EDIT_MODE",
+
+      enabled:
+        previewEditMode
+    },
+    "*"
+  );
+
+  if(previewEditMode){
 
     showMessage(
-      "Preview Edit enabled. Click an element inside the preview."
+      "Preview edit mode ON. Click text or elements inside the preview and edit them."
     );
+
+  }else{
+
+    showMessage(
+      "Preview edit mode OFF."
+    );
+
   }
+
 };
 
 
-$("visualCloseBtn").onclick = function(){
+/* =========================================================
+PREVIEW SAVE MESSAGE
+========================================================= */
 
-  visualPanel.classList.remove("show");
+window.addEventListener(
+  "message",
+  function(event){
 
-  disablePreviewSelection();
-};
-
-
-/* =====================================================
-   PREVIEW ELEMENT SELECTION
-===================================================== */
-
-function enablePreviewSelection(){
-
-  try{
-
-    const doc =
-      previewFrame.contentDocument;
-
-    if(!doc) return;
-
-    doc.addEventListener(
-      "click",
-      previewElementClick,
-      true
-    );
-
-    doc.addEventListener(
-      "mouseover",
-      previewHover,
-      true
-    );
-
-  }catch(error){
-
-    console.log(error);
-  }
-}
-
-
-function disablePreviewSelection(){
-
-  try{
-
-    const doc =
-      previewFrame.contentDocument;
-
-    if(!doc) return;
-
-    doc.removeEventListener(
-      "click",
-      previewElementClick,
-      true
-    );
-
-    doc.removeEventListener(
-      "mouseover",
-      previewHover,
-      true
-    );
-
-  }catch{}
-}
-
-
-function previewHover(event){
-
-  const target =
-    event.target;
-
-  if(!target || target === document.documentElement){
-    return;
-  }
-
-  target.style.outline =
-    "2px solid #7c3aed";
-
-  setTimeout(()=>{
-
-    if(target.style.outline.includes("2px")){
-      target.style.outline = "";
+    if(
+      !event.data ||
+      event.data.type !==
+        "SPDP_PREVIEW_SAVE"
+    ){
+      return;
     }
 
-  },300);
-}
+    const html =
+      cleanHTML(
+        event.data.html || ""
+      );
 
+    if(
+      !validHTML(html)
+    ){
+      return;
+    }
 
-function previewElementClick(event){
+    if(
+      html === currentHTML
+    ){
+      return;
+    }
 
-  event.preventDefault();
-  event.stopPropagation();
+    pushHistory();
 
-  const target =
-    event.target;
+    currentHTML =
+      html;
 
-  if(!target || target === document.body){
-    return;
+    code.value =
+      html;
+
+    localStorage.setItem(
+      "spdp_current_html",
+      html
+    );
+
   }
-
-  selectedPreviewElement = target;
-
-  $("selectedElement").value =
-    target.tagName.toLowerCase();
-
-  $("visualText").value =
-    target.children.length === 0
-    ? target.textContent.trim()
-    : "";
-
-  $("visualSize").value =
-    target.style.fontSize || "";
-
-  $("visualRadius").value =
-    target.style.borderRadius || "";
-
-  $("visualWeight").value =
-    target.style.fontWeight || "";
-
-  try{
-
-    const computed =
-      previewFrame.contentWindow
-      .getComputedStyle(target);
-
-    $("visualColor").value =
-      rgbToHex(computed.color);
-
-    $("visualBackground").value =
-      rgbToHex(computed.backgroundColor);
-
-  }catch{}
-
-  showMessage(
-    "✓ Selected: <" +
-    target.tagName.toLowerCase() +
-    ">"
-  );
-}
+);
 
 
-/* =====================================================
-   RGB TO HEX
-===================================================== */
+/* =========================================================
+FILES
+========================================================= */
 
-function rgbToHex(rgb){
+$("filesBtn").onclick =
+function(){
 
-  const match =
-    rgb.match(/\d+/g);
+  assetsPanel.style.display =
+    assetsPanel.style.display ===
+      "none"
+      ? "block"
+      : "none";
 
-  if(!match || match.length < 3){
-    return "#ffffff";
+  renderAssets();
+
+};
+
+
+$("uploadBtn").onclick =
+function(){
+
+  fileInput.click();
+
+};
+
+
+fileInput.addEventListener(
+  "change",
+  async function(){
+
+    const files =
+      Array.from(
+        this.files || []
+      );
+
+    for(
+      const file of files
+    ){
+
+      await addAsset(
+        file
+      );
+
+    }
+
+    renderAssets();
+
+    this.value =
+      "";
+
   }
-
-  return "#" +
-    match
-    .slice(0,3)
-    .map(x=>
-      Number(x)
-      .toString(16)
-      .padStart(2,"0")
-    )
-    .join("");
-}
+);
 
 
-/* =====================================================
-   APPLY VISUAL CHANGES
-===================================================== */
+/* =========================================================
+ADD ASSET
+========================================================= */
 
-$("visualApplyBtn").onclick = function(){
+async function addAsset(
+  file
+){
 
-  if(!selectedPreviewElement){
+  if(
+    file.size >
+    5 * 1024 * 1024
+  ){
 
     showMessage(
-      "Click an element inside the preview first."
+      file.name +
+      " is larger than 5MB."
     );
 
     return;
   }
 
-  const newText =
-    $("visualText").value;
+  const reader =
+    new FileReader();
 
-  const size =
-    $("visualSize").value.trim();
+  await new Promise(
+    resolve => {
 
-  const radius =
-    $("visualRadius").value.trim();
+      reader.onload =
+      function(){
 
-  const weight =
-    $("visualWeight").value;
+        assets.push({
 
-  const color =
-    $("visualColor").value;
+          name:
+            file.name,
 
-  const background =
-    $("visualBackground").value;
+          type:
+            file.type,
 
-  /*
-    Save current HTML before changing preview.
-  */
+          size:
+            file.size,
 
-  saveHistory();
+          data:
+            reader.result
+
+        });
+
+        localStorage.setItem(
+          "spdp_assets",
+          JSON.stringify(
+            assets
+          )
+        );
+
+        resolve();
+
+      };
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+RENDER ASSETS
+========================================================= */
+
+function renderAssets(){
+
+  assetList.innerHTML =
+    "";
+
+  if(!assets.length){
+
+    assetList.innerHTML = `
+      <div
+        style="
+          grid-column:1/-1;
+          padding:25px;
+          text-align:center;
+          color:#555;
+          font-size:12px;
+        "
+      >
+        No uploaded files yet.
+        Click "Upload Files".
+      </div>
+    `;
+
+    return;
+  }
+
+  assets.forEach(
+    function(asset,index){
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.className =
+        "asset";
+
+      if(
+        asset.type.startsWith(
+          "image/"
+        )
+      ){
+
+        div.innerHTML = `
+
+          <img
+            src="${asset.data}"
+            alt=""
+          >
+
+          <div class="asset-name">
+            ${escapeHTML(asset.name)}
+          </div>
+
+        `;
+
+      }else{
+
+        div.innerHTML = `
+
+          <div class="asset-file">
+            📄
+          </div>
+
+          <div class="asset-name">
+            ${escapeHTML(asset.name)}
+          </div>
+
+        `;
+
+      }
+
+      div.title =
+        "Click to insert into code";
+
+      div.onclick =
+        function(){
+
+          insertAsset(
+            asset
+          );
+
+        };
+
+      assetList.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+INSERT ASSET
+========================================================= */
+
+function insertAsset(
+  asset
+){
+
+  if(!currentHTML){
+
+    showMessage(
+      "Generate a website first."
+    );
+
+    return;
+  }
+
+  const start =
+    code.selectionStart;
+
+  const end =
+    code.selectionEnd;
+
+  let snippet = "";
 
   if(
-    selectedPreviewElement.children.length === 0 &&
-    newText
+    asset.type.startsWith(
+      "image/"
+    )
   ){
 
-    selectedPreviewElement.textContent =
-      newText;
+    snippet =
+      `<img src="${asset.data}" alt="${escapeHTML(asset.name)}">`;
+
+  }else{
+
+    snippet =
+      `<!-- ${escapeHTML(asset.name)} uploaded asset -->`;
+
   }
 
-  if(size){
-    selectedPreviewElement.style.fontSize =
-      size;
-  }
-
-  if(radius){
-    selectedPreviewElement.style.borderRadius =
-      radius;
-  }
-
-  if(weight){
-    selectedPreviewElement.style.fontWeight =
-      weight;
-  }
-
-  selectedPreviewElement.style.color =
-    color;
-
-  selectedPreviewElement.style.backgroundColor =
-    background;
-
-  /*
-    Get modified HTML directly from iframe.
-  */
-
-  const modifiedHTML =
-    previewFrame.contentDocument
-    .documentElement
-    .outerHTML;
-
-  const finalHTML =
-    "<!DOCTYPE html>\n" +
-    modifiedHTML;
-
-  currentHTML =
-    cleanHTML(finalHTML);
+  const value =
+    code.value;
 
   code.value =
-    currentHTML;
+    value.substring(
+      0,
+      start
+    ) +
+    snippet +
+    value.substring(
+      end
+    );
 
-  localStorage.setItem(
-    "spdp_current_html",
-    currentHTML
-  );
+  code.focus();
 
-  previewFrame.srcdoc =
-    currentHTML;
-
-  selectedPreviewElement = null;
-
-  $("selectedElement").value =
-    "Nothing selected";
+  code.selectionStart =
+    code.selectionEnd =
+      start +
+      snippet.length;
 
   showMessage(
-    "✓ Visual changes applied."
+    "✓ Asset inserted into code. Click Apply Code."
   );
 
-  addMessage(
-    "ai",
-    "✓ Visual preview changes applied."
-  );
-};
+}
 
 
-/* =====================================================
-   CLEAR
-===================================================== */
+/* =========================================================
+ESCAPE
+========================================================= */
 
-$("clearBtn").onclick = function(){
+function escapeHTML(
+  value
+){
+
+  return String(value)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+CLEAR
+========================================================= */
+
+$("clearBtn").onclick =
+function(){
 
   if(
     currentHTML &&
-    !confirm("Clear current project?")
+    !confirm(
+      "Clear current project?"
+    )
   ){
+
     return;
   }
 
-  currentHTML = "";
-  originalHTML = "";
+  currentHTML =
+    "";
 
-  undoStack = [];
-  redoStack = [];
+  originalHTML =
+    "";
 
-  promptInput.value = "";
-  editPrompt.value = "";
-  code.value = "";
+  undoStack =
+    [];
 
-  previewFrame.srcdoc = "";
+  redoStack =
+    [];
 
-  workspace.classList.remove("show");
-  codePanel.classList.remove("show");
-  visualPanel.classList.remove("show");
+  promptInput.value =
+    "";
+
+  editPrompt.value =
+    "";
+
+  code.value =
+    "";
+
+  previewFrame.srcdoc =
+    "";
+
+  workspace.classList.remove(
+    "show"
+  );
+
+  codePanel.classList.remove(
+    "show"
+  );
 
   localStorage.removeItem(
     "spdp_current_html"
@@ -1828,26 +2848,30 @@ $("clearBtn").onclick = function(){
   `;
 
   hideMessage();
+
 };
 
 
-/* =====================================================
-   KEYBOARD
-===================================================== */
+/* =========================================================
+KEYBOARD
+========================================================= */
 
 promptInput.addEventListener(
   "keydown",
   function(e){
 
     if(
-      (e.ctrlKey || e.metaKey) &&
+      (e.ctrlKey ||
+       e.metaKey) &&
       e.key === "Enter"
     ){
 
       e.preventDefault();
 
       generateWebsite();
+
     }
+
   }
 );
 
@@ -1857,51 +2881,64 @@ editPrompt.addEventListener(
   function(e){
 
     if(
-      (e.ctrlKey || e.metaKey) &&
+      (e.ctrlKey ||
+       e.metaKey) &&
       e.key === "Enter"
     ){
 
       e.preventDefault();
 
       editWebsite();
+
     }
+
   }
 );
 
 
-/* =====================================================
-   TAB SUPPORT
-===================================================== */
+/* =========================================================
+TAB IN CODE
+========================================================= */
 
 code.addEventListener(
   "keydown",
   function(e){
 
-    if(e.key !== "Tab") return;
+    if(
+      e.key === "Tab"
+    ){
 
-    e.preventDefault();
+      e.preventDefault();
 
-    const start =
-      this.selectionStart;
+      const start =
+        this.selectionStart;
 
-    const end =
-      this.selectionEnd;
+      const end =
+        this.selectionEnd;
 
-    this.value =
-      this.value.substring(0,start) +
-      "  " +
-      this.value.substring(end);
+      this.value =
+        this.value.substring(
+          0,
+          start
+        ) +
+        "  " +
+        this.value.substring(
+          end
+        );
 
-    this.selectionStart =
-      this.selectionEnd =
-      start + 2;
+      this.selectionStart =
+        this.selectionEnd =
+          start + 2;
+
+    }
+
   }
 );
 
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+/* =========================================================
+BUTTONS
+========================================================= */
 
 generateBtn.onclick =
   generateWebsite;
@@ -1910,49 +2947,59 @@ editBtn.onclick =
   editWebsite;
 
 
-/* =====================================================
-   PREVIEW LOAD
-===================================================== */
-
-previewFrame.addEventListener(
-  "load",
-  function(){
-
-    if(
-      visualPanel.classList.contains("show")
-    ){
-
-      enablePreviewSelection();
-    }
-  }
-);
-
-
-/* =====================================================
-   RESTORE PROJECT
-===================================================== */
+/* =========================================================
+LOAD
+========================================================= */
 
 window.addEventListener(
   "load",
   function(){
 
-    const saved =
-      localStorage.getItem(
-        "spdp_current_html"
+    try{
+
+      const saved =
+        localStorage.getItem(
+          "spdp_current_html"
+        );
+
+      const savedAssets =
+        localStorage.getItem(
+          "spdp_assets"
+        );
+
+      if(savedAssets){
+
+        assets =
+          JSON.parse(
+            savedAssets
+          );
+
+      }
+
+      if(
+        saved &&
+        validHTML(saved)
+      ){
+
+        renderHTML(
+          saved
+        );
+
+        addMessage(
+          "ai",
+          "✓ Previous project restored."
+        );
+
+      }
+
+    }catch(error){
+
+      console.error(
+        error
       );
 
-    if(
-      saved &&
-      validHTML(saved)
-    ){
-
-      renderHTML(saved);
-
-      addMessage(
-        "ai",
-        "✓ Previous project restored."
-      );
     }
+
   }
 );
 
