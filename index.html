@@ -2,33 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050505">
 <title>SPDP AI — Website Builder</title>
 
 <style>
-
 *{
   box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
   background:#050505;
   color:#fff;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 body{
@@ -46,7 +34,7 @@ button{
 }
 
 button:disabled{
-  opacity:.5;
+  opacity:.45;
   cursor:not-allowed;
 }
 
@@ -60,50 +48,42 @@ button:disabled{
   margin:auto;
 }
 
-
-/* =========================================================
-HEADER
-========================================================= */
+/* ================= HEADER ================= */
 
 header{
-  height:64px;
+  height:62px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid #191919;
+  border-bottom:1px solid #1a1a1a;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-weight:900;
+  gap:11px;
+  font-weight:850;
+  letter-spacing:-.02em;
 }
 
 .logo{
-  width:40px;
-  height:40px;
+  width:39px;
+  height:39px;
   border-radius:12px;
   display:grid;
   place-items:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #777
-    );
-
+  background:linear-gradient(135deg,#fff,#777);
   color:#000;
   font-weight:950;
+  box-shadow:0 0 35px rgba(255,255,255,.08);
 }
 
 .status{
-  font-size:12px;
-  color:#777;
   display:flex;
   align-items:center;
   gap:8px;
+  color:#777;
+  font-size:12px;
 }
 
 .dot{
@@ -111,138 +91,110 @@ header{
   height:7px;
   border-radius:50%;
   background:#4ade80;
-  box-shadow:
-    0 0 15px #4ade80;
+  box-shadow:0 0 15px #4ade80;
 }
 
-
-/* =========================================================
-HERO
-========================================================= */
+/* ================= HERO ================= */
 
 .hero{
   text-align:center;
-  padding:52px 0 28px;
+  padding:55px 0 28px;
 }
 
 .badge{
   display:inline-flex;
+  align-items:center;
+  gap:7px;
   padding:8px 14px;
   border:1px solid #242424;
   border-radius:999px;
   background:#0b0b0b;
-  color:#888;
+  color:#999;
   font-size:12px;
 }
 
 h1{
   margin:22px 0 15px;
-  font-size:
-    clamp(
-      48px,
-      8vw,
-      94px
-    );
-
-  line-height:.9;
-  letter-spacing:-.07em;
-
-  background:
-    linear-gradient(
-      180deg,
-      #fff,
-      #555
-    );
-
+  font-size:clamp(50px,8vw,94px);
+  line-height:.88;
+  letter-spacing:-.075em;
+  background:linear-gradient(180deg,#fff,#555);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  max-width:750px;
+  max-width:720px;
   margin:auto;
   color:#777;
   line-height:1.7;
 }
 
-
-/* =========================================================
-PROMPT
-========================================================= */
+/* ================= GENERATOR ================= */
 
 .panel{
   margin-top:30px;
-  padding:16px;
-
+  padding:15px;
   border:1px solid #202020;
   border-radius:24px;
-
-  background:
-    rgba(255,255,255,.025);
-
-  box-shadow:
-    0 30px 100px
-    rgba(0,0,0,.45);
-
+  background:rgba(255,255,255,.025);
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
   text-align:left;
 }
 
 .prompt{
   width:100%;
   min-height:145px;
-
   resize:vertical;
-
-  border:1px solid #1b1b1b;
+  border:1px solid #1c1c1c;
   border-radius:17px;
-
   background:#080808;
   color:#fff;
-
   padding:18px;
-
   outline:none;
-
   line-height:1.6;
 }
 
 .prompt:focus{
   border-color:#444;
+  box-shadow:0 0 0 3px rgba(255,255,255,.025);
 }
 
 .prompt::placeholder{
-  color:#444;
+  color:#414141;
 }
 
 .actions{
   display:flex;
-  justify-content:flex-end;
+  justify-content:space-between;
   gap:8px;
   margin-top:10px;
 }
 
+.actions-left,
+.actions-right{
+  display:flex;
+  gap:8px;
+}
+
 button{
   border-radius:11px;
-
-  padding:
-    10px 15px;
-
+  padding:10px 15px;
   border:1px solid #292929;
-
   background:#111;
   color:#fff;
-
   font-weight:750;
-
-  transition:
-    transform .15s,
-    background .15s;
+  transition:.16s ease;
 }
 
 button:hover{
-  transform:
-    translateY(-1px);
+  transform:translateY(-1px);
+  border-color:#444;
+}
+
+button:active{
+  transform:translateY(0);
 }
 
 .primary{
@@ -253,68 +205,48 @@ button:hover{
 
 .message{
   display:none;
-
   margin-top:12px;
   padding:13px;
-
   border-radius:12px;
-
   background:#101010;
   border:1px solid #292929;
-
   color:#aaa;
-
   white-space:pre-wrap;
   line-height:1.5;
+  font-size:13px;
 }
 
 .message.show{
   display:block;
 }
 
-
-/* =========================================================
-WORKSPACE
-========================================================= */
+/* ================= WORKSPACE ================= */
 
 .workspace{
   display:none;
-
   margin-top:25px;
-
   border:1px solid #202020;
   border-radius:22px;
-
   overflow:hidden;
-
   background:#070707;
-
-  box-shadow:
-    0 35px 100px
-    rgba(0,0,0,.5);
+  box-shadow:0 35px 100px rgba(0,0,0,.5);
 }
 
 .workspace.show{
   display:block;
 }
 
-
-/* =========================================================
-TOOLBAR
-========================================================= */
+/* ================= TOOLBAR ================= */
 
 .toolbar{
   min-height:62px;
-
   padding:10px;
-
   border-bottom:1px solid #202020;
-
   display:flex;
   justify-content:space-between;
-
   gap:8px;
   flex-wrap:wrap;
+  background:#080808;
 }
 
 .toolbar-left,
@@ -332,57 +264,86 @@ TOOLBAR
 }
 
 .device.active,
-.edit-preview.active{
+.mode.active{
   background:#fff;
   color:#000;
 }
 
-
-/* =========================================================
-PREVIEW
-========================================================= */
+/* ================= PREVIEW ================= */
 
 .preview-wrap{
-  min-height:720px;
-
-  padding:12px;
-
+  min-height:730px;
+  padding:14px;
   display:flex;
   justify-content:center;
   align-items:flex-start;
-
   background:
     radial-gradient(
-      circle at center,
-      #151515,
-      #030303 72%
+      circle at 50% 20%,
+      #171717,
+      #030303 70%
     );
+  overflow:auto;
+}
+
+.preview-stage{
+  width:100%;
+  min-height:700px;
+  display:flex;
+  justify-content:center;
+  perspective:1400px;
 }
 
 .preview-frame{
   width:100%;
   height:700px;
-
-  border:1px solid #292929;
+  border:1px solid #303030;
   border-radius:15px;
-
   background:#fff;
-
   box-shadow:
-    0 20px 80px
-    rgba(0,0,0,.5);
-
-  transition:.3s;
+    0 25px 100px rgba(0,0,0,.65),
+    0 0 0 1px rgba(255,255,255,.02);
+  transition:
+    width .3s ease,
+    transform .35s ease,
+    box-shadow .35s ease;
 }
 
+.preview-frame.three-d{
+  transform:
+    rotateX(1deg)
+    rotateY(0deg)
+    translateZ(0);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.75),
+    0 30px 50px rgba(0,0,0,.35);
+}
 
-/* =========================================================
-CODE PANEL
-========================================================= */
+.preview-frame.editable{
+  cursor:crosshair;
+}
+
+/* ================= EDIT OVERLAY ================= */
+
+.preview-overlay{
+  display:none;
+  position:absolute;
+  inset:14px;
+  pointer-events:none;
+  border:1px dashed rgba(255,255,255,.2);
+  border-radius:15px;
+}
+
+.preview-stage.edit-mode .preview-overlay{
+  display:block;
+}
+
+/* ================= CODE ================= */
 
 .code-panel{
   display:none;
   border-top:1px solid #202020;
+  background:#030303;
 }
 
 .code-panel.show{
@@ -391,40 +352,40 @@ CODE PANEL
 
 .code-head{
   padding:12px;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
-
   gap:10px;
-
   border-bottom:1px solid #202020;
+}
+
+.code-head-left{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.code-title{
+  font-size:13px;
+  font-weight:800;
+}
+
+.code-subtitle{
+  font-size:11px;
+  color:#555;
 }
 
 .code{
   display:block;
-
   width:100%;
   height:560px;
-
   resize:vertical;
-
   background:#020202;
-  color:#c9ced6;
-
+  color:#d5d9df;
   border:0;
-
   padding:18px;
-
-  font:
-    12px/1.6
-    Consolas,
-    Monaco,
-    "Courier New",
-    monospace;
-
+  font:12px/1.65 Consolas,Monaco,"Courier New",monospace;
   outline:none;
-
   tab-size:2;
 }
 
@@ -435,109 +396,75 @@ CODE PANEL
 
 .code-actions{
   padding:10px;
-
   display:flex;
   justify-content:flex-end;
-
   gap:8px;
-
   border-top:1px solid #181818;
 }
 
+/* ================= FILES ================= */
 
-/* =========================================================
-ASSETS
-========================================================= */
-
-.assets{
+.file-panel{
+  display:none;
   border-top:1px solid #202020;
+  padding:14px;
+  background:#080808;
 }
 
-.assets-head{
-  padding:13px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:10px;
-
-  border-bottom:1px solid #1b1b1b;
-}
-
-.assets-head strong{
-  font-size:14px;
-}
-
-.asset-list{
-  padding:12px;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(120px,1fr)
-    );
-
-  gap:10px;
-}
-
-.asset{
-  position:relative;
-
-  min-height:100px;
-
-  border:1px solid #252525;
-  border-radius:12px;
-
-  overflow:hidden;
-
-  background:#0b0b0b;
-
-  cursor:pointer;
-}
-
-.asset:hover{
-  border-color:#555;
-}
-
-.asset img{
-  width:100%;
-  height:80px;
-
-  object-fit:cover;
-
+.file-panel.show{
   display:block;
 }
 
-.asset-name{
-  padding:6px;
-
-  font-size:10px;
-
-  color:#888;
-
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.asset-file{
-  height:80px;
-
-  display:grid;
-  place-items:center;
-
+.file-drop{
+  border:1px dashed #333;
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
   color:#777;
-
-  font-size:24px;
+  transition:.2s;
 }
 
+.file-drop.drag{
+  border-color:#fff;
+  background:#111;
+}
 
-/* =========================================================
-CHAT
-========================================================= */
+.file-drop strong{
+  display:block;
+  color:#aaa;
+  margin-bottom:7px;
+}
+
+.file-list{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fill,minmax(150px,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+
+.file-item{
+  border:1px solid #222;
+  border-radius:12px;
+  overflow:hidden;
+  background:#0d0d0d;
+}
+
+.file-item img{
+  width:100%;
+  height:110px;
+  object-fit:cover;
+  display:block;
+}
+
+.file-info{
+  padding:8px;
+  font-size:11px;
+  color:#777;
+  word-break:break-word;
+}
+
+/* ================= CHAT ================= */
 
 .chat{
   border-top:1px solid #202020;
@@ -545,8 +472,10 @@ CHAT
 
 .chat-head{
   padding:15px;
-
   border-bottom:1px solid #1b1b1b;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .chat-head strong{
@@ -556,79 +485,55 @@ CHAT
 .chat-head span{
   color:#666;
   font-size:12px;
-  margin-left:8px;
 }
 
 .messages{
-  height:240px;
-
+  height:260px;
   overflow-y:auto;
-
   padding:15px;
-
   display:flex;
   flex-direction:column;
-
   gap:9px;
 }
 
 .msg{
   max-width:85%;
-
-  padding:
-    11px 13px;
-
+  padding:11px 13px;
   border-radius:13px;
-
   font-size:13px;
-
   white-space:pre-wrap;
-
   line-height:1.5;
 }
 
 .msg.user{
   align-self:flex-end;
-
   background:#fff;
   color:#000;
 }
 
 .msg.ai{
   align-self:flex-start;
-
   background:#111;
   color:#aaa;
-
   border:1px solid #222;
 }
 
 .chat-input{
   display:flex;
-
   gap:8px;
-
   padding:12px;
-
   border-top:1px solid #191919;
 }
 
 .edit-prompt{
   flex:1;
-
   height:48px;
-
   resize:none;
-
   border-radius:12px;
-
   border:1px solid #1c1c1c;
-
   background:#080808;
   color:#fff;
-
   padding:12px;
-
   outline:none;
 }
 
@@ -636,84 +541,74 @@ CHAT
   border-color:#444;
 }
 
-
-/* =========================================================
-FEATURES
-========================================================= */
+/* ================= FEATURES ================= */
 
 .features{
   display:grid;
-
   grid-template-columns:
     repeat(3,1fr);
-
   gap:12px;
-
   margin:35px 0;
 }
 
 .feature{
   padding:22px;
-
   border:1px solid #1c1c1c;
-
   border-radius:17px;
-
   background:#090909;
 }
 
 .feature h3{
-  margin:
-    0 0 8px;
+  margin:0 0 8px;
 }
 
 .feature p{
   margin:0;
-
   color:#666;
-
   line-height:1.6;
-
   font-size:13px;
 }
 
-
-/* =========================================================
-FOOTER
-========================================================= */
+/* ================= FOOTER ================= */
 
 footer{
   text-align:center;
-
   padding:35px;
-
   color:#444;
-
   font-size:12px;
 }
 
-
-/* =========================================================
-HIDDEN FILE INPUT
-========================================================= */
-
-#fileInput{
-  display:none;
-}
-
-
-/* =========================================================
-MOBILE
-========================================================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:760px){
 
   .app{
-    padding:12px;
+    padding:10px;
   }
 
   .status{
     display:none;
+  }
+
+  .hero{
+    padding-top:40px;
+  }
+
+  h1{
+    font-size:52px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions-left,
+  .actions-right{
+    width:100%;
+  }
+
+  .actions button{
+    flex:1;
   }
 
   .features{
@@ -722,6 +617,11 @@ MOBILE
 
   .preview-wrap{
     min-height:610px;
+    padding:8px;
+  }
+
+  .preview-stage{
+    min-height:590px;
   }
 
   .preview-frame{
@@ -749,43 +649,28 @@ MOBILE
     width:100%;
   }
 
-  .toolbar-left button,
-  .toolbar-right button{
+  .toolbar button{
     flex:1;
   }
 }
-
 </style>
 </head>
-
 
 <body>
 
 <main class="app">
-
 <div class="container">
-
 
 <header>
 
   <div class="brand">
-
-    <div class="logo">
-      S
-    </div>
-
-    <span>
-      SPDP AI
-    </span>
-
+    <div class="logo">S</div>
+    <span>SPDP AI</span>
   </div>
 
   <div class="status">
-
     <span class="dot"></span>
-
-    Workers AI Online
-
+    AI Builder Online
   </div>
 
 </header>
@@ -797,46 +682,50 @@ MOBILE
     ✦ AI Website · App · Game Builder
   </div>
 
-  <h1>
-    Build anything.
-  </h1>
+  <h1>Build anything.</h1>
 
   <p>
-    Generate a complete website with AI,
-    inspect and edit the real source code,
-    directly edit the live preview,
-    upload assets and continue modifying
-    your project with AI Sub-chat.
+    Create a complete website with AI, inspect and edit
+    the real source code, modify the current project with
+    AI Sub-chat, upload files and preview your project
+    instantly.
   </p>
-
 
   <div class="panel">
 
     <textarea
       id="prompt"
       class="prompt"
-      placeholder="Example: Create a premium black 3D gaming company website with animated hero, games, pricing, about and contact sections..."
+      placeholder="Describe what you want to build...
+
+Example:
+Create a premium black 3D gaming website for SPDP Digital Platform with animated hero, games section, pricing, about, testimonials and contact."
     ></textarea>
 
     <div class="actions">
 
-      <button id="clearBtn">
-        Clear
-      </button>
+      <div class="actions-left">
+        <button id="clearBtn">
+          Clear
+        </button>
 
-      <button
-        id="generateBtn"
-        class="primary"
-      >
-        Generate
-      </button>
+        <button id="fileBtn">
+          Files
+        </button>
+      </div>
+
+      <div class="actions-right">
+        <button
+          id="generateBtn"
+          class="primary"
+        >
+          Generate
+        </button>
+      </div>
 
     </div>
 
-    <div
-      id="message"
-      class="message"
-    ></div>
+    <div id="message" class="message"></div>
 
   </div>
 
@@ -848,238 +737,251 @@ MOBILE
   class="workspace"
 >
 
+  <!-- TOOLBAR -->
 
-<!-- ======================================================
-TOOLBAR
-======================================================= -->
+  <div class="toolbar">
 
-<div class="toolbar">
+    <div class="toolbar-left">
 
-  <div class="toolbar-left">
+      <span class="tool-title">
+        Workspace
+      </span>
 
-    <span class="tool-title">
-      Live Preview
-    </span>
+      <button
+        class="device active"
+        data-width="100%"
+      >
+        Desktop
+      </button>
 
-    <button
-      class="device active"
-      data-width="100%"
-    >
-      Desktop
-    </button>
+      <button
+        class="device"
+        data-width="768px"
+      >
+        Tablet
+      </button>
 
-    <button
-      class="device"
-      data-width="768px"
-    >
-      Tablet
-    </button>
+      <button
+        class="device"
+        data-width="390px"
+      >
+        Mobile
+      </button>
 
-    <button
-      class="device"
-      data-width="390px"
-    >
-      Mobile
-    </button>
+      <button
+        id="preview3DBtn"
+        class="mode active"
+      >
+        3D Preview
+      </button>
 
-    <button
-      id="previewEditBtn"
-      class="edit-preview"
-    >
-      ✎ Edit Preview
-    </button>
+      <button
+        id="codeBtn"
+      >
+        Code
+      </button>
 
-    <button id="codeBtn">
-      &lt;/&gt; Code
-    </button>
+      <button
+        id="filesToolbarBtn"
+      >
+        Files
+      </button>
 
-    <button id="filesBtn">
-      + Files
-    </button>
-
-  </div>
-
-
-  <div class="toolbar-right">
-
-    <button id="undoBtn">
-      Undo
-    </button>
-
-    <button id="redoBtn">
-      Redo
-    </button>
-
-    <button id="copyBtn">
-      Copy
-    </button>
-
-    <button id="downloadBtn">
-      Download
-    </button>
-
-    <button id="openBtn">
-      Open
-    </button>
-
-  </div>
-
-</div>
+    </div>
 
 
-<!-- ======================================================
-PREVIEW
-======================================================= -->
+    <div class="toolbar-right">
 
-<div class="preview-wrap">
+      <button id="undoBtn">
+        Undo
+      </button>
 
-  <iframe
-    id="previewFrame"
-    class="preview-frame"
-    title="Live Preview"
-    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-  ></iframe>
+      <button id="redoBtn">
+        Redo
+      </button>
 
-</div>
+      <button id="copyBtn">
+        Copy
+      </button>
 
+      <button id="downloadBtn">
+        Download
+      </button>
 
-<!-- ======================================================
-CODE
-======================================================= -->
+      <button id="openBtn">
+        Open
+      </button>
 
-<div
-  id="codePanel"
-  class="code-panel"
->
-
-  <div class="code-head">
-
-    <span class="tool-title">
-      HTML / CSS / JavaScript Editor
-    </span>
-
-    <button id="codeCopyBtn">
-      Copy Code
-    </button>
-
-  </div>
-
-
-  <textarea
-    id="code"
-    class="code"
-    spellcheck="false"
-    wrap="off"
-  ></textarea>
-
-
-  <div class="code-actions">
-
-    <button id="resetCodeBtn">
-      Reset
-    </button>
-
-    <button
-      id="applyCodeBtn"
-      class="primary"
-    >
-      Apply Code
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- ======================================================
-ASSETS
-======================================================= -->
-
-<div
-  id="assetsPanel"
-  class="assets"
-  style="display:none"
->
-
-  <div class="assets-head">
-
-    <strong>
-      Project Assets
-    </strong>
-
-    <button id="uploadBtn">
-      Upload Files
-    </button>
-
-  </div>
-
-  <div
-    id="assetList"
-    class="asset-list"
-  ></div>
-
-</div>
-
-
-<input
-  id="fileInput"
-  type="file"
-  multiple
-  accept="image/*,.txt,.css,.js,.json,.svg,.html"
-/>
-
-
-<!-- ======================================================
-CHAT
-======================================================= -->
-
-<div class="chat">
-
-  <div class="chat-head">
-
-    <strong>
-      AI Sub-chat
-    </strong>
-
-    <span>
-      Modify the current website
-    </span>
-
-  </div>
-
-
-  <div
-    id="messages"
-    class="messages"
-  >
-
-    <div class="msg ai">
-      Generate a website first.
-      Then ask me to modify it.
     </div>
 
   </div>
 
 
-  <div class="chat-input">
+  <!-- PREVIEW -->
 
-    <textarea
-      id="editPrompt"
-      class="edit-prompt"
-      placeholder="Example: Make the hero more premium, add 3D cards, improve animations, and add a portfolio section..."
-    ></textarea>
+  <div class="preview-wrap">
 
-    <button
-      id="editBtn"
-      class="primary"
+    <div
+      id="previewStage"
+      class="preview-stage"
     >
-      Apply Edit
-    </button>
+
+      <iframe
+        id="previewFrame"
+        class="preview-frame three-d"
+        title="Live Website Preview"
+        sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+      ></iframe>
+
+      <div class="preview-overlay"></div>
+
+    </div>
 
   </div>
 
-</div>
 
+  <!-- CODE -->
+
+  <div
+    id="codePanel"
+    class="code-panel"
+  >
+
+    <div class="code-head">
+
+      <div class="code-head-left">
+
+        <div class="code-title">
+          HTML / CSS / JavaScript
+        </div>
+
+        <div class="code-subtitle">
+          Edit the actual generated website source
+        </div>
+
+      </div>
+
+      <button id="codeCopyBtn">
+        Copy Code
+      </button>
+
+    </div>
+
+
+    <textarea
+      id="code"
+      class="code"
+      spellcheck="false"
+      wrap="off"
+    ></textarea>
+
+
+    <div class="code-actions">
+
+      <button id="resetCodeBtn">
+        Reset
+      </button>
+
+      <button
+        id="applyCodeBtn"
+        class="primary"
+      >
+        Apply Code
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- FILES -->
+
+  <div
+    id="filePanel"
+    class="file-panel"
+  >
+
+    <div
+      id="fileDrop"
+      class="file-drop"
+    >
+
+      <strong>
+        Drop images/files here
+      </strong>
+
+      <span>
+        or click to select files
+      </span>
+
+      <input
+        id="fileInput"
+        type="file"
+        multiple
+        hidden
+        accept="image/*,.svg,.json,.txt,.pdf"
+      />
+
+    </div>
+
+    <div
+      id="fileList"
+      class="file-list"
+    ></div>
+
+  </div>
+
+
+  <!-- AI SUB CHAT -->
+
+  <div class="chat">
+
+    <div class="chat-head">
+
+      <div>
+        <strong>
+          AI Sub-chat
+        </strong>
+
+        <span>
+          Modify current website
+        </span>
+      </div>
+
+    </div>
+
+
+    <div
+      id="messages"
+      class="messages"
+    >
+
+      <div class="msg ai">
+        Generate a website first.
+        Then tell me what you want changed.
+      </div>
+
+    </div>
+
+
+    <div class="chat-input">
+
+      <textarea
+        id="editPrompt"
+        class="edit-prompt"
+        placeholder="Example: Make the hero more premium, add 3D animated cards and improve the mobile design..."
+      ></textarea>
+
+      <button
+        id="editBtn"
+        class="primary"
+      >
+        Apply Edit
+      </button>
+
+    </div>
+
+  </div>
 
 </section>
 
@@ -1093,9 +995,8 @@ CHAT
     </h3>
 
     <p>
-      Generate complete websites,
-      applications and browser games
-      using Cloudflare Workers AI.
+      Generate a complete website from a natural-language
+      description.
     </p>
 
   </article>
@@ -1104,13 +1005,12 @@ CHAT
   <article class="feature">
 
     <h3>
-      &lt;/&gt; Real Code
+      🛠 Real Code
     </h3>
 
     <p>
-      Open the Code panel,
-      edit the actual HTML, CSS and JavaScript,
-      then apply it directly to the preview.
+      Open Code and edit the actual HTML, CSS and JavaScript
+      generated for your project.
     </p>
 
   </article>
@@ -1119,13 +1019,12 @@ CHAT
   <article class="feature">
 
     <h3>
-      ✨ Live AI Editing
+      ✨ AI Sub-chat
     </h3>
 
     <p>
-      Use AI Sub-chat to modify the
-      existing project without starting
-      from zero.
+      Ask AI to change the current project instead of
+      creating a completely new website.
     </p>
 
   </article>
@@ -1137,30 +1036,26 @@ CHAT
   SPDP AI · Digital Platform · 2026
 </footer>
 
-
 </div>
-
 </main>
 
 
 <script>
 
-/* =========================================================
-CONFIG
-========================================================= */
+/* =====================================================
+   CONFIG
+===================================================== */
 
 const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
 
-/* =========================================================
-ELEMENTS
-========================================================= */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-const $ =
-  id =>
-    document.getElementById(id);
-
+const $ = id =>
+  document.getElementById(id);
 
 const promptInput =
   $("prompt");
@@ -1180,6 +1075,9 @@ const workspace =
 const previewFrame =
   $("previewFrame");
 
+const previewStage =
+  $("previewStage");
+
 const code =
   $("code");
 
@@ -1192,22 +1090,22 @@ const messages =
 const message =
   $("message");
 
+const filePanel =
+  $("filePanel");
+
 const fileInput =
   $("fileInput");
 
-const assetsPanel =
-  $("assetsPanel");
+const fileDrop =
+  $("fileDrop");
 
-const assetList =
-  $("assetList");
-
-const previewEditBtn =
-  $("previewEditBtn");
+const fileList =
+  $("fileList");
 
 
-/* =========================================================
-STATE
-========================================================= */
+/* =====================================================
+   STATE
+===================================================== */
 
 let currentHTML = "";
 
@@ -1217,14 +1115,12 @@ let undoStack = [];
 
 let redoStack = [];
 
-let previewEditMode = false;
-
-let assets = [];
+let uploadedFiles = [];
 
 
-/* =========================================================
-MESSAGE
-========================================================= */
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 function showMessage(text){
 
@@ -1248,9 +1144,9 @@ function hideMessage(){
 }
 
 
-/* =========================================================
-HISTORY
-========================================================= */
+/* =====================================================
+   HISTORY
+===================================================== */
 
 function pushHistory(){
 
@@ -1272,14 +1168,77 @@ function pushHistory(){
 }
 
 
-/* =========================================================
-VALID HTML
-========================================================= */
+/* =====================================================
+   HTML CLEANER
+===================================================== */
+
+function cleanHTML(value){
+
+  let html =
+    String(value || "")
+      .trim();
+
+  html =
+    html.replace(
+      /^```(?:html)?\s*/i,
+      ""
+    );
+
+  html =
+    html.replace(
+      /\s*```$/i,
+      ""
+    );
+
+  const doctype =
+    html.search(
+      /<!doctype\s+html/i
+    );
+
+  const htmlStart =
+    html.search(
+      /<html[\s>]/i
+    );
+
+  let start = -1;
+
+  if(doctype !== -1){
+    start = doctype;
+  }else if(htmlStart !== -1){
+    start = htmlStart;
+  }
+
+  if(start > 0){
+    html =
+      html.substring(start);
+  }
+
+  const end =
+    html
+      .toLowerCase()
+      .lastIndexOf("</html>");
+
+  if(end !== -1){
+    html =
+      html.substring(
+        0,
+        end + 7
+      );
+  }
+
+  return html.trim();
+}
+
+
+/* =====================================================
+   VALID HTML
+===================================================== */
 
 function validHTML(html){
 
   if(
-    typeof html !== "string"
+    typeof html !== "string" ||
+    !html.trim()
   ){
     return false;
   }
@@ -1307,292 +1266,29 @@ function validHTML(html){
 }
 
 
-/* =========================================================
-CLEAN HTML
-========================================================= */
-
-function cleanHTML(html){
-
-  let result =
-    String(html || "")
-      .trim();
-
-  result =
-    result.replace(
-      /^```html\s*/i,
-      ""
-    );
-
-  result =
-    result.replace(
-      /^```\s*/i,
-      ""
-    );
-
-  result =
-    result.replace(
-      /\s*```\s*$/i,
-      ""
-    );
-
-  const lower =
-    result.toLowerCase();
-
-  let start =
-    lower.indexOf(
-      "<!doctype html"
-    );
-
-  if(start === -1){
-
-    start =
-      lower.indexOf(
-        "<html"
-      );
-
-  }
-
-  if(start > 0){
-
-    result =
-      result.substring(start);
-
-  }
-
-  const end =
-    result
-      .toLowerCase()
-      .lastIndexOf(
-        "</html>"
-      );
-
-  if(end !== -1){
-
-    result =
-      result.substring(
-        0,
-        end + 7
-      );
-
-  }
-
-  return result.trim();
-}
-
-
-/* =========================================================
-PREVIEW EDIT SCRIPT
-========================================================= */
-
-function buildPreviewHTML(html){
-
-  const injection = `
-
-<script>
-
-(function(){
-
-  let editing = false;
-
-  function send(){
-
-    try{
-
-      window.parent.postMessage({
-
-        type:"SPDP_PREVIEW_SAVE",
-
-        html:
-          "<!DOCTYPE html>" +
-          document.documentElement.outerHTML
-
-      },"*");
-
-    }catch(e){}
-
-  }
-
-
-  window.addEventListener(
-    "message",
-    function(event){
-
-      if(
-        !event.data ||
-        event.data.type !==
-          "SPDP_EDIT_MODE"
-      ){
-        return;
-      }
-
-      editing =
-        !!event.data.enabled;
-
-
-      document.body
-        .classList.toggle(
-          "spdp-editing",
-          editing
-        );
-
-
-      const all =
-        document.querySelectorAll(
-          "body *"
-        );
-
-
-      all.forEach(
-        function(el){
-
-          if(
-            el.tagName ===
-              "SCRIPT" ||
-            el.tagName ===
-              "STYLE" ||
-            el.tagName ===
-              "IFRAME"
-          ){
-            return;
-          }
-
-          if(
-            el.closest(
-              ".spdp-editor-ui"
-            )
-          ){
-            return;
-          }
-
-          if(
-            editing
-          ){
-
-            el.setAttribute(
-              "contenteditable",
-              "true"
-            );
-
-            el.style.cursor =
-              "text";
-
-          }else{
-
-            el.removeAttribute(
-              "contenteditable"
-            );
-
-            el.style.cursor =
-              "";
-
-          }
-
-        }
-      );
-
-    }
-  );
-
-
-  document.addEventListener(
-    "input",
-    function(){
-
-      if(editing){
-        clearTimeout(
-          window.__spdpSaveTimer
-        );
-
-        window.__spdpSaveTimer =
-          setTimeout(
-            send,
-            400
-          );
-      }
-
-    }
-  );
-
-
-  document.addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        editing &&
-        (
-          event.ctrlKey ||
-          event.metaKey
-        ) &&
-        event.key === "s"
-      ){
-
-        event.preventDefault();
-
-        send();
-
-      }
-
-    }
-  );
-
-
-})();
-
-</script>
-
-`;
-
-  const bodyIndex =
-    html.toLowerCase()
-      .lastIndexOf(
-        "</body>"
-      );
-
-  if(bodyIndex !== -1){
-
-    return (
-      html.substring(
-        0,
-        bodyIndex
-      ) +
-      injection +
-      html.substring(
-        bodyIndex
-      )
-    );
-
-  }
-
-  return html;
-}
-
-
-/* =========================================================
-RENDER
-========================================================= */
+/* =====================================================
+   RENDER
+===================================================== */
 
 function renderHTML(
   html,
-  addHistory = false
+  saveHistory = false
 ){
 
   const cleaned =
     cleanHTML(html);
 
-  if(
-    !validHTML(cleaned)
-  ){
+  if(!validHTML(cleaned)){
 
     showMessage(
-      "❌ Invalid HTML received."
+      "❌ AI returned invalid HTML."
     );
 
     return false;
   }
 
   if(
-    addHistory &&
+    saveHistory &&
     currentHTML &&
     cleaned !== currentHTML
   ){
@@ -1602,13 +1298,8 @@ function renderHTML(
   currentHTML =
     cleaned;
 
-  const previewHTML =
-    buildPreviewHTML(
-      currentHTML
-    );
-
   previewFrame.srcdoc =
-    previewHTML;
+    currentHTML;
 
   code.value =
     currentHTML;
@@ -1626,9 +1317,9 @@ function renderHTML(
 }
 
 
-/* =========================================================
-WORKER REQUEST
-========================================================= */
+/* =====================================================
+   WORKER REQUEST
+===================================================== */
 
 async function workerRequest(
   payload
@@ -1675,22 +1366,9 @@ async function workerRequest(
     !data.success
   ){
 
-    let error =
-      data.error ||
-      "AI request failed.";
-
-    if(
-      data.details
-    ){
-
-      error +=
-        "\n" +
-        data.details;
-
-    }
-
     throw new Error(
-      error
+      data.error ||
+      "AI request failed."
     );
   }
 
@@ -1698,9 +1376,9 @@ async function workerRequest(
 }
 
 
-/* =========================================================
-GENERATE
-========================================================= */
+/* =====================================================
+   GENERATE
+===================================================== */
 
 async function generateWebsite(){
 
@@ -1724,7 +1402,7 @@ async function generateWebsite(){
     true;
 
   generateBtn.textContent =
-    "AI Generating...";
+    "Generating...";
 
   try{
 
@@ -1736,9 +1414,11 @@ async function generateWebsite(){
     const data =
       await workerRequest({
 
-        action:"create",
+        action:
+          "create",
 
-        prompt:text
+        prompt:
+          text
 
       });
 
@@ -1747,18 +1427,14 @@ async function generateWebsite(){
         data.html
       );
 
-    if(
-      !validHTML(html)
-    ){
+    if(!validHTML(html)){
 
       throw new Error(
         "AI returned invalid HTML."
       );
-
     }
 
     undoStack = [];
-
     redoStack = [];
 
     originalHTML =
@@ -1770,7 +1446,7 @@ async function generateWebsite(){
 
     addMessage(
       "ai",
-      "✓ Website generated."
+      "✓ Website generated successfully."
       +
       (
         data.model
@@ -1805,14 +1481,13 @@ async function generateWebsite(){
 
     generateBtn.textContent =
       "Generate";
-
   }
 }
 
 
-/* =========================================================
-AI EDIT
-========================================================= */
+/* =====================================================
+   AI EDIT
+===================================================== */
 
 async function editWebsite(){
 
@@ -1835,6 +1510,9 @@ async function editWebsite(){
     return;
   }
 
+  const oldHTML =
+    currentHTML;
+
   addMessage(
     "user",
     instruction
@@ -1853,19 +1531,17 @@ async function editWebsite(){
 
   try{
 
-    const oldHTML =
-      currentHTML;
-
     const data =
       await workerRequest({
 
-        action:"edit",
+        action:
+          "edit",
 
         prompt:
           instruction,
 
         currentHTML:
-          oldHTML
+          currentHTML
 
       });
 
@@ -1874,17 +1550,18 @@ async function editWebsite(){
         data.html
       );
 
-    if(
-      !validHTML(html)
-    ){
+    if(!validHTML(html)){
 
       throw new Error(
         "AI returned invalid HTML."
       );
-
     }
 
-    pushHistory();
+    undoStack.push(
+      oldHTML
+    );
+
+    redoStack = [];
 
     renderHTML(
       html
@@ -1892,7 +1569,7 @@ async function editWebsite(){
 
     addMessage(
       "ai",
-      "✓ Website updated."
+      "✓ Website updated successfully."
       +
       (
         data.model
@@ -1903,6 +1580,15 @@ async function editWebsite(){
     );
 
   }catch(error){
+
+    currentHTML =
+      oldHTML;
+
+    code.value =
+      oldHTML;
+
+    previewFrame.srcdoc =
+      oldHTML;
 
     addMessage(
       "ai",
@@ -1922,14 +1608,13 @@ async function editWebsite(){
 
     editBtn.textContent =
       "Apply Edit";
-
   }
 }
 
 
-/* =========================================================
-CHAT
-========================================================= */
+/* =====================================================
+   CHAT
+===================================================== */
 
 function addMessage(
   type,
@@ -1957,9 +1642,9 @@ function addMessage(
 }
 
 
-/* =========================================================
-UNDO
-========================================================= */
+/* =====================================================
+   UNDO
+===================================================== */
 
 $("undoBtn").onclick =
 function(){
@@ -1985,13 +1670,12 @@ function(){
   renderHTML(
     previous
   );
-
 };
 
 
-/* =========================================================
-REDO
-========================================================= */
+/* =====================================================
+   REDO
+===================================================== */
 
 $("redoBtn").onclick =
 function(){
@@ -2017,13 +1701,12 @@ function(){
   renderHTML(
     next
   );
-
 };
 
 
-/* =========================================================
-CODE PANEL
-========================================================= */
+/* =====================================================
+   CODE PANEL
+===================================================== */
 
 $("codeBtn").onclick =
 function(){
@@ -2054,15 +1737,13 @@ function(){
       () => code.focus(),
       50
     );
-
   }
-
 };
 
 
-/* =========================================================
-APPLY CODE
-========================================================= */
+/* =====================================================
+   APPLY CODE
+===================================================== */
 
 $("applyCodeBtn").onclick =
 function(){
@@ -2089,8 +1770,10 @@ function(){
   ){
 
     showMessage(
-      "❌ Invalid HTML.\n" +
-      "The document must contain html, head and body."
+      "❌ Invalid HTML.\n\n" +
+      "Your document must contain:\n" +
+      "<html>\n<head>\n<body>\n" +
+      "and closing tags."
     );
 
     return;
@@ -2121,30 +1804,32 @@ function(){
   showMessage(
     "✓ Code applied successfully."
   );
-
 };
 
 
-/* =========================================================
-RESET CODE
-========================================================= */
+/* =====================================================
+   RESET CODE
+===================================================== */
 
 $("resetCodeBtn").onclick =
 function(){
+
+  if(!currentHTML){
+    return;
+  }
 
   code.value =
     currentHTML;
 
   showMessage(
-    "Code editor reset."
+    "Code editor reset to current preview."
   );
-
 };
 
 
-/* =========================================================
-COPY
-========================================================= */
+/* =====================================================
+   COPY
+===================================================== */
 
 async function copyText(
   text
@@ -2199,7 +1884,6 @@ async function copyText(
     showMessage(
       "✓ Copied."
     );
-
   }
 }
 
@@ -2218,9 +1902,9 @@ $("codeCopyBtn").onclick =
   );
 
 
-/* =========================================================
-DOWNLOAD
-========================================================= */
+/* =====================================================
+   DOWNLOAD
+===================================================== */
 
 $("downloadBtn").onclick =
 function(){
@@ -2274,13 +1958,12 @@ function(){
       ),
     1000
   );
-
 };
 
 
-/* =========================================================
-OPEN
-========================================================= */
+/* =====================================================
+   OPEN
+===================================================== */
 
 $("openBtn").onclick =
 function(){
@@ -2312,13 +1995,12 @@ function(){
     url,
     "_blank"
   );
-
 };
 
 
-/* =========================================================
-DEVICE PREVIEW
-========================================================= */
+/* =====================================================
+   DEVICES
+===================================================== */
 
 document
 .querySelectorAll(
@@ -2355,442 +2037,199 @@ document
         width === "100%"
           ? "0"
           : "0 auto";
-
     };
-
   }
 );
 
 
-/* =========================================================
-PREVIEW EDIT MODE
-========================================================= */
+/* =====================================================
+   3D PREVIEW
+===================================================== */
 
-previewEditBtn.onclick =
+$("preview3DBtn").onclick =
 function(){
 
-  if(!currentHTML){
-
-    showMessage(
-      "Generate a website first."
-    );
-
-    return;
-  }
-
-  previewEditMode =
-    !previewEditMode;
-
-  previewEditBtn.classList.toggle(
-    "active",
-    previewEditMode
+  previewFrame.classList.toggle(
+    "three-d"
   );
 
-  previewEditBtn.textContent =
-    previewEditMode
-      ? "✓ Editing Preview"
-      : "✎ Edit Preview";
-
-  previewFrame.contentWindow.postMessage(
-    {
-      type:
-        "SPDP_EDIT_MODE",
-
-      enabled:
-        previewEditMode
-    },
-    "*"
+  this.classList.toggle(
+    "active"
   );
-
-  if(previewEditMode){
-
-    showMessage(
-      "Preview edit mode ON. Click text or elements inside the preview and edit them."
-    );
-
-  }else{
-
-    showMessage(
-      "Preview edit mode OFF."
-    );
-
-  }
-
 };
 
 
-/* =========================================================
-PREVIEW SAVE MESSAGE
-========================================================= */
+/* =====================================================
+   FILE PANEL
+===================================================== */
 
-window.addEventListener(
-  "message",
-  function(event){
+function toggleFiles(){
 
-    if(
-      !event.data ||
-      event.data.type !==
-        "SPDP_PREVIEW_SAVE"
-    ){
-      return;
-    }
+  filePanel.classList.toggle(
+    "show"
+  );
+}
 
-    const html =
-      cleanHTML(
-        event.data.html || ""
-      );
+$("fileBtn").onclick =
+toggleFiles;
 
-    if(
-      !validHTML(html)
-    ){
-      return;
-    }
-
-    if(
-      html === currentHTML
-    ){
-      return;
-    }
-
-    pushHistory();
-
-    currentHTML =
-      html;
-
-    code.value =
-      html;
-
-    localStorage.setItem(
-      "spdp_current_html",
-      html
-    );
-
-  }
-);
+$("filesToolbarBtn").onclick =
+toggleFiles;
 
 
-/* =========================================================
-FILES
-========================================================= */
-
-$("filesBtn").onclick =
-function(){
-
-  assetsPanel.style.display =
-    assetsPanel.style.display ===
-      "none"
-      ? "block"
-      : "none";
-
-  renderAssets();
-
-};
-
-
-$("uploadBtn").onclick =
+fileDrop.onclick =
 function(){
 
   fileInput.click();
-
 };
 
 
-fileInput.addEventListener(
-  "change",
-  async function(){
+fileDrop.addEventListener(
+  "dragover",
+  e => {
 
-    const files =
-      Array.from(
-        this.files || []
-      );
+    e.preventDefault();
 
-    for(
-      const file of files
-    ){
-
-      await addAsset(
-        file
-      );
-
-    }
-
-    renderAssets();
-
-    this.value =
-      "";
-
+    fileDrop.classList.add(
+      "drag"
+    );
   }
 );
 
 
-/* =========================================================
-ADD ASSET
-========================================================= */
+fileDrop.addEventListener(
+  "dragleave",
+  () => {
 
-async function addAsset(
-  file
-){
+    fileDrop.classList.remove(
+      "drag"
+    );
+  }
+);
 
-  if(
-    file.size >
-    5 * 1024 * 1024
-  ){
 
-    showMessage(
-      file.name +
-      " is larger than 5MB."
+fileDrop.addEventListener(
+  "drop",
+  e => {
+
+    e.preventDefault();
+
+    fileDrop.classList.remove(
+      "drag"
     );
 
-    return;
+    handleFiles(
+      e.dataTransfer.files
+    );
   }
+);
 
-  const reader =
-    new FileReader();
 
-  await new Promise(
-    resolve => {
+fileInput.onchange =
+function(){
 
-      reader.onload =
-      function(){
+  handleFiles(
+    this.files
+  );
 
-        assets.push({
+  this.value =
+    "";
+};
 
-          name:
-            file.name,
 
-          type:
-            file.type,
+function handleFiles(
+  files
+){
 
-          size:
-            file.size,
+  [...files].forEach(
+    file => {
 
-          data:
-            reader.result
+      if(
+        uploadedFiles.some(
+          x =>
+            x.name === file.name &&
+            x.size === file.size
+        )
+      ){
+        return;
+      }
 
-        });
-
-        localStorage.setItem(
-          "spdp_assets",
-          JSON.stringify(
-            assets
-          )
-        );
-
-        resolve();
-
-      };
-
-      reader.readAsDataURL(
+      uploadedFiles.push(
         file
       );
 
-    }
-  );
-
-}
-
-
-/* =========================================================
-RENDER ASSETS
-========================================================= */
-
-function renderAssets(){
-
-  assetList.innerHTML =
-    "";
-
-  if(!assets.length){
-
-    assetList.innerHTML = `
-      <div
-        style="
-          grid-column:1/-1;
-          padding:25px;
-          text-align:center;
-          color:#555;
-          font-size:12px;
-        "
-      >
-        No uploaded files yet.
-        Click "Upload Files".
-      </div>
-    `;
-
-    return;
-  }
-
-  assets.forEach(
-    function(asset,index){
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-      div.className =
-        "asset";
-
-      if(
-        asset.type.startsWith(
-          "image/"
-        )
-      ){
-
-        div.innerHTML = `
-
-          <img
-            src="${asset.data}"
-            alt=""
-          >
-
-          <div class="asset-name">
-            ${escapeHTML(asset.name)}
-          </div>
-
-        `;
-
-      }else{
-
-        div.innerHTML = `
-
-          <div class="asset-file">
-            📄
-          </div>
-
-          <div class="asset-name">
-            ${escapeHTML(asset.name)}
-          </div>
-
-        `;
-
-      }
-
-      div.title =
-        "Click to insert into code";
-
-      div.onclick =
-        function(){
-
-          insertAsset(
-            asset
-          );
-
-        };
-
-      assetList.appendChild(
-        div
+      renderFile(
+        file
       );
-
     }
   );
 
+  if(uploadedFiles.length){
+
+    filePanel.classList.add(
+      "show"
+    );
+  }
 }
 
 
-/* =========================================================
-INSERT ASSET
-========================================================= */
-
-function insertAsset(
-  asset
+function renderFile(
+  file
 ){
 
-  if(!currentHTML){
-
-    showMessage(
-      "Generate a website first."
+  const item =
+    document.createElement(
+      "div"
     );
 
-    return;
-  }
-
-  const start =
-    code.selectionStart;
-
-  const end =
-    code.selectionEnd;
-
-  let snippet = "";
+  item.className =
+    "file-item";
 
   if(
-    asset.type.startsWith(
+    file.type.startsWith(
       "image/"
     )
   ){
 
-    snippet =
-      `<img src="${asset.data}" alt="${escapeHTML(asset.name)}">`;
+    const img =
+      document.createElement(
+        "img"
+      );
 
-  }else{
+    img.src =
+      URL.createObjectURL(
+        file
+      );
 
-    snippet =
-      `<!-- ${escapeHTML(asset.name)} uploaded asset -->`;
-
+    item.appendChild(
+      img
+    );
   }
 
-  const value =
-    code.value;
-
-  code.value =
-    value.substring(
-      0,
-      start
-    ) +
-    snippet +
-    value.substring(
-      end
+  const info =
+    document.createElement(
+      "div"
     );
 
-  code.focus();
+  info.className =
+    "file-info";
 
-  code.selectionStart =
-    code.selectionEnd =
-      start +
-      snippet.length;
+  info.textContent =
+    file.name;
 
-  showMessage(
-    "✓ Asset inserted into code. Click Apply Code."
+  item.appendChild(
+    info
   );
 
+  fileList.appendChild(
+    item
+  );
 }
 
 
-/* =========================================================
-ESCAPE
-========================================================= */
-
-function escapeHTML(
-  value
-){
-
-  return String(value)
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =========================================================
-CLEAR
-========================================================= */
+/* =====================================================
+   CLEAR
+===================================================== */
 
 $("clearBtn").onclick =
 function(){
@@ -2801,7 +2240,6 @@ function(){
       "Clear current project?"
     )
   ){
-
     return;
   }
 
@@ -2815,6 +2253,9 @@ function(){
     [];
 
   redoStack =
+    [];
+
+  uploadedFiles =
     [];
 
   promptInput.value =
@@ -2837,6 +2278,13 @@ function(){
     "show"
   );
 
+  filePanel.classList.remove(
+    "show"
+  );
+
+  fileList.innerHTML =
+    "";
+
   localStorage.removeItem(
     "spdp_current_html"
   );
@@ -2848,13 +2296,12 @@ function(){
   `;
 
   hideMessage();
-
 };
 
 
-/* =========================================================
-KEYBOARD
-========================================================= */
+/* =====================================================
+   KEYBOARD
+===================================================== */
 
 promptInput.addEventListener(
   "keydown",
@@ -2869,9 +2316,7 @@ promptInput.addEventListener(
       e.preventDefault();
 
       generateWebsite();
-
     }
-
   }
 );
 
@@ -2889,24 +2334,20 @@ editPrompt.addEventListener(
       e.preventDefault();
 
       editWebsite();
-
     }
-
   }
 );
 
 
-/* =========================================================
-TAB IN CODE
-========================================================= */
+/* =====================================================
+   CODE TAB
+===================================================== */
 
 code.addEventListener(
   "keydown",
   function(e){
 
-    if(
-      e.key === "Tab"
-    ){
+    if(e.key === "Tab"){
 
       e.preventDefault();
 
@@ -2920,8 +2361,10 @@ code.addEventListener(
         this.value.substring(
           0,
           start
-        ) +
-        "  " +
+        )
+        +
+        "  "
+        +
         this.value.substring(
           end
         );
@@ -2929,16 +2372,14 @@ code.addEventListener(
       this.selectionStart =
         this.selectionEnd =
           start + 2;
-
     }
-
   }
 );
 
 
-/* =========================================================
-BUTTONS
-========================================================= */
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 generateBtn.onclick =
   generateWebsite;
@@ -2947,59 +2388,53 @@ editBtn.onclick =
   editWebsite;
 
 
-/* =========================================================
-LOAD
-========================================================= */
+/* =====================================================
+   AUTO SAVE CODE WHILE TYPING
+===================================================== */
+
+code.addEventListener(
+  "input",
+  function(){
+
+    if(
+      this.value.length > 20
+    ){
+      localStorage.setItem(
+        "spdp_code_draft",
+        this.value
+      );
+    }
+  }
+);
+
+
+/* =====================================================
+   LOAD SAVED PROJECT
+===================================================== */
 
 window.addEventListener(
   "load",
   function(){
 
-    try{
-
-      const saved =
-        localStorage.getItem(
-          "spdp_current_html"
-        );
-
-      const savedAssets =
-        localStorage.getItem(
-          "spdp_assets"
-        );
-
-      if(savedAssets){
-
-        assets =
-          JSON.parse(
-            savedAssets
-          );
-
-      }
-
-      if(
-        saved &&
-        validHTML(saved)
-      ){
-
-        renderHTML(
-          saved
-        );
-
-        addMessage(
-          "ai",
-          "✓ Previous project restored."
-        );
-
-      }
-
-    }catch(error){
-
-      console.error(
-        error
+    const saved =
+      localStorage.getItem(
+        "spdp_current_html"
       );
 
-    }
+    if(
+      saved &&
+      validHTML(saved)
+    ){
 
+      renderHTML(
+        saved
+      );
+
+      addMessage(
+        "ai",
+        "✓ Previous project restored."
+      );
+    }
   }
 );
 
