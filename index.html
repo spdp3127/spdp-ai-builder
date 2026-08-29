@@ -14,24 +14,26 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      overflow-y: auto;
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: #050505;
+      color: #ffffff;
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
-      background: #070707;
-      color: #fff;
-      font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
     }
 
     button,
@@ -51,93 +53,92 @@
     }
 
     .topbar {
-      min-height: 70px;
-      padding: 12px 18px;
+      height: 64px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      padding: 0 20px;
       border-bottom: 1px solid #202020;
-      background: rgba(8, 8, 8, 0.96);
+      background: rgba(5, 5, 5, 0.94);
+      backdrop-filter: blur(18px);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(16px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
       font-weight: 800;
-      letter-spacing: -0.4px;
+      letter-spacing: -0.5px;
     }
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      background:
-        linear-gradient(
-          135deg,
-          #fff,
-          #777
-        );
-      color: #000;
-      font-weight: 1000;
-      box-shadow:
-        0 0 30px rgba(255,255,255,.12);
+      background: linear-gradient(
+        135deg,
+        #ffffff,
+        #777777
+      );
+      color: #000000;
+      font-size: 14px;
+      font-weight: 900;
     }
 
-    .brand small {
-      display: block;
-      color: #777;
-      font-size: 10px;
-      margin-top: 2px;
-      font-weight: 500;
+    .brand span {
+      font-size: 17px;
     }
 
     .status {
       display: flex;
       align-items: center;
       gap: 7px;
-      color: #aaa;
       font-size: 12px;
+      color: #9b9b9b;
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #42ff88;
-      box-shadow: 0 0 12px #42ff88;
+      background: #38e879;
+      box-shadow: 0 0 12px rgba(56, 232, 121, 0.8);
     }
 
-    .main {
+    .workspace {
       flex: 1;
+      min-height: calc(100vh - 64px);
       display: grid;
-      grid-template-columns: 360px minmax(0, 1fr);
-      min-height: calc(100vh - 70px);
+      grid-template-columns: 390px minmax(0, 1fr);
     }
 
     .sidebar {
+      min-width: 0;
       border-right: 1px solid #202020;
-      background: #0b0b0b;
-      padding: 18px;
+      background: #080808;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      min-width: 0;
+      overflow-y: auto;
     }
 
-    .label {
-      color: #8e8e8e;
-      font-size: 11px;
-      font-weight: 800;
+    .panel {
+      padding: 20px;
+      border-bottom: 1px solid #1b1b1b;
+    }
+
+    .panel-title {
+      margin-bottom: 12px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.4px;
+      color: #858585;
+      font-weight: 800;
     }
 
     textarea {
@@ -145,160 +146,205 @@
       min-height: 170px;
       resize: vertical;
       border: 1px solid #292929;
-      border-radius: 16px;
-      outline: none;
-      background: #111;
-      color: #fff;
+      border-radius: 14px;
       padding: 15px;
+      background: #101010;
+      color: #ffffff;
+      outline: none;
       line-height: 1.55;
-      font-size: 13px;
     }
 
     textarea:focus {
-      border-color: #555;
+      border-color: #555555;
       box-shadow:
-        0 0 0 3px rgba(255,255,255,.04);
+        0 0 0 3px rgba(255,255,255,0.04);
     }
 
-    .generate {
+    textarea::placeholder {
+      color: #666666;
+    }
+
+    .primary {
       width: 100%;
+      margin-top: 12px;
       border: 0;
-      border-radius: 14px;
-      padding: 14px 16px;
-      background: #fff;
-      color: #000;
-      font-weight: 900;
-      transition: .2s ease;
+      border-radius: 13px;
+      padding: 13px 16px;
+      background: #ffffff;
+      color: #000000;
+      font-weight: 800;
+      transition: transform .15s, opacity .15s;
     }
 
-    .generate:hover {
+    .primary:hover {
       transform: translateY(-1px);
-      box-shadow:
-        0 12px 35px rgba(255,255,255,.12);
     }
 
-    .generate:disabled {
+    .primary:disabled {
       opacity: .5;
       cursor: wait;
       transform: none;
     }
 
-    .subchat {
-      margin-top: 4px;
-      padding-top: 16px;
-      border-top: 1px solid #202020;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .subchat textarea {
-      min-height: 105px;
-    }
-
-    .edit-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-    }
-
-    .edit-btn,
     .secondary {
       border: 1px solid #292929;
-      border-radius: 12px;
-      padding: 11px 14px;
-      background: #151515;
-      color: #fff;
-      font-weight: 700;
+      border-radius: 11px;
+      padding: 10px 13px;
+      background: #111111;
+      color: #ffffff;
+      transition: background .15s;
     }
 
-    .edit-btn:hover,
     .secondary:hover {
-      background: #202020;
+      background: #191919;
     }
 
-    .workspace {
-      min-width: 0;
+    .button-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .button-row.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .chat {
       display: flex;
       flex-direction: column;
-      background: #080808;
+      min-height: 320px;
     }
 
-    .toolbar {
-      min-height: 58px;
+    .chat-log {
+      min-height: 100px;
+      max-height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      border-radius: 11px;
+      padding: 10px 11px;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .message.ai {
+      background: #111111;
+      border: 1px solid #202020;
+      color: #cfcfcf;
+    }
+
+    .message.user {
+      background: #ffffff;
+      color: #000000;
+      align-self: flex-end;
+      max-width: 90%;
+    }
+
+    .chat-input {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .preview-area {
+      min-width: 0;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      background: #111111;
+    }
+
+    .preview-toolbar {
+      height: 54px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-bottom: 1px solid #202020;
-      overflow-x: auto;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #222222;
+      background: #0b0b0b;
     }
 
-    .toolbar button {
-      white-space: nowrap;
+    .view-buttons,
+    .action-buttons {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    .view-btn {
-      border: 1px solid #292929;
-      border-radius: 10px;
-      padding: 9px 12px;
-      background: #111;
-      color: #aaa;
+    .toolbar-button {
+      border: 1px solid #282828;
+      background: #111111;
+      color: #cccccc;
+      padding: 8px 11px;
+      border-radius: 9px;
       font-size: 12px;
-      font-weight: 700;
     }
 
-    .view-btn.active,
-    .view-btn:hover {
-      color: #fff;
-      background: #1a1a1a;
+    .toolbar-button.active,
+    .toolbar-button:hover {
+      background: #222222;
+      color: #ffffff;
     }
 
-    .spacer {
+    .preview-frame {
       flex: 1;
-    }
-
-    .preview-wrap {
-      flex: 1;
-      min-height: 600px;
+      min-height: 0;
       position: relative;
-      background: #111;
-      overflow: hidden;
+      background: #ffffff;
     }
 
     iframe {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      min-height: 600px;
-      display: block;
       border: 0;
-      background: #fff;
+      background: #ffffff;
     }
 
     .code-panel {
-      display: none;
       position: absolute;
       inset: 0;
-      overflow: auto;
       background: #050505;
-      color: #e7e7e7;
-      padding: 22px;
+      display: none;
+      flex-direction: column;
     }
 
     .code-panel.show {
-      display: block;
+      display: flex;
     }
 
-    pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-word;
+    .code-header {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      border-bottom: 1px solid #222222;
+      color: #888888;
+      font-size: 12px;
+    }
+
+    #codeOutput {
+      flex: 1;
+      width: 100%;
+      resize: none;
+      border: 0;
+      border-radius: 0;
+      background: #050505;
+      color: #d8d8d8;
       font-family:
+        "Cascadia Code",
         Consolas,
-        Monaco,
         monospace;
       font-size: 12px;
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     .empty {
@@ -306,7 +352,7 @@
       inset: 0;
       display: grid;
       place-items: center;
-      color: #666;
+      color: #777777;
       text-align: center;
       padding: 30px;
       pointer-events: none;
@@ -314,68 +360,70 @@
 
     .empty strong {
       display: block;
-      color: #aaa;
+      color: #ffffff;
       font-size: 20px;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     .error {
-      margin-top: 2px;
-      padding: 11px 12px;
-      border-radius: 12px;
-      background: #241010;
-      border: 1px solid #4b2020;
-      color: #ff9c9c;
+      color: #ff7676;
       font-size: 12px;
-      line-height: 1.45;
-      display: none;
+      margin-top: 10px;
+      line-height: 1.5;
+      white-space: pre-wrap;
     }
 
-    .error.show {
-      display: block;
-    }
-
-    .provider {
-      color: #777;
-      font-size: 10px;
-      text-align: center;
+    .hidden {
+      display: none !important;
     }
 
     @media (max-width: 900px) {
-      .main {
+      .workspace {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
         border-right: 0;
         border-bottom: 1px solid #202020;
+        max-height: none;
       }
 
-      .preview-wrap,
-      iframe {
-        min-height: 70vh;
+      .preview-area {
+        height: 75vh;
+        min-height: 550px;
       }
     }
 
     @media (max-width: 600px) {
       .topbar {
-        padding: 10px 12px;
+        padding: 0 12px;
       }
 
       .status {
         display: none;
       }
 
-      .sidebar {
-        padding: 13px;
+      .panel {
+        padding: 14px;
       }
 
-      .edit-row {
+      .button-row.three {
         grid-template-columns: 1fr;
       }
 
-      .toolbar {
-        padding: 8px;
+      .preview-toolbar {
+        height: auto;
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .view-buttons,
+      .action-buttons {
+        width: 100%;
+      }
+
+      .toolbar-button {
+        flex: 1;
       }
     }
   </style>
@@ -387,11 +435,8 @@
 
   <header class="topbar">
     <div class="brand">
-      <div class="brand-logo">S</div>
-      <div>
-        SPDP AI
-        <small>Website · App · Game Builder</small>
-      </div>
+      <div class="logo">S</div>
+      <span>SPDP AI</span>
     </div>
 
     <div class="status">
@@ -400,117 +445,182 @@
     </div>
   </header>
 
-  <main class="main">
+  <main class="workspace">
 
     <aside class="sidebar">
 
-      <div class="label">Create</div>
+      <section class="panel">
 
-      <textarea
-        id="prompt"
-        placeholder="Describe the website you want...
-
-Example:
-Create a premium black 3D gaming website with an animated hero, games section, features, pricing and footer."
-      ></textarea>
-
-      <button
-        class="generate"
-        id="generateBtn"
-      >
-        ✦ Generate Website
-      </button>
-
-      <div
-        class="error"
-        id="errorBox"
-      ></div>
-
-      <div class="subchat">
-
-        <div class="label">
-          Sub-chat Edit
+        <div class="panel-title">
+          Create Website
         </div>
 
         <textarea
-          id="editPrompt"
-          placeholder="Example:
-Make the hero blue, add a pricing section, change the navbar..."
+          id="prompt"
+          placeholder="Describe the website you want...
+
+Example:
+Create a premium black 3D gaming website for SPDP AI with a hero section, animated Three.js scene, features, pricing, testimonials, FAQ and footer."
         ></textarea>
 
-        <div class="edit-row">
+        <button
+          id="generateBtn"
+          class="primary"
+        >
+          Generate Website
+        </button>
+
+        <div
+          id="mainError"
+          class="error hidden"
+        ></div>
+
+      </section>
+
+      <section class="panel">
+
+        <div class="panel-title">
+          Website Controls
+        </div>
+
+        <div class="button-row">
 
           <button
-            class="edit-btn"
-            id="editBtn"
-          >
-            ✦ Update Website
-          </button>
-
-          <button
+            id="copyBtn"
             class="secondary"
-            id="clearBtn"
           >
-            Clear
+            Copy Code
           </button>
 
+          <button
+            id="downloadBtn"
+            class="secondary"
+          >
+            Download
+          </button>
+
+        </div>
+
+        <div class="button-row">
+
+          <button
+            id="undoBtn"
+            class="secondary"
+          >
+            Undo
+          </button>
+
+          <button
+            id="redoBtn"
+            class="secondary"
+          >
+            Redo
+          </button>
+
+        </div>
+
+      </section>
+
+      <section class="panel chat">
+
+        <div class="panel-title">
+          Sub-chat Edit
         </div>
 
         <div
-          class="provider"
-          id="provider"
+          id="chatLog"
+          class="chat-log"
         >
-          Ready
+          <div class="message ai">
+            Generate a website first. Then tell me what you want to change.
+
+Example:
+"Make the hero section blue and add animated cards."
+          </div>
+        </div>
+
+        <textarea
+          id="chatInput"
+          class="chat-input"
+          placeholder="Tell SPDP AI what to change..."
+        ></textarea>
+
+        <button
+          id="editBtn"
+          class="primary"
+        >
+          Update Website
+        </button>
+
+        <div
+          id="chatError"
+          class="error hidden"
+        ></div>
+
+      </section>
+
+    </aside>
+
+    <section class="preview-area">
+
+      <div class="preview-toolbar">
+
+        <div class="view-buttons">
+
+          <button
+            id="previewBtn"
+            class="toolbar-button active"
+          >
+            Preview
+          </button>
+
+          <button
+            id="codeBtn"
+            class="toolbar-button"
+          >
+            Code
+          </button>
+
+        </div>
+
+        <div class="action-buttons">
+
+          <button
+            id="desktopBtn"
+            class="toolbar-button active"
+          >
+            Desktop
+          </button>
+
+          <button
+            id="tabletBtn"
+            class="toolbar-button"
+          >
+            Tablet
+          </button>
+
+          <button
+            id="mobileBtn"
+            class="toolbar-button"
+          >
+            Mobile
+          </button>
+
+          <button
+            id="openBtn"
+            class="toolbar-button"
+          >
+            Open
+          </button>
+
         </div>
 
       </div>
 
-    </aside>
-
-    <section class="workspace">
-
-      <div class="toolbar">
-
-        <button
-          class="view-btn active"
-          id="previewBtn"
-        >
-          Preview
-        </button>
-
-        <button
-          class="view-btn"
-          id="codeBtn"
-        >
-          Code
-        </button>
-
-        <div class="spacer"></div>
-
-        <button
-          class="view-btn"
-          id="copyBtn"
-        >
-          Copy
-        </button>
-
-        <button
-          class="view-btn"
-          id="downloadBtn"
-        >
-          Download
-        </button>
-
-        <button
-          class="view-btn"
-          id="openBtn"
-        >
-          Open
-        </button>
-
-      </div>
-
-      <div class="preview-wrap">
+      <div
+        id="previewFrame"
+        class="preview-frame"
+      >
 
         <iframe
           id="preview"
@@ -519,20 +629,28 @@ Make the hero blue, add a pricing section, change the navbar..."
         ></iframe>
 
         <div
-          class="code-panel"
-          id="codePanel"
+          id="emptyState"
+          class="empty"
         >
-          <pre id="code"></pre>
+          <div>
+            <strong>SPDP AI Website Builder</strong>
+            Enter a prompt and generate your website.
+          </div>
         </div>
 
         <div
-          class="empty"
-          id="emptyState"
+          id="codePanel"
+          class="code-panel"
         >
-          <div>
-            <strong>SPDP AI</strong>
-            Describe your website and press Generate.
+          <div class="code-header">
+            Generated HTML
           </div>
+
+          <textarea
+            id="codeOutput"
+            spellcheck="false"
+            readonly
+          ></textarea>
         </div>
 
       </div>
@@ -547,11 +665,8 @@ Make the hero blue, add a pricing section, change the navbar..."
   const WORKER_URL =
     "https://spdp-ai.spdp3127.workers.dev/";
 
-  const promptInput =
+  const promptEl =
     document.getElementById("prompt");
-
-  const editInput =
-    document.getElementById("editPrompt");
 
   const generateBtn =
     document.getElementById("generateBtn");
@@ -559,26 +674,23 @@ Make the hero blue, add a pricing section, change the navbar..."
   const editBtn =
     document.getElementById("editBtn");
 
-  const clearBtn =
-    document.getElementById("clearBtn");
+  const chatInput =
+    document.getElementById("chatInput");
+
+  const chatLog =
+    document.getElementById("chatLog");
 
   const preview =
     document.getElementById("preview");
 
-  const codePanel =
-    document.getElementById("codePanel");
-
-  const code =
-    document.getElementById("code");
+  const codeOutput =
+    document.getElementById("codeOutput");
 
   const emptyState =
     document.getElementById("emptyState");
 
-  const errorBox =
-    document.getElementById("errorBox");
-
-  const provider =
-    document.getElementById("provider");
+  const codePanel =
+    document.getElementById("codePanel");
 
   const previewBtn =
     document.getElementById("previewBtn");
@@ -586,70 +698,117 @@ Make the hero blue, add a pricing section, change the navbar..."
   const codeBtn =
     document.getElementById("codeBtn");
 
-  const copyBtn =
-    document.getElementById("copyBtn");
+  const mainError =
+    document.getElementById("mainError");
 
-  const downloadBtn =
-    document.getElementById("downloadBtn");
+  const chatError =
+    document.getElementById("chatError");
 
-  const openBtn =
-    document.getElementById("openBtn");
+  const desktopBtn =
+    document.getElementById("desktopBtn");
+
+  const tabletBtn =
+    document.getElementById("tabletBtn");
+
+  const mobileBtn =
+    document.getElementById("mobileBtn");
 
   let currentHTML = "";
+  let history = [];
+  let historyIndex = -1;
 
-  function showError(message) {
-    errorBox.textContent =
-      "❌ " + message;
-
-    errorBox.classList.add("show");
+  function showError(element, message) {
+    element.textContent = message || "";
+    element.classList.toggle(
+      "hidden",
+      !message
+    );
   }
 
-  function hideError() {
-    errorBox.textContent = "";
-    errorBox.classList.remove("show");
+  function addChatMessage(
+    text,
+    type = "ai"
+  ) {
+    const message =
+      document.createElement("div");
+
+    message.className =
+      "message " + type;
+
+    message.textContent = text;
+
+    chatLog.appendChild(message);
+
+    chatLog.scrollTop =
+      chatLog.scrollHeight;
   }
 
-  function showPreview() {
-    preview.style.display = "block";
-    codePanel.classList.remove("show");
+  function saveHistory() {
+    if (!currentHTML) return;
 
-    previewBtn.classList.add("active");
-    codeBtn.classList.remove("active");
+    history =
+      history.slice(
+        0,
+        historyIndex + 1
+      );
+
+    history.push(currentHTML);
+
+    historyIndex =
+      history.length - 1;
   }
 
-  function showCode() {
-    preview.style.display = "none";
-    codePanel.classList.add("show");
+  function renderHTML(html) {
+    currentHTML = html;
 
-    previewBtn.classList.remove("active");
-    codeBtn.classList.add("active");
+    codeOutput.value = html;
 
-    code.textContent = currentHTML || "";
+    preview.srcdoc = html;
+
+    emptyState.classList.add(
+      "hidden"
+    );
   }
 
-  function setLoading(button, loading, text) {
-    if (loading) {
-      button.disabled = true;
-      button.dataset.oldText =
-        button.textContent;
-      button.textContent = text;
-    } else {
-      button.disabled = false;
-      button.textContent =
-        button.dataset.oldText ||
-        button.textContent;
-    }
+  function setLoading(button, loadingText) {
+    button.dataset.oldText =
+      button.textContent;
+
+    button.textContent =
+      loadingText;
+
+    button.disabled = true;
   }
 
-  async function callWorker(payload) {
+  function stopLoading(button) {
+    button.textContent =
+      button.dataset.oldText ||
+      "Generate";
+
+    button.disabled = false;
+  }
+
+  async function callWorker(
+    action,
+    prompt,
+    existingHTML = ""
+  ) {
     const response = await fetch(
       WORKER_URL,
       {
         method: "POST",
+
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type":
+            "application/json"
         },
-        body: JSON.stringify(payload)
+
+        body: JSON.stringify({
+          action,
+          prompt,
+          currentHTML:
+            existingHTML
+        })
       }
     );
 
@@ -662,353 +821,517 @@ Make the hero blue, add a pricing section, change the navbar..."
       data = JSON.parse(raw);
     } catch {
       throw new Error(
-        "Worker returned invalid JSON. HTTP " +
-        response.status
+        "Worker returned invalid JSON:\n" +
+        raw.slice(0, 500)
       );
     }
 
     if (!response.ok || !data.success) {
-      let message =
-        data?.error ||
-        "AI request failed.";
-
-      if (data?.details) {
-        if (
-          typeof data.details === "object"
-        ) {
-          message +=
-            " " +
-            Object.entries(
-              data.details
-            )
-              .map(
-                ([key, value]) =>
-                  key + ": " + value
-              )
-              .join(" | ");
-        } else {
-          message +=
-            " " +
-            String(data.details);
-        }
-      }
-
-      throw new Error(message);
+      throw new Error(
+        data.error ||
+        "SPDP AI request failed."
+      );
     }
 
     if (
-      typeof data.html !== "string" ||
-      !data.html.trim()
+      typeof data.html !==
+      "string"
     ) {
       throw new Error(
-        "Worker returned empty HTML."
+        "Worker returned no HTML."
       );
     }
 
-    return data;
-  }
-
-  async function generateWebsite() {
-    const prompt =
-      promptInput.value.trim();
-
-    if (!prompt) {
-      showError(
-        "Enter a website prompt first."
-      );
-      promptInput.focus();
-      return;
-    }
-
-    hideError();
-
-    setLoading(
-      generateBtn,
-      true,
-      "Generating..."
-    );
-
-    provider.textContent =
-      "AI is generating your website...";
-
-    try {
-      const data =
-        await callWorker({
-          action: "create",
-          prompt: prompt
-        });
-
-      currentHTML =
-        data.html;
-
-      preview.srcdoc =
-        currentHTML;
-
-      code.textContent =
-        currentHTML;
-
-      emptyState.style.display =
-        "none";
-
-      showPreview();
-
-      provider.textContent =
-        "Generated with " +
-        (
-          data.provider ||
-          "AI"
-        );
-    } catch (error) {
-      console.error(error);
-
-      showError(
-        error?.message ||
-        "Generation failed."
-      );
-
-      provider.textContent =
-        "Generation failed";
-    } finally {
-      setLoading(
-        generateBtn,
-        false
-      );
-    }
-  }
-
-  async function editWebsite() {
-    if (!currentHTML) {
-      showError(
-        "Generate a website first."
-      );
-      return;
-    }
-
-    const instruction =
-      editInput.value.trim();
-
-    if (!instruction) {
-      showError(
-        "Enter an edit request."
-      );
-      editInput.focus();
-      return;
-    }
-
-    hideError();
-
-    setLoading(
-      editBtn,
-      true,
-      "Updating..."
-    );
-
-    provider.textContent =
-      "Updating website...";
-
-    try {
-      const data =
-        await callWorker({
-          action: "edit",
-          prompt: instruction,
-          currentHTML: currentHTML
-        });
-
-      currentHTML =
-        data.html;
-
-      preview.srcdoc =
-        currentHTML;
-
-      code.textContent =
-        currentHTML;
-
-      showPreview();
-
-      editInput.value = "";
-
-      provider.textContent =
-        "Updated with " +
-        (
-          data.provider ||
-          "AI"
-        );
-    } catch (error) {
-      console.error(error);
-
-      showError(
-        error?.message ||
-        "Website update failed."
-      );
-
-      provider.textContent =
-        "Update failed";
-    } finally {
-      setLoading(
-        editBtn,
-        false
-      );
-    }
-  }
-
-  async function copyCode() {
-    if (!currentHTML) {
-      showError(
-        "No generated website code."
-      );
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(
-        currentHTML
-      );
-
-      provider.textContent =
-        "Code copied";
-    } catch {
-      showError(
-        "Could not copy the code."
-      );
-    }
-  }
-
-  function downloadCode() {
-    if (!currentHTML) {
-      showError(
-        "No generated website code."
-      );
-      return;
-    }
-
-    const blob =
-      new Blob(
-        [currentHTML],
-        {
-          type: "text/html;charset=utf-8"
-        }
-      );
-
-    const url =
-      URL.createObjectURL(blob);
-
-    const a =
-      document.createElement("a");
-
-    a.href = url;
-    a.download =
-      "spdp-ai-website.html";
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-    URL.revokeObjectURL(url);
-
-    provider.textContent =
-      "HTML downloaded";
-  }
-
-  function openWebsite() {
-    if (!currentHTML) {
-      showError(
-        "No generated website."
-      );
-      return;
-    }
-
-    const blob =
-      new Blob(
-        [currentHTML],
-        {
-          type: "text/html"
-        }
-      );
-
-    const url =
-      URL.createObjectURL(blob);
-
-    window.open(
-      url,
-      "_blank",
-      "noopener,noreferrer"
-    );
-
-    setTimeout(
-      () =>
-        URL.revokeObjectURL(url),
-      60000
-    );
+    return data.html;
   }
 
   generateBtn.addEventListener(
     "click",
-    generateWebsite
+    async () => {
+
+      const prompt =
+        promptEl.value.trim();
+
+      showError(
+        mainError,
+        ""
+      );
+
+      if (!prompt) {
+        showError(
+          mainError,
+          "Please enter a website prompt."
+        );
+        return;
+      }
+
+      setLoading(
+        generateBtn,
+        "Generating..."
+      );
+
+      try {
+
+        const html =
+          await callWorker(
+            "create",
+            prompt
+          );
+
+        currentHTML = html;
+
+        history = [html];
+        historyIndex = 0;
+
+        renderHTML(html);
+
+        addChatMessage(
+          "Website generated successfully. Tell me what you want to change."
+        );
+
+      } catch (error) {
+
+        showError(
+          mainError,
+          error?.message ||
+          "Generation failed."
+        );
+
+      } finally {
+
+        stopLoading(
+          generateBtn
+        );
+      }
+    }
   );
 
   editBtn.addEventListener(
     "click",
-    editWebsite
+    async () => {
+
+      const instruction =
+        chatInput.value.trim();
+
+      showError(
+        chatError,
+        ""
+      );
+
+      if (!currentHTML) {
+        showError(
+          chatError,
+          "Generate a website first."
+        );
+        return;
+      }
+
+      if (!instruction) {
+        showError(
+          chatError,
+          "Tell me what you want to change."
+        );
+        return;
+      }
+
+      addChatMessage(
+        instruction,
+        "user"
+      );
+
+      chatInput.value = "";
+
+      setLoading(
+        editBtn,
+        "Updating..."
+      );
+
+      try {
+
+        const oldHTML =
+          currentHTML;
+
+        const updatedHTML =
+          await callWorker(
+            "edit",
+            instruction,
+            oldHTML
+          );
+
+        currentHTML =
+          updatedHTML;
+
+        history =
+          history.slice(
+            0,
+            historyIndex + 1
+          );
+
+        history.push(
+          updatedHTML
+        );
+
+        historyIndex =
+          history.length - 1;
+
+        renderHTML(
+          updatedHTML
+        );
+
+        addChatMessage(
+          "Done. The website has been updated."
+        );
+
+      } catch (error) {
+
+        showError(
+          chatError,
+          error?.message ||
+          "Update failed."
+        );
+
+        addChatMessage(
+          "I could not update the website: " +
+          (error?.message || "Unknown error.")
+        );
+
+      } finally {
+
+        stopLoading(
+          editBtn
+        );
+      }
+    }
   );
 
-  clearBtn.addEventListener(
-    "click",
-    () => {
-      editInput.value = "";
-      hideError();
+  chatInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter" &&
+        (event.ctrlKey ||
+          event.metaKey)
+      ) {
+        editBtn.click();
+      }
+
     }
   );
 
   previewBtn.addEventListener(
     "click",
-    showPreview
+    () => {
+
+      preview.style.display =
+        "block";
+
+      codePanel.classList.remove(
+        "show"
+      );
+
+      previewBtn.classList.add(
+        "active"
+      );
+
+      codeBtn.classList.remove(
+        "active"
+      );
+    }
   );
 
   codeBtn.addEventListener(
     "click",
-    showCode
-  );
+    () => {
 
-  copyBtn.addEventListener(
-    "click",
-    copyCode
-  );
+      preview.style.display =
+        "none";
 
-  downloadBtn.addEventListener(
-    "click",
-    downloadCode
-  );
+      codePanel.classList.add(
+        "show"
+      );
 
-  openBtn.addEventListener(
-    "click",
-    openWebsite
-  );
+      codeBtn.classList.add(
+        "active"
+      );
 
-  promptInput.addEventListener(
-    "keydown",
-    (event) => {
-      if (
-        event.key === "Enter" &&
-        (event.ctrlKey ||
-          event.metaKey)
-      ) {
-        generateWebsite();
-      }
+      previewBtn.classList.remove(
+        "active"
+      );
+
+      codeOutput.value =
+        currentHTML;
     }
   );
 
-  editInput.addEventListener(
+  document
+    .getElementById("copyBtn")
+    .addEventListener(
+      "click",
+      async () => {
+
+        if (!currentHTML) return;
+
+        try {
+
+          await navigator.clipboard.writeText(
+            currentHTML
+          );
+
+          addChatMessage(
+            "HTML code copied to clipboard."
+          );
+
+        } catch {
+
+          codeOutput.value =
+            currentHTML;
+
+          codeOutput.select();
+
+          document.execCommand(
+            "copy"
+          );
+
+        }
+      }
+    );
+
+  document
+    .getElementById("downloadBtn")
+    .addEventListener(
+      "click",
+      () => {
+
+        if (!currentHTML) return;
+
+        const blob =
+          new Blob(
+            [currentHTML],
+            {
+              type:
+                "text/html;charset=utf-8"
+            }
+          );
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+        const a =
+          document.createElement(
+            "a"
+          );
+
+        a.href = url;
+
+        a.download =
+          "spdp-ai-website.html";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+        URL.revokeObjectURL(
+          url
+        );
+      }
+    );
+
+  document
+    .getElementById("openBtn")
+    .addEventListener(
+      "click",
+      () => {
+
+        if (!currentHTML) return;
+
+        const blob =
+          new Blob(
+            [currentHTML],
+            {
+              type:
+                "text/html"
+            }
+          );
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+        window.open(
+          url,
+          "_blank"
+        );
+
+        setTimeout(
+          () =>
+            URL.revokeObjectURL(
+              url
+            ),
+          60000
+        );
+      }
+    );
+
+  function setPreviewWidth(
+    width,
+    activeButton
+  ) {
+
+    const frame =
+      document.getElementById(
+        "previewFrame"
+      );
+
+    frame.style.display =
+      "flex";
+
+    preview.style.position =
+      "absolute";
+
+    preview.style.left =
+      "50%";
+
+    preview.style.transform =
+      "translateX(-50%)";
+
+    preview.style.width =
+      width;
+
+    [
+      desktopBtn,
+      tabletBtn,
+      mobileBtn
+    ].forEach(button =>
+      button.classList.remove(
+        "active"
+      )
+    );
+
+    activeButton.classList.add(
+      "active"
+    );
+  }
+
+  desktopBtn.addEventListener(
+    "click",
+    () => {
+
+      preview.style.left =
+        "0";
+
+      preview.style.transform =
+        "none";
+
+      preview.style.width =
+        "100%";
+
+      desktopBtn.classList.add(
+        "active"
+      );
+
+      tabletBtn.classList.remove(
+        "active"
+      );
+
+      mobileBtn.classList.remove(
+        "active"
+      );
+    }
+  );
+
+  tabletBtn.addEventListener(
+    "click",
+    () => {
+
+      setPreviewWidth(
+        "768px",
+        tabletBtn
+      );
+    }
+  );
+
+  mobileBtn.addEventListener(
+    "click",
+    () => {
+
+      setPreviewWidth(
+        "390px",
+        mobileBtn
+      );
+    }
+  );
+
+  document
+    .getElementById("undoBtn")
+    .addEventListener(
+      "click",
+      () => {
+
+        if (
+          historyIndex <= 0
+        ) {
+          return;
+        }
+
+        historyIndex--;
+
+        renderHTML(
+          history[
+            historyIndex
+          ]
+        );
+
+        addChatMessage(
+          "Undo applied."
+        );
+      }
+    );
+
+  document
+    .getElementById("redoBtn")
+    .addEventListener(
+      "click",
+      () => {
+
+        if (
+          historyIndex >=
+          history.length - 1
+        ) {
+          return;
+        }
+
+        historyIndex++;
+
+        renderHTML(
+          history[
+            historyIndex
+          ]
+        );
+
+        addChatMessage(
+          "Redo applied."
+        );
+      }
+    );
+
+  promptEl.addEventListener(
     "keydown",
-    (event) => {
+    event => {
+
       if (
         event.key === "Enter" &&
         (event.ctrlKey ||
           event.metaKey)
       ) {
-        editWebsite();
+        generateBtn.click();
       }
+
     }
   );
 </script>
