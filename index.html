@@ -2,36 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
-/>
-<meta
-  name="theme-color"
-  content="#070707"
-/>
-
-<title>SPDP AI — AI Website Builder</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SPDP AI — Website Builder</title>
 
 <style>
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html,
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  margin:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#060606;
+  min-height:100vh;
+  background:#050505;
   color:#fff;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 button,
-textarea,
-input{
+textarea{
   font:inherit;
 }
 
@@ -39,446 +32,515 @@ button{
   cursor:pointer;
 }
 
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
 .app{
-  width:100%;
-  height:100vh;
-  display:flex;
-}
-
-.sidebar{
-  width:238px;
-  flex:none;
-  background:#090909;
-  border-right:1px solid #202020;
+  min-height:100vh;
   display:flex;
   flex-direction:column;
-  padding:14px 12px;
+}
+
+/* HEADER */
+
+.header{
+  height:68px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  border-bottom:1px solid #202020;
+  background:rgba(5,5,5,.96);
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
 .brand{
   display:flex;
-  gap:10px;
   align-items:center;
-  padding:7px 8px 22px;
+  gap:11px;
 }
 
-.brandIcon{
+.logo{
   width:38px;
   height:38px;
   border-radius:11px;
   display:grid;
   place-items:center;
-  background:linear-gradient(
-    135deg,
-    #ffffff,
-    #777
-  );
-  color:#000;
-  font-weight:950;
+  font-weight:900;
+  font-size:15px;
+  background:linear-gradient(145deg,#fff,#777);
+  color:#050505;
+  box-shadow:0 8px 25px rgba(255,255,255,.08);
 }
 
-.brandTitle{
-  font-size:14px;
-  font-weight:850;
+.brand-text{
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:-.4px;
 }
 
-.brandSub{
-  margin-top:2px;
-  font-size:8px;
-  letter-spacing:1px;
-  color:#666;
-}
-
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-}
-
-.navBtn{
-  width:100%;
-  border:0;
-  background:transparent;
-  color:#888;
-  text-align:left;
-  padding:11px;
-  border-radius:9px;
-}
-
-.navBtn:hover,
-.navBtn.active{
-  background:#181818;
-  color:#fff;
-}
-
-.sidebarBottom{
-  margin-top:auto;
-  border-top:1px solid #202020;
-  padding:14px 8px;
+.brand-sub{
+  color:#777;
   font-size:11px;
-  color:#666;
+  margin-top:2px;
 }
 
-.online{
-  color:#42dc86;
-}
-
-.main{
-  flex:1;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-}
-
-.topbar{
-  height:61px;
-  flex:none;
-  border-bottom:1px solid #202020;
+.header-actions{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-}
-
-.topTitle{
-  font-weight:800;
-}
-
-.status{
-  color:#777;
-  font-size:12px;
-}
-
-.workspace{
-  flex:1;
-  min-height:0;
-  display:grid;
-  grid-template-columns:350px minmax(0,1fr);
-}
-
-.left{
-  min-width:0;
-  min-height:0;
-  border-right:1px solid #202020;
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-}
-
-.label{
-  color:#666;
-  font-size:10px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  margin:3px 0 8px;
-}
-
-.prompt{
-  height:125px;
-  width:100%;
-  resize:none;
-  outline:none;
-  background:#101010;
-  color:#fff;
-  border:1px solid #292929;
-  border-radius:12px;
-  padding:13px;
-}
-
-.prompt:focus,
-.chatInput:focus,
-.code:focus{
-  border-color:#765cff;
-}
-
-.row{
-  display:flex;
-  gap:7px;
-  margin-top:8px;
+  gap:8px;
 }
 
 .btn{
   border:1px solid #2b2b2b;
   background:#111;
   color:#ddd;
+  padding:9px 13px;
   border-radius:9px;
-  padding:9px 11px;
+  transition:.2s;
 }
 
 .btn:hover{
   background:#191919;
-}
-
-.primary{
-  background:#7057e8;
-  border-color:#7057e8;
+  border-color:#444;
   color:#fff;
 }
 
-.primary:hover{
-  background:#8069f2;
+.btn.primary{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+  font-weight:800;
 }
 
-.generate{
-  width:100%;
-  margin-top:8px;
+.btn.primary:hover{
+  background:#ddd;
 }
 
-.attachments{
-  display:none;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-top:8px;
-  max-height:70px;
-  overflow:auto;
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
 }
 
-.attachments.show{
+/* MAIN */
+
+.main{
+  flex:1;
+  min-height:0;
+  display:grid;
+  grid-template-columns:360px minmax(0,1fr);
+}
+
+/* LEFT */
+
+.sidebar{
+  min-width:0;
+  border-right:1px solid #202020;
+  background:#080808;
   display:flex;
+  flex-direction:column;
 }
 
-.attachment{
-  background:#111;
-  border:1px solid #292929;
-  color:#aaa;
-  border-radius:7px;
-  padding:6px 8px;
-  font-size:10px;
+.sidebar-section{
+  padding:16px;
+  border-bottom:1px solid #1c1c1c;
 }
+
+.label{
+  color:#777;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.prompt{
+  width:100%;
+  min-height:150px;
+  resize:vertical;
+  padding:13px;
+  border-radius:12px;
+  border:1px solid #292929;
+  background:#0d0d0d;
+  color:#eee;
+  outline:none;
+  line-height:1.55;
+}
+
+.prompt:focus{
+  border-color:#555;
+}
+
+.generate-row{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.generate-row .btn{
+  flex:1;
+}
+
+/* SUB CHAT */
 
 .chat{
   flex:1;
   min-height:0;
-  margin-top:12px;
-  border:1px solid #232323;
-  border-radius:12px;
-  overflow:hidden;
   display:flex;
   flex-direction:column;
 }
 
-.chatHeader{
-  padding:10px;
-  border-bottom:1px solid #232323;
-  font-size:12px;
+.chat-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
 }
 
-.chatSub{
-  color:#666;
-  font-size:10px;
-  margin-top:3px;
+.status{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#777;
+  font-size:11px;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#555;
+}
+
+.status-dot.active{
+  background:#fff;
 }
 
 .messages{
   flex:1;
-  min-height:0;
+  min-height:100px;
   overflow:auto;
-  padding:9px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-bottom:10px;
 }
 
 .message{
-  padding:9px 10px;
-  border-radius:9px;
-  margin-bottom:7px;
+  border:1px solid #222;
+  background:#0d0d0d;
+  border-radius:10px;
+  padding:10px;
   font-size:12px;
-  line-height:1.45;
-  white-space:pre-wrap;
-}
-
-.message.ai{
-  background:#111;
-  color:#aaa;
+  line-height:1.5;
 }
 
 .message.user{
-  background:#211b3d;
-  color:#eee;
+  background:#151515;
+  border-color:#303030;
 }
 
-.chatInput{
+.message.ai{
+  color:#aaa;
+}
+
+.chat-input{
   width:100%;
-  height:70px;
+  min-height:75px;
   resize:none;
-  border:0;
-  border-top:1px solid #232323;
-  outline:0;
-  padding:10px;
-  background:#0e0e0e;
-  color:#fff;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid #292929;
+  background:#0d0d0d;
+  color:#eee;
+  outline:none;
 }
 
-.chatFooter{
-  padding:7px;
-  border-top:1px solid #232323;
+.chat-input:focus{
+  border-color:#555;
 }
 
-.right{
+.chat-actions{
+  display:flex;
+  gap:7px;
+  margin-top:8px;
+}
+
+.chat-actions .btn{
+  flex:1;
+}
+
+/* WORKSPACE */
+
+.workspace{
   min-width:0;
-  min-height:0;
   display:flex;
   flex-direction:column;
+  background:#030303;
 }
 
+/* TOOLBAR */
+
 .toolbar{
-  min-height:52px;
-  border-bottom:1px solid #202020;
+  height:54px;
+  flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:8px;
-  padding:7px;
+  padding:0 13px;
+  border-bottom:1px solid #202020;
+  background:#080808;
 }
 
-.toolGroup{
+.toolbar-left,
+.toolbar-right{
   display:flex;
-  gap:5px;
-  overflow:auto;
+  align-items:center;
+  gap:6px;
 }
 
-.tool{
-  white-space:nowrap;
-  background:#111;
+.mode-btn{
+  border:1px solid transparent;
+  background:transparent;
+  color:#777;
+  padding:7px 10px;
+  border-radius:7px;
+  font-size:12px;
+}
+
+.mode-btn.active{
+  background:#171717;
+  border-color:#292929;
+  color:#fff;
+}
+
+.device{
   border:1px solid #292929;
+  background:#101010;
   color:#999;
-  border-radius:8px;
   padding:7px 9px;
+  border-radius:7px;
   font-size:11px;
 }
 
-.tool:hover,
-.tool.active{
+.device.active{
   color:#fff;
-  background:#1c1c1c;
+  border-color:#444;
 }
 
-.previewArea{
+/* PREVIEW */
+
+.preview-wrap{
   flex:1;
   min-height:0;
-  overflow:auto;
-  background:#050505;
-  padding:14px;
+  position:relative;
   display:flex;
   justify-content:center;
+  align-items:stretch;
+  background:
+    radial-gradient(circle at 50% 0%,#171717 0,#080808 35%,#030303 75%);
 }
 
-.frame{
+.preview-frame{
   width:100%;
   height:100%;
-  min-height:450px;
-  border:1px solid #292929;
-  border-radius:9px;
-  background:#fff;
-  flex:none;
-}
-
-.codePanel{
-  display:none;
-  height:46%;
-  min-height:220px;
-  border-top:1px solid #222;
-  flex-direction:column;
-}
-
-.codePanel.show{
-  display:flex;
-}
-
-.codeHeader{
-  height:40px;
-  flex:none;
-  background:#0b0b0b;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 10px;
-  font-size:12px;
-}
-
-.code{
-  flex:1;
-  min-height:0;
-  width:100%;
-  resize:none;
-  outline:0;
   border:0;
-  padding:13px;
-  background:#050505;
-  color:#ddd;
-  font:13px/1.5 Consolas,monospace;
+  background:#fff;
+  transition:.25s;
 }
 
-.codeFooter{
-  padding:7px;
-  border-top:1px solid #222;
-  background:#0b0b0b;
-  text-align:right;
+.preview-frame.desktop{
+  width:100%;
 }
 
-.menu{
-  position:fixed;
-  z-index:100;
+.preview-frame.tablet{
+  width:768px;
+  max-width:100%;
+}
+
+.preview-frame.mobile{
+  width:390px;
+  max-width:100%;
+}
+
+.code-panel{
+  position:absolute;
+  inset:0;
   display:none;
-  background:#111;
-  border:1px solid #333;
-  border-radius:10px;
-  padding:5px;
-  box-shadow:0 20px 50px #000;
+  background:#050505;
 }
 
-.menu.show{
+.code-panel.show{
   display:block;
 }
 
-.menu button{
-  width:190px;
+.code-editor{
+  width:100%;
+  height:100%;
+  resize:none;
   border:0;
-  background:transparent;
+  outline:none;
+  background:#050505;
   color:#ddd;
-  padding:10px;
-  border-radius:7px;
-  text-align:left;
+  padding:20px;
+  font:13px/1.55 Consolas,Monaco,monospace;
+  tab-size:2;
 }
 
-.menu button:hover{
-  background:#1d1d1d;
+/* EMPTY */
+
+.empty{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
 }
+
+.empty-box{
+  max-width:500px;
+  padding:30px;
+}
+
+.empty-logo{
+  width:65px;
+  height:65px;
+  margin:0 auto 16px;
+  border-radius:19px;
+  display:grid;
+  place-items:center;
+  font-size:24px;
+  font-weight:900;
+  background:linear-gradient(145deg,#fff,#666);
+  color:#000;
+}
+
+.empty h1{
+  font-size:28px;
+  letter-spacing:-1px;
+  margin-bottom:8px;
+}
+
+.empty p{
+  color:#666;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* LOADING */
+
+.loading{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(5px);
+  z-index:20;
+}
+
+.loading.show{
+  display:flex;
+}
+
+.loading-box{
+  padding:20px 25px;
+  border:1px solid #292929;
+  border-radius:14px;
+  background:#0b0b0b;
+  text-align:center;
+}
+
+.spinner{
+  width:30px;
+  height:30px;
+  margin:0 auto 12px;
+  border:3px solid #333;
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.loading-text{
+  color:#aaa;
+  font-size:12px;
+}
+
+/* TOAST */
 
 .toast{
   position:fixed;
-  z-index:999;
-  left:50%;
+  right:18px;
   bottom:18px;
-  transform:translateX(-50%);
-  display:none;
-  background:#171717;
+  z-index:999;
+  padding:11px 14px;
   border:1px solid #333;
-  color:#fff;
-  padding:9px 13px;
+  background:#111;
+  color:#eee;
   border-radius:9px;
   font-size:12px;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:.25s;
 }
 
 .toast.show{
-  display:block;
+  opacity:1;
+  transform:translateY(0);
 }
 
-@media(max-width:850px){
+/* RESPONSIVE */
+
+@media(max-width:900px){
+  .main{
+    grid-template-columns:300px minmax(0,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .header{
+    padding:0 12px;
+  }
+
+  .brand-sub{
+    display:none;
+  }
+
+  .header-actions .btn:not(.primary){
+    display:none;
+  }
+
+  .main{
+    display:flex;
+    flex-direction:column;
+  }
 
   .sidebar{
-    display:none;
+    height:auto;
+    max-height:48vh;
+    border-right:0;
+    border-bottom:1px solid #202020;
+  }
+
+  .chat{
+    min-height:250px;
   }
 
   .workspace{
-    grid-template-columns:1fr;
+    min-height:65vh;
   }
 
-  .left{
-    display:none;
+  .toolbar{
+    overflow:auto;
   }
 }
 </style>
@@ -488,386 +550,246 @@ button:disabled{
 
 <div class="app">
 
-  <aside class="sidebar">
+  <header class="header">
 
     <div class="brand">
-
-      <div class="brandIcon">
-        S
-      </div>
+      <div class="logo">S</div>
 
       <div>
-        <div class="brandTitle">
-          SPDP AI
-        </div>
-
-        <div class="brandSub">
-          AI WEBSITE BUILDER
-        </div>
+        <div class="brand-text">SPDP AI</div>
+        <div class="brand-sub">Website · App · Game Builder</div>
       </div>
-
     </div>
 
-    <nav class="nav">
-
-      <button
-        class="navBtn active"
-        id="builderNav"
-      >
-        ✦ Builder
-      </button>
-
-      <button
-        class="navBtn"
-        id="codeNav"
-      >
-        ⌘ Code
-      </button>
-
-      <button
-        class="navBtn"
-        id="previewNav"
-      >
-        ◉ Preview
-      </button>
-
-      <button
-        class="navBtn"
-        id="assetsNav"
-      >
-        ▣ Assets
-      </button>
-
-    </nav>
-
-    <div class="sidebarBottom">
-      Cloudflare Workers AI
-      <br>
-      <span class="online">
-        ● AI Online
-      </span>
+    <div class="header-actions">
+      <button class="btn" id="undoBtn">Undo</button>
+      <button class="btn" id="redoBtn">Redo</button>
+      <button class="btn" id="downloadBtn">Download</button>
+      <button class="btn primary" id="openBtn">Open</button>
     </div>
 
-  </aside>
+  </header>
 
 
   <main class="main">
 
-    <header class="topbar">
+    <!-- SIDEBAR -->
 
-      <div class="topTitle">
-        AI Website Builder
-      </div>
+    <aside class="sidebar">
 
-      <div class="status">
-        <span class="online">●</span>
-        Connected
-      </div>
+      <section class="sidebar-section">
 
-    </header>
-
-
-    <div class="workspace">
-
-      <section class="left">
-
-        <div class="label">
-          Website prompt
-        </div>
+        <div class="label">Create Website</div>
 
         <textarea
           id="prompt"
           class="prompt"
-          placeholder="Create a playable Flappy Bird game with a premium dark UI, animated bird, pipes, score, high score and restart button..."
+          placeholder="Describe the website you want...
+
+Example:
+Create a premium black 3D gaming website with hero, games, features, pricing and footer."
         ></textarea>
 
-
-        <div class="row">
-
-          <button
-            id="addBtn"
-            class="btn"
-          >
-            ＋ Add
+        <div class="generate-row">
+          <button class="btn primary" id="generateBtn">
+            Generate
           </button>
 
-          <button
-            id="clearBtn"
-            class="btn"
-          >
+          <button class="btn" id="clearBtn">
             Clear
           </button>
-
-        </div>
-
-
-        <button
-          id="generateBtn"
-          class="btn primary generate"
-        >
-          Generate Website
-        </button>
-
-
-        <div
-          id="attachments"
-          class="attachments"
-        ></div>
-
-
-        <input
-          id="imageInput"
-          type="file"
-          accept="image/*"
-          multiple
-          hidden
-        />
-
-        <input
-          id="videoInput"
-          type="file"
-          accept="video/*"
-          multiple
-          hidden
-        />
-
-        <input
-          id="fileInput"
-          type="file"
-          multiple
-          accept=".html,.css,.js,.json,.txt,.md,.pdf,.zip"
-          hidden
-        />
-
-
-        <div class="chat">
-
-          <div class="chatHeader">
-
-            <b>
-              AI Sub-chat
-            </b>
-
-            <div class="chatSub">
-              Ask AI to modify the current website
-            </div>
-
-          </div>
-
-
-          <div
-            id="messages"
-            class="messages"
-          >
-
-            <div class="message ai">
-              Generate a website first. Then tell me what you want to change.
-            </div>
-
-          </div>
-
-
-          <textarea
-            id="chatInput"
-            class="chatInput"
-            placeholder="Make the navbar glassmorphism and add animated particles..."
-          ></textarea>
-
-
-          <div class="chatFooter">
-
-            <button
-              id="chatBtn"
-              class="btn primary"
-              style="width:100%"
-            >
-              Apply AI Edit
-            </button>
-
-          </div>
-
         </div>
 
       </section>
 
 
-      <section class="right">
+      <!-- SUB CHAT -->
 
-        <div class="toolbar">
+      <section class="sidebar-section chat">
 
-          <div class="toolGroup">
+        <div class="chat-title">
 
-            <button
-              id="previewBtn"
-              class="tool active"
-            >
-              Preview
-            </button>
-
-            <button
-              id="codeBtn"
-              class="tool"
-            >
-              Code
-            </button>
-
-            <button
-              id="previewEditBtn"
-              class="tool"
-            >
-              ✎ Edit Preview
-            </button>
-
-            <button
-              id="threeBtn"
-              class="tool"
-            >
-              ◇ 3D
-            </button>
-
-            <button
-              id="desktopBtn"
-              class="tool"
-            >
-              Desktop
-            </button>
-
-            <button
-              id="tabletBtn"
-              class="tool"
-            >
-              Tablet
-            </button>
-
-            <button
-              id="mobileBtn"
-              class="tool"
-            >
-              Mobile
-            </button>
-
+          <div class="label" style="margin:0">
+            Sub Chat
           </div>
 
+          <div class="status">
+            <span id="statusDot" class="status-dot"></span>
+            <span id="statusText">Ready</span>
+          </div>
 
-          <div class="toolGroup">
+        </div>
 
-            <button
-              id="undoBtn"
-              class="tool"
-            >
-              ↶
-            </button>
+        <div id="messages" class="messages">
 
-            <button
-              id="redoBtn"
-              class="tool"
-            >
-              ↷
-            </button>
+          <div class="message ai">
+            Generate a website first. Then tell me what you want to change here.
+          </div>
 
-            <button
-              id="copyBtn"
-              class="tool"
-            >
-              Copy
-            </button>
+        </div>
 
-            <button
-              id="downloadBtn"
-              class="tool"
-            >
-              Download
-            </button>
+        <textarea
+          id="chatInput"
+          class="chat-input"
+          placeholder="Change the current website...
+
+Example:
+Make the navbar glassmorphism and change the hero button to blue."
+        ></textarea>
+
+        <div class="chat-actions">
+
+          <button
+            class="btn primary"
+            id="editBtn"
+          >
+            Update Website
+          </button>
+
+          <button
+            class="btn"
+            id="clearChatBtn"
+          >
+            Clear Chat
+          </button>
+
+        </div>
+
+      </section>
+
+    </aside>
+
+
+    <!-- WORKSPACE -->
+
+    <section class="workspace">
+
+      <div class="toolbar">
+
+        <div class="toolbar-left">
+
+          <button
+            class="mode-btn active"
+            id="previewMode"
+          >
+            Preview
+          </button>
+
+          <button
+            class="mode-btn"
+            id="codeMode"
+          >
+            Code
+          </button>
+
+          <button
+            class="device active"
+            data-device="desktop"
+          >
+            Desktop
+          </button>
+
+          <button
+            class="device"
+            data-device="tablet"
+          >
+            Tablet
+          </button>
+
+          <button
+            class="device"
+            data-device="mobile"
+          >
+            Mobile
+          </button>
+
+        </div>
+
+
+        <div class="toolbar-right">
+
+          <button
+            class="btn"
+            id="copyBtn"
+          >
+            Copy Code
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="preview-wrap">
+
+        <div id="emptyState" class="empty">
+
+          <div class="empty-box">
+
+            <div class="empty-logo">
+              S
+            </div>
+
+            <h1>Build with SPDP AI</h1>
+
+            <p>
+              Describe your website, application or game.
+              Generate it and then use Sub Chat to modify
+              the generated website.
+            </p>
 
           </div>
 
         </div>
 
 
-        <div class="previewArea">
-
-          <iframe
-            id="preview"
-            class="frame"
-            sandbox="allow-scripts allow-forms allow-modals allow-popups"
-          ></iframe>
-
-        </div>
+        <iframe
+          id="preview"
+          class="preview-frame desktop"
+          sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+          style="display:none"
+        ></iframe>
 
 
         <div
           id="codePanel"
-          class="codePanel"
+          class="code-panel"
         >
 
-          <div class="codeHeader">
-
-            <b>
-              HTML / CSS / JS
-            </b>
-
-            <button
-              id="copyCodeBtn"
-              class="tool"
-            >
-              Copy Code
-            </button>
-
-          </div>
-
-
           <textarea
-            id="code"
-            class="code"
+            id="codeEditor"
+            class="code-editor"
             spellcheck="false"
           ></textarea>
 
+        </div>
 
-          <div class="codeFooter">
 
-            <button
-              id="resetCodeBtn"
-              class="tool"
+        <div
+          id="loading"
+          class="loading"
+        >
+
+          <div class="loading-box">
+
+            <div class="spinner"></div>
+
+            <div
+              id="loadingText"
+              class="loading-text"
             >
-              Reset
-            </button>
-
-            <button
-              id="applyCodeBtn"
-              class="tool primary"
-            >
-              Apply Code
-            </button>
+              Generating website...
+            </div>
 
           </div>
 
         </div>
 
-      </section>
+      </div>
 
-    </div>
+    </section>
 
   </main>
-
-</div>
-
-
-<div
-  id="menu"
-  class="menu"
->
-
-  <button data-file="image">
-    🖼️ Image
-  </button>
-
-  <button data-file="video">
-    🎬 Video
-  </button>
-
-  <button data-file="file">
-    📄 File
-  </button>
 
 </div>
 
@@ -879,283 +801,224 @@ button:disabled{
 
 
 <script>
-"use strict";
-
-
-/* =========================================================
-   CONFIG
-========================================================= */
 
 const WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
 
-/* =========================================================
-   DOM
-========================================================= */
+let currentHTML = "";
 
-const $ =
-  id => document.getElementById(id);
+let history = [];
 
+let historyIndex = -1;
 
-/* =========================================================
-   STATE
-========================================================= */
-
-let html =
-  localStorage.getItem("spdp_html") || "";
-
-let undoStack = [];
-let redoStack = [];
-
-let selectedFiles = [];
-
-let previewEditing = false;
+let isBusy = false;
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+// ==========================================
+// ELEMENTS
+// ==========================================
 
-function toast(text){
+const promptEl =
+  document.getElementById("prompt");
 
-  const el = $("toast");
+const chatInput =
+  document.getElementById("chatInput");
 
-  el.textContent = text;
+const preview =
+  document.getElementById("preview");
+
+const codeEditor =
+  document.getElementById("codeEditor");
+
+const codePanel =
+  document.getElementById("codePanel");
+
+const emptyState =
+  document.getElementById("emptyState");
+
+const loading =
+  document.getElementById("loading");
+
+const loadingText =
+  document.getElementById("loadingText");
+
+const messages =
+  document.getElementById("messages");
+
+const statusDot =
+  document.getElementById("statusDot");
+
+const statusText =
+  document.getElementById("statusText");
+
+
+// ==========================================
+// TOAST
+// ==========================================
+
+let toastTimer;
+
+function toast(message){
+
+  const el =
+    document.getElementById("toast");
+
+  el.textContent = message;
 
   el.classList.add("show");
 
-  clearTimeout(
-    window.__toastTimer
-  );
+  clearTimeout(toastTimer);
 
-  window.__toastTimer =
+  toastTimer =
     setTimeout(() => {
       el.classList.remove("show");
-    }, 2600);
+    }, 2500);
 }
 
 
-/* =========================================================
-   MESSAGES
-========================================================= */
+// ==========================================
+// STATUS
+// ==========================================
 
-function message(type,text){
+function setStatus(text, active=false){
 
-  const el =
-    document.createElement("div");
+  statusText.textContent = text;
 
-  el.className =
-    "message " + type;
-
-  el.textContent = text;
-
-  $("messages")
-    .appendChild(el);
-
-  $("messages").scrollTop =
-    $("messages").scrollHeight;
-}
-
-
-/* =========================================================
-   HTML CLEAN
-========================================================= */
-
-function cleanHTML(value){
-
-  let s =
-    String(value || "")
-      .trim();
-
-  s =
-    s.replace(
-      /^```html\s*/i,
-      ""
-    );
-
-  s =
-    s.replace(
-      /^```javascript\s*/i,
-      ""
-    );
-
-  s =
-    s.replace(
-      /^```js\s*/i,
-      ""
-    );
-
-  s =
-    s.replace(
-      /^```\s*/i,
-      ""
-    );
-
-  s =
-    s.replace(
-      /\s*```$/i,
-      ""
-    );
-
-  const lower =
-    s.toLowerCase();
-
-  let start =
-    lower.indexOf(
-      "<!doctype html"
-    );
-
-  if(start < 0){
-    start =
-      lower.indexOf("<html");
-  }
-
-  if(start >= 0){
-    s =
-      s.substring(start);
-  }
-
-  const end =
-    s
-      .toLowerCase()
-      .lastIndexOf("</html>");
-
-  if(end >= 0){
-    s =
-      s.substring(
-        0,
-        end + 7
-      );
-  }
-
-  return s.trim();
-}
-
-
-/* =========================================================
-   HTML VALIDATION
-========================================================= */
-
-function validHTML(value){
-
-  const s =
-    String(value || "")
-      .trim()
-      .toLowerCase();
-
-  if(!(
-    s.startsWith("<!doctype html") ||
-    s.startsWith("<html")
-  )){
-    return false;
-  }
-
-  return (
-    s.includes("<head") &&
-    s.includes("</head>") &&
-    s.includes("<body") &&
-    s.includes("</body>") &&
-    s.includes("</html>")
+  statusDot.classList.toggle(
+    "active",
+    active
   );
 }
 
 
-/* =========================================================
-   PREVIEW
-========================================================= */
+// ==========================================
+// LOADING
+// ==========================================
 
-function renderPreview(value){
+function setLoading(value, text){
 
-  $("preview").srcdoc =
-    value || "";
-}
+  isBusy = value;
 
-
-/* =========================================================
-   SET HTML
-========================================================= */
-
-function setHTML(
-  value,
-  saveHistory = true
-){
-
-  const clean =
-    cleanHTML(value);
-
-  if(!validHTML(clean)){
-    toast(
-      "❌ Invalid or incomplete HTML"
-    );
-
-    return false;
-  }
-
-  if(
-    saveHistory &&
-    html &&
-    html !== clean
-  ){
-    undoStack.push(html);
-
-    if(
-      undoStack.length > 30
-    ){
-      undoStack.shift();
-    }
-  }
-
-  redoStack = [];
-
-  html = clean;
-
-  $("code").value = html;
-
-  renderPreview(html);
-
-  localStorage.setItem(
-    "spdp_html",
-    html
+  loading.classList.toggle(
+    "show",
+    value
   );
 
-  return true;
+  if(text){
+    loadingText.textContent = text;
+  }
+
+  setStatus(
+    value ? "Working..." : "Ready",
+    value
+  );
+
+  document.getElementById(
+    "generateBtn"
+  ).disabled = value;
+
+  document.getElementById(
+    "editBtn"
+  ).disabled = value;
 }
 
 
-/* =========================================================
-   API
-========================================================= */
+// ==========================================
+// HISTORY
+// ==========================================
 
-async function api(payload){
+function saveHistory(html){
 
-  let response;
+  if(!html) return;
 
-  try{
-
-    response =
-      await fetch(
-        WORKER_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-          body:
-            JSON.stringify(payload)
-        }
-      );
-
-  }catch(error){
-
-    throw new Error(
-      "Could not connect to SPDP AI Worker."
+  history =
+    history.slice(
+      0,
+      historyIndex + 1
     );
-  }
+
+  history.push(html);
+
+  historyIndex =
+    history.length - 1;
+
+  updateHistoryButtons();
+}
 
 
-  const text =
+function updateHistoryButtons(){
+
+  document.getElementById(
+    "undoBtn"
+  ).disabled =
+    historyIndex <= 0;
+
+  document.getElementById(
+    "redoBtn"
+  ).disabled =
+    historyIndex >=
+    history.length - 1;
+}
+
+
+// ==========================================
+// SHOW HTML
+// ==========================================
+
+function showHTML(html){
+
+  currentHTML = html;
+
+  codeEditor.value =
+    html;
+
+  preview.srcdoc =
+    html;
+
+  preview.style.display =
+    "block";
+
+  emptyState.style.display =
+    "none";
+
+  codePanel.classList.remove(
+    "show"
+  );
+
+  document.getElementById(
+    "previewMode"
+  ).classList.add("active");
+
+  document.getElementById(
+    "codeMode"
+  ).classList.remove("active");
+}
+
+
+// ==========================================
+// API
+// ==========================================
+
+async function callWorker(payload){
+
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(payload)
+      }
+    );
+
+  const raw =
     await response.text();
 
   let data;
@@ -1163,322 +1026,438 @@ async function api(payload){
   try{
 
     data =
-      JSON.parse(text);
+      JSON.parse(raw);
 
-  }catch{
-
-    console.error(
-      "RAW WORKER RESPONSE:",
-      text
-    );
+  }catch(error){
 
     throw new Error(
-      "Worker returned invalid JSON."
+      "Worker returned invalid JSON. " +
+      raw.substring(0,300)
     );
   }
 
-
-  if(
-    !response.ok ||
-    data.success !== true
-  ){
+  if(!response.ok){
 
     throw new Error(
-      data.error ||
+      data?.error ||
+      "Worker request failed."
+    );
+  }
+
+  if(!data?.success){
+
+    throw new Error(
+      data?.error ||
       "AI request failed."
     );
   }
-
 
   return data;
 }
 
 
-/* =========================================================
-   ADD MENU
-========================================================= */
+// ==========================================
+// GENERATE
+// ==========================================
 
-$("addBtn").onclick =
-  event => {
+async function generateWebsite(){
 
-    const rect =
-      $("addBtn")
-        .getBoundingClientRect();
+  if(isBusy) return;
 
-    $("menu").style.left =
-      rect.left + "px";
+  const prompt =
+    promptEl.value.trim();
 
-    $("menu").style.top =
-      (rect.top - 125) + "px";
+  if(!prompt){
 
-    $("menu")
-      .classList
-      .toggle("show");
+    toast(
+      "Enter a website prompt first."
+    );
 
-    event.stopPropagation();
-  };
+    promptEl.focus();
 
+    return;
+  }
 
-document.addEventListener(
-  "click",
-  event => {
+  setLoading(
+    true,
+    "Generating your website..."
+  );
+
+  try{
+
+    const data =
+      await callWorker({
+        action:"create",
+        prompt:prompt
+      });
 
     if(
-      !event.target.closest(
-        "#menu"
-      ) &&
-      !event.target.closest(
-        "#addBtn"
-      )
+      !data.html ||
+      !data.html
+        .toLowerCase()
+        .includes("<!doctype html")
     ){
 
-      $("menu")
-        .classList
-        .remove("show");
+      throw new Error(
+        "AI did not return valid HTML."
+      );
     }
+
+    saveHistory(
+      data.html
+    );
+
+    showHTML(
+      data.html
+    );
+
+    addMessage(
+      "ai",
+      "Website generated successfully. You can now edit it using Sub Chat."
+    );
+
+    toast(
+      "Website generated successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    addMessage(
+      "ai",
+      "❌ " +
+      error.message
+    );
+
+    toast(
+      error.message
+    );
+
+  }finally{
+
+    setLoading(
+      false
+    );
+  }
+}
+
+
+// ==========================================
+// EDIT EXISTING WEBSITE
+// ==========================================
+
+async function editWebsite(){
+
+  if(isBusy) return;
+
+  if(!currentHTML){
+
+    toast(
+      "Generate a website first."
+    );
+
+    return;
+  }
+
+  const instruction =
+    chatInput.value.trim();
+
+  if(!instruction){
+
+    toast(
+      "Tell Sub Chat what you want to change."
+    );
+
+    chatInput.focus();
+
+    return;
+  }
+
+  addMessage(
+    "user",
+    instruction
+  );
+
+  chatInput.value =
+    "";
+
+  setLoading(
+    true,
+    "Updating your website..."
+  );
+
+  try{
+
+    const data =
+      await callWorker({
+
+        action:"edit",
+
+        prompt:instruction,
+
+        currentHTML:
+          currentHTML
+
+      });
+
+    if(
+      !data.html ||
+      !data.html
+        .toLowerCase()
+        .includes("<!doctype html")
+    ){
+
+      throw new Error(
+        "AI did not return valid updated HTML."
+      );
+    }
+
+    saveHistory(
+      data.html
+    );
+
+    showHTML(
+      data.html
+    );
+
+    addMessage(
+      "ai",
+      "Done. I updated the existing website while preserving the current HTML structure and functionality."
+    );
+
+    toast(
+      "Website updated."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    addMessage(
+      "ai",
+      "❌ " +
+      error.message
+    );
+
+    toast(
+      error.message
+    );
+
+  }finally{
+
+    setLoading(
+      false
+    );
+  }
+}
+
+
+// ==========================================
+// CHAT MESSAGE
+// ==========================================
+
+function addMessage(
+  type,
+  text
+){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.className =
+    "message " +
+    type;
+
+  div.textContent =
+    text;
+
+  messages.appendChild(
+    div
+  );
+
+  messages.scrollTop =
+    messages.scrollHeight;
+}
+
+
+// ==========================================
+// PREVIEW / CODE
+// ==========================================
+
+document.getElementById(
+  "previewMode"
+).addEventListener(
+  "click",
+  () => {
+
+    if(!currentHTML) return;
+
+    codePanel.classList.remove(
+      "show"
+    );
+
+    preview.style.display =
+      "block";
+
+    document.getElementById(
+      "previewMode"
+    ).classList.add("active");
+
+    document.getElementById(
+      "codeMode"
+    ).classList.remove("active");
+
   }
 );
 
 
-/* =========================================================
-   FILE PICKERS
-========================================================= */
+document.getElementById(
+  "codeMode"
+).addEventListener(
+  "click",
+  () => {
+
+    if(!currentHTML) return;
+
+    codePanel.classList.add(
+      "show"
+    );
+
+    preview.style.display =
+      "none";
+
+    document.getElementById(
+      "codeMode"
+    ).classList.add("active");
+
+    document.getElementById(
+      "previewMode"
+    ).classList.remove("active");
+
+  }
+);
+
+
+// ==========================================
+// CODE EDITOR
+// ==========================================
+
+codeEditor.addEventListener(
+  "input",
+  () => {
+
+    currentHTML =
+      codeEditor.value;
+
+  }
+);
+
+
+// ==========================================
+// DEVICES
+// ==========================================
 
 document
-  .querySelectorAll(
-    "[data-file]"
-  )
+  .querySelectorAll(".device")
   .forEach(button => {
 
-    button.onclick = () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-      const type =
-        button.dataset.file;
+        document
+          .querySelectorAll(
+            ".device"
+          )
+          .forEach(b =>
+            b.classList.remove(
+              "active"
+            )
+          );
 
-      $("menu")
-        .classList
-        .remove("show");
+        button.classList.add(
+          "active"
+        );
 
-      if(type === "image"){
-        $("imageInput").click();
+        const device =
+          button.dataset.device;
+
+        preview.classList.remove(
+          "desktop",
+          "tablet",
+          "mobile"
+        );
+
+        preview.classList.add(
+          device
+        );
+
       }
+    );
 
-      if(type === "video"){
-        $("videoInput").click();
-      }
-
-      if(type === "file"){
-        $("fileInput").click();
-      }
-    };
   });
 
 
-[
-  "imageInput",
-  "videoInput",
-  "fileInput"
-]
-.forEach(id => {
+// ==========================================
+// COPY
+// ==========================================
 
-  $(id).onchange =
-    event => {
-
-      selectedFiles.push(
-        ...Array.from(
-          event.target.files || []
-        )
-      );
-
-      renderAttachments();
-
-      event.target.value = "";
-    };
-});
-
-
-function renderAttachments(){
-
-  const box =
-    $("attachments");
-
-  box.innerHTML = "";
-
-  box.classList.toggle(
-    "show",
-    selectedFiles.length > 0
-  );
-
-  selectedFiles.forEach(
-    (file,index) => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "attachment";
-
-      item.textContent =
-        "✓ " +
-        file.name +
-        " ×";
-
-      item.onclick = () => {
-
-        selectedFiles.splice(
-          index,
-          1
-        );
-
-        renderAttachments();
-      };
-
-      box.appendChild(item);
-    }
-  );
-}
-
-
-/* =========================================================
-   GENERATE
-========================================================= */
-
-$("generateBtn").onclick =
+document.getElementById(
+  "copyBtn"
+).addEventListener(
+  "click",
   async () => {
 
-    const prompt =
-      $("prompt")
-        .value
-        .trim();
-
-    if(!prompt){
+    if(!currentHTML){
 
       toast(
-        "Write a website prompt first."
+        "No generated code yet."
       );
 
       return;
     }
-
-
-    const button =
-      $("generateBtn");
-
-    button.disabled = true;
-
-    button.textContent =
-      "Generating...";
-
-
-    message(
-      "user",
-      prompt
-    );
-
 
     try{
 
-      const attachments =
-        selectedFiles.map(
-          file => ({
-            name:file.name,
-            type:file.type,
-            size:file.size
-          })
-        );
-
-
-      const data =
-        await api({
-          action:"create",
-          prompt,
-          currentHTML:"",
-          attachments
-        });
-
-
-      const generated =
-        cleanHTML(
-          data.html
-        );
-
-
-      if(!validHTML(generated)){
-
-        throw new Error(
-          "AI generated an incomplete website."
-        );
-      }
-
-
-      undoStack = [];
-      redoStack = [];
-
-
-      if(
-        !setHTML(
-          generated,
-          false
-        )
-      ){
-
-        throw new Error(
-          "AI generated an incomplete website."
-        );
-      }
-
-
-      message(
-        "ai",
-        "✓ Website generated successfully."
+      await navigator.clipboard.writeText(
+        currentHTML
       );
 
       toast(
-        "Website ready"
+        "Code copied."
       );
-
 
     }catch(error){
 
-      console.error(error);
+      codeEditor.select();
 
-      message(
-        "ai",
-        "❌ " +
-        error.message
+      document.execCommand(
+        "copy"
       );
 
       toast(
-        error.message
+        "Code copied."
       );
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Generate Website";
-    }
-  };
-
-
-/* =========================================================
-   AI EDIT
-========================================================= */
-
-$("chatBtn").onclick =
-  async () => {
-
-    const instruction =
-      $("chatInput")
-        .value
-        .trim();
-
-    if(!instruction){
-      return;
     }
 
-    if(!html){
+  }
+);
+
+
+// ==========================================
+// DOWNLOAD
+// ==========================================
+
+document.getElementById(
+  "downloadBtn"
+).addEventListener(
+  "click",
+  () => {
+
+    if(!currentHTML){
 
       toast(
         "Generate a website first."
@@ -1487,358 +1466,114 @@ $("chatBtn").onclick =
       return;
     }
 
-
-    const button =
-      $("chatBtn");
-
-    button.disabled = true;
-
-    button.textContent =
-      "AI Working...";
-
-
-    message(
-      "user",
-      instruction
-    );
-
-
-    try{
-
-      const data =
-        await api({
-          action:"edit",
-          prompt:instruction,
-          currentHTML:html
-        });
-
-
-      const updated =
-        cleanHTML(
-          data.html
-        );
-
-
-      if(!validHTML(updated)){
-
-        throw new Error(
-          "AI generated an incomplete website."
-        );
-      }
-
-
-      if(
-        !setHTML(
-          updated,
-          true
-        )
-      ){
-
-        throw new Error(
-          "AI generated an incomplete website."
-        );
-      }
-
-
-      $("chatInput")
-        .value = "";
-
-
-      message(
-        "ai",
-        "✓ Website updated."
-      );
-
-      toast(
-        "AI edit applied"
-      );
-
-
-    }catch(error){
-
-      console.error(error);
-
-      message(
-        "ai",
-        "❌ " +
-        error.message
-      );
-
-      toast(
-        error.message
-      );
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Apply AI Edit";
-    }
-  };
-
-
-/* =========================================================
-   CHAT ENTER
-========================================================= */
-
-$("chatInput").addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Enter" &&
-      !event.shiftKey
-    ){
-
-      event.preventDefault();
-
-      $("chatBtn").click();
-    }
-  }
-);
-
-
-/* =========================================================
-   CODE PANEL
-========================================================= */
-
-$("codeBtn").onclick =
-  () => {
-
-    $("codePanel")
-      .classList
-      .toggle("show");
-
-    const open =
-      $("codePanel")
-        .classList
-        .contains("show");
-
-    $("codeBtn")
-      .classList
-      .toggle(
-        "active",
-        open
-      );
-
-    $("previewBtn")
-      .classList
-      .toggle(
-        "active",
-        !open
-      );
-
-    $("code").value =
-      html;
-  };
-
-
-$("previewBtn").onclick =
-  () => {
-
-    $("codePanel")
-      .classList
-      .remove("show");
-
-    $("previewBtn")
-      .classList
-      .add("active");
-
-    $("codeBtn")
-      .classList
-      .remove("active");
-  };
-
-
-$("applyCodeBtn").onclick =
-  () => {
-
-    if(
-      setHTML(
-        $("code").value,
-        true
-      )
-    ){
-
-      toast(
-        "✓ Code applied"
-      );
-    }
-  };
-
-
-$("resetCodeBtn").onclick =
-  () => {
-
-    $("code").value =
-      html;
-  };
-
-
-/* =========================================================
-   COPY
-========================================================= */
-
-$("copyBtn").onclick =
-  async () => {
-
-    if(!html){
-
-      toast(
-        "No website yet."
-      );
-
-      return;
-    }
-
-    try{
-
-      await navigator.clipboard
-        .writeText(html);
-
-      toast(
-        "Code copied"
-      );
-
-    }catch{
-
-      toast(
-        "Copy failed"
-      );
-    }
-  };
-
-
-$("copyCodeBtn").onclick =
-  async () => {
-
-    try{
-
-      await navigator.clipboard
-        .writeText(
-          $("code").value
-        );
-
-      toast(
-        "Code copied"
-      );
-
-    }catch{
-
-      toast(
-        "Copy failed"
-      );
-    }
-  };
-
-
-/* =========================================================
-   DOWNLOAD
-========================================================= */
-
-$("downloadBtn").onclick =
-  () => {
-
-    if(!html){
-
-      toast(
-        "No website to download."
-      );
-
-      return;
-    }
-
-
     const blob =
       new Blob(
-        [html],
+        [currentHTML],
         {
           type:
             "text/html;charset=utf-8"
         }
       );
 
-
     const url =
-      URL.createObjectURL(blob);
+      URL.createObjectURL(
+        blob
+      );
 
+    const a =
+      document.createElement(
+        "a"
+      );
 
-    const link =
-      document.createElement("a");
+    a.href =
+      url;
 
-    link.href = url;
-
-    link.download =
+    a.download =
       "spdp-ai-website.html";
 
-    document.body
-      .appendChild(link);
+    document.body.appendChild(
+      a
+    );
 
-    link.click();
+    a.click();
 
-    link.remove();
+    a.remove();
+
+    URL.revokeObjectURL(
+      url
+    );
+
+    toast(
+      "HTML downloaded."
+    );
+
+  }
+);
+
+
+// ==========================================
+// OPEN
+// ==========================================
+
+document.getElementById(
+  "openBtn"
+).addEventListener(
+  "click",
+  () => {
+
+    if(!currentHTML){
+
+      toast(
+        "Generate a website first."
+      );
+
+      return;
+    }
+
+    const blob =
+      new Blob(
+        [currentHTML],
+        {
+          type:
+            "text/html"
+        }
+      );
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+    window.open(
+      url,
+      "_blank"
+    );
 
     setTimeout(
-      () => URL.revokeObjectURL(url),
-      1000
+      () =>
+        URL.revokeObjectURL(
+          url
+        ),
+      10000
     );
-  };
+
+  }
+);
 
 
-/* =========================================================
-   DEVICES
-========================================================= */
+// ==========================================
+// UNDO
+// ==========================================
 
-function setFrameWidth(width){
-
-  $("preview")
-    .style
-    .width = width;
-}
-
-
-$("desktopBtn").onclick =
+document.getElementById(
+  "undoBtn"
+).addEventListener(
+  "click",
   () => {
 
-    setFrameWidth("100%");
-
-    toast(
-      "Desktop preview"
-    );
-  };
-
-
-$("tabletBtn").onclick =
-  () => {
-
-    setFrameWidth("768px");
-
-    toast(
-      "Tablet preview"
-    );
-  };
-
-
-$("mobileBtn").onclick =
-  () => {
-
-    setFrameWidth("390px");
-
-    toast(
-      "Mobile preview"
-    );
-  };
-
-
-/* =========================================================
-   UNDO
-========================================================= */
-
-$("undoBtn").onclick =
-  () => {
-
-    if(!undoStack.length){
+    if(
+      historyIndex <= 0
+    ){
 
       toast(
         "Nothing to undo."
@@ -1847,37 +1582,38 @@ $("undoBtn").onclick =
       return;
     }
 
+    historyIndex--;
 
-    redoStack.push(html);
-
-    html =
-      undoStack.pop();
-
-
-    $("code").value =
-      html;
-
-    renderPreview(html);
-
-    localStorage.setItem(
-      "spdp_html",
-      html
+    showHTML(
+      history[
+        historyIndex
+      ]
     );
+
+    updateHistoryButtons();
 
     toast(
-      "Undo"
+      "Undo complete."
     );
-  };
+
+  }
+);
 
 
-/* =========================================================
-   REDO
-========================================================= */
+// ==========================================
+// REDO
+// ==========================================
 
-$("redoBtn").onclick =
+document.getElementById(
+  "redoBtn"
+).addEventListener(
+  "click",
   () => {
 
-    if(!redoStack.length){
+    if(
+      historyIndex >=
+      history.length - 1
+    ){
 
       toast(
         "Nothing to redo."
@@ -1886,508 +1622,131 @@ $("redoBtn").onclick =
       return;
     }
 
+    historyIndex++;
 
-    undoStack.push(html);
-
-    html =
-      redoStack.pop();
-
-
-    $("code").value =
-      html;
-
-    renderPreview(html);
-
-    localStorage.setItem(
-      "spdp_html",
-      html
+    showHTML(
+      history[
+        historyIndex
+      ]
     );
+
+    updateHistoryButtons();
 
     toast(
-      "Redo"
-    );
-  };
-
-
-/* =========================================================
-   PREVIEW EDIT
-========================================================= */
-
-$("previewEditBtn").onclick =
-  () => {
-
-    if(!html){
-
-      toast(
-        "Generate a website first."
-      );
-
-      return;
-    }
-
-
-    previewEditing =
-      !previewEditing;
-
-
-    $("previewEditBtn")
-      .classList
-      .toggle(
-        "active",
-        previewEditing
-      );
-
-
-    const injected = `
-
-<style>
-body.spdp-edit-mode *{
-  cursor:pointer!important;
-}
-
-body.spdp-edit-mode *:hover{
-  outline:2px dashed #765cff!important;
-  outline-offset:2px;
-}
-</style>
-
-<script>
-(function(){
-
-  let enabled = false;
-
-  window.addEventListener(
-    "message",
-    function(event){
-
-      if(
-        event.data &&
-        event.data.type === "SPDP_EDIT"
-      ){
-
-        enabled =
-          !!event.data.enabled;
-
-        document.body
-          .classList
-          .toggle(
-            "spdp-edit-mode",
-            enabled
-          );
-      }
-
-    }
-  );
-
-
-  document.addEventListener(
-    "click",
-    function(event){
-
-      if(!enabled){
-        return;
-      }
-
-      const element =
-        event.target;
-
-      if(
-        !element ||
-        element === document.body ||
-        element === document.documentElement
-      ){
-        return;
-      }
-
-
-      event.preventDefault();
-
-      element.contentEditable =
-        "true";
-
-      element.focus();
-
-
-      element.onblur =
-        function(){
-
-          element.contentEditable =
-            "false";
-
-          parent.postMessage(
-            {
-              type:"SPDP_SAVE",
-              html:
-                "<!DOCTYPE html>" +
-                document.documentElement
-                  .outerHTML
-            },
-            "*"
-          );
-        };
-
-    }
-  );
-
-})();
-<\/script>
-`;
-
-
-    $("preview").srcdoc =
-      html.replace(
-        "</body>",
-        injected +
-        "</body>"
-      );
-
-
-    setTimeout(
-      () => {
-
-        try{
-
-          $("preview")
-            .contentWindow
-            .postMessage(
-              {
-                type:"SPDP_EDIT",
-                enabled:
-                  previewEditing
-              },
-              "*"
-            );
-
-        }catch{}
-
-      },
-      150
+      "Redo complete."
     );
 
-
-    toast(
-      previewEditing
-        ? "Preview edit ON"
-        : "Preview edit OFF"
-    );
-  };
-
-
-/* =========================================================
-   PREVIEW SAVE
-========================================================= */
-
-window.addEventListener(
-  "message",
-  event => {
-
-    if(
-      event.data &&
-      event.data.type ===
-        "SPDP_SAVE"
-    ){
-
-      const updated =
-        cleanHTML(
-          event.data.html
-        );
-
-
-      if(
-        validHTML(updated)
-      ){
-
-        setHTML(
-          updated,
-          true
-        );
-
-        toast(
-          "Preview change saved"
-        );
-      }
-    }
   }
 );
 
 
-/* =========================================================
-   3D PREVIEW
-========================================================= */
+// ==========================================
+// GENERATE BUTTON
+// ==========================================
 
-$("threeBtn").onclick =
-  () => {
-
-    if(!html){
-
-      toast(
-        "Generate a website first."
-      );
-
-      return;
-    }
+document.getElementById(
+  "generateBtn"
+).addEventListener(
+  "click",
+  generateWebsite
+);
 
 
-    const addon = `
+// ==========================================
+// EDIT BUTTON
+// ==========================================
 
-<script
-src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js">
-<\/script>
-
-<style>
-
-#spdp3dwidget{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:180px;
-  height:180px;
-  border-radius:18px;
-  overflow:hidden;
-  background:#050505;
-  border:1px solid #333;
-  z-index:999999;
-}
-
-</style>
-
-<div id="spdp3dwidget"></div>
-
-<script>
-
-(function(){
-
-  if(!window.THREE){
-    return;
-  }
-
-  const root =
-    document.getElementById(
-      "spdp3dwidget"
-    );
-
-  if(!root){
-    return;
-  }
+document.getElementById(
+  "editBtn"
+).addEventListener(
+  "click",
+  editWebsite
+);
 
 
-  const scene =
-    new THREE.Scene();
+// ==========================================
+// ENTER SHORTCUTS
+// ==========================================
 
-
-  const camera =
-    new THREE.PerspectiveCamera(
-      45,
-      1,
-      0.1,
-      100
-    );
-
-
-  camera.position.z = 3;
-
-
-  const renderer =
-    new THREE.WebGLRenderer({
-      antialias:true,
-      alpha:true
-    });
-
-
-  renderer.setSize(
-    180,
-    180
-  );
-
-
-  root.appendChild(
-    renderer.domElement
-  );
-
-
-  const mesh =
-    new THREE.Mesh(
-      new THREE.IcosahedronGeometry(
-        0.75,
-        2
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x765cff,
-        metalness:0.85,
-        roughness:0.2
-      })
-    );
-
-
-  scene.add(mesh);
-
-
-  const light =
-    new THREE.PointLight(
-      0xffffff,
-      4
-    );
-
-
-  light.position.set(
-    2,
-    2,
-    3
-  );
-
-
-  scene.add(light);
-
-
-  scene.add(
-    new THREE.AmbientLight(
-      0xffffff,
-      0.8
-    )
-  );
-
-
-  function animate(){
-
-    requestAnimationFrame(
-      animate
-    );
-
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.015;
-
-    renderer.render(
-      scene,
-      camera
-    );
-  }
-
-
-  animate();
-
-})();
-
-<\/script>
-`;
-
-
-    $("preview").srcdoc =
-      html.replace(
-        "</body>",
-        addon +
-        "</body>"
-      );
-
-
-    toast(
-      "3D preview ON"
-    );
-  };
-
-
-/* =========================================================
-   CLEAR
-========================================================= */
-
-$("clearBtn").onclick =
-  () => {
+promptEl.addEventListener(
+  "keydown",
+  event => {
 
     if(
-      !confirm(
-        "Clear this project?"
-      )
+      event.ctrlKey &&
+      event.key === "Enter"
     ){
-      return;
+
+      event.preventDefault();
+
+      generateWebsite();
     }
 
-
-    html = "";
-
-    undoStack = [];
-    redoStack = [];
-
-    selectedFiles = [];
+  }
+);
 
 
-    $("prompt").value = "";
-
-    $("chatInput").value = "";
-
-    $("code").value = "";
-
-    $("preview").srcdoc = "";
-
-    $("messages").innerHTML = `
-      <div class="message ai">
-        Generate a website first. Then tell me what you want to change.
-      </div>
-    `;
-
-
-    localStorage.removeItem(
-      "spdp_html"
-    );
-
-
-    renderAttachments();
-
-    toast(
-      "Project cleared"
-    );
-  };
-
-
-/* =========================================================
-   NAV
-========================================================= */
-
-$("codeNav").onclick =
-  () => {
-
-    $("codeBtn").click();
-  };
-
-
-$("previewNav").onclick =
-  () => {
-
-    $("previewBtn").click();
-  };
-
-
-$("builderNav").onclick =
-  () => {
-
-    $("previewBtn").click();
-  };
-
-
-$("assetsNav").onclick =
-  () => {
-
-    $("addBtn").click();
-  };
-
-
-/* =========================================================
-   LOAD
-========================================================= */
-
-window.addEventListener(
-  "load",
-  () => {
+chatInput.addEventListener(
+  "keydown",
+  event => {
 
     if(
-      html &&
-      validHTML(html)
+      event.ctrlKey &&
+      event.key === "Enter"
     ){
 
-      $("code").value =
-        html;
+      event.preventDefault();
 
-      renderPreview(html);
+      editWebsite();
     }
+
   }
+);
+
+
+// ==========================================
+// CLEAR
+// ==========================================
+
+document.getElementById(
+  "clearBtn"
+).addEventListener(
+  "click",
+  () => {
+
+    promptEl.value =
+      "";
+
+  }
+);
+
+
+document.getElementById(
+  "clearChatBtn"
+).addEventListener(
+  "click",
+  () => {
+
+    messages.innerHTML = "";
+
+    addMessage(
+      "ai",
+      "Sub Chat cleared. Your current website is still preserved."
+    );
+
+  }
+);
+
+
+// ==========================================
+// INITIAL STATE
+// ==========================================
+
+updateHistoryButtons();
+
+setStatus(
+  "Ready",
+  false
 );
 
 </script>
