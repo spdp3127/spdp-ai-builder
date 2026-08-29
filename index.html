@@ -2,425 +2,436 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SPDP AI — Website Builder</title>
 
 <style>
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
+* {
+  box-sizing: border-box;
 }
 
-body{
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#050505;
-  color:#fff;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
 }
 
-button,textarea{font:inherit}
-
-button{cursor:pointer}
-
-.app{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+body {
+  background: #050505;
+  color: #ffffff;
+  font-family: Inter, Arial, sans-serif;
 }
 
-.topbar{
-  height:68px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  border-bottom:1px solid #222;
-  background:#080808;
-  position:sticky;
-  top:0;
-  z-index:100;
+button,
+textarea {
+  font-family: inherit;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
+button {
+  cursor: pointer;
 }
 
-.logo{
-  width:38px;
-  height:38px;
-  border-radius:11px;
-  display:grid;
-  place-items:center;
-  background:#fff;
-  color:#000;
-  font-weight:900;
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.brand small{
-  display:block;
-  color:#666;
-  font-size:9px;
-  margin-top:2px;
+.topbar {
+  height: 68px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: #080808;
+  border-bottom: 1px solid #222222;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.status{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#777;
-  font-size:12px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
 }
 
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#555;
+.logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #000000;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
 }
 
-.dot.online{
-  background:#65ff98;
-  box-shadow:0 0 12px #65ff98;
+.brand-text small {
+  display: block;
+  color: #666666;
+  font-size: 9px;
+  margin-top: 2px;
 }
 
-.workspace{
-  flex:1;
-  min-height:calc(100vh - 68px);
-  display:grid;
-  grid-template-columns:380px minmax(0,1fr);
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #777777;
+  font-size: 12px;
 }
 
-.sidebar{
-  min-width:0;
-  background:#080808;
-  border-right:1px solid #222;
-  padding:20px;
-  overflow-y:auto;
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #555555;
 }
 
-h1{
-  margin:0;
-  font-size:25px;
-  letter-spacing:-1px;
+.dot.online {
+  background: #66ff99;
+  box-shadow: 0 0 12px #66ff99;
 }
 
-.description{
-  margin:7px 0 20px;
-  color:#777;
-  font-size:13px;
-  line-height:1.55;
+.workspace {
+  flex: 1;
+  min-height: calc(100vh - 68px);
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
 }
 
-.label{
-  margin-bottom:8px;
-  color:#999;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  font-weight:700;
+.sidebar {
+  background: #080808;
+  border-right: 1px solid #222222;
+  padding: 20px;
+  overflow-y: auto;
 }
 
-textarea{
-  width:100%;
-  resize:vertical;
-  min-height:165px;
-  padding:15px;
-  border:1px solid #292929;
-  border-radius:14px;
-  outline:none;
-  background:#101010;
-  color:#fff;
-  line-height:1.55;
-  font-size:13px;
+.sidebar h1 {
+  margin: 0;
+  font-size: 25px;
+  letter-spacing: -1px;
 }
 
-textarea:focus{
-  border-color:#666;
+.description {
+  color: #777777;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 8px 0 20px;
 }
 
-.generate{
-  width:100%;
-  height:48px;
-  margin-top:10px;
-  border:0;
-  border-radius:13px;
-  background:#fff;
-  color:#000;
-  font-weight:800;
+.label {
+  color: #999999;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  margin-bottom: 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 165px;
+  resize: vertical;
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid #292929;
+  outline: none;
+  background: #101010;
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+textarea:focus {
+  border-color: #666666;
+}
+
+.generate {
+  width: 100%;
+  height: 48px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 800;
+}
+
+.edit {
+  width: 100%;
+  height: 44px;
+  margin-top: 8px;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  background: #151515;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .generate:disabled,
-.edit:disabled{
-  opacity:.45;
-  cursor:not-allowed;
+.edit:disabled {
+  opacity: .45;
+  cursor: not-allowed;
 }
 
-.divider{
-  height:1px;
-  background:#222;
-  margin:22px 0;
+.divider {
+  height: 1px;
+  background: #222222;
+  margin: 22px 0;
 }
 
-.sub-title{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
+.sub-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-.sub-title strong{
-  font-size:13px;
+.sub-title strong {
+  font-size: 13px;
 }
 
-.sub-title span{
-  color:#666;
-  font-size:9px;
+.sub-title span {
+  color: #666666;
+  font-size: 9px;
 }
 
-.edit{
-  width:100%;
-  height:44px;
-  margin-top:8px;
-  border:1px solid #333;
-  border-radius:12px;
-  background:#151515;
-  color:#fff;
-  font-weight:700;
+.hint {
+  color: #666666;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 12px;
 }
 
-.hint{
-  margin-top:12px;
-  color:#666;
-  font-size:11px;
-  line-height:1.5;
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.main{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
+.toolbar {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  background: #090909;
+  border-bottom: 1px solid #222222;
 }
 
-.toolbar{
-  min-height:58px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:9px 12px;
-  border-bottom:1px solid #222;
-  background:#090909;
+.toolbar-group {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
 }
 
-.toolbar-group{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+.tool {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #292929;
+  border-radius: 9px;
+  background: #111111;
+  color: #aaaaaa;
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.tool{
-  height:36px;
-  padding:0 12px;
-  border:1px solid #292929;
-  border-radius:9px;
-  background:#111;
-  color:#aaa;
-  font-size:11px;
-  font-weight:700;
+.tool:hover {
+  background: #181818;
+  color: #ffffff;
 }
 
-.tool:hover{
-  background:#181818;
-  color:#fff;
+.tool.active {
+  background: #ffffff;
+  color: #000000;
 }
 
-.tool.active{
-  background:#fff;
-  color:#000;
+.preview {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background: #111111;
 }
 
-.preview{
-  flex:1;
-  min-height:0;
-  position:relative;
-  background:#111;
+iframe {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 126px);
+  min-height: 500px;
+  border: 0;
+  background: #ffffff;
 }
 
-iframe{
-  display:block;
-  width:100%;
-  height:calc(100vh - 126px);
-  min-height:500px;
-  border:0;
-  background:#fff;
+.code {
+  display: none;
+  width: 100%;
+  height: calc(100vh - 126px);
+  min-height: 500px;
+  overflow: auto;
+  padding: 20px;
+  background: #070707;
 }
 
-.code{
-  display:none;
-  width:100%;
-  height:calc(100vh - 126px);
-  min-height:500px;
-  overflow:auto;
-  padding:20px;
-  background:#070707;
+.code.visible {
+  display: block;
 }
 
-.code.visible{
-  display:block;
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #dddddd;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
-pre{
-  margin:0;
-  white-space:pre-wrap;
-  word-break:break-word;
-  color:#ddd;
-  font-family:Consolas,"Cascadia Code",monospace;
-  font-size:12px;
-  line-height:1.6;
+.empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
 }
 
-.empty{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  pointer-events:none;
+.empty-box {
+  max-width: 420px;
+  padding: 30px;
+  text-align: center;
 }
 
-.empty-box{
-  text-align:center;
-  max-width:420px;
-  padding:30px;
+.empty-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #292929;
+  border-radius: 18px;
+  background: #151515;
+  font-size: 25px;
 }
 
-.empty-icon{
-  width:60px;
-  height:60px;
-  margin:auto auto 16px;
-  display:grid;
-  place-items:center;
-  border:1px solid #292929;
-  border-radius:18px;
-  background:#151515;
-  font-size:25px;
+.empty h2 {
+  margin: 0;
+  font-size: 21px;
 }
 
-.empty h2{
-  margin:0;
-  font-size:21px;
+.empty p {
+  color: #666666;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
-.empty p{
-  color:#666;
-  font-size:13px;
-  line-height:1.5;
+.loading {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  z-index: 30;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(8px);
 }
 
-.loading{
-  position:absolute;
-  inset:0;
-  display:none;
-  place-items:center;
-  z-index:30;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(8px);
+.loading.show {
+  display: grid;
 }
 
-.loading.show{
-  display:grid;
+.loader {
+  text-align: center;
 }
 
-.loader{
-  text-align:center;
+.spinner {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 12px;
+  border: 3px solid #292929;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
 }
 
-.spinner{
-  width:38px;
-  height:38px;
-  margin:auto auto 12px;
-  border:3px solid #292929;
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.loader strong{
-  font-size:13px;
-}
-
-.loader p{
-  margin:6px 0;
-  color:#666;
-  font-size:11px;
-}
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  z-index:999;
-  padding:11px 16px;
-  border-radius:10px;
-  background:#fff;
-  color:#000;
-  font-size:12px;
-  font-weight:700;
-  transition:.25s;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-.toast.error{
-  background:#ffdada;
-  color:#790000;
-}
-
-@media(max-width:900px){
-  .workspace{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    border-right:0;
-    border-bottom:1px solid #222;
-  }
-
-  iframe,.code{
-    height:70vh;
-    min-height:500px;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-@media(max-width:600px){
-  .status{
-    display:none;
+.loader strong {
+  font-size: 13px;
+}
+
+.loader p {
+  margin: 6px 0;
+  color: #666666;
+  font-size: 11px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 700;
+  transition: .25s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.toast.error {
+  background: #ffdada;
+  color: #790000;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
   }
 
-  .sidebar{
-    padding:15px;
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid #222222;
   }
 
-  .toolbar{
-    overflow-x:auto;
+  iframe,
+  .code {
+    height: 70vh;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .status {
+    display: none;
   }
 
-  .toolbar-group{
-    flex-wrap:nowrap;
+  .sidebar {
+    padding: 15px;
+  }
+
+  .toolbar {
+    overflow-x: auto;
+  }
+
+  .toolbar-group {
+    flex-wrap: nowrap;
   }
 }
 </style>
@@ -433,7 +444,8 @@ pre{
 <header class="topbar">
   <div class="brand">
     <div class="logo">S</div>
-    <div>
+
+    <div class="brand-text">
       SPDP AI
       <small>AI WEBSITE BUILDER</small>
     </div>
@@ -456,11 +468,13 @@ pre{
     understand and build it.
   </p>
 
-  <div class="label">Customer Prompt</div>
+  <div class="label">
+    Customer Prompt
+  </div>
 
   <textarea
     id="prompt"
-    placeholder="Example: Create a premium modern website for my business..."
+    placeholder="Create a premium website for my business..."
   ></textarea>
 
   <button
@@ -480,7 +494,7 @@ pre{
   <textarea
     id="editPrompt"
     style="min-height:105px"
-    placeholder="Tell SPDP AI what to change..."
+    placeholder="Change the hero section, add pricing, change colors..."
   ></textarea>
 
   <button
@@ -492,8 +506,8 @@ pre{
   </button>
 
   <div class="hint">
-    Generate a website first, then use Sub-chat
-    to modify it without losing existing functionality.
+    Generate a website first. Then describe any
+    changes you want to make.
   </div>
 
 </aside>
@@ -560,7 +574,7 @@ pre{
 
   <iframe
     id="frame"
-    title="Website Preview"
+    title="SPDP AI Website Preview"
     sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
   ></iframe>
 
@@ -577,10 +591,14 @@ pre{
   >
     <div class="empty-box">
       <div class="empty-icon">✦</div>
-      <h2>Your website appears here</h2>
+
+      <h2>
+        Your website appears here
+      </h2>
+
       <p>
-        Enter a customer prompt and generate
-        your website.
+        Enter a customer prompt and
+        generate your website.
       </p>
     </div>
   </div>
@@ -590,13 +608,17 @@ pre{
     class="loading"
   >
     <div class="loader">
+
       <div class="spinner"></div>
+
       <strong id="loadingTitle">
         Building website...
       </strong>
+
       <p id="loadingText">
         SPDP AI is working.
       </p>
+
     </div>
   </div>
 
@@ -605,6 +627,7 @@ pre{
 </main>
 
 </div>
+
 </div>
 
 <div
@@ -613,59 +636,80 @@ pre{
 ></div>
 
 <script>
-const WORKER_URL =
+var WORKER_URL =
   "https://spdp-ai.spdp3127.workers.dev/";
 
-const $ = id =>
-  document.getElementById(id);
+var currentHTML = "";
 
-let currentHTML = "";
-let undoStack = [];
-let redoStack = [];
+var undoStack = [];
+var redoStack = [];
 
-function toast(message, error = false) {
-  const el = $("toast");
-
-  el.textContent = message;
-  el.classList.toggle("error", error);
-  el.classList.add("show");
-
-  clearTimeout(toast.timer);
-
-  toast.timer = setTimeout(() => {
-    el.classList.remove("show");
-  }, 3000);
+function get(id) {
+  return document.getElementById(id);
 }
 
-function loading(show, title, text) {
-  $("loading").classList.toggle(
-    "show",
-    show
-  );
+function showToast(message, isError) {
+  var element = get("toast");
+
+  element.textContent = message;
+
+  if (isError) {
+    element.classList.add("error");
+  } else {
+    element.classList.remove("error");
+  }
+
+  element.classList.add("show");
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer =
+    setTimeout(function() {
+      element.classList.remove("show");
+    }, 3000);
+}
+
+function setLoading(
+  visible,
+  title,
+  message
+) {
+  var loading =
+    get("loading");
+
+  if (visible) {
+    loading.classList.add("show");
+  } else {
+    loading.classList.remove("show");
+  }
 
   if (title) {
-    $("loadingTitle").textContent =
+    get("loadingTitle").textContent =
       title;
   }
 
-  if (text) {
-    $("loadingText").textContent =
-      text;
+  if (message) {
+    get("loadingText").textContent =
+      message;
   }
 }
 
-function updateHistory() {
-  $("undo").disabled =
+function updateHistoryButtons() {
+  get("undo").disabled =
     undoStack.length === 0;
 
-  $("redo").disabled =
+  get("redo").disabled =
     redoStack.length === 0;
 }
 
 function saveHistory() {
-  if (!currentHTML) return;
+  if (!currentHTML) {
+    return;
+  }
 
-  undoStack.push(currentHTML);
+  undoStack.push(
+    currentHTML
+  );
 
   if (undoStack.length > 20) {
     undoStack.shift();
@@ -673,102 +717,103 @@ function saveHistory() {
 
   redoStack = [];
 
-  updateHistory();
+  updateHistoryButtons();
 }
 
-function render(html) {
+function renderWebsite(html) {
   currentHTML = html;
 
-  $("frame").srcdoc =
+  get("frame").srcdoc =
     currentHTML;
 
-  $("codeText").textContent =
+  get("codeText").textContent =
     currentHTML;
 
-  $("empty").style.display =
+  get("empty").style.display =
     "none";
 
-  $("edit").disabled = false;
+  get("edit").disabled =
+    false;
 
   showPreview();
 
-  updateHistory();
+  updateHistoryButtons();
 }
 
 function showPreview() {
-  $("previewBtn")
+  get("previewBtn")
     .classList.add("active");
 
-  $("codeBtn")
+  get("codeBtn")
     .classList.remove("active");
 
-  $("frame").style.display =
+  get("frame").style.display =
     "block";
 
-  $("code").classList.remove(
+  get("code").classList.remove(
     "visible"
   );
 }
 
 function showCode() {
-  $("codeBtn")
+  get("codeBtn")
     .classList.add("active");
 
-  $("previewBtn")
+  get("previewBtn")
     .classList.remove("active");
 
-  $("frame").style.display =
+  get("frame").style.display =
     "none";
 
-  $("code").classList.add(
+  get("code").classList.add(
     "visible"
   );
 
-  $("codeText").textContent =
+  get("codeText").textContent =
     currentHTML;
 }
 
-async function requestAI(
+async function callWorker(
   action,
   prompt,
-  existingHTML = ""
+  existingHTML
 ) {
-  const body = {
-    action,
-    prompt
+  var payload = {
+    action: action,
+    prompt: prompt
   };
 
   if (
     action === "edit" &&
     existingHTML
   ) {
-    body.currentHTML =
+    payload.currentHTML =
       existingHTML;
   }
 
-  const response =
+  var response =
     await fetch(
       WORKER_URL,
       {
-        method:"POST",
-        headers:{
+        method: "POST",
+        headers: {
           "Content-Type":
             "application/json"
         },
         body:
-          JSON.stringify(body)
+          JSON.stringify(payload)
       }
     );
 
-  const text =
+  var text =
     await response.text();
 
-  let data;
+  var data;
 
   try {
     data =
       JSON.parse(text);
-  } catch {
+  } catch (error) {
     throw new Error(
       "Worker returned invalid JSON."
     );
@@ -785,12 +830,11 @@ async function requestAI(
   }
 
   if (
-    typeof data.html !==
-      "string" ||
+    typeof data.html !== "string" ||
     !data.html.trim()
   ) {
     throw new Error(
-      "AI returned no website."
+      "AI returned no HTML."
     );
   }
 
@@ -798,129 +842,144 @@ async function requestAI(
 }
 
 async function generateWebsite() {
-  const prompt =
-    $("prompt").value.trim();
+  var prompt =
+    get("prompt").value.trim();
 
   if (!prompt) {
-    toast(
+    showToast(
       "Enter a customer prompt.",
       true
     );
-    $("prompt").focus();
+
+    get("prompt").focus();
+
     return;
   }
 
-  saveHistory();
+  if (currentHTML) {
+    saveHistory();
+  }
 
-  $("generate").disabled = true;
-  $("edit").disabled = true;
+  get("generate").disabled =
+    true;
 
-  loading(
+  get("edit").disabled =
+    true;
+
+  setLoading(
     true,
     "Understanding your request...",
-    "Building a functional website."
+    "Generating a functional website."
   );
 
   try {
-    const html =
-      await requestAI(
+    var html =
+      await callWorker(
         "create",
-        prompt
+        prompt,
+        ""
       );
 
-    render(html);
+    renderWebsite(html);
 
-    $("editPrompt").value =
+    get("editPrompt").value =
       "";
 
-    toast(
-      "Website generated."
+    showToast(
+      "Website generated successfully."
     );
+
   } catch (error) {
     console.error(error);
 
-    toast(
+    showToast(
       error.message ||
-      "Generation failed.",
+      "Website generation failed.",
       true
     );
-  } finally {
-    loading(false);
 
-    $("generate").disabled =
+  } finally {
+    setLoading(false);
+
+    get("generate").disabled =
       false;
 
-    $("edit").disabled =
+    get("edit").disabled =
       !currentHTML;
   }
 }
 
 async function editWebsite() {
-  const prompt =
-    $("editPrompt").value.trim();
+  var prompt =
+    get("editPrompt").value.trim();
 
   if (!currentHTML) {
-    toast(
+    showToast(
       "Generate a website first.",
       true
     );
+
     return;
   }
 
   if (!prompt) {
-    toast(
-      "Describe the change.",
+    showToast(
+      "Describe the change you want.",
       true
     );
-    $("editPrompt").focus();
+
+    get("editPrompt").focus();
+
     return;
   }
 
   saveHistory();
 
-  $("generate").disabled =
+  get("generate").disabled =
     true;
 
-  $("edit").disabled =
+  get("edit").disabled =
     true;
 
-  loading(
+  setLoading(
     true,
     "Updating website...",
-    "Preserving existing functionality."
+    "Preserving the existing functionality."
   );
 
   try {
-    const html =
-      await requestAI(
+    var html =
+      await callWorker(
         "edit",
         prompt,
         currentHTML
       );
 
-    render(html);
+    renderWebsite(html);
 
-    $("editPrompt").value =
+    get("editPrompt").value =
       "";
 
-    toast(
-      "Website updated."
+    showToast(
+      "Website updated successfully."
     );
+
   } catch (error) {
     console.error(error);
 
-    toast(
+    showToast(
       error.message ||
-      "Update failed.",
+      "Website update failed.",
       true
     );
-  } finally {
-    loading(false);
 
-    $("generate").disabled =
+  } finally {
+    setLoading(false);
+
+    get("generate").disabled =
       false;
 
-    $("edit").disabled =
+    get("edit").disabled =
       !currentHTML;
   }
 }
@@ -937,9 +996,13 @@ function undo() {
   currentHTML =
     undoStack.pop();
 
-  render(currentHTML);
+  renderWebsite(
+    currentHTML
+  );
 
-  toast("Undo applied.");
+  showToast(
+    "Undo applied."
+  );
 }
 
 function redo() {
@@ -954,60 +1017,72 @@ function redo() {
   currentHTML =
     redoStack.pop();
 
-  render(currentHTML);
+  renderWebsite(
+    currentHTML
+  );
 
-  toast("Redo applied.");
+  showToast(
+    "Redo applied."
+  );
 }
 
 async function copyCode() {
   if (!currentHTML) {
-    toast(
+    showToast(
       "Generate a website first.",
       true
     );
+
     return;
   }
 
   try {
-    await navigator.clipboard
-      .writeText(currentHTML);
+    await navigator.clipboard.writeText(
+      currentHTML
+    );
 
-    toast("Code copied.");
-  } catch {
-    const area =
+    showToast(
+      "Code copied."
+    );
+
+  } catch (error) {
+    var textarea =
       document.createElement(
         "textarea"
       );
 
-    area.value =
+    textarea.value =
       currentHTML;
 
     document.body.appendChild(
-      area
+      textarea
     );
 
-    area.select();
+    textarea.select();
 
     document.execCommand(
       "copy"
     );
 
-    area.remove();
+    textarea.remove();
 
-    toast("Code copied.");
+    showToast(
+      "Code copied."
+    );
   }
 }
 
-function downloadCode() {
+function downloadWebsite() {
   if (!currentHTML) {
-    toast(
+    showToast(
       "Generate a website first.",
       true
     );
+
     return;
   }
 
-  const blob =
+  var blob =
     new Blob(
       [currentHTML],
       {
@@ -1016,141 +1091,145 @@ function downloadCode() {
       }
     );
 
-  const url =
+  var url =
     URL.createObjectURL(blob);
 
-  const a =
-    document.createElement(
-      "a"
-    );
+  var link =
+    document.createElement("a");
 
-  a.href = url;
-  a.download =
+  link.href = url;
+
+  link.download =
     "spdp-ai-website.html";
 
-  document.body.appendChild(a);
+  document.body.appendChild(
+    link
+  );
 
-  a.click();
+  link.click();
 
-  a.remove();
+  link.remove();
 
   URL.revokeObjectURL(url);
 
-  toast(
+  showToast(
     "Website downloaded."
   );
 }
 
 async function checkWorker() {
   try {
-    const response =
+    var response =
       await fetch(
         WORKER_URL
       );
 
-    const data =
+    var data =
       await response.json();
 
     if (
       response.ok &&
       data.success
     ) {
-      $("dot")
+      get("dot")
         .classList.add(
           "online"
         );
 
-      $("status").textContent =
+      get("status").textContent =
         "AI Online";
     } else {
       throw new Error();
     }
-  } catch {
-    $("status").textContent =
+
+  } catch (error) {
+    get("status").textContent =
       "AI Offline";
   }
 }
 
-$("generate")
+get("generate")
   .addEventListener(
     "click",
     generateWebsite
   );
 
-$("edit")
+get("edit")
   .addEventListener(
     "click",
     editWebsite
   );
 
-$("undo")
+get("undo")
   .addEventListener(
     "click",
     undo
   );
 
-$("redo")
+get("redo")
   .addEventListener(
     "click",
     redo
   );
 
-$("copyBtn")
+get("copyBtn")
   .addEventListener(
     "click",
     copyCode
   );
 
-$("downloadBtn")
+get("downloadBtn")
   .addEventListener(
     "click",
-    downloadCode
+    downloadWebsite
   );
 
-$("previewBtn")
+get("previewBtn")
   .addEventListener(
     "click",
     showPreview
   );
 
-$("codeBtn")
+get("codeBtn")
   .addEventListener(
     "click",
     showCode
   );
 
-$("prompt")
+get("prompt")
   .addEventListener(
     "keydown",
-    event => {
+    function(event) {
       if (
         (event.ctrlKey ||
          event.metaKey) &&
         event.key === "Enter"
       ) {
         event.preventDefault();
+
         generateWebsite();
       }
     }
   );
 
-$("editPrompt")
+get("editPrompt")
   .addEventListener(
     "keydown",
-    event => {
+    function(event) {
       if (
         (event.ctrlKey ||
          event.metaKey) &&
         event.key === "Enter"
       ) {
         event.preventDefault();
+
         editWebsite();
       }
     }
   );
 
+updateHistoryButtons();
 checkWorker();
-updateHistory();
 </script>
 
 </body>
