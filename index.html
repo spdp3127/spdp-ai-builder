@@ -1,715 +1,610 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>SPDP AI — Website Builder</title>
-
-  <meta
-    name="description"
-    content="SPDP AI — Build websites, apps and games with AI."
-  >
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      background:
-        #050505;
-      color: #fff;
-    }
-
-    button,
-    textarea,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .app {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .topbar {
-      height: 68px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 22px;
-      border-bottom: 1px solid #222;
-      background: rgba(5,5,5,.94);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      font-weight: 800;
-      letter-spacing: -.4px;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(135deg,#fff,#777);
-      color: #000;
-      font-weight: 1000;
-      box-shadow:
-        0 0 30px rgba(255,255,255,.12);
-    }
-
-    .brand small {
-      display: block;
-      color: #777;
-      font-size: 10px;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #aaa;
-      font-size: 12px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #555;
-    }
-
-    .status-dot.online {
-      background: #6cff9a;
-      box-shadow: 0 0 12px #6cff9a;
-    }
-
-    .workspace {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 390px minmax(0,1fr);
-      min-height: calc(100vh - 68px);
-    }
-
-    .sidebar {
-      border-right: 1px solid #222;
-      background: #080808;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .sidebar-inner {
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    .heading {
-      margin-bottom: 18px;
-    }
-
-    .heading h1 {
-      margin: 0;
-      font-size: 25px;
-      letter-spacing: -.9px;
-    }
-
-    .heading p {
-      margin: 7px 0 0;
-      color: #777;
-      line-height: 1.5;
-      font-size: 13px;
-    }
-
-    .label {
-      color: #999;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      margin-bottom: 8px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 170px;
-      resize: vertical;
-      color: #fff;
-      background: #101010;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      padding: 15px;
-      outline: none;
-      line-height: 1.55;
-      font-size: 13px;
-      transition: .2s;
-    }
-
-    textarea:focus {
-      border-color: #666;
-      box-shadow:
-        0 0 0 3px rgba(255,255,255,.04);
-    }
-
-    .generate {
-      width: 100%;
-      height: 48px;
-      margin-top: 10px;
-      border: 0;
-      border-radius: 13px;
-      background: #fff;
-      color: #000;
-      font-weight: 800;
-      transition: .2s;
-    }
-
-    .generate:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 10px 35px rgba(255,255,255,.13);
-    }
-
-    .generate:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .divider {
-      height: 1px;
-      background: #222;
-      margin: 22px 0;
-    }
-
-    .subchat-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 9px;
-    }
-
-    .subchat-title strong {
-      font-size: 13px;
-    }
-
-    .subchat-title span {
-      color: #666;
-      font-size: 10px;
-    }
-
-    .edit-area {
-      min-height: 105px;
-    }
-
-    .edit-button {
-      width: 100%;
-      height: 43px;
-      margin-top: 8px;
-      border: 1px solid #333;
-      border-radius: 12px;
-      background: #151515;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .edit-button:hover {
-      background: #1c1c1c;
-      border-color: #555;
-    }
-
-    .edit-button:disabled {
-      opacity: .4;
-      cursor: not-allowed;
-    }
-
-    .tip {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 12px;
-      background: #0d0d0d;
-      border: 1px solid #1c1c1c;
-      color: #777;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .main {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      background: #0a0a0a;
-    }
-
-    .toolbar {
-      min-height: 58px;
-      padding: 9px 12px;
-      border-bottom: 1px solid #222;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      background: #090909;
-    }
-
-    .toolbar-left,
-    .toolbar-right {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
-    }
-
-    .tool-btn {
-      height: 36px;
-      padding: 0 12px;
-      border: 1px solid #292929;
-      background: #111;
-      color: #bbb;
-      border-radius: 9px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .tool-btn:hover {
-      background: #181818;
-      color: #fff;
-      border-color: #444;
-    }
-
-    .tool-btn.active {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
-    }
-
-    .preview {
-      flex: 1;
-      min-height: 0;
-      position: relative;
-      background: #111;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      min-height: calc(100vh - 127px);
-      border: 0;
-      display: block;
-      background: #fff;
-    }
-
-    .code-view {
-      display: none;
-      width: 100%;
-      height: 100%;
-      min-height: calc(100vh - 127px);
-      overflow: auto;
-      background: #070707;
-      padding: 20px;
-    }
-
-    .code-view.visible {
-      display: block;
-    }
-
-    .code {
-      margin: 0;
-      color: #ddd;
-      font-family:
-        "Cascadia Code",
-        "SFMono-Regular",
-        Consolas,
-        monospace;
-      font-size: 12px;
-      line-height: 1.65;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .empty {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      pointer-events: none;
-    }
-
-    .empty-box {
-      text-align: center;
-      max-width: 430px;
-      padding: 30px;
-    }
-
-    .empty-icon {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 18px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: #161616;
-      border: 1px solid #292929;
-      font-size: 26px;
-    }
-
-    .empty h2 {
-      margin: 0;
-      font-size: 21px;
-    }
-
-    .empty p {
-      color: #666;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .loading {
-      position: absolute;
-      inset: 0;
-      display: none;
-      place-items: center;
-      background: rgba(5,5,5,.76);
-      backdrop-filter: blur(8px);
-      z-index: 20;
-    }
-
-    .loading.show {
-      display: grid;
-    }
-
-    .loader-box {
-      text-align: center;
-    }
-
-    .spinner {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 3px solid #292929;
-      border-top-color: #fff;
-      animation: spin .8s linear infinite;
-      margin: 0 auto 13px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .loader-box strong {
-      font-size: 13px;
-    }
-
-    .loader-box p {
-      color: #666;
-      font-size: 11px;
-      margin: 6px 0;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translate(-50%,20px);
-      opacity: 0;
-      pointer-events: none;
-      background: #fff;
-      color: #000;
-      padding: 11px 16px;
-      border-radius: 10px;
-      font-size: 12px;
-      font-weight: 700;
-      z-index: 500;
-      transition: .25s;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%,0);
-    }
-
-    .toast.error {
-      background: #ffdddd;
-      color: #7a0000;
-    }
-
-    @media (max-width: 900px) {
-      .workspace {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        border-right: 0;
-        border-bottom: 1px solid #222;
-      }
-
-      .sidebar-inner {
-        max-height: none;
-      }
-
-      .preview {
-        min-height: 70vh;
-      }
-
-      iframe,
-      .code-view {
-        min-height: 70vh;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .topbar {
-        padding: 0 14px;
-      }
-
-      .status {
-        display: none;
-      }
-
-      .sidebar-inner {
-        padding: 15px;
-      }
-
-      .toolbar {
-        overflow-x: auto;
-      }
-
-      .toolbar-right {
-        display: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SPDP AI — Website Builder</title>
+
+<style>
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#050505;
+  color:#fff;
+}
+
+button,textarea{font:inherit}
+
+button{cursor:pointer}
+
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  height:68px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  border-bottom:1px solid #222;
+  background:#080808;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+}
+
+.logo{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  color:#000;
+  font-weight:900;
+}
+
+.brand small{
+  display:block;
+  color:#666;
+  font-size:9px;
+  margin-top:2px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#777;
+  font-size:12px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#555;
+}
+
+.dot.online{
+  background:#65ff98;
+  box-shadow:0 0 12px #65ff98;
+}
+
+.workspace{
+  flex:1;
+  min-height:calc(100vh - 68px);
+  display:grid;
+  grid-template-columns:380px minmax(0,1fr);
+}
+
+.sidebar{
+  min-width:0;
+  background:#080808;
+  border-right:1px solid #222;
+  padding:20px;
+  overflow-y:auto;
+}
+
+h1{
+  margin:0;
+  font-size:25px;
+  letter-spacing:-1px;
+}
+
+.description{
+  margin:7px 0 20px;
+  color:#777;
+  font-size:13px;
+  line-height:1.55;
+}
+
+.label{
+  margin-bottom:8px;
+  color:#999;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  font-weight:700;
+}
+
+textarea{
+  width:100%;
+  resize:vertical;
+  min-height:165px;
+  padding:15px;
+  border:1px solid #292929;
+  border-radius:14px;
+  outline:none;
+  background:#101010;
+  color:#fff;
+  line-height:1.55;
+  font-size:13px;
+}
+
+textarea:focus{
+  border-color:#666;
+}
+
+.generate{
+  width:100%;
+  height:48px;
+  margin-top:10px;
+  border:0;
+  border-radius:13px;
+  background:#fff;
+  color:#000;
+  font-weight:800;
+}
+
+.generate:disabled,
+.edit:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.divider{
+  height:1px;
+  background:#222;
+  margin:22px 0;
+}
+
+.sub-title{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.sub-title strong{
+  font-size:13px;
+}
+
+.sub-title span{
+  color:#666;
+  font-size:9px;
+}
+
+.edit{
+  width:100%;
+  height:44px;
+  margin-top:8px;
+  border:1px solid #333;
+  border-radius:12px;
+  background:#151515;
+  color:#fff;
+  font-weight:700;
+}
+
+.hint{
+  margin-top:12px;
+  color:#666;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.main{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.toolbar{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:9px 12px;
+  border-bottom:1px solid #222;
+  background:#090909;
+}
+
+.toolbar-group{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.tool{
+  height:36px;
+  padding:0 12px;
+  border:1px solid #292929;
+  border-radius:9px;
+  background:#111;
+  color:#aaa;
+  font-size:11px;
+  font-weight:700;
+}
+
+.tool:hover{
+  background:#181818;
+  color:#fff;
+}
+
+.tool.active{
+  background:#fff;
+  color:#000;
+}
+
+.preview{
+  flex:1;
+  min-height:0;
+  position:relative;
+  background:#111;
+}
+
+iframe{
+  display:block;
+  width:100%;
+  height:calc(100vh - 126px);
+  min-height:500px;
+  border:0;
+  background:#fff;
+}
+
+.code{
+  display:none;
+  width:100%;
+  height:calc(100vh - 126px);
+  min-height:500px;
+  overflow:auto;
+  padding:20px;
+  background:#070707;
+}
+
+.code.visible{
+  display:block;
+}
+
+pre{
+  margin:0;
+  white-space:pre-wrap;
+  word-break:break-word;
+  color:#ddd;
+  font-family:Consolas,"Cascadia Code",monospace;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.empty{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+}
+
+.empty-box{
+  text-align:center;
+  max-width:420px;
+  padding:30px;
+}
+
+.empty-icon{
+  width:60px;
+  height:60px;
+  margin:auto auto 16px;
+  display:grid;
+  place-items:center;
+  border:1px solid #292929;
+  border-radius:18px;
+  background:#151515;
+  font-size:25px;
+}
+
+.empty h2{
+  margin:0;
+  font-size:21px;
+}
+
+.empty p{
+  color:#666;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.loading{
+  position:absolute;
+  inset:0;
+  display:none;
+  place-items:center;
+  z-index:30;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+}
+
+.loading.show{
+  display:grid;
+}
+
+.loader{
+  text-align:center;
+}
+
+.spinner{
+  width:38px;
+  height:38px;
+  margin:auto auto 12px;
+  border:3px solid #292929;
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.loader strong{
+  font-size:13px;
+}
+
+.loader p{
+  margin:6px 0;
+  color:#666;
+  font-size:11px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  z-index:999;
+  padding:11px 16px;
+  border-radius:10px;
+  background:#fff;
+  color:#000;
+  font-size:12px;
+  font-weight:700;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.toast.error{
+  background:#ffdada;
+  color:#790000;
+}
+
+@media(max-width:900px){
+  .workspace{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    border-right:0;
+    border-bottom:1px solid #222;
+  }
+
+  iframe,.code{
+    height:70vh;
+    min-height:500px;
+  }
+}
+
+@media(max-width:600px){
+  .status{
+    display:none;
+  }
+
+  .sidebar{
+    padding:15px;
+  }
+
+  .toolbar{
+    overflow-x:auto;
+  }
+
+  .toolbar-group{
+    flex-wrap:nowrap;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-icon">S</div>
-      <div>
-        SPDP AI
-        <small>AI WEBSITE BUILDER</small>
-      </div>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">S</div>
+    <div>
+      SPDP AI
+      <small>AI WEBSITE BUILDER</small>
     </div>
+  </div>
 
-    <div class="status">
-      <span
-        id="statusDot"
-        class="status-dot"
-      ></span>
-      <span id="statusText">Checking AI...</span>
-    </div>
-  </header>
+  <div class="status">
+    <span id="dot" class="dot"></span>
+    <span id="status">Checking...</span>
+  </div>
+</header>
 
-  <div class="workspace">
+<div class="workspace">
 
-    <aside class="sidebar">
+<aside class="sidebar">
 
-      <div class="sidebar-inner">
+  <h1>Build with AI</h1>
 
-        <div class="heading">
-          <h1>Build with AI</h1>
-          <p>
-            Describe what you want. SPDP AI will
-            understand the request and build it.
-          </p>
-        </div>
+  <p class="description">
+    Describe what you want and SPDP AI will
+    understand and build it.
+  </p>
 
-        <div class="label">
-          Customer Prompt
-        </div>
+  <div class="label">Customer Prompt</div>
 
-        <textarea
-          id="prompt"
-          placeholder="Describe the website, app or game you want..."
-        ></textarea>
+  <textarea
+    id="prompt"
+    placeholder="Example: Create a premium modern website for my business..."
+  ></textarea>
 
-        <button
-          id="generateBtn"
-          class="generate"
-        >
-          Generate Website
-        </button>
+  <button
+    id="generate"
+    class="generate"
+  >
+    Generate Website
+  </button>
 
-        <div class="divider"></div>
+  <div class="divider"></div>
 
-        <div class="subchat-title">
-          <strong>Sub-chat Edit</strong>
-          <span>EDIT CURRENT SITE</span>
-        </div>
+  <div class="sub-title">
+    <strong>Sub-chat Edit</strong>
+    <span>CURRENT WEBSITE</span>
+  </div>
 
-        <textarea
-          id="editPrompt"
-          class="edit-area"
-          placeholder="Example: Make the hero section blue, add a pricing section, change the navbar..."
-        ></textarea>
+  <textarea
+    id="editPrompt"
+    style="min-height:105px"
+    placeholder="Tell SPDP AI what to change..."
+  ></textarea>
 
-        <button
-          id="editBtn"
-          class="edit-button"
-          disabled
-        >
-          ✦ Update Website
-        </button>
+  <button
+    id="edit"
+    class="edit"
+    disabled
+  >
+    ✦ Update Website
+  </button>
 
-        <div class="tip">
-          Generate a website first. Then describe any
-          change here and SPDP AI will modify the
-          current website instead of creating a new one.
-        </div>
+  <div class="hint">
+    Generate a website first, then use Sub-chat
+    to modify it without losing existing functionality.
+  </div>
 
-      </div>
+</aside>
 
-    </aside>
+<main class="main">
 
-    <main class="main">
+<div class="toolbar">
 
-      <div class="toolbar">
+  <div class="toolbar-group">
 
-        <div class="toolbar-left">
+    <button
+      id="previewBtn"
+      class="tool active"
+    >
+      Preview
+    </button>
 
-          <button
-            id="previewBtn"
-            class="tool-btn active"
-          >
-            Preview
-          </button>
+    <button
+      id="codeBtn"
+      class="tool"
+    >
+      Code
+    </button>
 
-          <button
-            id="codeBtn"
-            class="tool-btn"
-          >
-            Code
-          </button>
+    <button
+      id="copyBtn"
+      class="tool"
+    >
+      Copy
+    </button>
 
-          <button
-            id="copyBtn"
-            class="tool-btn"
-          >
-            Copy
-          </button>
-
-          <button
-            id="downloadBtn"
-            class="tool-btn"
-          >
-            Download
-          </button>
-
-        </div>
-
-        <div class="toolbar-right">
-
-          <button
-            id="undoBtn"
-            class="tool-btn"
-            disabled
-          >
-            ↶ Undo
-          </button>
-
-          <button
-            id="redoBtn"
-            class="tool-btn"
-            disabled
-          >
-            ↷ Redo
-          </button>
-
-        </div>
-
-      </div>
-
-      <section class="preview">
-
-        <iframe
-          id="previewFrame"
-          title="Generated website preview"
-          sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
-        ></iframe>
-
-        <div
-          id="codeView"
-          class="code-view"
-        >
-          <pre
-            id="codeOutput"
-            class="code"
-          ></pre>
-        </div>
-
-        <div
-          id="emptyState"
-          class="empty"
-        >
-          <div class="empty-box">
-            <div class="empty-icon">✦</div>
-            <h2>Your website appears here</h2>
-            <p>
-              Enter a customer prompt on the left
-              and generate a complete website.
-            </p>
-          </div>
-        </div>
-
-        <div
-          id="loading"
-          class="loading"
-        >
-          <div class="loader-box">
-            <div class="spinner"></div>
-            <strong id="loadingTitle">
-              Building your website...
-            </strong>
-            <p id="loadingText">
-              SPDP AI is generating the complete experience.
-            </p>
-          </div>
-        </div>
-
-      </section>
-
-    </main>
+    <button
+      id="downloadBtn"
+      class="tool"
+    >
+      Download
+    </button>
 
   </div>
+
+  <div class="toolbar-group">
+
+    <button
+      id="undo"
+      class="tool"
+      disabled
+    >
+      ↶ Undo
+    </button>
+
+    <button
+      id="redo"
+      class="tool"
+      disabled
+    >
+      ↷ Redo
+    </button>
+
+  </div>
+
+</div>
+
+<div class="preview">
+
+  <iframe
+    id="frame"
+    title="Website Preview"
+    sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
+  ></iframe>
+
+  <div
+    id="code"
+    class="code"
+  >
+    <pre id="codeText"></pre>
+  </div>
+
+  <div
+    id="empty"
+    class="empty"
+  >
+    <div class="empty-box">
+      <div class="empty-icon">✦</div>
+      <h2>Your website appears here</h2>
+      <p>
+        Enter a customer prompt and generate
+        your website.
+      </p>
+    </div>
+  </div>
+
+  <div
+    id="loading"
+    class="loading"
+  >
+    <div class="loader">
+      <div class="spinner"></div>
+      <strong id="loadingTitle">
+        Building website...
+      </strong>
+      <p id="loadingText">
+        SPDP AI is working.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+</div>
 </div>
 
 <div
@@ -718,553 +613,519 @@
 ></div>
 
 <script>
-  const WORKER_URL =
-    "https://spdp-ai.spdp3127.workers.dev/";
+const WORKER_URL =
+  "https://spdp-ai.spdp3127.workers.dev/";
 
-  const promptEl =
-    document.getElementById("prompt");
+const $ = id =>
+  document.getElementById(id);
 
-  const editPromptEl =
-    document.getElementById("editPrompt");
+let currentHTML = "";
+let undoStack = [];
+let redoStack = [];
 
-  const generateBtn =
-    document.getElementById("generateBtn");
+function toast(message, error = false) {
+  const el = $("toast");
 
-  const editBtn =
-    document.getElementById("editBtn");
+  el.textContent = message;
+  el.classList.toggle("error", error);
+  el.classList.add("show");
 
-  const previewFrame =
-    document.getElementById("previewFrame");
+  clearTimeout(toast.timer);
 
-  const codeView =
-    document.getElementById("codeView");
+  toast.timer = setTimeout(() => {
+    el.classList.remove("show");
+  }, 3000);
+}
 
-  const codeOutput =
-    document.getElementById("codeOutput");
+function loading(show, title, text) {
+  $("loading").classList.toggle(
+    "show",
+    show
+  );
 
-  const emptyState =
-    document.getElementById("emptyState");
-
-  const loading =
-    document.getElementById("loading");
-
-  const loadingTitle =
-    document.getElementById("loadingTitle");
-
-  const loadingText =
-    document.getElementById("loadingText");
-
-  const toast =
-    document.getElementById("toast");
-
-  const previewBtn =
-    document.getElementById("previewBtn");
-
-  const codeBtn =
-    document.getElementById("codeBtn");
-
-  const copyBtn =
-    document.getElementById("copyBtn");
-
-  const downloadBtn =
-    document.getElementById("downloadBtn");
-
-  const undoBtn =
-    document.getElementById("undoBtn");
-
-  const redoBtn =
-    document.getElementById("redoBtn");
-
-  const statusDot =
-    document.getElementById("statusDot");
-
-  const statusText =
-    document.getElementById("statusText");
-
-  let currentHTML = "";
-
-  let undoStack = [];
-  let redoStack = [];
-
-  function showToast(message, error = false) {
-    toast.textContent = message;
-    toast.classList.toggle("error", error);
-    toast.classList.add("show");
-
-    clearTimeout(showToast.timer);
-
-    showToast.timer = setTimeout(() => {
-      toast.classList.remove("show");
-    }, 3000);
+  if (title) {
+    $("loadingTitle").textContent =
+      title;
   }
 
-  function setLoading(
-    state,
-    title = "Building your website...",
-    text = "SPDP AI is generating the complete experience."
-  ) {
-    loading.classList.toggle(
-      "show",
-      state
-    );
+  if (text) {
+    $("loadingText").textContent =
+      text;
+  }
+}
 
-    loadingTitle.textContent = title;
-    loadingText.textContent = text;
+function updateHistory() {
+  $("undo").disabled =
+    undoStack.length === 0;
+
+  $("redo").disabled =
+    redoStack.length === 0;
+}
+
+function saveHistory() {
+  if (!currentHTML) return;
+
+  undoStack.push(currentHTML);
+
+  if (undoStack.length > 20) {
+    undoStack.shift();
   }
 
-  function setButtons(state) {
-    generateBtn.disabled = state;
-    editBtn.disabled =
-      state || !currentHTML;
-  }
+  redoStack = [];
 
-  function updateCode() {
-    codeOutput.textContent =
-      currentHTML || "";
-  }
+  updateHistory();
+}
 
-  function updateHistoryButtons() {
-    undoBtn.disabled =
-      undoStack.length === 0;
+function render(html) {
+  currentHTML = html;
 
-    redoBtn.disabled =
-      redoStack.length === 0;
-  }
+  $("frame").srcdoc =
+    currentHTML;
 
-  function saveHistory() {
-    if (!currentHTML) return;
+  $("codeText").textContent =
+    currentHTML;
 
-    undoStack.push(currentHTML);
+  $("empty").style.display =
+    "none";
 
-    if (undoStack.length > 20) {
-      undoStack.shift();
-    }
+  $("edit").disabled = false;
 
-    redoStack = [];
+  showPreview();
 
-    updateHistoryButtons();
-  }
+  updateHistory();
+}
 
-  function showPreview() {
-    previewBtn.classList.add("active");
-    codeBtn.classList.remove("active");
+function showPreview() {
+  $("previewBtn")
+    .classList.add("active");
 
-    previewFrame.style.display = "block";
-    codeView.classList.remove("visible");
-  }
+  $("codeBtn")
+    .classList.remove("active");
 
-  function showCode() {
-    codeBtn.classList.add("active");
-    previewBtn.classList.remove("active");
+  $("frame").style.display =
+    "block";
 
-    previewFrame.style.display = "none";
-    codeView.classList.add("visible");
+  $("code").classList.remove(
+    "visible"
+  );
+}
 
-    updateCode();
-  }
+function showCode() {
+  $("codeBtn")
+    .classList.add("active");
 
-  function renderHTML(html) {
-    currentHTML = html;
+  $("previewBtn")
+    .classList.remove("active");
 
-    previewFrame.srcdoc =
-      currentHTML;
+  $("frame").style.display =
+    "none";
 
-    updateCode();
+  $("code").classList.add(
+    "visible"
+  );
 
-    emptyState.style.display =
-      "none";
+  $("codeText").textContent =
+    currentHTML;
+}
 
-    editBtn.disabled = false;
-
-    updateHistoryButtons();
-
-    showPreview();
-  }
-
-  function parseWorkerError(data) {
-    if (
-      data &&
-      typeof data.error === "string"
-    ) {
-      return data.error;
-    }
-
-    return "Unknown Worker error.";
-  }
-
-  async function callWorker(
+async function requestAI(
+  action,
+  prompt,
+  existingHTML = ""
+) {
+  const body = {
     action,
-    prompt,
-    html = ""
+    prompt
+  };
+
+  if (
+    action === "edit" &&
+    existingHTML
   ) {
-    const payload = {
-      action,
-      prompt
-    };
+    body.currentHTML =
+      existingHTML;
+  }
 
-    if (
-      action === "edit" &&
-      html
-    ) {
-      payload.currentHTML = html;
-    }
-
-    const response =
-      await fetch(WORKER_URL, {
-        method: "POST",
-        headers: {
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
+        method:"POST",
+        headers:{
           "Content-Type":
             "application/json"
         },
         body:
-          JSON.stringify(payload)
-      });
-
-    const text =
-      await response.text();
-
-    let data;
-
-    try {
-      data = JSON.parse(text);
-    } catch {
-      throw new Error(
-        "Worker returned invalid JSON. HTTP " +
-        response.status
-      );
-    }
-
-    if (
-      !response.ok ||
-      !data.success
-    ) {
-      throw new Error(
-        parseWorkerError(data)
-      );
-    }
-
-    if (
-      typeof data.html !== "string" ||
-      !data.html.trim()
-    ) {
-      throw new Error(
-        "AI did not return website HTML."
-      );
-    }
-
-    return data.html;
-  }
-
-  async function generateWebsite() {
-    const prompt =
-      promptEl.value.trim();
-
-    if (!prompt) {
-      showToast(
-        "Enter a customer prompt first.",
-        true
-      );
-      promptEl.focus();
-      return;
-    }
-
-    saveHistory();
-
-    setLoading(
-      true,
-      "Understanding your request...",
-      "SPDP AI is designing the website."
+          JSON.stringify(body)
+      }
     );
 
-    setButtons(true);
+  const text =
+    await response.text();
 
-    try {
-      const html =
-        await callWorker(
-          "create",
-          prompt
-        );
+  let data;
 
-      renderHTML(html);
-
-      editPromptEl.value = "";
-
-      showToast(
-        "Website generated successfully."
-      );
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        error?.message ||
-        "Website generation failed.",
-        true
-      );
-    } finally {
-      setLoading(false);
-      setButtons(false);
-    }
-  }
-
-  async function editWebsite() {
-    const prompt =
-      editPromptEl.value.trim();
-
-    if (!currentHTML) {
-      showToast(
-        "Generate a website first.",
-        true
-      );
-      return;
-    }
-
-    if (!prompt) {
-      showToast(
-        "Describe the change you want.",
-        true
-      );
-      editPromptEl.focus();
-      return;
-    }
-
-    saveHistory();
-
-    setLoading(
-      true,
-      "Updating your website...",
-      "SPDP AI is editing the existing website."
+  try {
+    data =
+      JSON.parse(text);
+  } catch {
+    throw new Error(
+      "Worker returned invalid JSON."
     );
-
-    setButtons(true);
-
-    try {
-      const html =
-        await callWorker(
-          "edit",
-          prompt,
-          currentHTML
-        );
-
-      renderHTML(html);
-
-      editPromptEl.value = "";
-
-      showToast(
-        "Website updated successfully."
-      );
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        error?.message ||
-        "Website update failed.",
-        true
-      );
-    } finally {
-      setLoading(false);
-      setButtons(false);
-    }
   }
 
-  function undo() {
-    if (!undoStack.length) {
-      return;
-    }
-
-    redoStack.push(currentHTML);
-
-    currentHTML =
-      undoStack.pop();
-
-    renderHTML(currentHTML);
-
-    updateHistoryButtons();
-
-    showToast("Undo applied.");
+  if (
+    !response.ok ||
+    !data.success
+  ) {
+    throw new Error(
+      data.error ||
+      "AI request failed."
+    );
   }
 
-  function redo() {
-    if (!redoStack.length) {
-      return;
-    }
-
-    undoStack.push(currentHTML);
-
-    currentHTML =
-      redoStack.pop();
-
-    renderHTML(currentHTML);
-
-    updateHistoryButtons();
-
-    showToast("Redo applied.");
+  if (
+    typeof data.html !==
+      "string" ||
+    !data.html.trim()
+  ) {
+    throw new Error(
+      "AI returned no website."
+    );
   }
 
-  async function copyCode() {
-    if (!currentHTML) {
-      showToast(
-        "Generate a website first.",
-        true
+  return data.html;
+}
+
+async function generateWebsite() {
+  const prompt =
+    $("prompt").value.trim();
+
+  if (!prompt) {
+    toast(
+      "Enter a customer prompt.",
+      true
+    );
+    $("prompt").focus();
+    return;
+  }
+
+  saveHistory();
+
+  $("generate").disabled = true;
+  $("edit").disabled = true;
+
+  loading(
+    true,
+    "Understanding your request...",
+    "Building a functional website."
+  );
+
+  try {
+    const html =
+      await requestAI(
+        "create",
+        prompt
       );
-      return;
-    }
 
-    try {
-      await navigator.clipboard.writeText(
+    render(html);
+
+    $("editPrompt").value =
+      "";
+
+    toast(
+      "Website generated."
+    );
+  } catch (error) {
+    console.error(error);
+
+    toast(
+      error.message ||
+      "Generation failed.",
+      true
+    );
+  } finally {
+    loading(false);
+
+    $("generate").disabled =
+      false;
+
+    $("edit").disabled =
+      !currentHTML;
+  }
+}
+
+async function editWebsite() {
+  const prompt =
+    $("editPrompt").value.trim();
+
+  if (!currentHTML) {
+    toast(
+      "Generate a website first.",
+      true
+    );
+    return;
+  }
+
+  if (!prompt) {
+    toast(
+      "Describe the change.",
+      true
+    );
+    $("editPrompt").focus();
+    return;
+  }
+
+  saveHistory();
+
+  $("generate").disabled =
+    true;
+
+  $("edit").disabled =
+    true;
+
+  loading(
+    true,
+    "Updating website...",
+    "Preserving existing functionality."
+  );
+
+  try {
+    const html =
+      await requestAI(
+        "edit",
+        prompt,
         currentHTML
       );
 
-      showToast(
-        "Code copied."
-      );
-    } catch {
-      const area =
-        document.createElement("textarea");
+    render(html);
 
-      area.value =
-        currentHTML;
+    $("editPrompt").value =
+      "";
 
-      document.body.appendChild(area);
-
-      area.select();
-
-      document.execCommand(
-        "copy"
-      );
-
-      area.remove();
-
-      showToast(
-        "Code copied."
-      );
-    }
-  }
-
-  function downloadHTML() {
-    if (!currentHTML) {
-      showToast(
-        "Generate a website first.",
-        true
-      );
-      return;
-    }
-
-    const blob =
-      new Blob(
-        [currentHTML],
-        {
-          type:
-            "text/html;charset=utf-8"
-        }
-      );
-
-    const url =
-      URL.createObjectURL(blob);
-
-    const a =
-      document.createElement("a");
-
-    a.href = url;
-    a.download =
-      "spdp-ai-website.html";
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-    }, 1000);
-
-    showToast(
-      "HTML downloaded."
+    toast(
+      "Website updated."
     );
+  } catch (error) {
+    console.error(error);
+
+    toast(
+      error.message ||
+      "Update failed.",
+      true
+    );
+  } finally {
+    loading(false);
+
+    $("generate").disabled =
+      false;
+
+    $("edit").disabled =
+      !currentHTML;
+  }
+}
+
+function undo() {
+  if (!undoStack.length) {
+    return;
   }
 
-  async function checkWorker() {
-    try {
-      const response =
-        await fetch(
-          WORKER_URL,
-          {
-            method: "GET"
-          }
-        );
+  redoStack.push(
+    currentHTML
+  );
 
-      const data =
-        await response.json();
+  currentHTML =
+    undoStack.pop();
 
-      if (
-        response.ok &&
-        data?.success
-      ) {
-        statusDot.classList.add(
+  render(currentHTML);
+
+  toast("Undo applied.");
+}
+
+function redo() {
+  if (!redoStack.length) {
+    return;
+  }
+
+  undoStack.push(
+    currentHTML
+  );
+
+  currentHTML =
+    redoStack.pop();
+
+  render(currentHTML);
+
+  toast("Redo applied.");
+}
+
+async function copyCode() {
+  if (!currentHTML) {
+    toast(
+      "Generate a website first.",
+      true
+    );
+    return;
+  }
+
+  try {
+    await navigator.clipboard
+      .writeText(currentHTML);
+
+    toast("Code copied.");
+  } catch {
+    const area =
+      document.createElement(
+        "textarea"
+      );
+
+    area.value =
+      currentHTML;
+
+    document.body.appendChild(
+      area
+    );
+
+    area.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    area.remove();
+
+    toast("Code copied.");
+  }
+}
+
+function downloadCode() {
+  if (!currentHTML) {
+    toast(
+      "Generate a website first.",
+      true
+    );
+    return;
+  }
+
+  const blob =
+    new Blob(
+      [currentHTML],
+      {
+        type:
+          "text/html;charset=utf-8"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+  a.href = url;
+  a.download =
+    "spdp-ai-website.html";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+  toast(
+    "Website downloaded."
+  );
+}
+
+async function checkWorker() {
+  try {
+    const response =
+      await fetch(
+        WORKER_URL
+      );
+
+    const data =
+      await response.json();
+
+    if (
+      response.ok &&
+      data.success
+    ) {
+      $("dot")
+        .classList.add(
           "online"
         );
 
-        statusText.textContent =
-          "AI Online";
-      } else {
-        throw new Error();
-      }
-    } catch {
-      statusDot.classList.remove(
-        "online"
-      );
-
-      statusText.textContent =
-        "AI Offline";
+      $("status").textContent =
+        "AI Online";
+    } else {
+      throw new Error();
     }
+  } catch {
+    $("status").textContent =
+      "AI Offline";
   }
+}
 
-  generateBtn.addEventListener(
+$("generate")
+  .addEventListener(
     "click",
     generateWebsite
   );
 
-  editBtn.addEventListener(
+$("edit")
+  .addEventListener(
     "click",
     editWebsite
   );
 
-  undoBtn.addEventListener(
+$("undo")
+  .addEventListener(
     "click",
     undo
   );
 
-  redoBtn.addEventListener(
+$("redo")
+  .addEventListener(
     "click",
     redo
   );
 
-  copyBtn.addEventListener(
+$("copyBtn")
+  .addEventListener(
     "click",
     copyCode
   );
 
-  downloadBtn.addEventListener(
+$("downloadBtn")
+  .addEventListener(
     "click",
-    downloadHTML
+    downloadCode
   );
 
-  previewBtn.addEventListener(
+$("previewBtn")
+  .addEventListener(
     "click",
     showPreview
   );
 
-  codeBtn.addEventListener(
+$("codeBtn")
+  .addEventListener(
     "click",
     showCode
   );
 
-  promptEl.addEventListener(
+$("prompt")
+  .addEventListener(
     "keydown",
     event => {
       if (
         (event.ctrlKey ||
-          event.metaKey) &&
+         event.metaKey) &&
         event.key === "Enter"
       ) {
         event.preventDefault();
@@ -1273,12 +1134,13 @@
     }
   );
 
-  editPromptEl.addEventListener(
+$("editPrompt")
+  .addEventListener(
     "keydown",
     event => {
       if (
         (event.ctrlKey ||
-          event.metaKey) &&
+         event.metaKey) &&
         event.key === "Enter"
       ) {
         event.preventDefault();
@@ -1287,8 +1149,8 @@
     }
   );
 
-  checkWorker();
-  updateHistoryButtons();
+checkWorker();
+updateHistory();
 </script>
 
 </body>
