@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -13,21 +11,10 @@
 
   <meta
     name="description"
-    content="SPDP AI Website, App and Game Builder"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
+    content="SPDP AI — Build websites, apps and games with AI."
   >
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -39,14 +26,21 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: #050505;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background:
+        #050505;
       color: #fff;
-      font-family: Inter, Arial, sans-serif;
-      overflow-x: hidden;
     }
 
     button,
-    textarea {
+    textarea,
+    input {
       font: inherit;
     }
 
@@ -60,237 +54,235 @@
       flex-direction: column;
     }
 
-    header {
+    .topbar {
       height: 68px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 22px;
-      border-bottom: 1px solid #202020;
-      background: rgba(5, 5, 5, 0.94);
-      backdrop-filter: blur(18px);
-      position: relative;
-      z-index: 20;
+      border-bottom: 1px solid #222;
+      background: rgba(5,5,5,.94);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 11px;
+      font-weight: 800;
+      letter-spacing: -.4px;
     }
 
-    .logo {
-      width: 38px;
-      height: 38px;
+    .brand-icon {
+      width: 36px;
+      height: 36px;
       border-radius: 11px;
       display: grid;
       place-items: center;
-      background: linear-gradient(
-        145deg,
-        #ffffff,
-        #777
-      );
+      background:
+        linear-gradient(135deg,#fff,#777);
       color: #000;
-      font-weight: 900;
+      font-weight: 1000;
       box-shadow:
         0 0 30px rgba(255,255,255,.12);
     }
 
-    .brand-text {
-      font-family: Outfit, sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: -.4px;
-    }
-
-    .brand-sub {
+    .brand small {
+      display: block;
       color: #777;
-      font-size: 11px;
-      margin-left: 4px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 9px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 2px;
     }
 
     .status {
       display: flex;
       align-items: center;
-      gap: 7px;
-      color: #999;
+      gap: 8px;
+      color: #aaa;
       font-size: 12px;
-      margin-right: 8px;
     }
 
     .status-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: #35d07f;
-      box-shadow: 0 0 12px #35d07f;
+      background: #555;
     }
 
-    .btn {
-      border: 1px solid #292929;
-      background: #101010;
-      color: #ddd;
-      padding: 9px 13px;
-      border-radius: 9px;
-      font-size: 12px;
-      transition: .2s ease;
-    }
-
-    .btn:hover {
-      background: #181818;
-      border-color: #444;
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
-      font-weight: 700;
-    }
-
-    .btn-primary:hover {
-      background: #e8e8e8;
+    .status-dot.online {
+      background: #6cff9a;
+      box-shadow: 0 0 12px #6cff9a;
     }
 
     .workspace {
       flex: 1;
-      min-height: calc(100vh - 68px);
       display: grid;
-      grid-template-columns: 360px minmax(0, 1fr);
+      grid-template-columns: 390px minmax(0,1fr);
+      min-height: calc(100vh - 68px);
     }
 
     .sidebar {
-      border-right: 1px solid #202020;
+      border-right: 1px solid #222;
       background: #080808;
       display: flex;
       flex-direction: column;
-      min-height: calc(100vh - 68px);
+      min-width: 0;
     }
 
-    .sidebar-top {
+    .sidebar-inner {
       padding: 20px;
+      overflow-y: auto;
+    }
+
+    .heading {
+      margin-bottom: 18px;
+    }
+
+    .heading h1 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -.9px;
+    }
+
+    .heading p {
+      margin: 7px 0 0;
+      color: #777;
+      line-height: 1.5;
+      font-size: 13px;
     }
 
     .label {
-      color: #777;
-      text-transform: uppercase;
-      letter-spacing: 1.3px;
-      font-size: 10px;
+      color: #999;
+      font-size: 11px;
       font-weight: 700;
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 8px;
     }
 
     textarea {
       width: 100%;
-      min-height: 180px;
+      min-height: 170px;
       resize: vertical;
-      border-radius: 13px;
-      border: 1px solid #252525;
-      background: #0e0e0e;
-      color: #eee;
-      outline: none;
+      color: #fff;
+      background: #101010;
+      border: 1px solid #292929;
+      border-radius: 14px;
       padding: 15px;
+      outline: none;
       line-height: 1.55;
       font-size: 13px;
+      transition: .2s;
     }
 
     textarea:focus {
-      border-color: #555;
-      box-shadow: 0 0 0 3px rgba(255,255,255,.035);
+      border-color: #666;
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,.04);
     }
 
     .generate {
       width: 100%;
-      margin-top: 11px;
-      min-height: 45px;
-      border-radius: 11px;
+      height: 48px;
+      margin-top: 10px;
       border: 0;
-      background: linear-gradient(
-        135deg,
-        #fff,
-        #aaa
-      );
+      border-radius: 13px;
+      background: #fff;
       color: #000;
       font-weight: 800;
-    }
-
-    .generate:disabled {
-      opacity: .5;
-      cursor: wait;
-    }
-
-    .examples {
-      padding: 0 20px 20px;
-    }
-
-    .example {
-      border: 1px solid #202020;
-      background: #0d0d0d;
-      border-radius: 9px;
-      color: #aaa;
-      padding: 10px;
-      font-size: 11px;
-      margin-bottom: 7px;
-      cursor: pointer;
       transition: .2s;
     }
 
-    .example:hover {
-      color: #fff;
-      border-color: #3c3c3c;
-      background: #121212;
+    .generate:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 10px 35px rgba(255,255,255,.13);
     }
 
-    .subchat {
-      margin-top: auto;
-      border-top: 1px solid #202020;
-      padding: 17px 20px 20px;
+    .generate:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .divider {
+      height: 1px;
+      background: #222;
+      margin: 22px 0;
     }
 
     .subchat-title {
-      font-family: Outfit;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .subchat textarea {
-      min-height: 82px;
-      max-height: 180px;
-    }
-
-    .subchat-row {
       display: flex;
-      gap: 7px;
-      margin-top: 8px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 9px;
     }
 
-    .subchat-row button {
-      flex: 1;
+    .subchat-title strong {
+      font-size: 13px;
+    }
+
+    .subchat-title span {
+      color: #666;
+      font-size: 10px;
+    }
+
+    .edit-area {
+      min-height: 105px;
+    }
+
+    .edit-button {
+      width: 100%;
+      height: 43px;
+      margin-top: 8px;
+      border: 1px solid #333;
+      border-radius: 12px;
+      background: #151515;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .edit-button:hover {
+      background: #1c1c1c;
+      border-color: #555;
+    }
+
+    .edit-button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .tip {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #0d0d0d;
+      border: 1px solid #1c1c1c;
+      color: #777;
+      font-size: 11px;
+      line-height: 1.5;
     }
 
     .main {
       min-width: 0;
       display: flex;
       flex-direction: column;
-      background: #0b0b0b;
+      background: #0a0a0a;
     }
 
     .toolbar {
-      height: 58px;
-      flex-shrink: 0;
-      border-bottom: 1px solid #202020;
+      min-height: 58px;
+      padding: 9px 12px;
+      border-bottom: 1px solid #222;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 14px;
+      gap: 8px;
       background: #090909;
     }
 
@@ -299,57 +291,72 @@
       display: flex;
       align-items: center;
       gap: 7px;
+      flex-wrap: wrap;
     }
 
-    .view-btn.active {
+    .tool-btn {
+      height: 36px;
+      padding: 0 12px;
+      border: 1px solid #292929;
+      background: #111;
+      color: #bbb;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tool-btn:hover {
+      background: #181818;
+      color: #fff;
+      border-color: #444;
+    }
+
+    .tool-btn.active {
       background: #fff;
       color: #000;
       border-color: #fff;
     }
 
-    .preview-wrap {
+    .preview {
       flex: 1;
       min-height: 0;
       position: relative;
-      background:
-        radial-gradient(
-          circle at center,
-          #171717,
-          #080808 65%
-        );
+      background: #111;
     }
 
-    .preview-frame {
+    iframe {
       width: 100%;
       height: 100%;
-      min-height: 600px;
+      min-height: calc(100vh - 127px);
       border: 0;
       display: block;
-      background: white;
+      background: #fff;
     }
 
-    .code-panel {
+    .code-view {
       display: none;
-      position: absolute;
-      inset: 0;
-      background: #070707;
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 127px);
       overflow: auto;
+      background: #070707;
+      padding: 20px;
     }
 
-    .code-panel.show {
+    .code-view.visible {
       display: block;
     }
 
-    pre {
+    .code {
       margin: 0;
-      padding: 22px;
       color: #ddd;
       font-family:
+        "Cascadia Code",
         "SFMono-Regular",
         Consolas,
         monospace;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.65;
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -359,21 +366,36 @@
       inset: 0;
       display: grid;
       place-items: center;
-      color: #555;
-      text-align: center;
-      padding: 40px;
       pointer-events: none;
     }
 
+    .empty-box {
+      text-align: center;
+      max-width: 430px;
+      padding: 30px;
+    }
+
+    .empty-icon {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: #161616;
+      border: 1px solid #292929;
+      font-size: 26px;
+    }
+
     .empty h2 {
-      font-family: Outfit;
-      color: #aaa;
-      margin: 0 0 7px;
+      margin: 0;
+      font-size: 21px;
     }
 
     .empty p {
-      margin: 0;
+      color: #666;
       font-size: 13px;
+      line-height: 1.6;
     }
 
     .loading {
@@ -381,9 +403,9 @@
       inset: 0;
       display: none;
       place-items: center;
-      background: rgba(5,5,5,.72);
+      background: rgba(5,5,5,.76);
       backdrop-filter: blur(8px);
-      z-index: 10;
+      z-index: 20;
     }
 
     .loading.show {
@@ -395,13 +417,13 @@
     }
 
     .spinner {
-      width: 35px;
-      height: 35px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 3px solid #333;
+      border: 3px solid #292929;
       border-top-color: #fff;
       animation: spin .8s linear infinite;
-      margin: auto auto 12px;
+      margin: 0 auto 13px;
     }
 
     @keyframes spin {
@@ -410,79 +432,88 @@
       }
     }
 
+    .loader-box strong {
+      font-size: 13px;
+    }
+
+    .loader-box p {
+      color: #666;
+      font-size: 11px;
+      margin: 6px 0;
+    }
+
     .toast {
       position: fixed;
-      bottom: 22px;
-      right: 22px;
-      max-width: 390px;
-      padding: 12px 15px;
-      background: #151515;
-      border: 1px solid #333;
-      border-radius: 10px;
-      color: #ddd;
-      font-size: 12px;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%,20px);
       opacity: 0;
-      transform: translateY(10px);
       pointer-events: none;
+      background: #fff;
+      color: #000;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 500;
       transition: .25s;
-      z-index: 100;
     }
 
     .toast.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%,0);
+    }
+
+    .toast.error {
+      background: #ffdddd;
+      color: #7a0000;
     }
 
     @media (max-width: 900px) {
-
       .workspace {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
-        min-height: auto;
         border-right: 0;
-        border-bottom: 1px solid #202020;
+        border-bottom: 1px solid #222;
       }
 
-      .subchat {
-        margin-top: 0;
+      .sidebar-inner {
+        max-height: none;
       }
 
-      .preview-frame {
-        min-height: 650px;
+      .preview {
+        min-height: 70vh;
       }
 
+      iframe,
+      .code-view {
+        min-height: 70vh;
+      }
     }
 
     @media (max-width: 600px) {
-
-      header {
-        padding: 0 12px;
+      .topbar {
+        padding: 0 14px;
       }
 
-      .brand-sub,
       .status {
         display: none;
       }
 
-      .header-right .btn {
-        padding: 8px 9px;
-      }
-
-      .sidebar-top,
-      .examples,
-      .subchat {
-        padding-left: 13px;
-        padding-right: 13px;
+      .sidebar-inner {
+        padding: 15px;
       }
 
       .toolbar {
         overflow-x: auto;
       }
 
+      .toolbar-right {
+        display: none;
+      }
     }
-
   </style>
 </head>
 
@@ -490,164 +521,84 @@
 
 <div class="app">
 
-  <header>
-
+  <header class="topbar">
     <div class="brand">
-
-      <div class="logo">
-        SP
-      </div>
-
+      <div class="brand-icon">S</div>
       <div>
-        <span class="brand-text">
-          SPDP AI
-        </span>
-
-        <span class="brand-sub">
-          Website Builder
-        </span>
+        SPDP AI
+        <small>AI WEBSITE BUILDER</small>
       </div>
-
     </div>
 
-    <div class="header-right">
-
-      <div class="status">
-        <span class="status-dot"></span>
-        <span id="statusText">
-          Ready
-        </span>
-      </div>
-
-      <button
-        class="btn"
-        id="copyBtn"
-      >
-        Copy
-      </button>
-
-      <button
-        class="btn"
-        id="downloadBtn"
-      >
-        Download
-      </button>
-
-      <button
-        class="btn"
-        id="openBtn"
-      >
-        Open
-      </button>
-
+    <div class="status">
+      <span
+        id="statusDot"
+        class="status-dot"
+      ></span>
+      <span id="statusText">Checking AI...</span>
     </div>
-
   </header>
-
 
   <div class="workspace">
 
-
     <aside class="sidebar">
 
-      <div class="sidebar-top">
+      <div class="sidebar-inner">
+
+        <div class="heading">
+          <h1>Build with AI</h1>
+          <p>
+            Describe what you want. SPDP AI will
+            understand the request and build it.
+          </p>
+        </div>
 
         <div class="label">
-          Create
+          Customer Prompt
         </div>
 
         <textarea
           id="prompt"
-          placeholder="Describe the website you want...
-
-Example:
-Create a premium black 3D gaming website with Three.js, hero section, games, features, pricing, animations and footer."
+          placeholder="Describe the website, app or game you want..."
         ></textarea>
 
         <button
-          class="generate"
           id="generateBtn"
+          class="generate"
         >
-          ✦ Generate Website
+          Generate Website
         </button>
 
-      </div>
-
-
-      <div class="examples">
-
-        <div class="label">
-          Quick prompts
-        </div>
-
-        <div
-          class="example"
-          data-prompt="Create a premium black 3D gaming website with Three.js, animated hero, games, features, testimonials and footer."
-        >
-          🎮 Premium 3D Gaming Website
-        </div>
-
-        <div
-          class="example"
-          data-prompt="Create a modern SaaS landing page with dark glassmorphism design, hero, features, pricing, testimonials, FAQ and footer."
-        >
-          ⚡ SaaS Landing Page
-        </div>
-
-        <div
-          class="example"
-          data-prompt="Create a premium restaurant website with elegant hero, menu, gallery, chef section, testimonials, reservation form and footer."
-        >
-          🍽 Restaurant Website
-        </div>
-
-        <div
-          class="example"
-          data-prompt="Create a modern portfolio website for a creative developer with animated hero, projects, skills, about, testimonials and contact."
-        >
-          💼 Developer Portfolio
-        </div>
-
-      </div>
-
-
-      <div class="subchat">
+        <div class="divider"></div>
 
         <div class="subchat-title">
-          AI Sub-chat
-        </div>
-
-        <div class="label">
-          Edit current website
+          <strong>Sub-chat Edit</strong>
+          <span>EDIT CURRENT SITE</span>
         </div>
 
         <textarea
           id="editPrompt"
-          placeholder="Example: Make the hero more premium and change the primary button to blue."
+          class="edit-area"
+          placeholder="Example: Make the hero section blue, add a pricing section, change the navbar..."
         ></textarea>
 
-        <div class="subchat-row">
+        <button
+          id="editBtn"
+          class="edit-button"
+          disabled
+        >
+          ✦ Update Website
+        </button>
 
-          <button
-            class="btn"
-            id="undoBtn"
-          >
-            Undo
-          </button>
-
-          <button
-            class="btn btn-primary"
-            id="editBtn"
-          >
-            Apply Edit
-          </button>
-
+        <div class="tip">
+          Generate a website first. Then describe any
+          change here and SPDP AI will modify the
+          current website instead of creating a new one.
         </div>
 
       </div>
 
     </aside>
-
 
     <main class="main">
 
@@ -656,118 +607,117 @@ Create a premium black 3D gaming website with Three.js, hero section, games, fea
         <div class="toolbar-left">
 
           <button
-            class="btn view-btn active"
             id="previewBtn"
+            class="tool-btn active"
           >
             Preview
           </button>
 
           <button
-            class="btn view-btn"
             id="codeBtn"
+            class="tool-btn"
           >
             Code
           </button>
 
-        </div>
+          <button
+            id="copyBtn"
+            class="tool-btn"
+          >
+            Copy
+          </button>
 
+          <button
+            id="downloadBtn"
+            class="tool-btn"
+          >
+            Download
+          </button>
+
+        </div>
 
         <div class="toolbar-right">
 
           <button
-            class="btn"
-            id="desktopBtn"
+            id="undoBtn"
+            class="tool-btn"
+            disabled
           >
-            Desktop
+            ↶ Undo
           </button>
 
           <button
-            class="btn"
-            id="tabletBtn"
+            id="redoBtn"
+            class="tool-btn"
+            disabled
           >
-            Tablet
-          </button>
-
-          <button
-            class="btn"
-            id="mobileBtn"
-          >
-            Mobile
+            ↷ Redo
           </button>
 
         </div>
 
       </div>
 
-
-      <div class="preview-wrap">
+      <section class="preview">
 
         <iframe
-          id="preview"
-          class="preview-frame"
-          sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-          title="Website Preview"
+          id="previewFrame"
+          title="Generated website preview"
+          sandbox="allow-scripts allow-forms allow-modals allow-popups allow-downloads"
         ></iframe>
 
-
         <div
-          id="codePanel"
-          class="code-panel"
+          id="codeView"
+          class="code-view"
         >
-          <pre id="code"></pre>
+          <pre
+            id="codeOutput"
+            class="code"
+          ></pre>
         </div>
 
-
         <div
-          id="empty"
+          id="emptyState"
           class="empty"
         >
-          <div>
-            <h2>
-              Build something amazing.
-            </h2>
-
+          <div class="empty-box">
+            <div class="empty-icon">✦</div>
+            <h2>Your website appears here</h2>
             <p>
-              Describe your website on the left and click Generate.
+              Enter a customer prompt on the left
+              and generate a complete website.
             </p>
           </div>
         </div>
-
 
         <div
           id="loading"
           class="loading"
         >
-
           <div class="loader-box">
-
             <div class="spinner"></div>
-
-            <div id="loadingText">
+            <strong id="loadingTitle">
               Building your website...
-            </div>
-
+            </strong>
+            <p id="loadingText">
+              SPDP AI is generating the complete experience.
+            </p>
           </div>
-
         </div>
 
-      </div>
+      </section>
 
     </main>
 
   </div>
-
 </div>
-
 
 <div
   id="toast"
   class="toast"
 ></div>
 
-
 <script>
-
   const WORKER_URL =
     "https://spdp-ai.spdp3127.workers.dev/";
 
@@ -783,123 +733,192 @@ Create a premium black 3D gaming website with Three.js, hero section, games, fea
   const editBtn =
     document.getElementById("editBtn");
 
-  const undoBtn =
-    document.getElementById("undoBtn");
+  const previewFrame =
+    document.getElementById("previewFrame");
 
-  const preview =
-    document.getElementById("preview");
+  const codeView =
+    document.getElementById("codeView");
 
-  const code =
-    document.getElementById("code");
+  const codeOutput =
+    document.getElementById("codeOutput");
 
-  const codePanel =
-    document.getElementById("codePanel");
-
-  const empty =
-    document.getElementById("empty");
+  const emptyState =
+    document.getElementById("emptyState");
 
   const loading =
     document.getElementById("loading");
 
+  const loadingTitle =
+    document.getElementById("loadingTitle");
+
   const loadingText =
     document.getElementById("loadingText");
-
-  const statusText =
-    document.getElementById("statusText");
 
   const toast =
     document.getElementById("toast");
 
+  const previewBtn =
+    document.getElementById("previewBtn");
+
+  const codeBtn =
+    document.getElementById("codeBtn");
+
+  const copyBtn =
+    document.getElementById("copyBtn");
+
+  const downloadBtn =
+    document.getElementById("downloadBtn");
+
+  const undoBtn =
+    document.getElementById("undoBtn");
+
+  const redoBtn =
+    document.getElementById("redoBtn");
+
+  const statusDot =
+    document.getElementById("statusDot");
+
+  const statusText =
+    document.getElementById("statusText");
+
   let currentHTML = "";
 
-  let previousHTML = "";
+  let undoStack = [];
+  let redoStack = [];
 
-  function showToast(message) {
-
+  function showToast(message, error = false) {
     toast.textContent = message;
-
+    toast.classList.toggle("error", error);
     toast.classList.add("show");
 
-    clearTimeout(
-      showToast.timer
-    );
+    clearTimeout(showToast.timer);
 
-    showToast.timer =
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 3000);
+    showToast.timer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
   }
-
 
   function setLoading(
     state,
-    text = "Building your website..."
+    title = "Building your website...",
+    text = "SPDP AI is generating the complete experience."
   ) {
-
-    loadingText.textContent = text;
-
     loading.classList.toggle(
       "show",
       state
     );
 
-    generateBtn.disabled = state;
-    editBtn.disabled = state;
-
-    statusText.textContent =
-      state ? "Generating..." : "Ready";
+    loadingTitle.textContent = title;
+    loadingText.textContent = text;
   }
 
+  function setButtons(state) {
+    generateBtn.disabled = state;
+    editBtn.disabled =
+      state || !currentHTML;
+  }
 
-  function showPreview(html) {
+  function updateCode() {
+    codeOutput.textContent =
+      currentHTML || "";
+  }
 
+  function updateHistoryButtons() {
+    undoBtn.disabled =
+      undoStack.length === 0;
+
+    redoBtn.disabled =
+      redoStack.length === 0;
+  }
+
+  function saveHistory() {
+    if (!currentHTML) return;
+
+    undoStack.push(currentHTML);
+
+    if (undoStack.length > 20) {
+      undoStack.shift();
+    }
+
+    redoStack = [];
+
+    updateHistoryButtons();
+  }
+
+  function showPreview() {
+    previewBtn.classList.add("active");
+    codeBtn.classList.remove("active");
+
+    previewFrame.style.display = "block";
+    codeView.classList.remove("visible");
+  }
+
+  function showCode() {
+    codeBtn.classList.add("active");
+    previewBtn.classList.remove("active");
+
+    previewFrame.style.display = "none";
+    codeView.classList.add("visible");
+
+    updateCode();
+  }
+
+  function renderHTML(html) {
     currentHTML = html;
 
-    code.textContent = html;
+    previewFrame.srcdoc =
+      currentHTML;
 
-    preview.srcdoc = html;
+    updateCode();
 
-    empty.style.display = "none";
+    emptyState.style.display =
+      "none";
 
-    codePanel.classList.remove("show");
+    editBtn.disabled = false;
 
-    document
-      .querySelectorAll(".view-btn")
-      .forEach(btn =>
-        btn.classList.remove("active")
-      );
+    updateHistoryButtons();
 
-    document
-      .getElementById("previewBtn")
-      .classList.add("active");
-
+    showPreview();
   }
 
+  function parseWorkerError(data) {
+    if (
+      data &&
+      typeof data.error === "string"
+    ) {
+      return data.error;
+    }
+
+    return "Unknown Worker error.";
+  }
 
   async function callWorker(
     action,
     prompt,
     html = ""
   ) {
+    const payload = {
+      action,
+      prompt
+    };
+
+    if (
+      action === "edit" &&
+      html
+    ) {
+      payload.currentHTML = html;
+    }
 
     const response =
-      await fetch(
-        WORKER_URL,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-            action,
-            prompt,
-            currentHTML: html
-          })
-        }
-      );
+      await fetch(WORKER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+        body:
+          JSON.stringify(payload)
+      });
 
     const text =
       await response.text();
@@ -909,171 +928,296 @@ Create a premium black 3D gaming website with Three.js, hero section, games, fea
     try {
       data = JSON.parse(text);
     } catch {
-
       throw new Error(
-        "Worker returned invalid JSON: " +
-        text.slice(0, 300)
+        "Worker returned invalid JSON. HTTP " +
+        response.status
       );
-
     }
 
-    if (!response.ok) {
-
+    if (
+      !response.ok ||
+      !data.success
+    ) {
       throw new Error(
-        data?.error ||
-        "Worker request failed."
+        parseWorkerError(data)
       );
-
     }
 
-    if (!data?.success) {
-
+    if (
+      typeof data.html !== "string" ||
+      !data.html.trim()
+    ) {
       throw new Error(
-        data?.error ||
-        "AI generation failed."
+        "AI did not return website HTML."
       );
-
-    }
-
-    if (!data?.html) {
-
-      throw new Error(
-        "Worker returned no HTML."
-      );
-
     }
 
     return data.html;
   }
 
-
   async function generateWebsite() {
-
     const prompt =
       promptEl.value.trim();
 
     if (!prompt) {
-
       showToast(
-        "Describe the website first."
+        "Enter a customer prompt first.",
+        true
       );
-
       promptEl.focus();
-
       return;
     }
 
-    previousHTML = currentHTML;
+    saveHistory();
 
     setLoading(
       true,
-      "SPDP AI is building your website..."
+      "Understanding your request...",
+      "SPDP AI is designing the website."
     );
 
-    try {
+    setButtons(true);
 
+    try {
       const html =
         await callWorker(
           "create",
           prompt
         );
 
-      showPreview(html);
+      renderHTML(html);
 
-      statusText.textContent =
-        "Website ready";
+      editPromptEl.value = "";
 
       showToast(
         "Website generated successfully."
       );
-
     } catch (error) {
-
       console.error(error);
 
-      statusText.textContent =
-        "Error";
-
       showToast(
-        "❌ " +
-        (error.message ||
-          "Generation failed.")
+        error?.message ||
+        "Website generation failed.",
+        true
       );
-
     } finally {
-
       setLoading(false);
-
+      setButtons(false);
     }
   }
 
-
   async function editWebsite() {
-
-    if (!currentHTML) {
-
-      showToast(
-        "Generate a website first."
-      );
-
-      return;
-    }
-
-    const instruction =
+    const prompt =
       editPromptEl.value.trim();
 
-    if (!instruction) {
-
+    if (!currentHTML) {
       showToast(
-        "Tell the AI what you want to change."
+        "Generate a website first.",
+        true
       );
-
-      editPromptEl.focus();
-
       return;
     }
 
-    previousHTML = currentHTML;
+    if (!prompt) {
+      showToast(
+        "Describe the change you want.",
+        true
+      );
+      editPromptEl.focus();
+      return;
+    }
+
+    saveHistory();
 
     setLoading(
       true,
-      "AI is editing your website..."
+      "Updating your website...",
+      "SPDP AI is editing the existing website."
     );
 
-    try {
+    setButtons(true);
 
+    try {
       const html =
         await callWorker(
           "edit",
-          instruction,
+          prompt,
           currentHTML
         );
 
-      showPreview(html);
+      renderHTML(html);
 
       editPromptEl.value = "";
 
       showToast(
         "Website updated successfully."
       );
-
     } catch (error) {
-
       console.error(error);
 
       showToast(
-        "❌ " +
-        (error.message ||
-          "Edit failed.")
+        error?.message ||
+        "Website update failed.",
+        true
       );
-
     } finally {
-
       setLoading(false);
-
+      setButtons(false);
     }
   }
 
+  function undo() {
+    if (!undoStack.length) {
+      return;
+    }
+
+    redoStack.push(currentHTML);
+
+    currentHTML =
+      undoStack.pop();
+
+    renderHTML(currentHTML);
+
+    updateHistoryButtons();
+
+    showToast("Undo applied.");
+  }
+
+  function redo() {
+    if (!redoStack.length) {
+      return;
+    }
+
+    undoStack.push(currentHTML);
+
+    currentHTML =
+      redoStack.pop();
+
+    renderHTML(currentHTML);
+
+    updateHistoryButtons();
+
+    showToast("Redo applied.");
+  }
+
+  async function copyCode() {
+    if (!currentHTML) {
+      showToast(
+        "Generate a website first.",
+        true
+      );
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(
+        currentHTML
+      );
+
+      showToast(
+        "Code copied."
+      );
+    } catch {
+      const area =
+        document.createElement("textarea");
+
+      area.value =
+        currentHTML;
+
+      document.body.appendChild(area);
+
+      area.select();
+
+      document.execCommand(
+        "copy"
+      );
+
+      area.remove();
+
+      showToast(
+        "Code copied."
+      );
+    }
+  }
+
+  function downloadHTML() {
+    if (!currentHTML) {
+      showToast(
+        "Generate a website first.",
+        true
+      );
+      return;
+    }
+
+    const blob =
+      new Blob(
+        [currentHTML],
+        {
+          type:
+            "text/html;charset=utf-8"
+        }
+      );
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const a =
+      document.createElement("a");
+
+    a.href = url;
+    a.download =
+      "spdp-ai-website.html";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+
+    showToast(
+      "HTML downloaded."
+    );
+  }
+
+  async function checkWorker() {
+    try {
+      const response =
+        await fetch(
+          WORKER_URL,
+          {
+            method: "GET"
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if (
+        response.ok &&
+        data?.success
+      ) {
+        statusDot.classList.add(
+          "online"
+        );
+
+        statusText.textContent =
+          "AI Online";
+      } else {
+        throw new Error();
+      }
+    } catch {
+      statusDot.classList.remove(
+        "online"
+      );
+
+      statusText.textContent =
+        "AI Offline";
+    }
+  }
 
   generateBtn.addEventListener(
     "click",
@@ -1085,386 +1229,66 @@ Create a premium black 3D gaming website with Three.js, hero section, games, fea
     editWebsite
   );
 
-
   undoBtn.addEventListener(
     "click",
-    () => {
-
-      if (!previousHTML) {
-
-        showToast(
-          "Nothing to undo."
-        );
-
-        return;
-      }
-
-      const temp =
-        currentHTML;
-
-      currentHTML =
-        previousHTML;
-
-      previousHTML =
-        temp;
-
-      showPreview(
-        currentHTML
-      );
-
-      showToast(
-        "Previous version restored."
-      );
-
-    }
+    undo
   );
 
+  redoBtn.addEventListener(
+    "click",
+    redo
+  );
+
+  copyBtn.addEventListener(
+    "click",
+    copyCode
+  );
+
+  downloadBtn.addEventListener(
+    "click",
+    downloadHTML
+  );
+
+  previewBtn.addEventListener(
+    "click",
+    showPreview
+  );
+
+  codeBtn.addEventListener(
+    "click",
+    showCode
+  );
 
   promptEl.addEventListener(
     "keydown",
     event => {
-
       if (
         (event.ctrlKey ||
           event.metaKey) &&
         event.key === "Enter"
       ) {
-
         event.preventDefault();
-
         generateWebsite();
-
       }
-
     }
   );
-
 
   editPromptEl.addEventListener(
     "keydown",
     event => {
-
       if (
         (event.ctrlKey ||
           event.metaKey) &&
         event.key === "Enter"
       ) {
-
         event.preventDefault();
-
         editWebsite();
-
       }
-
     }
   );
 
-
-  document
-    .querySelectorAll(".example")
-    .forEach(example => {
-
-      example.addEventListener(
-        "click",
-        () => {
-
-          promptEl.value =
-            example.dataset.prompt;
-
-          promptEl.focus();
-
-        }
-      );
-
-    });
-
-
-  document
-    .getElementById("previewBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        codePanel.classList.remove(
-          "show"
-        );
-
-        preview.style.display =
-          "block";
-
-        document
-          .querySelectorAll(".view-btn")
-          .forEach(btn =>
-            btn.classList.remove(
-              "active"
-            )
-          );
-
-        document
-          .getElementById("previewBtn")
-          .classList.add(
-            "active"
-          );
-
-      }
-    );
-
-
-  document
-    .getElementById("codeBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        if (!currentHTML) {
-
-          showToast(
-            "Generate a website first."
-          );
-
-          return;
-        }
-
-        codePanel.classList.add(
-          "show"
-        );
-
-        document
-          .querySelectorAll(".view-btn")
-          .forEach(btn =>
-            btn.classList.remove(
-              "active"
-            )
-          );
-
-        document
-          .getElementById("codeBtn")
-          .classList.add(
-            "active"
-          );
-
-      }
-    );
-
-
-  function setPreviewWidth(
-    width
-  ) {
-
-    preview.style.width =
-      width;
-
-    preview.style.margin =
-      "0 auto";
-
-    preview.style.display =
-      "block";
-
-  }
-
-
-  document
-    .getElementById("desktopBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        setPreviewWidth(
-          "100%"
-        );
-
-      }
-    );
-
-
-  document
-    .getElementById("tabletBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        setPreviewWidth(
-          "768px"
-        );
-
-      }
-    );
-
-
-  document
-    .getElementById("mobileBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        setPreviewWidth(
-          "390px"
-        );
-
-      }
-    );
-
-
-  document
-    .getElementById("copyBtn")
-    .addEventListener(
-      "click",
-      async () => {
-
-        if (!currentHTML) {
-
-          showToast(
-            "Generate a website first."
-          );
-
-          return;
-        }
-
-        try {
-
-          await navigator.clipboard.writeText(
-            currentHTML
-          );
-
-          showToast(
-            "HTML copied."
-          );
-
-        } catch {
-
-          showToast(
-            "Copy failed."
-          );
-
-        }
-
-      }
-    );
-
-
-  document
-    .getElementById("downloadBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        if (!currentHTML) {
-
-          showToast(
-            "Generate a website first."
-          );
-
-          return;
-        }
-
-        const blob =
-          new Blob(
-            [currentHTML],
-            {
-              type:
-                "text/html;charset=utf-8"
-            }
-          );
-
-        const url =
-          URL.createObjectURL(blob);
-
-        const a =
-          document.createElement("a");
-
-        a.href = url;
-
-        a.download =
-          "spdp-ai-website.html";
-
-        document.body.appendChild(a);
-
-        a.click();
-
-        a.remove();
-
-        URL.revokeObjectURL(url);
-
-        showToast(
-          "HTML downloaded."
-        );
-
-      }
-    );
-
-
-  document
-    .getElementById("openBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        if (!currentHTML) {
-
-          showToast(
-            "Generate a website first."
-          );
-
-          return;
-        }
-
-        const blob =
-          new Blob(
-            [currentHTML],
-            {
-              type:
-                "text/html"
-            }
-          );
-
-        const url =
-          URL.createObjectURL(blob);
-
-        window.open(
-          url,
-          "_blank"
-        );
-
-      }
-    );
-
-
-  async function checkWorker() {
-
-    try {
-
-      const response =
-        await fetch(
-          WORKER_URL
-        );
-
-      const data =
-        await response.json();
-
-      if (data?.success) {
-
-        statusText.textContent =
-          "AI Online";
-
-      } else {
-
-        statusText.textContent =
-          "AI Error";
-
-      }
-
-    } catch {
-
-      statusText.textContent =
-        "Worker Offline";
-
-    }
-
-  }
-
-
   checkWorker();
-
+  updateHistoryButtons();
 </script>
 
 </body>
