@@ -1,575 +1,736 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SPDP AI — Website Builder</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  min-height:100vh;
-  background:#050505;
-  color:#fff;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-button,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.app{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-/* HEADER */
-
-.header{
-  height:68px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  border-bottom:1px solid #202020;
-  background:rgba(5,5,5,.96);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.logo{
-  width:38px;
-  height:38px;
-  border-radius:11px;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  font-size:15px;
-  background:linear-gradient(145deg,#fff,#777);
-  color:#050505;
-  box-shadow:0 8px 25px rgba(255,255,255,.08);
-}
-
-.brand-text{
-  font-size:17px;
-  font-weight:800;
-  letter-spacing:-.4px;
-}
-
-.brand-sub{
-  color:#777;
-  font-size:11px;
-  margin-top:2px;
-}
-
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.btn{
-  border:1px solid #2b2b2b;
-  background:#111;
-  color:#ddd;
-  padding:9px 13px;
-  border-radius:9px;
-  transition:.2s;
-}
-
-.btn:hover{
-  background:#191919;
-  border-color:#444;
-  color:#fff;
-}
-
-.btn.primary{
-  background:#fff;
-  color:#000;
-  border-color:#fff;
-  font-weight:800;
-}
-
-.btn.primary:hover{
-  background:#ddd;
-}
-
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-/* MAIN */
-
-.main{
-  flex:1;
-  min-height:0;
-  display:grid;
-  grid-template-columns:360px minmax(0,1fr);
-}
-
-/* LEFT */
-
-.sidebar{
-  min-width:0;
-  border-right:1px solid #202020;
-  background:#080808;
-  display:flex;
-  flex-direction:column;
-}
-
-.sidebar-section{
-  padding:16px;
-  border-bottom:1px solid #1c1c1c;
-}
-
-.label{
-  color:#777;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-  margin-bottom:9px;
-}
-
-.prompt{
-  width:100%;
-  min-height:150px;
-  resize:vertical;
-  padding:13px;
-  border-radius:12px;
-  border:1px solid #292929;
-  background:#0d0d0d;
-  color:#eee;
-  outline:none;
-  line-height:1.55;
-}
-
-.prompt:focus{
-  border-color:#555;
-}
-
-.generate-row{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-}
-
-.generate-row .btn{
-  flex:1;
-}
-
-/* SUB CHAT */
-
-.chat{
-  flex:1;
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-}
-
-.chat-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.status{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:#777;
-  font-size:11px;
-}
-
-.status-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#555;
-}
-
-.status-dot.active{
-  background:#fff;
-}
-
-.messages{
-  flex:1;
-  min-height:100px;
-  overflow:auto;
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-  margin-bottom:10px;
-}
-
-.message{
-  border:1px solid #222;
-  background:#0d0d0d;
-  border-radius:10px;
-  padding:10px;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.message.user{
-  background:#151515;
-  border-color:#303030;
-}
-
-.message.ai{
-  color:#aaa;
-}
-
-.chat-input{
-  width:100%;
-  min-height:75px;
-  resize:none;
-  padding:11px;
-  border-radius:10px;
-  border:1px solid #292929;
-  background:#0d0d0d;
-  color:#eee;
-  outline:none;
-}
-
-.chat-input:focus{
-  border-color:#555;
-}
-
-.chat-actions{
-  display:flex;
-  gap:7px;
-  margin-top:8px;
-}
-
-.chat-actions .btn{
-  flex:1;
-}
-
-/* WORKSPACE */
-
-.workspace{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  background:#030303;
-}
-
-/* TOOLBAR */
-
-.toolbar{
-  height:54px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 13px;
-  border-bottom:1px solid #202020;
-  background:#080808;
-}
-
-.toolbar-left,
-.toolbar-right{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.mode-btn{
-  border:1px solid transparent;
-  background:transparent;
-  color:#777;
-  padding:7px 10px;
-  border-radius:7px;
-  font-size:12px;
-}
-
-.mode-btn.active{
-  background:#171717;
-  border-color:#292929;
-  color:#fff;
-}
-
-.device{
-  border:1px solid #292929;
-  background:#101010;
-  color:#999;
-  padding:7px 9px;
-  border-radius:7px;
-  font-size:11px;
-}
-
-.device.active{
-  color:#fff;
-  border-color:#444;
-}
-
-/* PREVIEW */
-
-.preview-wrap{
-  flex:1;
-  min-height:0;
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:stretch;
-  background:
-    radial-gradient(circle at 50% 0%,#171717 0,#080808 35%,#030303 75%);
-}
-
-.preview-frame{
-  width:100%;
-  height:100%;
-  border:0;
-  background:#fff;
-  transition:.25s;
-}
-
-.preview-frame.desktop{
-  width:100%;
-}
-
-.preview-frame.tablet{
-  width:768px;
-  max-width:100%;
-}
-
-.preview-frame.mobile{
-  width:390px;
-  max-width:100%;
-}
-
-.code-panel{
-  position:absolute;
-  inset:0;
-  display:none;
-  background:#050505;
-}
-
-.code-panel.show{
-  display:block;
-}
-
-.code-editor{
-  width:100%;
-  height:100%;
-  resize:none;
-  border:0;
-  outline:none;
-  background:#050505;
-  color:#ddd;
-  padding:20px;
-  font:13px/1.55 Consolas,Monaco,monospace;
-  tab-size:2;
-}
-
-/* EMPTY */
-
-.empty{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  pointer-events:none;
-}
-
-.empty-box{
-  max-width:500px;
-  padding:30px;
-}
-
-.empty-logo{
-  width:65px;
-  height:65px;
-  margin:0 auto 16px;
-  border-radius:19px;
-  display:grid;
-  place-items:center;
-  font-size:24px;
-  font-weight:900;
-  background:linear-gradient(145deg,#fff,#666);
-  color:#000;
-}
-
-.empty h1{
-  font-size:28px;
-  letter-spacing:-1px;
-  margin-bottom:8px;
-}
-
-.empty p{
-  color:#666;
-  font-size:13px;
-  line-height:1.6;
-}
-
-/* LOADING */
-
-.loading{
-  position:absolute;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(5px);
-  z-index:20;
-}
-
-.loading.show{
-  display:flex;
-}
-
-.loading-box{
-  padding:20px 25px;
-  border:1px solid #292929;
-  border-radius:14px;
-  background:#0b0b0b;
-  text-align:center;
-}
-
-.spinner{
-  width:30px;
-  height:30px;
-  margin:0 auto 12px;
-  border:3px solid #333;
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.loading-text{
-  color:#aaa;
-  font-size:12px;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:999;
-  padding:11px 14px;
-  border:1px solid #333;
-  background:#111;
-  color:#eee;
-  border-radius:9px;
-  font-size:12px;
-  opacity:0;
-  transform:translateY(10px);
-  pointer-events:none;
-  transition:.25s;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-  .main{
-    grid-template-columns:300px minmax(0,1fr);
-  }
-}
-
-@media(max-width:700px){
-  .header{
-    padding:0 12px;
-  }
-
-  .brand-sub{
-    display:none;
-  }
-
-  .header-actions .btn:not(.primary){
-    display:none;
-  }
-
-  .main{
-    display:flex;
-    flex-direction:column;
-  }
-
-  .sidebar{
-    height:auto;
-    max-height:48vh;
-    border-right:0;
-    border-bottom:1px solid #202020;
-  }
-
-  .chat{
-    min-height:250px;
-  }
-
-  .workspace{
-    min-height:65vh;
-  }
-
-  .toolbar{
-    overflow:auto;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SPDP AI — Website Builder</title>
+
+  <meta
+    name="description"
+    content="SPDP AI Website, App and Game Builder"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070707;
+      --panel: #101010;
+      --panel2: #151515;
+      --border: rgba(255,255,255,.1);
+      --text: #f5f5f5;
+      --muted: #929292;
+      --accent: #ffffff;
+      --danger: #ff5b5b;
+      --success: #63e6be;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      overflow: hidden;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: 64px 1fr;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+
+    .header {
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: rgba(7,7,7,.94);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #888888
+        );
+      color: #000;
+      font-size: 15px;
+      font-weight: 900;
+      box-shadow:
+        0 0 30px rgba(255,255,255,.08);
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-btn {
+      height: 36px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #111;
+      color: #ddd;
+      font-size: 12px;
+      transition: .2s ease;
+    }
+
+    .header-btn:hover {
+      background: #1c1c1c;
+      border-color: rgba(255,255,255,.2);
+    }
+
+    .header-btn.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      font-weight: 800;
+    }
+
+    /* MAIN */
+
+    .main {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      overflow: hidden;
+    }
+
+    /* LEFT */
+
+    .sidebar {
+      min-width: 0;
+      border-right: 1px solid var(--border);
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .prompt-area {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ddd;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .prompt-box {
+      width: 100%;
+      min-height: 170px;
+      max-height: 270px;
+      resize: vertical;
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: #eee;
+      outline: none;
+      padding: 13px;
+      font-size: 13px;
+      line-height: 1.55;
+      transition: .2s ease;
+    }
+
+    .prompt-box:focus {
+      border-color: rgba(255,255,255,.28);
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,.04);
+    }
+
+    .prompt-box::placeholder {
+      color: #656565;
+    }
+
+    .generate-btn {
+      width: 100%;
+      margin-top: 10px;
+      height: 43px;
+      border: 0;
+      border-radius: 11px;
+      background: #fff;
+      color: #000;
+      font-weight: 900;
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 8px 30px rgba(255,255,255,.08);
+    }
+
+    .generate-btn:disabled {
+      opacity: .55;
+      cursor: wait;
+      transform: none;
+    }
+
+    .examples {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .examples-title {
+      color: #777;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 8px;
+    }
+
+    .example {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #0f0f0f;
+      color: #aaa;
+      padding: 8px 9px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .example:hover {
+      background: #151515;
+      color: #eee;
+    }
+
+    /* SUB CHAT */
+
+    .subchat {
+      min-height: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .subchat-header {
+      height: 43px;
+      flex: 0 0 43px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .subchat-title {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .subchat-status {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .chat-messages {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 12px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .message.user {
+      background: #181818;
+      border: 1px solid var(--border);
+    }
+
+    .message.ai {
+      background: #0e0e0e;
+      border: 1px solid rgba(255,255,255,.06);
+      color: #bdbdbd;
+    }
+
+    .chat-input-wrap {
+      padding: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 7px;
+    }
+
+    .chat-input {
+      flex: 1;
+      min-width: 0;
+      min-height: 42px;
+      max-height: 100px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      background: #111;
+      color: #eee;
+      border-radius: 9px;
+      padding: 10px;
+      outline: none;
+      font-size: 11px;
+    }
+
+    .chat-send {
+      width: 43px;
+      min-width: 43px;
+      height: 43px;
+      border: 0;
+      border-radius: 9px;
+      background: #fff;
+      color: #000;
+      font-weight: 900;
+    }
+
+    /* WORKSPACE */
+
+    .workspace {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 48px 1fr;
+      overflow: hidden;
+      background: #050505;
+    }
+
+    .workspace-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--border);
+      background: #090909;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-btn {
+      height: 31px;
+      padding: 0 10px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #888;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .view-btn.active,
+    .view-btn:hover {
+      color: #fff;
+      background: #161616;
+      border-color: var(--border);
+    }
+
+    .device-btn {
+      width: 31px;
+      height: 31px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #777;
+      border-radius: 7px;
+      font-size: 12px;
+    }
+
+    .device-btn.active,
+    .device-btn:hover {
+      background: #161616;
+      color: #fff;
+      border-color: var(--border);
+    }
+
+    .workspace-body {
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* PREVIEW */
+
+    .preview-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 14px;
+      overflow: auto;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(255,255,255,.04),
+          transparent 40%
+        ),
+        #050505;
+    }
+
+    .preview-device {
+      width: 100%;
+      height: 100%;
+      max-width: 1440px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.45);
+      transition:
+        width .25s ease,
+        height .25s ease;
+      flex-shrink: 0;
+    }
+
+    .preview-device.tablet {
+      width: 768px;
+    }
+
+    .preview-device.mobile {
+      width: 390px;
+    }
+
+    #previewFrame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
+    /* CODE */
+
+    .code-panel {
+      position: absolute;
+      inset: 0;
+      display: none;
+      background: #080808;
+    }
+
+    .code-panel.show {
+      display: block;
+    }
+
+    #codeEditor {
+      width: 100%;
+      height: 100%;
+      resize: none;
+      border: 0;
+      outline: 0;
+      background:
+        linear-gradient(
+          90deg,
+          #0b0b0b,
+          #090909
+        );
+      color: #d7d7d7;
+      padding: 18px;
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      tab-size: 2;
+    }
+
+    /* STATUS */
+
+    .status {
+      position: absolute;
+      left: 50%;
+      bottom: 15px;
+      transform: translateX(-50%);
+      z-index: 20;
+      min-width: 220px;
+      max-width: 80%;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(12,12,12,.9);
+      backdrop-filter: blur(15px);
+      color: #aaa;
+      font-size: 10px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .status.show {
+      opacity: 1;
+    }
+
+    .status.success {
+      color: var(--success);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    /* EMPTY */
+
+    .empty {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+
+    .empty-card {
+      width: min(500px, 90%);
+      text-align: center;
+      color: #777;
+    }
+
+    .empty-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      border-radius: 20px;
+      background: #111;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .empty-title {
+      color: #ddd;
+      font-weight: 800;
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .empty-text {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .main {
+        grid-template-columns: 300px 1fr;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .app {
+        grid-template-rows: 58px 1fr;
+      }
+
+      .header {
+        height: 58px;
+        padding: 0 10px;
+      }
+
+      .header-btn {
+        padding: 0 9px;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      .sidebar {
+        max-height: 48vh;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .prompt-area {
+        padding: 10px;
+      }
+
+      .prompt-box {
+        min-height: 95px;
+      }
+
+      .examples {
+        display: none;
+      }
+
+      .subchat {
+        min-height: 160px;
+      }
+
+      .workspace {
+        min-height: 52vh;
+      }
+
+      .preview-wrap {
+        padding: 7px;
+      }
+
+      .preview-device.tablet,
+      .preview-device.mobile {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="app">
 
+  <!-- HEADER -->
+
   <header class="header">
 
     <div class="brand">
-      <div class="logo">S</div>
 
-      <div>
-        <div class="brand-text">SPDP AI</div>
-        <div class="brand-sub">Website · App · Game Builder</div>
+      <div class="brand-logo">
+        SP
       </div>
+
+      <div class="brand-text">
+        <div class="brand-name">
+          SPDP AI
+        </div>
+
+        <div class="brand-sub">
+          Website · App · Game Builder
+        </div>
+      </div>
+
     </div>
 
     <div class="header-actions">
-      <button class="btn" id="undoBtn">Undo</button>
-      <button class="btn" id="redoBtn">Redo</button>
-      <button class="btn" id="downloadBtn">Download</button>
-      <button class="btn primary" id="openBtn">Open</button>
+
+      <button
+        class="header-btn"
+        id="undoBtn"
+        title="Undo"
+      >
+        ↶
+      </button>
+
+      <button
+        class="header-btn"
+        id="redoBtn"
+        title="Redo"
+      >
+        ↷
+      </button>
+
+      <button
+        class="header-btn"
+        id="downloadBtn"
+      >
+        Download
+      </button>
+
+      <button
+        class="header-btn"
+        id="openBtn"
+      >
+        Open
+      </button>
+
+      <button
+        class="header-btn primary"
+        id="copyBtn"
+      >
+        Copy
+      </button>
+
     </div>
 
   </header>
 
+  <!-- MAIN -->
 
   <main class="main">
 
@@ -577,50 +738,84 @@ button{
 
     <aside class="sidebar">
 
-      <section class="sidebar-section">
+      <!-- GENERATOR -->
 
-        <div class="label">Create Website</div>
+      <section class="prompt-area">
+
+        <div class="section-label">
+          <span>Create</span>
+          <span>AI</span>
+        </div>
 
         <textarea
           id="prompt"
-          class="prompt"
-          placeholder="Describe the website you want...
-
-Example:
-Create a premium black 3D gaming website with hero, games, features, pricing and footer."
+          class="prompt-box"
+          placeholder="Create a premium black 3D gaming website with a hero section, animated Three.js scene, games, features, pricing and footer."
         ></textarea>
 
-        <div class="generate-row">
-          <button class="btn primary" id="generateBtn">
-            Generate
-          </button>
-
-          <button class="btn" id="clearBtn">
-            Clear
-          </button>
-        </div>
+        <button
+          id="generateBtn"
+          class="generate-btn"
+        >
+          Generate Website
+        </button>
 
       </section>
 
+      <!-- EXAMPLES -->
+
+      <section class="examples">
+
+        <div class="examples-title">
+          Try an example
+        </div>
+
+        <button
+          class="example"
+          data-prompt="Create a premium black 3D portfolio website for a creative developer. Include a cinematic Three.js hero, about section, projects, skills, testimonials, contact section and footer. Make it fully responsive and scroll animated."
+        >
+          Premium 3D Portfolio
+        </button>
+
+        <button
+          class="example"
+          data-prompt="Create a premium SaaS landing page for an AI productivity platform. Include navigation, hero, features, statistics, pricing, testimonials, FAQ, CTA and footer."
+        >
+          AI SaaS Website
+        </button>
+
+        <button
+          class="example"
+          data-prompt="Create a playable 2D space shooter game using HTML5 Canvas. Include player movement, shooting, enemies, collision detection, score, health, start screen, game over and restart."
+        >
+          2D Space Game
+        </button>
+
+      </section>
 
       <!-- SUB CHAT -->
 
-      <section class="sidebar-section chat">
+      <section class="subchat">
 
-        <div class="chat-title">
+        <div class="subchat-header">
 
-          <div class="label" style="margin:0">
-            Sub Chat
+          <div class="subchat-title">
+            AI Sub-chat
           </div>
 
-          <div class="status">
-            <span id="statusDot" class="status-dot"></span>
-            <span id="statusText">Ready</span>
+          <div
+            class="subchat-status"
+            id="subchatStatus"
+          >
+            Edit generated website
           </div>
 
         </div>
 
-        <div id="messages" class="messages">
+        <div
+          id="chatMessages"
+          class="chat-messages"
+        >
 
           <div class="message ai">
             Generate a website first. Then tell me what you want to change here.
@@ -628,29 +823,20 @@ Create a premium black 3D gaming website with hero, games, features, pricing and
 
         </div>
 
-        <textarea
-          id="chatInput"
-          class="chat-input"
-          placeholder="Change the current website...
+        <div class="chat-input-wrap">
 
-Example:
-Make the navbar glassmorphism and change the hero button to blue."
-        ></textarea>
-
-        <div class="chat-actions">
+          <textarea
+            id="chatInput"
+            class="chat-input"
+            placeholder="Change the hero, add a section, make it black, fix the button..."
+          ></textarea>
 
           <button
-            class="btn primary"
-            id="editBtn"
+            id="chatSend"
+            class="chat-send"
+            title="Send"
           >
-            Update Website
-          </button>
-
-          <button
-            class="btn"
-            id="clearChatBtn"
-          >
-            Clear Chat
+            ↑
           </button>
 
         </div>
@@ -659,97 +845,85 @@ Make the navbar glassmorphism and change the hero button to blue."
 
     </aside>
 
-
     <!-- WORKSPACE -->
 
     <section class="workspace">
 
-      <div class="toolbar">
+      <div class="workspace-toolbar">
 
         <div class="toolbar-left">
 
           <button
-            class="mode-btn active"
-            id="previewMode"
+            class="view-btn active"
+            id="previewTab"
           >
             Preview
           </button>
 
           <button
-            class="mode-btn"
-            id="codeMode"
+            class="view-btn"
+            id="codeTab"
           >
             Code
           </button>
 
-          <button
-            class="device active"
-            data-device="desktop"
-          >
-            Desktop
-          </button>
-
-          <button
-            class="device"
-            data-device="tablet"
-          >
-            Tablet
-          </button>
-
-          <button
-            class="device"
-            data-device="mobile"
-          >
-            Mobile
-          </button>
-
         </div>
-
 
         <div class="toolbar-right">
 
           <button
-            class="btn"
-            id="copyBtn"
+            class="device-btn active"
+            data-device="desktop"
+            title="Desktop"
           >
-            Copy Code
+            ▣
+          </button>
+
+          <button
+            class="device-btn"
+            data-device="tablet"
+            title="Tablet"
+          >
+            ▯
+          </button>
+
+          <button
+            class="device-btn"
+            data-device="mobile"
+            title="Mobile"
+          >
+            ▯
           </button>
 
         </div>
 
       </div>
 
+      <div class="workspace-body">
 
-      <div class="preview-wrap">
+        <!-- PREVIEW -->
 
-        <div id="emptyState" class="empty">
+        <div
+          id="previewWrap"
+          class="preview-wrap"
+        >
 
-          <div class="empty-box">
+          <div
+            id="previewDevice"
+            class="preview-device"
+          >
 
-            <div class="empty-logo">
-              S
-            </div>
-
-            <h1>Build with SPDP AI</h1>
-
-            <p>
-              Describe your website, application or game.
-              Generate it and then use Sub Chat to modify
-              the generated website.
-            </p>
+            <iframe
+              id="previewFrame"
+              title="SPDP AI Website Preview"
+              sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
+            ></iframe>
 
           </div>
 
         </div>
 
-
-        <iframe
-          id="preview"
-          class="preview-frame desktop"
-          sandbox="allow-scripts allow-forms allow-modals allow-popups allow-same-origin"
-          style="display:none"
-        ></iframe>
-
+        <!-- CODE -->
 
         <div
           id="codePanel"
@@ -758,31 +932,46 @@ Make the navbar glassmorphism and change the hero button to blue."
 
           <textarea
             id="codeEditor"
-            class="code-editor"
             spellcheck="false"
+            placeholder="Generated HTML code will appear here..."
           ></textarea>
 
         </div>
 
+        <!-- EMPTY -->
 
         <div
-          id="loading"
-          class="loading"
+          id="emptyState"
+          class="empty"
         >
 
-          <div class="loading-box">
+          <div class="empty-card">
 
-            <div class="spinner"></div>
+            <div class="empty-icon">
+              ✦
+            </div>
 
-            <div
-              id="loadingText"
-              class="loading-text"
-            >
-              Generating website...
+            <div class="empty-title">
+              Build something with SPDP AI
+            </div>
+
+            <div class="empty-text">
+              Describe the website, web app or game you want.
+              Generate it, inspect the complete HTML source,
+              then use AI Sub-chat to modify it.
             </div>
 
           </div>
 
+        </div>
+
+        <!-- STATUS -->
+
+        <div
+          id="status"
+          class="status"
+        >
+          Ready
         </div>
 
       </div>
@@ -793,962 +982,1054 @@ Make the navbar glassmorphism and change the hero button to blue."
 
 </div>
 
-
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
 <script>
+  /*
+   * ============================================================
+   * SPDP AI FRONTEND
+   * ============================================================
+   */
 
-const WORKER_URL =
-  "https://spdp-ai.spdp3127.workers.dev/";
+  const WORKER_URL =
+    "https://spdp-ai.spdp3127.workers.dev/";
 
+  const promptInput =
+    document.getElementById("prompt");
 
-let currentHTML = "";
+  const generateBtn =
+    document.getElementById("generateBtn");
 
-let history = [];
+  const previewFrame =
+    document.getElementById("previewFrame");
 
-let historyIndex = -1;
+  const previewDevice =
+    document.getElementById("previewDevice");
 
-let isBusy = false;
+  const previewWrap =
+    document.getElementById("previewWrap");
 
+  const codePanel =
+    document.getElementById("codePanel");
 
-// ==========================================
-// ELEMENTS
-// ==========================================
+  const codeEditor =
+    document.getElementById("codeEditor");
 
-const promptEl =
-  document.getElementById("prompt");
+  const previewTab =
+    document.getElementById("previewTab");
 
-const chatInput =
-  document.getElementById("chatInput");
+  const codeTab =
+    document.getElementById("codeTab");
 
-const preview =
-  document.getElementById("preview");
+  const emptyState =
+    document.getElementById("emptyState");
 
-const codeEditor =
-  document.getElementById("codeEditor");
+  const status =
+    document.getElementById("status");
 
-const codePanel =
-  document.getElementById("codePanel");
+  const copyBtn =
+    document.getElementById("copyBtn");
 
-const emptyState =
-  document.getElementById("emptyState");
+  const downloadBtn =
+    document.getElementById("downloadBtn");
 
-const loading =
-  document.getElementById("loading");
+  const openBtn =
+    document.getElementById("openBtn");
 
-const loadingText =
-  document.getElementById("loadingText");
+  const undoBtn =
+    document.getElementById("undoBtn");
 
-const messages =
-  document.getElementById("messages");
+  const redoBtn =
+    document.getElementById("redoBtn");
 
-const statusDot =
-  document.getElementById("statusDot");
+  const chatInput =
+    document.getElementById("chatInput");
 
-const statusText =
-  document.getElementById("statusText");
+  const chatSend =
+    document.getElementById("chatSend");
 
+  const chatMessages =
+    document.getElementById("chatMessages");
 
-// ==========================================
-// TOAST
-// ==========================================
+  const subchatStatus =
+    document.getElementById("subchatStatus");
 
-let toastTimer;
+  let currentHTML = "";
 
-function toast(message){
+  let history = [];
 
-  const el =
-    document.getElementById("toast");
+  let historyIndex = -1;
 
-  el.textContent = message;
-
-  el.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(() => {
-      el.classList.remove("show");
-    }, 2500);
-}
-
-
-// ==========================================
-// STATUS
-// ==========================================
-
-function setStatus(text, active=false){
-
-  statusText.textContent = text;
-
-  statusDot.classList.toggle(
-    "active",
-    active
-  );
-}
+  let isBusy = false;
 
 
-// ==========================================
-// LOADING
-// ==========================================
+  /*
+   * ============================================================
+   * STATUS
+   * ============================================================
+   */
 
-function setLoading(value, text){
+  function showStatus(
+    message,
+    type = ""
+  ) {
+    status.textContent = message;
 
-  isBusy = value;
+    status.className =
+      "status show " + type;
 
-  loading.classList.toggle(
-    "show",
-    value
-  );
-
-  if(text){
-    loadingText.textContent = text;
-  }
-
-  setStatus(
-    value ? "Working..." : "Ready",
-    value
-  );
-
-  document.getElementById(
-    "generateBtn"
-  ).disabled = value;
-
-  document.getElementById(
-    "editBtn"
-  ).disabled = value;
-}
-
-
-// ==========================================
-// HISTORY
-// ==========================================
-
-function saveHistory(html){
-
-  if(!html) return;
-
-  history =
-    history.slice(
-      0,
-      historyIndex + 1
+    clearTimeout(
+      showStatus.timer
     );
 
-  history.push(html);
-
-  historyIndex =
-    history.length - 1;
-
-  updateHistoryButtons();
-}
-
-
-function updateHistoryButtons(){
-
-  document.getElementById(
-    "undoBtn"
-  ).disabled =
-    historyIndex <= 0;
-
-  document.getElementById(
-    "redoBtn"
-  ).disabled =
-    historyIndex >=
-    history.length - 1;
-}
+    showStatus.timer =
+      setTimeout(function() {
+        status.className =
+          "status";
+      }, 3500);
+  }
 
 
-// ==========================================
-// SHOW HTML
-// ==========================================
+  /*
+   * ============================================================
+   * CHAT
+   * ============================================================
+   */
 
-function showHTML(html){
+  function addMessage(
+    text,
+    type
+  ) {
+    const div =
+      document.createElement("div");
 
-  currentHTML = html;
+    div.className =
+      "message " + type;
 
-  codeEditor.value =
-    html;
+    div.textContent = text;
 
-  preview.srcdoc =
-    html;
+    chatMessages.appendChild(div);
 
-  preview.style.display =
-    "block";
-
-  emptyState.style.display =
-    "none";
-
-  codePanel.classList.remove(
-    "show"
-  );
-
-  document.getElementById(
-    "previewMode"
-  ).classList.add("active");
-
-  document.getElementById(
-    "codeMode"
-  ).classList.remove("active");
-}
+    chatMessages.scrollTop =
+      chatMessages.scrollHeight;
+  }
 
 
-// ==========================================
-// API
-// ==========================================
+  /*
+   * ============================================================
+   * HISTORY
+   * ============================================================
+   */
 
-async function callWorker(payload){
+  function pushHistory(html) {
+    if (!html) {
+      return;
+    }
 
-  const response =
-    await fetch(
-      WORKER_URL,
-      {
-        method:"POST",
+    if (
+      historyIndex >= 0 &&
+      history[historyIndex] === html
+    ) {
+      return;
+    }
 
-        headers:{
-          "Content-Type":
-            "application/json"
-        },
+    history =
+      history.slice(
+        0,
+        historyIndex + 1
+      );
 
-        body:
-          JSON.stringify(payload)
+    history.push(html);
+
+    if (history.length > 30) {
+      history.shift();
+    }
+
+    historyIndex =
+      history.length - 1;
+  }
+
+
+  function restoreHTML(html) {
+    if (!html) {
+      return;
+    }
+
+    currentHTML = html;
+
+    codeEditor.value =
+      currentHTML;
+
+    previewFrame.srcdoc =
+      currentHTML;
+
+    emptyState.style.display =
+      "none";
+
+    subchatStatus.textContent =
+      "Website loaded";
+
+    showStatus(
+      "Website updated",
+      "success"
+    );
+  }
+
+
+  /*
+   * ============================================================
+   * PREVIEW
+   * ============================================================
+   */
+
+  function updatePreview(html) {
+    currentHTML = html;
+
+    codeEditor.value =
+      html;
+
+    previewFrame.srcdoc =
+      html;
+
+    emptyState.style.display =
+      "none";
+  }
+
+
+  /*
+   * ============================================================
+   * WORKER REQUEST
+   * ============================================================
+   */
+
+  async function callWorker(
+    payload
+  ) {
+    const response =
+      await fetch(
+        WORKER_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+    const raw =
+      await response.text();
+
+    let data;
+
+    try {
+      data =
+        JSON.parse(raw);
+    } catch (error) {
+      throw new Error(
+        "Worker returned invalid JSON. HTTP " +
+        response.status +
+        ". Response: " +
+        raw.slice(0, 500)
+      );
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        data?.error ||
+        "Worker request failed."
+      );
+    }
+
+    if (!data?.success) {
+      throw new Error(
+        data?.error ||
+        "SPDP AI request failed."
+      );
+    }
+
+    if (
+      typeof data.html !==
+      "string"
+    ) {
+      throw new Error(
+        "Worker returned no HTML."
+      );
+    }
+
+    return data;
+  }
+
+
+  /*
+   * ============================================================
+   * GENERATE
+   * ============================================================
+   */
+
+  async function generateWebsite() {
+    const prompt =
+      promptInput.value.trim();
+
+    if (!prompt) {
+      showStatus(
+        "Enter a website prompt first.",
+        "error"
+      );
+
+      promptInput.focus();
+
+      return;
+    }
+
+    if (isBusy) {
+      return;
+    }
+
+    isBusy = true;
+
+    generateBtn.disabled =
+      true;
+
+    generateBtn.textContent =
+      "Generating...";
+
+    showStatus(
+      "SPDP AI is building your website..."
+    );
+
+    try {
+      const data =
+        await callWorker({
+          action: "create",
+          prompt: prompt
+        });
+
+      if (!data.html) {
+        throw new Error(
+          "AI returned empty HTML."
+        );
       }
-    );
 
-  const raw =
-    await response.text();
-
-  let data;
-
-  try{
-
-    data =
-      JSON.parse(raw);
-
-  }catch(error){
-
-    throw new Error(
-      "Worker returned invalid JSON. " +
-      raw.substring(0,300)
-    );
-  }
-
-  if(!response.ok){
-
-    throw new Error(
-      data?.error ||
-      "Worker request failed."
-    );
-  }
-
-  if(!data?.success){
-
-    throw new Error(
-      data?.error ||
-      "AI request failed."
-    );
-  }
-
-  return data;
-}
-
-
-// ==========================================
-// GENERATE
-// ==========================================
-
-async function generateWebsite(){
-
-  if(isBusy) return;
-
-  const prompt =
-    promptEl.value.trim();
-
-  if(!prompt){
-
-    toast(
-      "Enter a website prompt first."
-    );
-
-    promptEl.focus();
-
-    return;
-  }
-
-  setLoading(
-    true,
-    "Generating your website..."
-  );
-
-  try{
-
-    const data =
-      await callWorker({
-        action:"create",
-        prompt:prompt
-      });
-
-    if(
-      !data.html ||
-      !data.html
-        .toLowerCase()
-        .includes("<!doctype html")
-    ){
-
-      throw new Error(
-        "AI did not return valid HTML."
+      pushHistory(
+        currentHTML
       );
+
+      updatePreview(
+        data.html
+      );
+
+      pushHistory(
+        data.html
+      );
+
+      addMessage(
+        "Website generated successfully.",
+        "ai"
+      );
+
+      showStatus(
+        "Website generated successfully.",
+        "success"
+      );
+
+    } catch (error) {
+      console.error(
+        error
+      );
+
+      showStatus(
+        error.message ||
+        "Generation failed.",
+        "error"
+      );
+
+      addMessage(
+        "Error: " +
+        (
+          error.message ||
+          "Generation failed."
+        ),
+        "ai"
+      );
+
+    } finally {
+      isBusy = false;
+
+      generateBtn.disabled =
+        false;
+
+      generateBtn.textContent =
+        "Generate Website";
+    }
+  }
+
+
+  /*
+   * ============================================================
+   * SUB-CHAT EDIT
+   * ============================================================
+   */
+
+  async function editWebsite() {
+    const instruction =
+      chatInput.value.trim();
+
+    if (!instruction) {
+      return;
     }
 
-    saveHistory(
-      data.html
-    );
-
-    showHTML(
-      data.html
-    );
-
-    addMessage(
-      "ai",
-      "Website generated successfully. You can now edit it using Sub Chat."
-    );
-
-    toast(
-      "Website generated successfully."
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    addMessage(
-      "ai",
-      "❌ " +
-      error.message
-    );
-
-    toast(
-      error.message
-    );
-
-  }finally{
-
-    setLoading(
-      false
-    );
-  }
-}
-
-
-// ==========================================
-// EDIT EXISTING WEBSITE
-// ==========================================
-
-async function editWebsite(){
-
-  if(isBusy) return;
-
-  if(!currentHTML){
-
-    toast(
-      "Generate a website first."
-    );
-
-    return;
-  }
-
-  const instruction =
-    chatInput.value.trim();
-
-  if(!instruction){
-
-    toast(
-      "Tell Sub Chat what you want to change."
-    );
-
-    chatInput.focus();
-
-    return;
-  }
-
-  addMessage(
-    "user",
-    instruction
-  );
-
-  chatInput.value =
-    "";
-
-  setLoading(
-    true,
-    "Updating your website..."
-  );
-
-  try{
-
-    const data =
-      await callWorker({
-
-        action:"edit",
-
-        prompt:instruction,
-
-        currentHTML:
-          currentHTML
-
-      });
-
-    if(
-      !data.html ||
-      !data.html
-        .toLowerCase()
-        .includes("<!doctype html")
-    ){
-
-      throw new Error(
-        "AI did not return valid updated HTML."
+    if (!currentHTML) {
+      showStatus(
+        "Generate a website before using Sub-chat.",
+        "error"
       );
+
+      addMessage(
+        "Generate a website first, then I can edit it.",
+        "ai"
+      );
+
+      return;
     }
 
-    saveHistory(
-      data.html
-    );
+    if (isBusy) {
+      return;
+    }
 
-    showHTML(
-      data.html
-    );
+    isBusy = true;
 
-    addMessage(
-      "ai",
-      "Done. I updated the existing website while preserving the current HTML structure and functionality."
-    );
-
-    toast(
-      "Website updated."
-    );
-
-  }catch(error){
-
-    console.error(error);
+    chatSend.disabled =
+      true;
 
     addMessage(
-      "ai",
-      "❌ " +
-      error.message
+      instruction,
+      "user"
     );
 
-    toast(
-      error.message
+    chatInput.value = "";
+
+    subchatStatus.textContent =
+      "Editing...";
+
+    showStatus(
+      "AI is updating your website..."
     );
 
-  }finally{
+    try {
+      const oldHTML =
+        currentHTML;
 
-    setLoading(
-      false
-    );
+      const data =
+        await callWorker({
+          action: "edit",
+          prompt: instruction,
+          currentHTML: oldHTML
+        });
+
+      pushHistory(
+        oldHTML
+      );
+
+      updatePreview(
+        data.html
+      );
+
+      pushHistory(
+        data.html
+      );
+
+      addMessage(
+        "Done. The website has been updated.",
+        "ai"
+      );
+
+      subchatStatus.textContent =
+        "Edit complete";
+
+      showStatus(
+        "Website updated successfully.",
+        "success"
+      );
+
+    } catch (error) {
+      console.error(
+        error
+      );
+
+      addMessage(
+        "Error: " +
+        (
+          error.message ||
+          "Edit failed."
+        ),
+        "ai"
+      );
+
+      subchatStatus.textContent =
+        "Edit failed";
+
+      showStatus(
+        error.message ||
+        "Edit failed.",
+        "error"
+      );
+
+    } finally {
+      isBusy = false;
+
+      chatSend.disabled =
+        false;
+    }
   }
-}
 
 
-// ==========================================
-// CHAT MESSAGE
-// ==========================================
+  /*
+   * ============================================================
+   * CODE VIEW
+   * ============================================================
+   */
 
-function addMessage(
-  type,
-  text
-){
-
-  const div =
-    document.createElement(
-      "div"
+  function showPreview() {
+    previewTab.classList.add(
+      "active"
     );
 
-  div.className =
-    "message " +
-    type;
+    codeTab.classList.remove(
+      "active"
+    );
 
-  div.textContent =
-    text;
-
-  messages.appendChild(
-    div
-  );
-
-  messages.scrollTop =
-    messages.scrollHeight;
-}
-
-
-// ==========================================
-// PREVIEW / CODE
-// ==========================================
-
-document.getElementById(
-  "previewMode"
-).addEventListener(
-  "click",
-  () => {
-
-    if(!currentHTML) return;
+    previewWrap.style.display =
+      "flex";
 
     codePanel.classList.remove(
       "show"
     );
-
-    preview.style.display =
-      "block";
-
-    document.getElementById(
-      "previewMode"
-    ).classList.add("active");
-
-    document.getElementById(
-      "codeMode"
-    ).classList.remove("active");
-
   }
-);
 
 
-document.getElementById(
-  "codeMode"
-).addEventListener(
-  "click",
-  () => {
+  function showCode() {
+    codeTab.classList.add(
+      "active"
+    );
 
-    if(!currentHTML) return;
+    previewTab.classList.remove(
+      "active"
+    );
+
+    previewWrap.style.display =
+      "none";
 
     codePanel.classList.add(
       "show"
     );
 
-    preview.style.display =
-      "none";
-
-    document.getElementById(
-      "codeMode"
-    ).classList.add("active");
-
-    document.getElementById(
-      "previewMode"
-    ).classList.remove("active");
-
+    codeEditor.value =
+      currentHTML;
   }
-);
 
 
-// ==========================================
-// CODE EDITOR
-// ==========================================
+  /*
+   * ============================================================
+   * CODE EDITOR LIVE UPDATE
+   * ============================================================
+   */
 
-codeEditor.addEventListener(
-  "input",
-  () => {
+  let editorTimer = null;
 
-    currentHTML =
-      codeEditor.value;
+  codeEditor.addEventListener(
+    "input",
+    function() {
+      clearTimeout(
+        editorTimer
+      );
 
-  }
-);
+      editorTimer =
+        setTimeout(
+          function() {
+            const html =
+              codeEditor.value;
+
+            if (
+              html.trim()
+            ) {
+              currentHTML =
+                html;
+
+              previewFrame.srcdoc =
+                html;
+            }
+          },
+          400
+        );
+    }
+  );
 
 
-// ==========================================
-// DEVICES
-// ==========================================
+  /*
+   * ============================================================
+   * COPY
+   * ============================================================
+   */
 
-document
-  .querySelectorAll(".device")
-  .forEach(button => {
+  copyBtn.addEventListener(
+    "click",
+    async function() {
+      if (!currentHTML) {
+        showStatus(
+          "No website code to copy.",
+          "error"
+        );
 
-    button.addEventListener(
-      "click",
-      () => {
+        return;
+      }
 
-        document
-          .querySelectorAll(
-            ".device"
-          )
-          .forEach(b =>
-            b.classList.remove(
-              "active"
-            )
+      try {
+        await navigator.clipboard.writeText(
+          currentHTML
+        );
+
+        showStatus(
+          "HTML copied to clipboard.",
+          "success"
+        );
+
+      } catch (error) {
+        codeEditor.select();
+
+        document.execCommand(
+          "copy"
+        );
+
+        showStatus(
+          "HTML copied.",
+          "success"
+        );
+      }
+    }
+  );
+
+
+  /*
+   * ============================================================
+   * DOWNLOAD
+   * ============================================================
+   */
+
+  downloadBtn.addEventListener(
+    "click",
+    function() {
+      if (!currentHTML) {
+        showStatus(
+          "Generate a website first.",
+          "error"
+        );
+
+        return;
+      }
+
+      const blob =
+        new Blob(
+          [currentHTML],
+          {
+            type:
+              "text/html;charset=utf-8"
+          }
+        );
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+      const a =
+        document.createElement(
+          "a"
+        );
+
+      a.href = url;
+
+      a.download =
+        "spdp-ai-website.html";
+
+      document.body.appendChild(
+        a
+      );
+
+      a.click();
+
+      a.remove();
+
+      URL.revokeObjectURL(
+        url
+      );
+
+      showStatus(
+        "Website downloaded.",
+        "success"
+      );
+    }
+  );
+
+
+  /*
+   * ============================================================
+   * OPEN
+   * ============================================================
+   */
+
+  openBtn.addEventListener(
+    "click",
+    function() {
+      if (!currentHTML) {
+        showStatus(
+          "Generate a website first.",
+          "error"
+        );
+
+        return;
+      }
+
+      const blob =
+        new Blob(
+          [currentHTML],
+          {
+            type:
+              "text/html"
+          }
+        );
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+      setTimeout(
+        function() {
+          URL.revokeObjectURL(
+            url
           );
+        },
+        10000
+      );
+    }
+  );
 
-        button.classList.add(
-          "active"
+
+  /*
+   * ============================================================
+   * UNDO
+   * ============================================================
+   */
+
+  undoBtn.addEventListener(
+    "click",
+    function() {
+      if (
+        historyIndex <= 0
+      ) {
+        showStatus(
+          "Nothing to undo."
         );
 
-        const device =
-          button.dataset.device;
+        return;
+      }
 
-        preview.classList.remove(
-          "desktop",
-          "tablet",
-          "mobile"
+      historyIndex--;
+
+      const html =
+        history[
+          historyIndex
+        ];
+
+      restoreHTML(
+        html
+      );
+
+      showStatus(
+        "Undo complete.",
+        "success"
+      );
+    }
+  );
+
+
+  /*
+   * ============================================================
+   * REDO
+   * ============================================================
+   */
+
+  redoBtn.addEventListener(
+    "click",
+    function() {
+      if (
+        historyIndex >=
+        history.length - 1
+      ) {
+        showStatus(
+          "Nothing to redo."
         );
 
-        preview.classList.add(
-          device
-        );
+        return;
+      }
 
+      historyIndex++;
+
+      const html =
+        history[
+          historyIndex
+        ];
+
+      restoreHTML(
+        html
+      );
+
+      showStatus(
+        "Redo complete.",
+        "success"
+      );
+    }
+  );
+
+
+  /*
+   * ============================================================
+   * TABS
+   * ============================================================
+   */
+
+  previewTab.addEventListener(
+    "click",
+    showPreview
+  );
+
+  codeTab.addEventListener(
+    "click",
+    showCode
+  );
+
+
+  /*
+   * ============================================================
+   * DEVICE PREVIEW
+   * ============================================================
+   */
+
+  document
+    .querySelectorAll(
+      ".device-btn"
+    )
+    .forEach(
+      function(button) {
+        button.addEventListener(
+          "click",
+          function() {
+
+            document
+              .querySelectorAll(
+                ".device-btn"
+              )
+              .forEach(
+                function(btn) {
+                  btn.classList.remove(
+                    "active"
+                  );
+                }
+              );
+
+            button.classList.add(
+              "active"
+            );
+
+            const device =
+              button.dataset.device;
+
+            previewDevice.className =
+              "preview-device";
+
+            if (
+              device ===
+              "tablet"
+            ) {
+              previewDevice.classList.add(
+                "tablet"
+              );
+            }
+
+            if (
+              device ===
+              "mobile"
+            ) {
+              previewDevice.classList.add(
+                "mobile"
+              );
+            }
+          }
+        );
       }
     );
 
-  });
+
+  /*
+   * ============================================================
+   * EXAMPLES
+   * ============================================================
+   */
+
+  document
+    .querySelectorAll(
+      ".example"
+    )
+    .forEach(
+      function(button) {
+        button.addEventListener(
+          "click",
+          function() {
+            promptInput.value =
+              button.dataset.prompt;
+
+            promptInput.focus();
+          }
+        );
+      }
+    );
 
 
-// ==========================================
-// COPY
-// ==========================================
+  /*
+   * ============================================================
+   * ENTER TO SEND CHAT
+   * ============================================================
+   */
 
-document.getElementById(
-  "copyBtn"
-).addEventListener(
-  "click",
-  async () => {
+  chatInput.addEventListener(
+    "keydown",
+    function(event) {
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey
+      ) {
+        event.preventDefault();
 
-    if(!currentHTML){
-
-      toast(
-        "No generated code yet."
-      );
-
-      return;
+        editWebsite();
+      }
     }
+  );
 
-    try{
 
-      await navigator.clipboard.writeText(
-        currentHTML
-      );
+  /*
+   * ============================================================
+   * BUTTON EVENTS
+   * ============================================================
+   */
 
-      toast(
-        "Code copied."
-      );
+  generateBtn.addEventListener(
+    "click",
+    generateWebsite
+  );
 
-    }catch(error){
+  chatSend.addEventListener(
+    "click",
+    editWebsite
+  );
 
-      codeEditor.select();
 
-      document.execCommand(
-        "copy"
-      );
+  /*
+   * ============================================================
+   * CTRL + ENTER GENERATE
+   * ============================================================
+   */
 
-      toast(
-        "Code copied."
-      );
+  promptInput.addEventListener(
+    "keydown",
+    function(event) {
+      if (
+        event.key === "Enter" &&
+        (event.ctrlKey ||
+          event.metaKey)
+      ) {
+        event.preventDefault();
+
+        generateWebsite();
+      }
     }
-
-  }
-);
+  );
 
 
-// ==========================================
-// DOWNLOAD
-// ==========================================
+  /*
+   * ============================================================
+   * KEYBOARD SHORTCUTS
+   * ============================================================
+   */
 
-document.getElementById(
-  "downloadBtn"
-).addEventListener(
-  "click",
-  () => {
+  document.addEventListener(
+    "keydown",
+    function(event) {
 
-    if(!currentHTML){
+      if (
+        (event.ctrlKey ||
+          event.metaKey) &&
+        event.key.toLowerCase() ===
+          "s"
+      ) {
+        event.preventDefault();
 
-      toast(
-        "Generate a website first."
-      );
+        downloadBtn.click();
+      }
 
-      return;
-    }
+      if (
+        (event.ctrlKey ||
+          event.metaKey) &&
+        event.key.toLowerCase() ===
+          "z"
+      ) {
+        if (
+          document.activeElement !==
+          codeEditor
+        ) {
+          event.preventDefault();
 
-    const blob =
-      new Blob(
-        [currentHTML],
-        {
-          type:
-            "text/html;charset=utf-8"
+          undoBtn.click();
         }
-      );
+      }
 
-    const url =
-      URL.createObjectURL(
-        blob
-      );
+      if (
+        (event.ctrlKey ||
+          event.metaKey) &&
+        event.key.toLowerCase() ===
+          "y"
+      ) {
+        event.preventDefault();
 
-    const a =
-      document.createElement(
-        "a"
-      );
-
-    a.href =
-      url;
-
-    a.download =
-      "spdp-ai-website.html";
-
-    document.body.appendChild(
-      a
-    );
-
-    a.click();
-
-    a.remove();
-
-    URL.revokeObjectURL(
-      url
-    );
-
-    toast(
-      "HTML downloaded."
-    );
-
-  }
-);
-
-
-// ==========================================
-// OPEN
-// ==========================================
-
-document.getElementById(
-  "openBtn"
-).addEventListener(
-  "click",
-  () => {
-
-    if(!currentHTML){
-
-      toast(
-        "Generate a website first."
-      );
-
-      return;
+        redoBtn.click();
+      }
     }
-
-    const blob =
-      new Blob(
-        [currentHTML],
-        {
-          type:
-            "text/html"
-        }
-      );
-
-    const url =
-      URL.createObjectURL(
-        blob
-      );
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-    setTimeout(
-      () =>
-        URL.revokeObjectURL(
-          url
-        ),
-      10000
-    );
-
-  }
-);
+  );
 
 
-// ==========================================
-// UNDO
-// ==========================================
+  /*
+   * ============================================================
+   * INITIAL STATE
+   * ============================================================
+   */
 
-document.getElementById(
-  "undoBtn"
-).addEventListener(
-  "click",
-  () => {
+  showPreview();
 
-    if(
-      historyIndex <= 0
-    ){
+  console.log(
+    "SPDP AI Builder loaded."
+  );
 
-      toast(
-        "Nothing to undo."
-      );
-
-      return;
-    }
-
-    historyIndex--;
-
-    showHTML(
-      history[
-        historyIndex
-      ]
-    );
-
-    updateHistoryButtons();
-
-    toast(
-      "Undo complete."
-    );
-
-  }
-);
-
-
-// ==========================================
-// REDO
-// ==========================================
-
-document.getElementById(
-  "redoBtn"
-).addEventListener(
-  "click",
-  () => {
-
-    if(
-      historyIndex >=
-      history.length - 1
-    ){
-
-      toast(
-        "Nothing to redo."
-      );
-
-      return;
-    }
-
-    historyIndex++;
-
-    showHTML(
-      history[
-        historyIndex
-      ]
-    );
-
-    updateHistoryButtons();
-
-    toast(
-      "Redo complete."
-    );
-
-  }
-);
-
-
-// ==========================================
-// GENERATE BUTTON
-// ==========================================
-
-document.getElementById(
-  "generateBtn"
-).addEventListener(
-  "click",
-  generateWebsite
-);
-
-
-// ==========================================
-// EDIT BUTTON
-// ==========================================
-
-document.getElementById(
-  "editBtn"
-).addEventListener(
-  "click",
-  editWebsite
-);
-
-
-// ==========================================
-// ENTER SHORTCUTS
-// ==========================================
-
-promptEl.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.ctrlKey &&
-      event.key === "Enter"
-    ){
-
-      event.preventDefault();
-
-      generateWebsite();
-    }
-
-  }
-);
-
-
-chatInput.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.ctrlKey &&
-      event.key === "Enter"
-    ){
-
-      event.preventDefault();
-
-      editWebsite();
-    }
-
-  }
-);
-
-
-// ==========================================
-// CLEAR
-// ==========================================
-
-document.getElementById(
-  "clearBtn"
-).addEventListener(
-  "click",
-  () => {
-
-    promptEl.value =
-      "";
-
-  }
-);
-
-
-document.getElementById(
-  "clearChatBtn"
-).addEventListener(
-  "click",
-  () => {
-
-    messages.innerHTML = "";
-
-    addMessage(
-      "ai",
-      "Sub Chat cleared. Your current website is still preserved."
-    );
-
-  }
-);
-
-
-// ==========================================
-// INITIAL STATE
-// ==========================================
-
-updateHistoryButtons();
-
-setStatus(
-  "Ready",
-  false
-);
-
+  console.log(
+    "Worker:",
+    WORKER_URL
+  );
 </script>
 
 </body>
